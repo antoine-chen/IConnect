@@ -60,7 +60,6 @@ class ContConnexion extends Connexion {
             $utilisateur = $this->modele->getUtilisateur($login);
 
             if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
-                $_SESSION['id'] = $utilisateur['id'];
                 $_SESSION['login'] = $utilisateur['login'];
                 $_SESSION['role'] = $utilisateur['role'];
                 $this->vue->message("Connexion réussie bienvenue, ". htmlspecialchars($login) );
@@ -75,6 +74,8 @@ class ContConnexion extends Connexion {
     }
 
     public function deconnexion() {
+        unset($_SESSION['login']);
+        unset($_SESSION['role']);
         session_destroy();
         $this->vue->message("Vous avez été déconnecté.");
     }

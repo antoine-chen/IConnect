@@ -33,6 +33,7 @@ class ModConnexion {
                 break;
             default:
                 echo "action inconnue";
+                break;
         }
     }
 }
