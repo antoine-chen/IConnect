@@ -59,7 +59,7 @@ class ContConnexion extends Connexion {
 
             $utilisateur = $this->modele->getUtilisateur($login);
 
-            if ($utilisateur && password_verify($pwd, $utilisateur['mot_de_passe'])) {
+            if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
                 $_SESSION['id'] = $utilisateur['id'];
                 $_SESSION['login'] = $utilisateur['login'];
                 $_SESSION['role'] = $utilisateur['role'];
