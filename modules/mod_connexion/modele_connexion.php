@@ -3,7 +3,7 @@
 class ModeleConnexion extends Connexion {
 
     public function ajouterUtilisateur($login, $hash) {
-        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, mot_de_passe) VALUES (?, ?)");
+        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd) VALUES (?, ?)");
         $req->execute([$login, $hash]);
     }
 

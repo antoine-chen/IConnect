@@ -21,7 +21,7 @@ class VueConnexion  {
                 <label>Login :</label><br>
                 <input name="login"><br><br>
                 <label>Mot de passe :</label><br>
-                <input name="mdp"><br><br>
+                <input name="pwd"><br><br>
                 <input type="submit" value="inscrire">
             </form>
             <br>
@@ -36,7 +36,7 @@ class VueConnexion  {
                 <label>Login :</label><br>
                 <input name="login"><br><br>
                 <label>Mot de passe :</label><br>
-                <input name="mdp"><br><br>
+                <input name="pwd"><br><br>
                 <input type="submit" value="Se connecter">
             </form>
             <br>

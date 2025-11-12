@@ -27,7 +27,7 @@ if (isset($_SESSION['role'])) {
             break;
     }
 }else{
-    //include_once 'modules/mod_connexion/mod_connexion.php';
+    include_once 'modules/mod_connexion/mod_connexion.php';
     $mod = new ModConnexion();
 }
 

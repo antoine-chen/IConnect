@@ -20,15 +20,15 @@ class ContConnexion extends Connexion {
     }
 
     public function inscription() {
-        if (isset($_POST['login']) && isset($_POST['mdp'])) {
+        if (isset($_POST['login']) && isset($_POST['pwd'])) {
             $login = $_POST['login'];
-            $mdp = $_POST['mdp'];
+            $pwd = $_POST['pwd'];
 
-            if (!empty($login) && !empty($mdp)) {
+            if (!empty($login) && !empty($pwd)) {
                 if ($this->modele->verifLoginExiste($login)) {
                     $this->vue->message("Ce login existe déjà ");
                 } else {
-                    $hash = password_hash($mdp, PASSWORD_DEFAULT);
+                    $hash = password_hash($pwd, PASSWORD_DEFAULT);
                     $this->modele->ajouterUtilisateur($login, $hash);
                     $this->vue->message("Inscription réussie vous pouvez maintenant vous connecter");
                 }
@@ -53,13 +53,13 @@ class ContConnexion extends Connexion {
     }
 
     public function connexion() {
-        if (isset($_POST['login']) && isset($_POST['mdp'])) {
+        if (isset($_POST['login']) && isset($_POST['pwd'])) {
             $login = $_POST['login'];
-            $mdp = $_POST['mdp'];
+            $pwd = $_POST['pwd'];
 
             $utilisateur = $this->modele->getUtilisateur($login);
 
-            if ($utilisateur && password_verify($mdp, $utilisateur['mot_de_passe'])) {
+            if ($utilisateur && password_verify($pwd, $utilisateur['mot_de_passe'])) {
                 $_SESSION['id'] = $utilisateur['id'];
                 $_SESSION['login'] = $utilisateur['login'];
                 $_SESSION['role'] = $utilisateur['role'];
