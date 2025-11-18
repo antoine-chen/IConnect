@@ -77,7 +77,7 @@ class ContConnexion extends Connexion {
         unset($_SESSION['login']);
         unset($_SESSION['role']);
         session_destroy();
-        $this->vue->message("Vous avez été déconnecté.");
+        $this->vue->message('Vous avez été déconnecté <a href="index.php">retour au menu</a>.');
     }
 
 }

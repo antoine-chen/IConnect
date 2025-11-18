@@ -1,10 +1,10 @@
 <?php
 include_once 'Connexion.php';
 
-
 Connexion::initConnexion();
-
 session_start();
+include_once 'modules/mod_connexion/mod_connexion.php';
+$mod = new ModConnexion();
 
 if (isset($_SESSION['role'])) {
     switch ($_SESSION['role']) {
@@ -26,8 +26,6 @@ if (isset($_SESSION['role'])) {
             echo 'gestionaire';
             break;
     }
-}else{
-    include_once 'modules/mod_connexion/mod_connexion.php';
-    $mod = new ModConnexion();
 }
+
 
