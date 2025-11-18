@@ -36,4 +36,9 @@ class ModConnexion {
                 break;
         }
     }
+
+    public function getAffichage()
+    {
+        return $this->controleur->getAffichage();
+    }
 }

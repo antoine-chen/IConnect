@@ -1,31 +1,34 @@
 <?php
 include_once 'Connexion.php';
-
+include_once 'Composants/mod_connexion/mod_connexion.php';
 Connexion::initConnexion();
 session_start();
-include_once 'modules/mod_connexion/mod_connexion.php';
 $mod = new ModConnexion();
+$contenuMenu = $mod->getAffichage();
 
 if (isset($_SESSION['role'])) {
     switch ($_SESSION['role']) {
         case 'client':
-            //include_once 'modules/mod_client/mod_client.php';
-            //$mod = new ModClient();
-            echo 'client';
+            include_once 'roles/client.php';
+            $mod = new Client();
+            $contenu = 'client';
         break;
 
         case 'vendeur':
-            //include_once 'modules/mod_vendeur/mod_vendeur.php';
-            //$mod = new ModVendeur();
-            echo 'vendeur';
+            include_once 'roles/vendeur.php';
+            $mod = new Vendeur();
+            $contenu = 'vendeur';
             break;
 
-        case 'gestionaire':
-            //include_once 'modules/mod_gestionaire/mod_gestionaire.php';
-            //$mod = new ModGestionaire();
-            echo 'gestionaire';
+        case 'gestionnaire':
+            include_once 'roles/gestionnaire.php';
+            $mod = new Gestionnaire();
+            $contenu = 'gestionaire';
             break;
     }
 }
+else {
+    $contenu = "Bienvenue dans le site d'achat";
+}
 
-
+include_once "template.php";

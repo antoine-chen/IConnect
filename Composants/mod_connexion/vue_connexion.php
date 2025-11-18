@@ -1,6 +1,9 @@
 <?php
-class VueConnexion  {
+include_once "vue_generique.php";
+
+class VueConnexion extends VueGenerique {
     public function __construct() {
+        parent::__construct();
     }
     public function menu() {
         echo '
@@ -50,6 +53,10 @@ class VueConnexion  {
 
     public function lien_deconnexion() {
         echo '<p><a href="index.php?action=deconnexion">Se déconnecter</a></p>';
+    }
+
+    public function afficher() {
+        return $this->getAffichage();
     }
 
 }

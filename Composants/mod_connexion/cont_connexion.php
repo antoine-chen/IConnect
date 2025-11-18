@@ -80,4 +80,9 @@ class ContConnexion extends Connexion {
         $this->vue->message('Vous avez été déconnecté <a href="index.php">retour au menu</a>.');
     }
 
+    public function getAffichage()
+    {
+        return $this->vue->afficher();
+    }
+
 }
