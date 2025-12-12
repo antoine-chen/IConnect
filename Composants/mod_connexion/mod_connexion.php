@@ -12,6 +12,7 @@ class ModConnexion {
     }
 
     public function exec() {
+
         switch ($this->action) {
             case 'menu':
                 $this->controleur->menu();

@@ -1,6 +1,6 @@
 <?php
+class Admin {
 
-class Vendeur {
     public function __construct()
     {
         $module = isset($_GET['module']) ? $_GET['module'] : 'default';

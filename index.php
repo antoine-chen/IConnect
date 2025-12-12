@@ -6,29 +6,16 @@ session_start();
 $mod = new ModConnexion();
 $contenuMenu = $mod->getAffichage();
 
-if (isset($_SESSION['role'])) {
-    switch ($_SESSION['role']) {
-        case 'client':
-            include_once 'roles/client.php';
-            $mod = new Client();
-            $contenu = 'client';
-        break;
-
-        case 'vendeur':
-            include_once 'roles/vendeur.php';
-            $mod = new Vendeur();
-            $contenu = 'vendeur';
-            break;
-
-        case 'gestionnaire':
-            include_once 'roles/gestionnaire.php';
-            $mod = new Gestionnaire();
-            $contenu = 'gestionaire';
-            break;
-    }
+if (isset($_SESSION['login'])) {
+    include_once 'modules/landingPage/mod_landingPage.php';
+    $mod = new ModLandingPage();
+    $contenu = 'Liste associations';
 }
+
 else {
-    $contenu = "Bienvenue dans le site d'achat";
+    include_once 'modules/landingPage/mod_landingPage.php';
+    $mod = new ModLandingPage();
+    $contenu = 'landing page';
 }
 
 include_once "template.php";
