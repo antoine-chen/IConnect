@@ -7,8 +7,8 @@ $mod = new ModConnexion();
 $contenuMenu = $mod->getAffichage();
 
 if (isset($_SESSION['login'])) {
-    include_once 'modules/landingPage/mod_landingPage.php';
-    $mod = new ModLandingPage();
+    include_once 'modules/mod_asso/mod_asso.php';
+    $mod = new ModAsso();
     $contenu = 'Liste associations';
 }
 
