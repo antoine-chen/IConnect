@@ -10,6 +10,7 @@
 <header>
     <h1>HEADER</h1>
     <?php echo $contenuMenu ?>
+    <?php echo $navbar ?>
 </header>
 
 <main>

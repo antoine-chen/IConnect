@@ -62,6 +62,7 @@ class ContConnexion extends Connexion {
             if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
                 $_SESSION['login'] = $utilisateur['login'];
                 $_SESSION['role'] = $utilisateur['role'];
+                $_SESSION['asso'] = $utilisateur['idUtilisateur'];
                 $this->vue->message("Connexion réussie bienvenue, ". htmlspecialchars($login) );
                 $this->vue->lien_deconnexion();
             } else {

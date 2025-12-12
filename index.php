@@ -17,4 +17,8 @@ else {
     $contenu = 'landing page';
 }
 
+include_once 'Composants/comp_navbar/comp_navbar.php';
+$compNavbar = new CompNavBar();
+$navbar = $compNavbar->affiche();
+
 include_once "template.php";

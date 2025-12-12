@@ -12,7 +12,6 @@ class ModConnexion {
     }
 
     public function exec() {
-
         switch ($this->action) {
             case 'menu':
                 $this->controleur->menu();
@@ -33,13 +32,12 @@ class ModConnexion {
                 $this->controleur->deconnexion();
                 break;
             default:
-                echo "action inconnue";
+                echo "action inconnue (dans mod connexion)";
                 break;
         }
     }
 
-    public function getAffichage()
-    {
+    public function getAffichage(){
         return $this->controleur->getAffichage();
     }
 }
