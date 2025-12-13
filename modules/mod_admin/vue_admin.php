@@ -24,10 +24,25 @@ class VueAdmin extends VueGenerique{
 
     public function afficherListeAssociations($listeAssociations){
         foreach ($listeAssociations as $association){
-            echo "<a href='index.php?module=admin&action=listerAssociation&id=" . $association['id'] . "'>"
-                . htmlspecialchars($association['nom']) . "</a>";
-            echo "<button>Ajouter un gestionnaire</button> <br>";
+            echo "<a href='index.php?module=admin&action=listerAssociation&id={$association['id']}'>"
+                . htmlspecialchars($association['nom'])
+                . "</a>";
+
+            echo "<a href='index.php?module=admin&action=formAjouterGestionnaire&id={$association['id']}'>"
+                . "<button type='button'>Ajouter un gestionnaire</button>"
+                . "</a><br>";
         }
+    }
+
+    public function afficheFormAjouterGestionnaire(){
+        echo '
+            <form method="post" action="">
+                <label>Login : </label>
+                <input name="login">
+                <label>Mot de passe : </label>
+                <input name="login">
+            </form>
+        ';
     }
 
     public function afficher() {

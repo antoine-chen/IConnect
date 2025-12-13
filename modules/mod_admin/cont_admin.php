@@ -42,6 +42,12 @@ class ContAdmin{
         $this->vue->afficherListeAssociations($listeAssociations);
     }
 
+    public function formAjouterGestionnaire(){
+        if (isset($_GET['id'])){
+            $this->vue->afficheFormAjouterGestionnaire();
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

@@ -12,4 +12,9 @@ class ModeleAdmin extends Connexion{
         $get->execute();
         return $get->fetchAll();
     }
+
+    public function insertGestionnaire(){
+        $insert = self::$bdd->prepare('INSERT INTO ');
+    }
+
 }
