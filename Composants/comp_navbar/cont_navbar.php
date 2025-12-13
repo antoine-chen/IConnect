@@ -8,9 +8,7 @@ class ContNavbar {
         $this->vue = new VueNavbar();
     }
     public function navbar(){
-        if (!isset($_SESSION['role'])){
-            echo 'choisissez une association';
-        }else {
+        if (isset($_SESSION['role'])){
             if ($_SESSION['role'] == "Client"){
                 // navbar du client
                 echo "client";
@@ -26,6 +24,9 @@ class ContNavbar {
             if ($_SESSION['role'] == "Admin"){
                 $this->vue->afficherNavbarAdmin();
             }
+        } else {
+            echo 'je suis sans role, je dois cliquer sur une association';
+            $this->vue->afficherNavbarClient();
         }
     }
     public function getVue(){

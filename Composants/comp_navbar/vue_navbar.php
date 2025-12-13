@@ -17,6 +17,14 @@ class VueNavbar extends VueGenerique {
             </nav>
         ';
     }
+
+    public function afficherNavbarClient(){
+        $this->contenu = '
+            <nav>
+                <a href="index.php?actionComposant=deconnexion">Se déconnecter</a></p>;
+            </nav>
+        ';
+    }
     public function getAffichage(){
         return $this->contenu;
     }
