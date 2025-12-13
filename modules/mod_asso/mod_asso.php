@@ -7,7 +7,7 @@ class ModAsso {
     {
         // Initialise le controleur
 
-        $module = $_GET['module'];
+        $module = $_GET['module'] ? $_GET['module'] : "asso";
         switch ($module) {
             case 'panier':
                 // new ModPanier
