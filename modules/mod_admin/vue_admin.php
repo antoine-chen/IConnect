@@ -6,14 +6,15 @@ class VueAdmin extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherFormAssociation(){
+    public function afficherFormAssociation($messageErreur){
         echo '
             <form action="index.php?module=admin&action=ajouterAssociation" method="post" enctype="multipart/form-data">
-                <label>Nom de lassociation :</label><br>
+                <p>' . $messageErreur . '</p>
+                <label>Nom de l\'association :</label><br>
                 <input name="nom"><br><br>
         
                 <label>Choisissez une image :</label><br>
-                <input type="file" id="image" name="image" accept="image/*" required><br><br>
+                <input type="file" name="imageAso"><br><br>
         
                 <button type="submit">Envoyer</button>
             </form>

@@ -17,6 +17,9 @@ class ModAdmin{
             case 'formAssociation':
                 $this->controleur->formAssociation();
                 break;
+            case 'ajouterAssociation':
+                $this->controleur->ajouterAssociation();
+                break;
 
             default:
                 echo "action inconnue";
