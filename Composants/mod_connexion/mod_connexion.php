@@ -3,17 +3,16 @@ include_once 'cont_connexion.php';
 
 class ModConnexion {
     private $controleur;
-    private $action;
+    private $actionMenu;
 
     public function __construct() {
         $this->controleur = new ContConnexion();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'menu';
+        $this->actionMenu = isset($_GET['actionMenu']) ? $_GET['actionMenu'] : 'menu';
         $this->exec();
     }
 
     public function exec() {
-
-        switch ($this->action) {
+        switch ($this->actionMenu) {
             case 'menu':
                 $this->controleur->menu();
                 break;
@@ -33,13 +32,12 @@ class ModConnexion {
                 $this->controleur->deconnexion();
                 break;
             default:
-                echo "action inconnue";
+                echo "action inconnue ";
                 break;
         }
     }
 
-    public function getAffichage()
-    {
+    public function getAffichage(){
         return $this->controleur->getAffichage();
     }
 }

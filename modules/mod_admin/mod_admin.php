@@ -1,0 +1,27 @@
+<?php
+include_once 'cont_admin.php';
+
+class ModAdmin{
+    private $controleur;
+    private $action;
+
+    public function __construct(){
+        $this->controleur = new ContAdmin();
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'formAssociation';
+
+        $this->exec();
+    }
+
+    public function exec(){
+        switch ($this->action) {
+            case 'formAssociation':
+                $this->controleur->formAssociation();
+                break;
+
+            default:
+                echo "action inconnue";
+                break;
+        }
+    }
+}
+

@@ -8,7 +8,7 @@ class ModeleConnexion extends Connexion {
     }
 
     public function getUtilisateur($login) {
-        $req = self::$bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+        $req = self::$bdd->prepare("SELECT * FROM utilisateurs u INNER JOIN role r ON r.idUtilisateur = u.id  WHERE login = ?");
         $req->execute([$login]);
         return $req->fetch();
     }
