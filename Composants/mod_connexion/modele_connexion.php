@@ -8,7 +8,7 @@ class ModeleConnexion extends Connexion {
     }
 
     public function getUtilisateur($login) {
-        $req = self::$bdd->prepare("SELECT * FROM utilisateurs u INNER JOIN role r ON r.idUtilisateur = u.id  WHERE login = ?");
+        $req = self::$bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
         $req->execute([$login]);
         return $req->fetch();
     }
@@ -17,5 +17,11 @@ class ModeleConnexion extends Connexion {
         $req = self::$bdd->prepare("SELECT id FROM utilisateurs WHERE login = ?");
         $req->execute([$login]);
         return $req->fetch();
+    }
+
+    public function estAdmin($login) {
+        $req = self::$bdd->prepare("SELECT r.role FROM utilisateurs u INNER JOIN role r ON r.idUtilisateur = u.id  WHERE login = ? AND role = 'Admin'");
+        $req->execute([$login]);
+        return $req->fetchColumn();
     }
 }
