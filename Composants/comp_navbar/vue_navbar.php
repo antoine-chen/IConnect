@@ -18,7 +18,7 @@ class VueNavbar extends VueGenerique {
         ';
     }
 
-    public function afficherNavbarClient(){
+    public function afficherNavbarSansRole(){
         $this->contenu = '
             <nav>
                 <a href="index.php?actionComposant=deconnexion">Se déconnecter</a></p>;
