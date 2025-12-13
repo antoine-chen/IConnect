@@ -24,7 +24,7 @@ class ContAdmin{
             $nomAssociation = $_POST['nom'];
             $nomFichier = $_FILES['imageAso']['name'];
 
-            $cheminFichier = 'modules/mod_asso/logos'. $nomFichier;
+            $cheminFichier = 'modules/mod_asso/logos/'. $nomFichier;
             move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
 
             if (!empty($nomAssociation) && !empty($nomFichier)){
