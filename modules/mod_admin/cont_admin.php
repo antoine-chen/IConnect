@@ -12,7 +12,9 @@ class ContAdmin{
     }
 
     public function formAssociation($messageErreur = ''){
-        $this->vue->afficherFormAssociation($messageErreur);
+        if ($_SESSION['role'] == 'Admin'){
+            $this->vue->afficherFormAssociation($messageErreur);
+        }
     }
 
     /*
@@ -21,7 +23,7 @@ class ContAdmin{
        si pas vide INSERT sinon re affiche le form avec un message d'erreur
     */
     public function ajouterAssociation(){
-        if (isset($_POST['nom']) && isset($_FILES['imageAso'])){
+        if (isset($_POST['nom']) && isset($_FILES['imageAso']) && $_SESSION['role'] == 'Admin'){
             $nomAssociation = $_POST['nom'];
             $nomFichier = $_FILES['imageAso']['name'];
 
@@ -30,7 +32,6 @@ class ContAdmin{
 
             if (!empty($nomAssociation) && !empty($nomFichier)){
                 $this->modele->insertAssociation($nomAssociation, $cheminFichier);
-                echo ' ca marche ';
             }else {
                 $messageErreur = "il faut remplir les champs ";
                 $this->formAssociation($messageErreur);
@@ -39,12 +40,14 @@ class ContAdmin{
     }
 
     public function listerAssociation(){
-        $listeAssociations = $this->modele->getAssociations();
-        $this->vue->afficherListeAssociations($listeAssociations);
+        if ($_SESSION['role'] == 'Admin'){
+            $listeAssociations = $this->modele->getAssociations();
+            $this->vue->afficherListeAssociations($listeAssociations);
+        }
     }
 
     public function formAjouterGestionnaire($messageErreur = ''){
-        if (isset($_GET['id'])){
+        if (isset($_GET['id']) && $_SESSION['role'] == 'Admin'){
             $_SESSION['asso'] = $_GET['id'];
             $this->vue->afficheFormAjouterGestionnaire($messageErreur);
         }
@@ -56,7 +59,7 @@ class ContAdmin{
         si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
      */
     public function ajouterGestionnaire(){
-        if (isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
+        if ($_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
             $login = $_POST['login'];
             $pwd = $_POST['pwd'];
             $idAssociation = $_SESSION['asso'];
