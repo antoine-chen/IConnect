@@ -26,6 +26,9 @@ class ModAdmin{
             case 'formAjouterGestionnaire':
                 $this->controleur->formAjouterGestionnaire();
                 break;
+            case 'ajouterGestionnaire':
+                $this->controleur->ajouterGestionnaire();
+                break;
             default:
                 echo "action inconnue";
                 break;

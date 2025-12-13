@@ -17,7 +17,8 @@ class ContAdmin{
 
     /*
        ajouter une association
-       isset puis regarde si les champs sont vide si pas vide INSERT sinon re affiche le form avec un message d'erreur
+       isset puis regarde si les champs sont vide
+       si pas vide INSERT sinon re affiche le form avec un message d'erreur
     */
     public function ajouterAssociation(){
         if (isset($_POST['nom']) && isset($_FILES['imageAso'])){
@@ -42,9 +43,35 @@ class ContAdmin{
         $this->vue->afficherListeAssociations($listeAssociations);
     }
 
-    public function formAjouterGestionnaire(){
+    public function formAjouterGestionnaire($messageErreur = ''){
         if (isset($_GET['id'])){
-            $this->vue->afficheFormAjouterGestionnaire();
+            $_SESSION['asso'] = $_GET['id'];
+            $this->vue->afficheFormAjouterGestionnaire($messageErreur);
+        }
+    }
+
+    /*
+        ajouter un gestionnaire dans une assocation
+        isset, regarde si les champs sont remplis
+        si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
+     */
+    public function ajouterGestionnaire(){
+        if (isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
+            $login = $_POST['login'];
+            $pwd = $_POST['pwd'];
+            $idAssociation = $_SESSION['asso'];
+            if (!empty($login) && !empty($pwd) && !$this->modele->getUtilisateur($login)){
+                // INSERT login pwd
+                $hash = password_hash($pwd, PASSWORD_DEFAULT);
+                $this->modele->insertUtilisateur($login, $hash);
+                // GET utilisateur
+                $idUtilisateur = $this->modele->getUtilisateur($login);
+                // INSERT role Gestionnaire
+                $this->modele->inserRoleGestionnaire($idUtilisateur, $idAssociation);
+            }else {
+                $messageErreur = "il faut remplir les champs ou login deja existant";
+                $this->vue->afficheFormAjouterGestionnaire($messageErreur);
+            }
         }
     }
 

@@ -34,13 +34,15 @@ class VueAdmin extends VueGenerique{
         }
     }
 
-    public function afficheFormAjouterGestionnaire(){
+    public function afficheFormAjouterGestionnaire($messageErreur){
         echo '
-            <form method="post" action="">
+            <form method="post" action="index.php?module=admin&action=ajouterGestionnaire">
+                <p>' . $messageErreur . '</p>
                 <label>Login : </label>
                 <input name="login">
                 <label>Mot de passe : </label>
-                <input name="login">
+                <input name="pwd">
+                <button type="submit">Créer un gestionnaire</button>
             </form>
         ';
     }
