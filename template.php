@@ -9,12 +9,16 @@
 <body>
 <header>
     <h1>HEADER</h1>
-    <?php echo $contenuMenu ?>
-    <?php echo $navbar ?>
+    <?php
+        echo $navbar;
+        echo $contenuMenu;
+    ?>
+
 </header>
 
 <main>
     <h1>Contenu du site : </h1>
+
     <?php echo $contenu ?>
 </main>
 

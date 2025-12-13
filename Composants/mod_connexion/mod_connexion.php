@@ -32,7 +32,7 @@ class ModConnexion {
                 $this->controleur->deconnexion();
                 break;
             default:
-                echo "action inconnue (dans mod connexion)";
+                echo "action inconnue ";
                 break;
         }
     }

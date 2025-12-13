@@ -15,7 +15,6 @@ class VueNavbar extends VueGenerique {
             </nav>
         ';
     }
-
     public function getAffichage(){
         return $this->contenu;
     }
