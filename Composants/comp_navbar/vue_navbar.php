@@ -12,6 +12,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
             <nav>
                 <a href="index.php?module=admin&action=formAssociation">Créer une association</a>
+                <a href="index.php?composant=connexion&actionComposant=deconnexion">Se déconnecter</a></p>;
             </nav>
         ';
     }

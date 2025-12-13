@@ -1,6 +1,10 @@
 <?php
-
-class VueAdmin {
+include_once "vue_generique.php";
+class VueAdmin extends VueGenerique{
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function afficherFormAssociation(){
         echo '
@@ -15,6 +19,10 @@ class VueAdmin {
             </form>
         
         ';
+    }
+
+    public function afficher() {
+        return $this->getAffichage();
     }
 
 }

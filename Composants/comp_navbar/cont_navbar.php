@@ -9,9 +9,7 @@ class ContNavbar {
     }
     public function navbar(){
         if (isset($_SESSION['login'])){
-            if (isset($_SESSION['role']) == 'Admin'){
-                $this->vue->afficherNavbarAdmin();
-            }
+            $this->vue->afficherNavbarAdmin();
         }
     }
     public function getVue(){

@@ -23,5 +23,9 @@ class ModAdmin{
                 break;
         }
     }
+
+    public function getAffichage(){
+        return $this->controleur->getVue();
+    }
 }
 

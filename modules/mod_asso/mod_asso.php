@@ -1,32 +1,44 @@
 <?php
 
-class ModAsso {
-    private $controleur;
-    private $action;
+class ModAsso
+{
+    private $module;
 
     public function __construct()
     {
-        // Initialise le controleur
-
-        $module = $_GET['module'] ? $_GET['module'] : "asso";
-        switch ($module) {
+        $action = isset($_GET['module']) ? $_GET['module'] : 'asso';
+        switch ($action) {
             case 'panier':
-                // new ModPanier
+                // $this->module = new ModPanier();
                 break;
             case 'boutique':
-                // New mod boutique
+                // $this->module = new ModBoutique();
                 break;
             case 'stock':
-                // New mod stock
+                // $this->module = new ModStock();
                 break;
-            case 'admin' :
+            case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
-                $mod = new ModAdmin();
-            case "asso" :
-                // Appelle le controleur de asso pour afficher la liste des assos
+                $this->module = new ModAdmin();
+                break;
+            case 'asso':
+                include_once 'modules/mod_asso/cont_asso.php';
+                $this->module = new ContAsso();
                 break;
             default:
-                echo "module inconnue";
+                $this->module = null;
                 break;
+        }
     }
+
+    public function getAffichage()
+    {
+        if($this->module!=null) {
+            return $this->module->getAffichage();
+        }
+        else {
+            $this->module = "module inconnu";
+        }
+    }
+
 }

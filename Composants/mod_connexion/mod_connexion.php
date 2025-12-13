@@ -3,16 +3,16 @@ include_once 'cont_connexion.php';
 
 class ModConnexion {
     private $controleur;
-    private $actionMenu;
+    private $actionComposant;
 
     public function __construct() {
         $this->controleur = new ContConnexion();
-        $this->actionMenu = isset($_GET['actionMenu']) ? $_GET['actionMenu'] : 'menu';
+        $this->actionComposant = isset($_GET['actionComposant']) ? $_GET['actionComposant'] : 'menu';
         $this->exec();
     }
 
     public function exec() {
-        switch ($this->actionMenu) {
+        switch ($this->actionComposant) {
             case 'menu':
                 $this->controleur->menu();
                 break;

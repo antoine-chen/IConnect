@@ -15,4 +15,8 @@ class ContAdmin{
         $this->vue->afficherFormAssociation();
     }
 
+    public function getVue(){
+        return $this->vue->afficher();
+    }
+
 }

@@ -2,7 +2,7 @@
 include_once 'vue_connexion.php';
 include_once 'modele_connexion.php';
 
-class ContConnexion extends Connexion {
+class ContConnexion {
     private $modele;
     private $vue;
 
@@ -25,31 +25,20 @@ class ContConnexion extends Connexion {
             $pwd = $_POST['pwd'];
 
             if (!empty($login) && !empty($pwd)) {
-                if ($this->modele->verifLoginExiste($login)) {
-                    $this->vue->message("Ce login existe déjà ");
-                } else {
+                if (!$this->modele->verifLoginExiste($login)) {
                     $hash = password_hash($pwd, PASSWORD_DEFAULT);
                     $this->modele->ajouterUtilisateur($login, $hash);
-                    $this->vue->message("Inscription réussie vous pouvez maintenant vous connecter");
                 }
             } else {
-                $this->vue->message("Merci de remplir tous les champs");
                 $this->vue->form_inscription();
             }
         } else {
-            $this->vue->message("Tu dois passer par le formulaire");
             $this->vue->form_inscription();
         }
     }
 
     public function form_connexion() {
-        // si déjà connecté, affiche message
-        if (isset($_SESSION['login'])) {
-            $this->vue->message("Vous êtes déjà connecté sous l'identifiant <b>" . htmlspecialchars($_SESSION['login']) . "</b>.");
-            $this->vue->lien_deconnexion();
-        } else {
             $this->vue->form_connexion();
-        }
     }
 
     public function connexion() {
@@ -61,10 +50,7 @@ class ContConnexion extends Connexion {
 
             if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
                 $_SESSION['login'] = $utilisateur['login'];
-                $this->vue->message("Connexion réussie bienvenue, ". htmlspecialchars($login) );
-                $this->vue->lien_deconnexion();
             } else {
-                $this->vue->message("incorrect");
                 $this->vue->form_connexion();
             }
         } else {
@@ -74,9 +60,8 @@ class ContConnexion extends Connexion {
 
     public function deconnexion() {
         unset($_SESSION['login']);
-        unset($_SESSION['role']);
         session_destroy();
-        $this->vue->message('Vous avez été déconnecté <a href="index.php">retour au menu</a>.');
+        $this->menu();
     }
 
     public function getAffichage()
