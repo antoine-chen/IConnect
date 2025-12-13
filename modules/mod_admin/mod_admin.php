@@ -20,7 +20,9 @@ class ModAdmin{
             case 'ajouterAssociation':
                 $this->controleur->ajouterAssociation();
                 break;
-
+            case 'listerAssociation':
+                $this->controleur->listerAssociation();
+                break;
             default:
                 echo "action inconnue";
                 break;

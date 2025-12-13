@@ -22,6 +22,14 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
+    public function afficherListeAssociations($listeAssociations){
+        foreach ($listeAssociations as $association){
+            echo "<a href='index.php?module=admin&action=listerAssociation&id=" . $association['id'] . "'>"
+                . htmlspecialchars($association['nom']) . "</a>";
+            echo "<button>Ajouter un gestionnaire</button> <br>";
+        }
+    }
+
     public function afficher() {
         return $this->getAffichage();
     }

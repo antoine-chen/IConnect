@@ -37,6 +37,11 @@ class ContAdmin{
         }
     }
 
+    public function listerAssociation(){
+        $listeAssociations = $this->modele->getAssociations();
+        $this->vue->afficherListeAssociations($listeAssociations);
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }
