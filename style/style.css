@@ -1,7 +1,10 @@
+* {
+    text-decoration: none;
+}
+
 .taille-tableau {
     width: 70%;
 }
-
 
 .taille-formulaire {
     width: 45%;
