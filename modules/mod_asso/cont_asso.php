@@ -13,4 +13,34 @@ class ContAsso {
     public function getAffichage(){
         return $this->vue->afficher();
     }
+
+    public function afficherAsso()
+    {
+        $this->vue->afficherListeAsso($this->modele->getListe());
+    }
+
+    public function aChoisitAsso()
+    {
+        if(isset($_GET['id']) && isset($_SESSION['login'])) {
+            $idAsso = $_GET['id'];
+            $_SESSION['asso'] = $idAsso;
+            $idUtilisateur = $this->modele->getIdUtilisateur($_SESSION['login']);
+
+            $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
+            if(empty($resultat)) {
+                $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
+            }
+            switch ($resultat['role']) {
+                case 'Barman' :
+                    header('Location: index.php?module=commande');
+                    break;
+                case 'Gestionnaire' :
+                    header('Location: index.php?module=stock');
+                    break;
+                default :
+                    header('Location: index.php?module=produit');
+                    break;
+            }
+        }
+    }
 }

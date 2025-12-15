@@ -6,24 +6,42 @@ class ModAsso
 
     public function __construct()
     {
-        $action = isset($_GET['module']) ? $_GET['module'] : 'asso';
-        switch ($action) {
+        $mod = isset($_GET['module']) ? $_GET['module'] : 'asso';
+        switch ($mod) {
             case 'panier':
-                // $this->module = new ModPanier();
+                include_once 'modules/mod_produit/mod_produit.php';
+
                 break;
-            case 'boutique':
-                // $this->module = new ModBoutique();
+            case 'produit':
+                include_once 'modules/mod_produit/mod_produit.php';
+                $this->module = new ModProduit();
                 break;
             case 'stock':
-                // $this->module = new ModStock();
+                include_once 'modules/mod_stock/mod_stock.php';
+                $this->module = new ModStock();
                 break;
             case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
                 $this->module = new ModAdmin();
                 break;
+            case 'commande' :
+                include_once  'modules/mod_commande/mod_commande.php';
+                $this->module = new ModCommande();
+                break;
             case 'asso':
                 include_once 'modules/mod_asso/cont_asso.php';
                 $this->module = new ContAsso();
+                $action = isset($_GET['action']) ? $_GET['action'] : 'afficherAsso';
+
+                switch ($action) {
+                    case 'choisiAsso' :
+                        $this->module->aChoisitAsso();
+                        break;
+                    case 'afficherAsso' :
+                        $this->module->afficherAsso();
+                        break;
+                }
+
                 break;
             default:
                 $this->module = null;
