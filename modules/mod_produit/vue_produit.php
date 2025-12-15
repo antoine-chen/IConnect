@@ -15,8 +15,8 @@ class VueProduit extends VueGenerique{
                   <img src="'. $produit["image"] .'" style="height: 250px; width: 200px; object-fit: cover;" alt="produit-item">
                   <div class="d-flex justify-content-between align-items-center gap-2 m-3">
                     <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-black" style="text-decoration = none;">
-                                ' . '<h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>'.'
-                                ' . '<p class="card-title"> '. htmlspecialchars($produit['prix']).'€' .'</p>' .'
+                                <h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>
+                                <p class="card-title"> '. htmlspecialchars($produit['prix']).'€' .'</p>
                     </a>
                     <a href="#" class="btn btn-outline-secondary">Ajouter</a>
                   </div>
