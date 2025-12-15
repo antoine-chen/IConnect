@@ -49,6 +49,7 @@ class ContConnexion {
             $utilisateur = $this->modele->getUtilisateur($login);
 
             if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
+                $_SESSION['id'] = $utilisateur['id'];
                 $_SESSION['login'] = $utilisateur['login'];
                 if ($this->modele->estAdmin($login)) $_SESSION['role'] = $this->modele->estAdmin($login);
             } else {

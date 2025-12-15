@@ -24,7 +24,7 @@ class ContAsso {
         if(isset($_GET['id']) && isset($_SESSION['login'])) {
             $idAsso = $_GET['id'];
             $_SESSION['asso'] = $idAsso;
-            $idUtilisateur = $this->modele->getIdUtilisateur($_SESSION['login']);
+            $idUtilisateur = $_SESSION['id'];
 
             $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
             if(empty($resultat)) {
