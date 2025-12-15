@@ -21,6 +21,10 @@ class ModAsso
                 include_once 'modules/mod_admin/mod_admin.php';
                 $this->module = new ModAdmin();
                 break;
+            case 'produit':
+                include_once 'modules/mod_produit/mod_produit.php';
+                $this->module = new ModProduit();
+                break;
             case 'asso':
                 include_once 'modules/mod_asso/cont_asso.php';
                 $this->module = new ContAsso();
