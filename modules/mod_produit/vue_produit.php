@@ -8,17 +8,17 @@ class VueProduit extends VueGenerique{
     }
     public function afficherProduits($listeProduit){
 
-        echo '<div class="d-flex justify-content-between align-items-center flex-wrap w-75 container">';
+        echo '<div class="d-flex justify-content-center align-items-center flex-wrap w-75 container gap-5  p-3">';
         foreach ($listeProduit as $produit){
             echo '
-               <div class="card" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
+               <div>
+                  <img src="'. $produit["image"] .'" style="height: 250px; width: 200px; object-fit: cover;" alt="produit-item">
+                  <div class="d-flex justify-content-between align-items-center gap-2 m-3">
                     <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '">
-                                ' . '<h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>' . '
-                                ' . '<h6 class="card-title"> '. htmlspecialchars($produit['prix']) .'</h6>' . '
+                                ' . '<h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>'.'
+                                ' . '<p class="card-title"> '. htmlspecialchars($produit['prix']).'€' .'</p>' .'
                     </a>
-                    <a href="#" class="btn btn-primary">Ajouter un produit</a>
+                    <a href="#" class="btn btn-primary">Ajouter</a>
                   </div>
                </div>
         ';
