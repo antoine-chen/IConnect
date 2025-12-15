@@ -9,7 +9,11 @@ $contenuMenu = $mod->getAffichage();
 if (isset($_SESSION['login'])) {
     include_once 'modules/mod_asso/mod_asso.php';
     $mod = new ModAsso();
-    $contenu = 'Liste associations';
+    $contenu = $mod->getAffichage();
+
+    include_once "Composants/comp_navbar/comp_navbar.php";
+    $mod = new CompNavBar();
+    $contenuMenu = $mod->affiche();
 }
 
 else {

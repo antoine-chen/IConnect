@@ -18,4 +18,10 @@ class ModeleConnexion extends Connexion {
         $req->execute([$login]);
         return $req->fetch();
     }
+
+    public function estAdmin($login) {
+        $req = self::$bdd->prepare("SELECT r.role FROM utilisateurs u INNER JOIN role r ON r.idUtilisateur = u.id  WHERE login = ? AND role = 'Admin'");
+        $req->execute([$login]);
+        return $req->fetchColumn();
+    }
 }
