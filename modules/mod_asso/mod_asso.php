@@ -6,7 +6,7 @@ class ModAsso
 
     public function __construct()
     {
-        $action = isset($_GET['module']) ? $_GET['module'] : 'asso';
+        $action = isset($_GET['module']) ? $_GET['module'] : 'stock';
         switch ($action) {
             case 'panier':
                 // $this->module = new ModPanier();
@@ -15,7 +15,8 @@ class ModAsso
                 // $this->module = new ModBoutique();
                 break;
             case 'stock':
-                // $this->module = new ModStock();
+                include_once 'modules/mod_stock/mod_stock.php';
+                $this->module = new ModStock();
                 break;
             case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
