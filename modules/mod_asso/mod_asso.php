@@ -17,6 +17,10 @@ class ModAsso
             case 'stock':
                 // $this->module = new ModStock();
                 break;
+            case 'compte':
+                include_once 'modules/mod_compte/mod_compte.php';
+                $this->module = new ModCompte();
+                break;
             case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
                 $this->module = new ModAdmin();

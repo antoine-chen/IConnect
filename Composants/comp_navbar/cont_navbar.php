@@ -26,6 +26,7 @@ class ContNavbar {
             }
         } else {
             echo 'je suis sans role, je dois cliquer sur une association';
+            $this->vue->afficherNavbarClient();
             $this->vue->afficherNavbarSansRole();
         }
     }
