@@ -12,7 +12,7 @@ class VueAdmin extends VueGenerique{
             <form action="index.php?module=admin&action=ajouterAssociation" method="post" enctype="multipart/form-data" class="container taille-formulaire">
                 <p class="text-danger">' . $messageErreur . '</p>
                 <div class="form-floating">
-                    <input name="nom" class="form-control" placeholder="Nom de l\'association"><br><br>
+                    <input name="nom" class="form-control" placeholder="Nom de l\'association">
                     <label>Nom de l\'association :</label><br>
                 </div>
                 <div class="mb-3">
