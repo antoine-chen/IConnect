@@ -11,9 +11,7 @@ class ContCompte{
         $this->vue = new VueCompte();
     }
     public function formRecharger(){
-        if ($_SESSION['role'] == 'Client'){
-            $this->vue->afficherFormRecharger();
-        }
+        $this->vue->afficherFormRecharger(); // il faut verifier si c'est un client
     }
 
     /**
@@ -24,10 +22,10 @@ class ContCompte{
      * deja recharger -> UPDATE (son solde)
      */
     public function recharger(){
-        if (isset($_POST['montant']) && $_SESSION['role'] == 'Client'){
+        if (isset($_POST['montant']) && isset($_SESSION['id'])){ // il faut verifier si c'est un client
             $montant = $_POST['montant'];
-            $idClient = $_SESSION['id'];
-            $idAsso = $_SESSION['asso']; // idAsso quand j'ai choisi l'asso (cont_ass)
+            $idClient = $_SESSION['id']; // $_SESSION['id']
+            $idAsso = 1; // $_SESSION['asso'] idAsso quand j'ai choisi l'asso (cont_ass)
             if ($montant > 0){
                 if (!$this->modele->chercherClient($idClient, $idAsso)){
                     $this->modele->insertClientSole($idClient, $idAsso, $montant);
