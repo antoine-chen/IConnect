@@ -11,8 +11,7 @@ class ContStock {
         $this->vue = new VueStock();
     }
     
-    public function stockProduits()
-    {
+    public function stockProduits(){
         $idAsso = 1;
         $resultat = $this->modele->stockActuel($idAsso);
         if(empty($resultat)) {

@@ -5,36 +5,37 @@ class VueStock extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherStockActuel($donnes)
-    {
-        ?>
-        <table>
-            <thead>
-                <th>Produit</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Date</th>
-            </thead>
-
-            <tbody>
-                <?php
-                    foreach ($donnes as $produit) {
-                        ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($produit['nom']) ?></td>
-                            <td><?php echo htmlspecialchars($produit['prix']) ?></td>
-                            <td><?php echo htmlspecialchars($produit['stock']-$produit['pertes']) ?></td>
-                            <td><?php echo htmlspecialchars($produit['date']) ?></td>
-                        </tr>
-                    <?php } ?>
+    public function afficherStockActuel($donnes){
+        echo '
+            <table class="table table-bordered table-hover text-center table-responsive container taille-tableau">
+                <thead>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Date</th>
+                </thead>
+    
+                <tbody>
+        ';
+        foreach ($donnes as $produit){
+            echo '
+               <tr>
+                   <td> '.htmlspecialchars($produit['nom']).' </td>
+                   <td> '.htmlspecialchars($produit['prix']) .'</td>
+                   <td> '.htmlspecialchars($produit['stock']-$produit['pertes']) .'</td>
+                   <td> '.htmlspecialchars($produit['date']) .'</td>
+               </tr>                
+                ';
+            }
+        echo '
             </tbody>
         </table>
-        <?php
+        
+        ';
     }
 
-    public function inventaireVide()
-    {
-        ?> <p>Aucune inventaire réalisée pour ce mois ci</p> <?php
+    public function inventaireVide(){
+        echo '<p>Aucune inventaire réalisée pour ce mois ci</p> ';
     }
 
     public function afficher() {
