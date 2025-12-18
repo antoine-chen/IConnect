@@ -10,23 +10,20 @@ class ContNavbar {
     public function navbar(){
         if (isset($_SESSION['role'])){
             if ($_SESSION['role'] == "Client"){
-                // navbar du client
-                echo "client";
+                echo 'client';
+                $this->vue->afficherNavbarClient();
             }
             if ($_SESSION['role'] == "Barman"){
-                // navbar du barman
-                echo "barman";
+                $this->vue->afficherNavbarBarman();
             }
             if ($_SESSION['role'] == "Gestionnaire"){
-                // navbar du gestionnaire
-                echo "gestionnaire";
+                $this->vue->afficherNavbarGestionnaire();
             }
             if ($_SESSION['role'] == "Admin"){
                 $this->vue->afficherNavbarAdmin();
             }
         } else {
             echo 'je suis sans role, je dois cliquer sur une association';
-            $this->vue->afficherNavbarClient();
             $this->vue->afficherNavbarSansRole();
         }
     }

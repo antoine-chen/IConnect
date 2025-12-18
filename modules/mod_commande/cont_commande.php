@@ -13,13 +13,15 @@ class ContCommande {
 
     public function commande(){
         $this->vue->afficheListeCommande(
-            $this->modele->toutesLesCommandes());
+            $this->modele->toutesLesCommandes()
+        );
     }
 
     public function commandeAvancée(){
         $this->vue->afficheCommandeComplete(
             $this->modele->toutesLesCommandes()
-            ,$this->modele->toutesLesLignesCommandes());
+            ,$this->modele->toutesLesLignesCommandes()
+        );
 
     }
     public function details(){

@@ -19,31 +19,43 @@ class VueConnexion extends VueGenerique {
 
     public function form_inscription() {
         echo '
-            <h2>Inscription</h2>
-            <form method="post" action="index.php?actionComposant=inscription">
-                <label>Login :</label><br>
-                <input name="login"><br><br>
-                <label>Mot de passe :</label><br>
-                <input name="pwd"><br><br>
-                <input type="submit" value="inscrire">
+            
+            <form method="post" action="index.php?actionComposant=inscription" class="container taille-connexion">
+                <h2 class="text-center">Inscription</h2>
+                <div class="form-floating mt-3 mb-2">
+                    <input name="login" class="form-control" placeholder="Login">
+                    <label>Login</label>
+                </div>
+                <div class="form-floating">
+                    <input name="pwd" class="form-control" placeholder="Mot de passe">
+                    <label>Mot de passe</label>
+                </div>
+                <div class="mb-3">
+                    <a href="index.php?actionComposant=form_connexion"> Connectez-vous ici</a>
+                </div>
+                <input class="btn btn-primary" type="submit" value="inscrire">
+                
             </form>
-            <br>
-            <a href="index.php?actionComposant=form_connexion"> Connectez-vous ici</a>
         ';
     }
 
     public function form_connexion() {
         echo '
-            <h2>Connexion</h2>
-            <form method="post" action="index.php?actionComposant=connexion">
-                <label>Login :</label><br>
-                <input name="login"><br><br>
-                <label>Mot de passe :</label><br>
-                <input name="pwd"><br><br>
-                <input type="submit" value="Se connecter">
-            </form>
-            <br>
-            <a href="index.php?actionComposant=form_inscription">Créer un compte</a>
+            <form method="post" action="index.php?actionComposant=connexion" class="container taille-connexion">
+                <h2 class="text-center">Connexion</h2>
+                <div class="form-floating mt-3 mb-2">
+                    <input name="login" class="form-control" placeholder="Login">
+                    <label>Login</label>
+                </div>
+                <div class="form-floating">
+                    <input name="pwd" class="form-control" placeholder="Mot de passe">
+                    <label>Mot de passe</label>
+                </div>
+                <div class="mb-3">
+                    <a href="index.php?actionComposant=form_inscription">Créer un compte</a>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Se connecter">
+            </form>      
         ';
     }
 

@@ -1,3 +1,33 @@
+/*-------------NAVBAR-----------------*/
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+.item-navbar {
+    display: flex;
+    gap: 0 30px;
+}
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+/*------------------------------------*/
+
+/*-------------CONNEXION--------------*/
+.taille-connexion {
+    width: 500px;
+}
+@media (max-width: 789px) {
+    .taille-connexion {
+        width: 250px;
+    }
+}
+/*------------------------------------*/
+
 .taille-tableau {
     width: 70%;
 }
