@@ -40,12 +40,9 @@ class ContAsso {
                     $_SESSION['role'] = 'Gestionnaire';
                     header('Location: index.php?module=stock');
                     break;
-                case 'Client':
+                default :
                     $_SESSION['role'] = 'Client';
                     header('Location: index.php?module=produit');
-                    break;
-                default :
-                    echo 'role inconnue';
                     break;
             }
         }
