@@ -21,7 +21,7 @@ class VueConnexion extends VueGenerique {
         echo '
             
             <form method="post" action="index.php?actionComposant=inscription" class="container taille-connexion">
-                <h2>Inscription</h2>
+                <h2 class="text-center">Inscription</h2>
                 <div class="form-floating mt-3 mb-2">
                     <input name="login" class="form-control" placeholder="Login">
                     <label>Login</label>
@@ -42,7 +42,7 @@ class VueConnexion extends VueGenerique {
     public function form_connexion() {
         echo '
             <form method="post" action="index.php?actionComposant=connexion" class="container taille-connexion">
-                <h2>Connexion</h2>
+                <h2 class="text-center">Connexion</h2>
                 <div class="form-floating mt-3 mb-2">
                     <input name="login" class="form-control" placeholder="Login">
                     <label>Login</label>
