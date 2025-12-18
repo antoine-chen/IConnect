@@ -14,9 +14,13 @@ private $action;
             case 'commandes':
                 $this->controleur->commande();
                 break;
+                //affiche les details d'une commande //todo d'une seule association
             case 'details':
-                $id =isset($_GET['id']) ? $_GET['id'] : '';
-                $this->controleur->details($id);
+                $this->controleur->details();
+                break;
+
+            case 'commandesComplete':
+                $this->controleur->commandeAvancée();
                 break;
             default:
                 echo "action inconnue";

@@ -13,14 +13,23 @@ class ContCommande {
     }
 
     public function commande(){
-        $this->vue->afficheListeCommande($this->modele->toutesLesCommandes());
-    }
-    public function details($id){
-        $this->vue->afficheDetailsCommande($this->modele->derouléCommande($id));
+        $this->vue->afficheListeCommande(
+            $this->modele->toutesLesCommandes());
     }
 
-    public function getVue()
-    {
+    public function commandeAvancée(){
+        $this->vue->afficheCommandeComplete(
+            $this->modele->toutesLesCommandes()
+            ,$this->modele->toutesLesLignesCommandes());
+
+    }
+    public function details(){
+        $id =isset($_GET['id']) ? $_GET['id'] : '';
+        $this->vue->afficheDetailsCommande(
+            $this->modele->derouléCommande($id));
+    }
+
+    public function getVue(){
         return $this->vue->afficher();
     }
 
