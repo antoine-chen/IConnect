@@ -24,11 +24,4 @@ class ModeleAsso extends Connexion{
         $insert->execute([$idAsso, $idUtilisateur,'Client']);
     }
 
-    public function getIdUtilisateur($login)
-    {
-        $sql = "select * from utilisateurs where login=(?)";
-        $donnesBlocTexte = self::$bdd->prepare($sql);
-        $donnesBlocTexte->execute([$login]);
-        return $donnesBlocTexte->fetchColumn();
-    }
 }
