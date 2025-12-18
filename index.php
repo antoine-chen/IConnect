@@ -15,11 +15,9 @@ if (isset($_SESSION['login'])) {
     $mod = new CompNavBar();
     $contenuMenu = $mod->affiche();
 }
-
 else {
     include_once 'modules/landingPage/mod_landingPage.php';
     $mod = new ModLandingPage();
     $contenu = 'landing page';
 }
-
 include_once "template.php";

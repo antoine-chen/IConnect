@@ -12,16 +12,16 @@ class ModeleAsso extends Connexion{
 
     public function estPresentDansAsso($idAsso, $login)
     {
-        $sql = "select * from role where idAssociation = (?) and idUtilisateur = (?)";
+        $sql = "select role from role where idUtilisateur = (?) and idAssociation = (?)";
         $donnesBlocTexte = self::$bdd->prepare($sql);
-        $donnesBlocTexte->execute([$idAsso,$login]);
-        return $donnesBlocTexte->fetchAll();
+        $donnesBlocTexte->execute([$login,$idAsso]);
+        return $donnesBlocTexte->fetch();
     }
 
     public function attribuerRoleClient($idAsso, $idUtilisateur)
     {
         $insert = self::$bdd->prepare('INSERT INTO role (idUtilisateur,idAssociation,role) VALUES (?, ?, ?)');
-        $insert->execute([$idAsso, $idUtilisateur,'Client']);
+        $insert->execute([$idUtilisateur, $idAsso,'Client']);
     }
 
 }

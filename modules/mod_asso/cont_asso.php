@@ -27,17 +27,21 @@ class ContAsso {
             $idUtilisateur = $_SESSION['id'];
 
             $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
+
             if(empty($resultat)) {
                 $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
             }
             switch ($resultat['role']) {
                 case 'Barman' :
+                    $_SESSION['role'] = 'Barman';
                     header('Location: index.php?module=commande');
                     break;
                 case 'Gestionnaire' :
+                    $_SESSION['role'] = 'Gestionnaire';
                     header('Location: index.php?module=stock');
                     break;
                 default :
+                    $_SESSION['role'] = 'GJNA IAHIH AHI';
                     header('Location: index.php?module=produit');
                     break;
             }

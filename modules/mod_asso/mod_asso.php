@@ -7,6 +7,11 @@ class ModAsso
     public function __construct()
     {
         $mod = isset($_GET['module']) ? $_GET['module'] : 'asso';
+        if(isset($_SESSION['role'])) {
+            if($_SESSION['role']=='Admin') {
+                $mod = 'admin';
+            }
+        }
         switch ($mod) {
             case 'panier':
                 include_once 'modules/mod_produit/mod_produit.php';
@@ -27,14 +32,9 @@ class ModAsso
                 include_once  'modules/mod_commande/mod_commande.php';
                 $this->module = new ModCommande();
                 break;
-
             case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
                 $this->module = new ModAdmin();
-                break;
-            case 'commande' :
-                include_once  'modules/mod_commande/mod_commande.php';
-                $this->module = new ModCommande();
                 break;
             case 'asso':
                 include_once 'modules/mod_asso/cont_asso.php';

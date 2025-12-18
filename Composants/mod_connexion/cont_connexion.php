@@ -51,7 +51,6 @@ class ContConnexion {
             if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
                 $_SESSION['id'] = $utilisateur['id'];
                 $_SESSION['login'] = $utilisateur['login'];
-                $_SESSION['id'] = $utilisateur['id'];
                 if ($this->modele->estAdmin($login)) $_SESSION['role'] = $this->modele->estAdmin($login);
             } else {
                 $this->vue->form_connexion();

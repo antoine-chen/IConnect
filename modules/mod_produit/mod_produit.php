@@ -7,7 +7,7 @@ class ModProduit{
 
     public function __construct(){
         $this->controleur = new ContProduit();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'listerProduitss';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'listerProduits';
 
         $this->exec();
     }
