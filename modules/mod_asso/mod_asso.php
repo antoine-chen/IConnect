@@ -10,7 +10,6 @@ class ModAsso
         switch ($mod) {
             case 'panier':
                 include_once 'modules/mod_produit/mod_produit.php';
-
                 break;
             case 'produit':
                 include_once 'modules/mod_produit/mod_produit.php';

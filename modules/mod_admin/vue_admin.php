@@ -40,7 +40,7 @@ class VueAdmin extends VueGenerique{
                 <tr>
                    <th>
                         <a href="index.php?module=admin&action=listerAssociation&id=' . $association['id'] . '">
-                            ' . htmlspecialchars($association['nom']) . '
+                        ' . htmlspecialchars($association['nom']) . '
                         </a>
                     </th> 
                     <th>
