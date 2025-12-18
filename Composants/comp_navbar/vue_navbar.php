@@ -10,7 +10,8 @@ class VueNavbar extends VueGenerique {
 
     public function afficherNavbarAdmin(){
         $this->contenu = '
-            <nav>
+            <nav class="navbar">
+                <img src="modules/mod_asso/logos/logo.png" id="logo" alt="">
                 <a href="index.php?module=admin&action=formAssociation">Créer une association</a>
                 <a href="index.php?module=admin&action=listerAssociation">Liste des associations</a>
                 <a href="index.php?actionComposant=deconnexion">Se déconnecter</a>
@@ -20,6 +21,7 @@ class VueNavbar extends VueGenerique {
     public function afficherNavbarClient(){
         $this->contenu = '
             <nav>
+                <img src="modules/mod_asso/logos/logo.png" id="logo" alt="">
                 <a href="index.php?module=compte&action=formRecharger">Recharger</a>
                 <a href="index.php?actionComposant=deconnexion">Se déconnecter</a>
             </nav>
@@ -29,10 +31,15 @@ class VueNavbar extends VueGenerique {
     // Modifier cette méthode
     public function afficherNavbarSansRole(){
         $this->contenu = '
-            <nav>
-                <a href="index.php?module=compte&action=formRecharger">Recharger</a>
-                <a href="index.php?module=produit&action=listerProduits">Lister les produits</a>
-                <a href="index.php?actionComposant=deconnexion">Se déconnecter</a>
+            <nav class="navbar">
+                <img src="modules/mod_asso/logos/logo.png" id="logo" alt="">
+               
+                <div class="item-navbar">
+                    <a href="index.php?module=compte&action=formRecharger">Recharger</a>
+                    <a href="index.php?module=produit&action=listerProduits">Lister les produits</a>
+                </div>
+
+                <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
             </nav>
         ';
     }
