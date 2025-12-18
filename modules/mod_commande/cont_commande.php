@@ -19,4 +19,9 @@ class ContCommande {
         $this->vue->afficheDetailsCommande($this->modele->derouléCommande($id));
     }
 
+    public function getVue()
+    {
+        return $this->vue->afficher();
+    }
+
 }

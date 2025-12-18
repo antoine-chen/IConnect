@@ -6,7 +6,7 @@ class ModeleCommande extends connexion {
         return $req->fetchAll();
     }
     public function derouléCommande($idCommande){
-        $req = self::$bdd->prepare("SELECT nom,quantité from ligneCommande inner join produit on idProduit=id where idCommande =? ");
+        $req = self::$bdd->prepare("SELECT nom,quantite from ligneCommande inner join produit on idProduit=id where idCommande =? ");
         $req->execute([$idCommande]);
         return $req->fetchAll();
     }
