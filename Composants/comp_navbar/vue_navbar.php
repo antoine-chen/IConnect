@@ -47,7 +47,7 @@ class VueNavbar extends VueGenerique {
                     <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
-                    navbar-item du barman
+                    <a href="index.php?module=commande&action=commandes">Commandes</a>
                 </div>
                 <div class="col">
                     <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
