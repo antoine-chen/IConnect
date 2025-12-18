@@ -17,11 +17,19 @@ class VueNavbar extends VueGenerique {
             </nav>
         ';
     }
-
+    public function afficherNavbarClient(){
+        $this->contenu = '
+            <nav>
+                <a href="index.php?module=compte&action=formRecharger">Recharger</a>
+                <a href="index.php?actionComposant=deconnexion">Se déconnecter</a>
+            </nav>
+        ';
+    }
     public function afficherNavbarSansRole(){
         $this->contenu = '
             <nav>
-                <a href="index.php?actionComposant=deconnexion">Se déconnecter</a></p>;
+                <a href="index.php?module=compte&action=formRecharger">Recharger</a>
+                <a href="index.php?actionComposant=deconnexion">Se déconnecter</a>
             </nav>
         ';
     }
