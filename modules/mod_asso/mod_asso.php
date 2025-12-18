@@ -23,6 +23,11 @@ class ModAsso
                 include_once 'modules/mod_compte/mod_compte.php';
                 $this->module = new ModCompte();
                 break;
+            case'commande':
+                include_once  'modules/mod_commande/mod_commande.php';
+                $this->module = new ModCommande();
+                break;
+
             case 'admin':
                 include_once 'modules/mod_admin/mod_admin.php';
                 $this->module = new ModAdmin();
