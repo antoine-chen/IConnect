@@ -17,7 +17,7 @@ class ContAdmin{
         }
     }
 
-    /*
+    /**
        ajouter une association
        isset puis regarde si les champs sont vide
        si pas vide INSERT sinon re affiche le form avec un message d'erreur
@@ -55,7 +55,7 @@ class ContAdmin{
         }
     }
 
-    /*
+    /**
         ajouter un gestionnaire dans une assocation
         isset, regarde si les champs sont remplis
         si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
