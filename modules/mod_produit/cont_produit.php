@@ -11,11 +11,9 @@ class ContProduit{
         $this->vue = new VueProduit();
     }
     public function listerProduits (){
-        if ($_SESSION['role'] == 'Client'){
-            $idAsso = $_SESSION['asso'];
-            $listeProduit = $this->modele->getProduits($idAsso);
-            $this->vue->afficherProduits($listeProduit);
-        }
+        // vérifier le role == Client
+        $listeProduit = $this->modele->getProduits();
+        $this->vue->afficherProduits($listeProduit);
     }
 
 
