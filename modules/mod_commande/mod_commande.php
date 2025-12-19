@@ -6,7 +6,8 @@ private $controleur;
 private $action;
     public function __construct(){
         $this->controleur =new ContCommande();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'commandes';
+
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'commandesComplete';
         $this->exec();
     }
 
