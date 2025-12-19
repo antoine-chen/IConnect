@@ -8,82 +8,22 @@ class VueNavbar extends VueGenerique {
         $this->contenu = "";
     }
 
-    public function afficherNavbarAdmin(){
+    public function afficherNavbar($listeUrlAction, $lien, $quitterOuDeconnexion){
         $this->contenu = '
             <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
                 </div>
-                <div class="col-8 d-flex justify-content-center gap-4">
-                    <a href="index.php?module=admin&action=formAssociation">Créer une association</a>
-                    <a href="index.php?module=admin&action=listerAssociation">Liste des associations</a>
-                </div>
-                <div class="col">
-                    <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
-                </div>
-            </nav>
-        ';
-    }
-    public function afficherNavbarGestionnaire(){
-        $this->contenu = '
-            <nav class="row align-items-center mx-5 border">
-                <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
-                </div>
-                <div class="col-8 d-flex justify-content-center gap-4">
-                    <a href="index.php?module=stock&action=stockProduits">Stock</a>
-                </div>
-                <div class="col">
-                    <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
-                </div>
-            </nav>
-        ';
-    }
+                <div class="col-8 d-flex justify-content-center gap-4">';
 
-    public function afficherNavbarBarman(){
-        $this->contenu = '
-            <nav class="row align-items-center mx-5 border">
-                <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
-                </div>
-                <div class="col-8 d-flex justify-content-center gap-4">
-                    <a href="index.php?module=commande&action=commandes">Commandes</a>
-                </div>
-                <div class="col">
-                    <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
-                </div>
-            </nav>
-        ';
-    }
+        foreach ($listeUrlAction as $ligne) {
+            $this->contenu .= '<a href="' . $ligne['url'] . '">' . $ligne['action'] . '</a>';
+        }
 
-    public function afficherNavbarClient(){
-        $this->contenu = '
-            <nav class="row align-items-center mx-5 border">
-                <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
-                </div>
-                <div class="col-8 d-flex justify-content-center gap-4">
-                    <a href="index.php?module=compte&action=formRecharger">Recharger</a>
-                    <a href="index.php?module=produit&action=listerProduits">Lister les produits</a>
+        $this->contenu .= '
                 </div>
                 <div class="col">
-                    <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
-                </div>
-            </nav>
-        ';
-    }
-
-    public function afficherNavbarSansRole(){
-        $this->contenu = '
-           <nav class="row align-items-center mx-5 border">
-                <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
-                </div>
-                <div class="col-8 d-flex justify-content-center gap-4">
-                    <a href="index.php?module=asso&action=afficherAsso">Les associations</a>
-                </div>
-                <div class="col">
-                    <a href="index.php?actionComposant=deconnexion" class="btn btn-primary">Se déconnecter</a>
+                    <a href="'. $lien .'" class="btn btn-primary"> '.$quitterOuDeconnexion.'</a>
                 </div>
             </nav>
         ';
