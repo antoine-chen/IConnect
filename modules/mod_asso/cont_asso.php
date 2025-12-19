@@ -27,20 +27,24 @@ class ContAsso {
             $idUtilisateur = $_SESSION['id'];
 
             $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
-            if(empty($resultat && $this->modele->existeAssociaion($idAsso))) {
+            if(empty($resultat) && $this->modele->existeAssociaion($idAsso)) {
                 $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
+
+                switch ($resultat['role']) {
+                    case 'Barman' :
+                        header('Location: index.php?module=commande');
+                        break;
+                    case 'Gestionnaire' :
+                        header('Location: index.php?module=stock');
+                        break;
+                    default :
+                        header('Location: index.php?module=produit');
+                        break;
+                }
+            } else {
+                $this->afficherAsso();
             }
-            switch ($resultat['role']) {
-                case 'Barman' :
-                    header('Location: index.php?module=commande');
-                    break;
-                case 'Gestionnaire' :
-                    header('Location: index.php?module=stock');
-                    break;
-                default :
-                    header('Location: index.php?module=produit');
-                    break;
-            }
+
         }
     }
 }
