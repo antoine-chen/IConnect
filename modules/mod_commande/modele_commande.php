@@ -5,7 +5,7 @@ class ModeleCommande extends connexion {
     //fait une requette pour toute les commandes d'une association
     public function toutesLesCommandes(){
         $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ?");
-        $req->execute([$_SESSION['association']]);
+        $req->execute([$_SESSION['asso']]);
         return $req->fetchAll();
     }
     //recupere toutes les ligne de commandes d'une commande
