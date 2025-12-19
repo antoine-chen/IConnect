@@ -12,7 +12,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
             <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
                     <a href="index.php?module=admin&action=formAssociation">Créer une association</a>
@@ -28,7 +28,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
             <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
                     <a href="index.php?module=stock&action=stockProduits">Stock</a>
@@ -44,7 +44,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
             <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
                     <a href="index.php?module=commande&action=commandes">Commandes</a>
@@ -60,7 +60,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
             <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
                     <a href="index.php?module=compte&action=formRecharger">Recharger</a>
@@ -77,7 +77,7 @@ class VueNavbar extends VueGenerique {
         $this->contenu = '
            <nav class="row align-items-center mx-5 border">
                 <div class="col">
-                    <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+                    <img src="modules/mod_asso/logos/logo.png" class="logo" style="width: 50px" alt="">
                 </div>
                 <div class="col-8 d-flex justify-content-center gap-4">
                     <a href="index.php?module=asso&action=afficherAsso">Les associations</a>
