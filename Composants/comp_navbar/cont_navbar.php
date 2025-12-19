@@ -11,6 +11,12 @@ class ContNavbar {
         $this->vue = new VueNavbar();
     }
 
+    /**
+     * gestion de la navbar
+     * regarde si connecter à une association
+     * si oui affiche la navbar selon le role (tableau 2 dimensions dans le modele)
+     * sinon affiche la navbar (sans role)
+     */
     public function navbar(){
         $quitterOuDeconnexion = $this->modele->quitterOuDeconnexion();
         if (isset($_SESSION['role'])){

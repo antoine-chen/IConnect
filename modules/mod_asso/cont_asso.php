@@ -19,6 +19,9 @@ class ContAsso {
         unset($_SESSION['asso']);
     }
 
+    /**
+     * si l'utilisateur quitte une association -> unset role et asso
+    */
     public function afficherAsso(){
         if (isset($_SESSION['role']) && isset($_SESSION['asso'])){
             $this->quitterAssoc();
@@ -26,6 +29,10 @@ class ContAsso {
         $this->vue->afficherListeAsso($this->modele->getListe());
     }
 
+    /**
+     * permet d'attribuer un role à un utilisateur dans une association : Gestionnaire, Barman ou client
+     * si l'utilisateur n'est jamais aller une association il aura le role Client
+    */
     public function aChoisitAsso(){
         if(isset($_GET['id']) && isset($_SESSION['login'])) {
             $idAsso = $_GET['id'];

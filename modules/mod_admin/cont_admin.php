@@ -18,9 +18,9 @@ class ContAdmin{
     }
 
     /**
-       ajouter une association
-       isset puis regarde si les champs sont vide
-       si pas vide INSERT sinon re affiche le form avec un message d'erreur
+     * ajouter une association
+     * isset puis regarde si les champs sont vide
+     * si pas vide INSERT sinon re affiche le form avec un message d'erreur
     */
     public function ajouterAssociation(){
         if (isset($_POST['nom']) && isset($_FILES['imageAso']) && $_SESSION['role'] == 'Admin') {
