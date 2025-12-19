@@ -23,10 +23,11 @@
 </main>
 
 <footer>
-    <h1>Footer :</h1>
-    <p></p>
-    <ul>
-    </ul>
+    <div class="d-flex justify-content-center border">
+        <div class="m-5 btn btn-danger">Antoine Chen</div>
+        <div class="m-5 btn btn-primary">JC Lay</div>
+        <div class="m-5 btn btn-success">Thai-nam Ngo-Marie</div>
+    </div>
 </footer>
 </body>
 </html>
