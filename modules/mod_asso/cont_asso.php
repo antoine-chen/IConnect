@@ -14,13 +14,19 @@ class ContAsso {
         return $this->vue->afficher();
     }
 
-    public function afficherAsso()
-    {
+    private function quitterAssoc(){
+        unset($_SESSION['role']);
+        unset($_SESSION['asso']);
+    }
+
+    public function afficherAsso(){
+        if (isset($_SESSION['role']) && isset($_SESSION['asso'])){
+            $this->quitterAssoc();
+        }
         $this->vue->afficherListeAsso($this->modele->getListe());
     }
 
-    public function aChoisitAsso()
-    {
+    public function aChoisitAsso(){
         if(isset($_GET['id']) && isset($_SESSION['login'])) {
             $idAsso = $_GET['id'];
             $_SESSION['asso'] = $idAsso;
