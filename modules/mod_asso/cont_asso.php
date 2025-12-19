@@ -28,7 +28,7 @@ class ContAsso {
 
             $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
 
-            if(empty($resultat)) {
+            if(empty($resultat && $this->modele->existeAssociaion($idAsso))) {
                 $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
             }
             switch ($resultat['role']) {

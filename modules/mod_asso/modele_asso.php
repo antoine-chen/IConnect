@@ -24,4 +24,10 @@ class ModeleAsso extends Connexion{
         $insert->execute([$idUtilisateur, $idAsso,'Client']);
     }
 
+    public function existeAssociaion ($idAssociation){
+        $existe = self::$bdd->prepare('SELECT id FROM association WHERE id = ?');
+        $existe->execute([$idAssociation]);
+        return $existe->fetch();
+    }
+
 }
