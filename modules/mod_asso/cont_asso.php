@@ -28,9 +28,10 @@ class ContAsso {
 
             $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
 
-            if(empty($resultat) && $this->modele->existeAssociaion($idAsso)) {
-                $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
-
+            if($this->modele->existeAssociaion($idAsso)) {
+                if(empty($resultat)) {
+                    $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
+                }
                 switch ($resultat['role']) {
                     case 'Barman' :
                         header('Location: index.php?module=commande');

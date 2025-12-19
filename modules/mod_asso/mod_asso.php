@@ -49,7 +49,6 @@ class ModAsso
                         $this->module->afficherAsso();
                         break;
                 }
-
                 break;
             default:
                 $this->module = null;
