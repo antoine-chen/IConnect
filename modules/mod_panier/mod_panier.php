@@ -20,6 +20,9 @@ class ModPanier{
             case "ajouterDansPanier":
                 $this->controleur->ajouterDansPanier();
                 break;
+            case "validerPanier":
+                $this->controleur->validerPanier();
+                break;
             default:
                 echo "action inconnue";
                 break;

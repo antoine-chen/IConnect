@@ -51,8 +51,24 @@ class ModelePanier extends Connexion{
         $updateLignePanier->execute([$idPanier, $idProduit]);
     }
 
-    public function additionPanier(){
+    public function getSoldeUtilisateur($idUtilisateur, $idAssociation){
+        $getSolde = self::$bdd->prepare('SELECT solde FROM solde WHERE idUtilisateur = ? AND idAssociation = ?');
+        $getSolde->execute([$idUtilisateur, $idAssociation]);
+        return $getSolde->fetchColumn();
+    }
 
+    public function updateSoldeUtilisateur($idUtilisateur, $idAssociation, $addition){
+        $updateSolde = self::$bdd->prepare('UPDATE solde SET solde = solde - ?  WHERE idUtilisateur = ? AND idAssociation = ?');
+        $updateSolde->execute([$addition, $idUtilisateur, $idAssociation]);
+    }
+
+    public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){
+        $deleteClientPanierEtLignePanier = self::$bdd->prepare('DELETE FROM panier WHERE idAssociation = ? AND idUtilisateur = ?');
+        $deleteClientPanierEtLignePanier->execute([$idUtilisateur, $idAssociation]);
+
+        $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
+        $deleteLignePanier = self::$bdd->prepare('DELETE FROM lignePanier WHERE idPanier = ?');
+        $deleteLignePanier->execute([$idIdPanierClient]);
     }
 
 }

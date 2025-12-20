@@ -55,6 +55,22 @@ class ContPanier{
         }
     }
 
+    public function validerPanier(){
+        if ($_SESSION['role'] == 'Client'){
+            $idUtilisateur = $_SESSION['id'];
+            $idAsso = $_SESSION['asso'];
+            $soldeUtilisateur = $this->modele->getSoldeUtilisateur($idUtilisateur, $idAsso) ? $this->modele->getSoldeUtilisateur($idUtilisateur, $idAsso) : 0;
+            $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur) ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
+
+            if ($addition > 0 && $soldeUtilisateur >= $addition){
+                $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition);
+                // TODO insert dans la table commande et ligneCommande
+                // TODO enlever le stock (panier)
+                // TODO vider table panier et lignePanier
+            }
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

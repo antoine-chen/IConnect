@@ -8,7 +8,7 @@ class VuePanier extends VueGenerique{
 
     public function afficherPanier($panier, $addition){
         echo '
-            <form action="" method="post" class="d-flex flex-column border rounded m-2">
+            <div class="d-flex flex-column border rounded m-2">
         ';
         foreach ($panier as $produit){
             echo '
@@ -29,11 +29,11 @@ class VuePanier extends VueGenerique{
             ';
         }
         echo '
-            <div class="d-flex justify-content-between align-items-center mx-5">
-                <p>Total : '. $addition .' €</p>
-                <input type="submit" value="Valider" class="btn btn-primary m-4">
+                <div class="d-flex justify-content-between align-items-center mx-5">
+                    <p>Total : '. $addition .' €</p>
+                    <a href="index.php?module=panier&action=validerPanier" class="btn btn-primary m-4">Valider</a>
+                </div>
             </div>
-            </form>
         ';
     }
 
