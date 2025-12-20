@@ -5,7 +5,7 @@ class ModeleNavbar{
     public function getNavbarClient(){
         return array(
             array("url" => "index.php?module=compte&action=formRecharger", "action" => "Recharger"),
-            array("url" => "index.php?module=panier&action=listerProduits", "action" => "Lister les produits"),
+            array("url" => "index.php?module=produit&action=listerProduits", "action" => "Lister les produits"),
             array("url" => "index.php?module=panier&action=panier", "action" => "Panier")
         );
     }

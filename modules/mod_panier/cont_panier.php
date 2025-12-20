@@ -12,18 +12,6 @@ class ContPanier{
     }
 
     /**
-     * affiche la liste des produits d'une association
-    */
-
-    public function listerProduits (){
-        if ($_SESSION['role'] == 'Client'){
-            $idAsso = $_SESSION['asso'];
-            $listeProduit = $this->modele->getProduits($idAsso);
-            $this->vue->afficherProduits($listeProduit);
-        }
-    }
-
-    /**
      * affiche le panier d'un client dans une association
     */
     public function panier(){
@@ -33,6 +21,34 @@ class ContPanier{
             $this->vue->afficherPanier(
                 $this->modele->getPanier($idAsso, $idUtilisateur)
             );
+        }
+    }
+
+    /**
+     * ajoute un produit dans le panier du client de l'association
+     * cas 1 -> je n'ai pas de panier -> INSERT panier + INSERT lignePanier
+     * cas 2 -> j'ai un panier + j'ai jamais ajoute ce produit dans lignePanier -> INSERT lignePanier
+     * cas 3 -> j'ai un panier + j'ai deja ajouté ce produit dans lignePanier -> UPDATE lignePanier
+    */
+    public function ajouterDansPanier(){
+        if (isset($_GET['id']) && $_SESSION['role'] == 'Client'){
+            $idProduit = $_GET['id']; // id produit que le client a cliqué
+            $idAsso = $_SESSION['asso'];
+            $idUtilisateur = $_SESSION['id'];
+
+            if ($this->modele->existeProduit($idProduit)){
+                $idPanier = $this->modele->getIdPanier($idAsso, $idUtilisateur);
+                if (!$idPanier){
+                    $this->modele->insertPanier($idAsso, $idUtilisateur);
+                    $this->modele->insertLignePanier($idPanier, $idProduit, 1); // click btn ajouter = 1 produit
+                }else {
+                    if ($this->modele->dejaAjouter($idPanier, $idProduit)){
+                        $this->modele->updateLignePanier($idPanier, $idProduit);
+                    } else {
+                        $this->modele->insertLignePanier($idPanier, $idProduit, 1);
+                    }
+                }
+            }
         }
     }
 

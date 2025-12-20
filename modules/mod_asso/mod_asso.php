@@ -13,6 +13,10 @@ class ModAsso
             }
         }
         switch ($mod) {
+            case 'produit':
+                include_once 'modules/mod_produit/mod_produit.php';
+                $this->module = new ModProduit();
+                break;
             case 'panier':
                 include_once 'modules/mod_panier/mod_panier.php';
                 $this->module = new ModPanier();

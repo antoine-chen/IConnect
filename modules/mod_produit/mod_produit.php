@@ -1,24 +1,21 @@
 <?php
-include_once 'cont_panier.php';
+include_once 'cont_produit.php';
 
-class ModPanier{
+class ModProduit{
     private $controleur;
     private $action;
 
     public function __construct(){
-        $this->controleur = new ContPanier();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'panier';
+        $this->controleur = new ContProduit();
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'listerProduits';
 
         $this->exec();
     }
 
     public function exec(){
         switch ($this->action) {
-            case "panier":
-                $this->controleur->panier();
-                break;
-            case "ajouterDansPanier":
-                $this->controleur->ajouterDansPanier();
+            case "listerProduits":
+                $this->controleur->listerProduits();
                 break;
             default:
                 echo "action inconnue";
