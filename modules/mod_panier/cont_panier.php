@@ -18,8 +18,10 @@ class ContPanier{
         if ($_SESSION['role'] == 'Client'){
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
+            $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur)>0 ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
             $this->vue->afficherPanier(
-                $this->modele->getPanier($idAsso, $idUtilisateur)
+                $this->modele->getPanier($idAsso, $idUtilisateur),
+                $addition
             );
         }
     }
@@ -40,6 +42,7 @@ class ContPanier{
                 $idPanier = $this->modele->getIdPanier($idAsso, $idUtilisateur);
                 if (!$idPanier){
                     $this->modele->insertPanier($idAsso, $idUtilisateur);
+                    $idPanier = $this->modele->getIdPanier($idAsso, $idUtilisateur);
                     $this->modele->insertLignePanier($idPanier, $idProduit, 1); // click btn ajouter = 1 produit
                 }else {
                     if ($this->modele->dejaAjouter($idPanier, $idProduit)){
