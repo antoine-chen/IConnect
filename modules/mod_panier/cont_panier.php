@@ -1,4 +1,29 @@
 <?php
-class ContPanier {
+include_once 'modele_panier.php';
+include_once 'vue_panier.php';
+
+class ContPanier{
+    private $modele;
+    private $vue;
+
+    public function __construct(){
+        $this->modele = new ModelePanier();
+        $this->vue = new VuePanier();
+    }
+
+    public function panier(){
+        if ($_SESSION['role'] == 'Client'){
+            $idAsso = $_SESSION['asso'];
+            $idUtilisateur = $_SESSION['id'];
+            $this->vue->afficherPanier(
+                $this->modele->getPanier($idAsso, $idUtilisateur)
+            );
+        }
+    }
+
+    public function getVue(){
+        return $this->vue->afficher();
+    }
 
 }
+
