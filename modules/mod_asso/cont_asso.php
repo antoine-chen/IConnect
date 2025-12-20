@@ -56,7 +56,7 @@ class ContAsso {
                         break;
                     default :
                         $_SESSION['role'] = 'Client';
-                        header('Location: index.php?module=produit');
+                        header('Location: index.php?module=panier');
                         break;
                 }
             } else {

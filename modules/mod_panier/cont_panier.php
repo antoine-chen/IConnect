@@ -11,6 +11,21 @@ class ContPanier{
         $this->vue = new VuePanier();
     }
 
+    /**
+     * affiche la liste des produits d'une association
+    */
+
+    public function listerProduits (){
+        if ($_SESSION['role'] == 'Client'){
+            $idAsso = $_SESSION['asso'];
+            $listeProduit = $this->modele->getProduits($idAsso);
+            $this->vue->afficherProduits($listeProduit);
+        }
+    }
+
+    /**
+     * affiche le panier d'un client dans une association
+    */
     public function panier(){
         if ($_SESSION['role'] == 'Client'){
             $idAsso = $_SESSION['asso'];

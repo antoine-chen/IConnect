@@ -17,10 +17,6 @@ class ModAsso
                 include_once 'modules/mod_panier/mod_panier.php';
                 $this->module = new ModPanier();
                 break;
-            case 'produit':
-                include_once 'modules/mod_produit/mod_produit.php';
-                $this->module = new ModProduit();
-                break;
             case 'stock':
                 include_once 'modules/mod_stock/mod_stock.php';
                 $this->module = new ModStock();
