@@ -46,8 +46,13 @@ class ModelePanier extends Connexion{
         return $dejaAjouter->fetch();
     }
 
-    public function updateLignePanier($idPanier, $idProduit){
+    public function updateLignePanierAjouter($idPanier, $idProduit){
         $updateLignePanier = self::$bdd->prepare('UPDATE lignePanier SET quantite = quantite + 1 
+                                                        WHERE idPanier = ? AND idProduit = ?');
+        $updateLignePanier->execute([$idPanier, $idProduit]);
+    }
+    public function updateLignePanierEnlever($idPanier, $idProduit){
+        $updateLignePanier = self::$bdd->prepare('UPDATE lignePanier SET quantite = quantite - 1 
                                                         WHERE idPanier = ? AND idProduit = ?');
         $updateLignePanier->execute([$idPanier, $idProduit]);
     }

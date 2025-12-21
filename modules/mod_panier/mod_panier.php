@@ -23,6 +23,9 @@ class ModPanier{
             case "validerPanier":
                 $this->controleur->validerPanier();
                 break;
+            case "enleverProduit":
+                $this->controleur->enleverProduit();
+                break;
             default:
                 echo "action inconnue";
                 break;

@@ -14,14 +14,15 @@ class ContPanier{
     /**
      * affiche le panier d'un client dans une association
     */
-    public function panier(){
+    public function panier($messageValidationPanier = ""){
         if ($_SESSION['role'] == 'Client'){
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur)>0 ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
             $this->vue->afficherPanier(
                 $this->modele->getPanier($idAsso, $idUtilisateur),
-                $addition
+                $addition,
+                $messageValidationPanier
             );
         }
     }
@@ -46,7 +47,7 @@ class ContPanier{
                     $this->modele->insertLignePanier($idPanier, $idProduit, 1); // click btn ajouter = 1 produit
                 }else {
                     if ($this->modele->dejaAjouter($idPanier, $idProduit)){
-                        $this->modele->updateLignePanier($idPanier, $idProduit);
+                        $this->modele->updateLignePanierAjouter($idPanier, $idProduit);
                     } else {
                         $this->modele->insertLignePanier($idPanier, $idProduit, 1);
                     }
@@ -55,12 +56,21 @@ class ContPanier{
         }
     }
 
+    public function enleverProduit(){
+        if (isset($_GET['id']) && $_SESSION['role'] == 'Client'){
+            $this->modele->updateLignePanierEnlever(
+                $this->modele->getIdPanier($_SESSION['asso'], $_SESSION['id']),
+                $_GET['id']
+            );
+            $this->panier();
+        }
+    }
+
     /**
      * valide ou non le panier du client de l'association
      * si pour chaque produit du panier du client il y a assez de produit dans le stock de l'inventaire
      * alors je rentre dans la condition if ($assezStock == 1) et j'execute les actions de la validation du panier (voir le commantaire correspondant)
      * sinon je fais rien
-     * TODO faire si panier refuser vider panier et lignePanier et mettre un message d'avertissement + améliorer la navigation quand j'ajoute un produit etc..
     */
     public function validerPanier(){
         if ($_SESSION['role'] == 'Client'){
@@ -81,13 +91,16 @@ class ContPanier{
                     $this->enleverStock($idAsso, $panierClient);
                     $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
                     $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
+                    $this->panier("Votre panier a été validé, veuillez recuperer votre commande");
+                }else {
+                    $this->panier("Erreur de stock, veuillez re faire à nouveau votre panier");
+                    $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
                 }
-
             }
         }
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
-    public function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
+    private function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
         $this->modele->insertCommande($idUtilisateur, date('Y-m-d'), "Encours", $idAsso);
         $idCommande = $this->modele->getIdCommandeClient($idUtilisateur, $idAsso);
         foreach ($panierClient as $lignePanier){
@@ -96,7 +109,7 @@ class ContPanier{
     }
 
     // update le stock -> ce que le client a acheté
-    public function enleverStock($idAsso, $panierClient){
+    private function enleverStock($idAsso, $panierClient){
         $idInventaire = $this->modele->getIdInventaire($idAsso);
         foreach ($panierClient as $lignePanier){
             $this->modele->updateLigneInventaire($idInventaire, $lignePanier['id'], $lignePanier['quantite']);
