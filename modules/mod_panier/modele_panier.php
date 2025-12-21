@@ -19,10 +19,11 @@ class ModelePanier extends Connexion{
         return $getPanier->fetchColumn();
     }
 
-    public function existeProduit($idProduit){
-        $existe = self::$bdd->prepare('SELECT id FROM produit WHERE id = ?');
-        $existe->execute([$idProduit]);
-        return $existe->fetch();
+    public function assezDeStockProduit($idAssociation, $idProduit){
+        $existe = self::$bdd->prepare('SELECT stock FROM inventaire i 
+                                                INNER JOIN ligneInventaire l WHERE i.idAssociation = ? AND l.idProduit = ?');
+        $existe->execute([$idAssociation ,$idProduit]);
+        return $existe->fetchColumn();
     }
     public function insertPanier($idAssociation, $idUtilisateur){
         $insertPanier = self::$bdd->prepare('INSERT INTO panier (idAssociation, idUtilisateur) VALUES (?, ?)');
@@ -62,13 +63,43 @@ class ModelePanier extends Connexion{
         $updateSolde->execute([$addition, $idUtilisateur, $idAssociation]);
     }
 
-    public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){
-        $deleteClientPanierEtLignePanier = self::$bdd->prepare('DELETE FROM panier WHERE idAssociation = ? AND idUtilisateur = ?');
-        $deleteClientPanierEtLignePanier->execute([$idUtilisateur, $idAssociation]);
+    public function getIdInventaire($idAssociation){
+        $existe = self::$bdd->prepare('SELECT id FROM inventaire i 
+                                                INNER JOIN ligneInventaire l WHERE i.idAssociation = ? ');
+        $existe->execute([$idAssociation]);
+        return $existe->fetchColumn();
+    }
+    // quand je valide mon panier je baisse le stock de l'inventaide de l'association
+    public function updateLigneInventaire($idInventaire, $idProduit, $quantite){
+        $updateLigneInventaire = self::$bdd->prepare('UPDATE ligneInventaire SET stock = stock - ?
+                                                                        WHERE idInventaire = ? AND idProduit = ?');
+        $updateLigneInventaire->execute([$quantite, $idInventaire, $idProduit]);
+    }
 
+    public function insertCommande($idUtilisateur, $date, $status, $idAssociation){
+        $insertCommande = self::$bdd->prepare('INSERT INTO commande(idUtilisateur, date, statut, idAssociation) VALUES (?, ?, ?, ?)');
+        $insertCommande->execute([$idUtilisateur, $date, $status, $idAssociation]);
+    }
+
+    public function insertLigneCommande($idCommande, $idProduit, $quantite){
+        $insertLigneCommande = self::$bdd->prepare('INSERT INTO ligneCommande(idCommande, idProduit, quantite) VALUES (?, ?, ?)');
+        $insertLigneCommande->execute([$idCommande, $idProduit, $quantite]);
+    }
+
+    public function getIdCommandeClient($idUtilisateur, $idAssociation){
+        $getIdCommandeClient = self::$bdd->prepare('SELECT id FROM commande WHERE idUtilisateur = ? AND idAssociation = ?');
+        $getIdCommandeClient->execute([$idUtilisateur, $idAssociation]);
+        return $getIdCommandeClient->fetchColumn();
+    }
+
+    public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){
         $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
+
         $deleteLignePanier = self::$bdd->prepare('DELETE FROM lignePanier WHERE idPanier = ?');
         $deleteLignePanier->execute([$idIdPanierClient]);
+
+        $deleteClientPanier = self::$bdd->prepare('DELETE FROM panier WHERE idAssociation = ? AND idUtilisateur = ?');
+        $deleteClientPanier->execute([$idAssociation, $idUtilisateur]);
     }
 
 }

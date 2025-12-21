@@ -38,7 +38,7 @@ class ContPanier{
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
 
-            if ($this->modele->existeProduit($idProduit)){
+            if ($this->modele->assezDeStockProduit($idAsso ,$idProduit)){
                 $idPanier = $this->modele->getIdPanier($idAsso, $idUtilisateur);
                 if (!$idPanier){
                     $this->modele->insertPanier($idAsso, $idUtilisateur);
@@ -55,6 +55,13 @@ class ContPanier{
         }
     }
 
+    /**
+     * valide ou non le panier du client de l'association
+     * si pour chaque produit du panier du client il y a assez de produit dans le stock de l'inventaire
+     * alors je rentre dans la condition if ($assezStock == 1) et j'execute les actions de la validation du panier (voir le commantaire correspondant)
+     * sinon je fais rien
+     * TODO faire si panier refuser vider panier et lignePanier et mettre un message d'avertissement + améliorer la navigation quand j'ajoute un produit etc..
+    */
     public function validerPanier(){
         if ($_SESSION['role'] == 'Client'){
             $idUtilisateur = $_SESSION['id'];
@@ -63,11 +70,36 @@ class ContPanier{
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur) ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
 
             if ($addition > 0 && $soldeUtilisateur >= $addition){
-                $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition);
-                // TODO insert dans la table commande et ligneCommande
-                // TODO enlever le stock (panier)
-                // TODO vider table panier et lignePanier
+                $panierClient = $this->modele->getPanier($idAsso, $idUtilisateur);
+                // regarde pour chaque produit s'il y a assez de stock
+                $assezStock = 1;
+                foreach ($panierClient as $lignePanier){
+                    if ($this->modele->assezDeStockProduit($idAsso, $lignePanier['id']) < 0) $assezStock = 0;
+                }
+                if ($assezStock == 1){
+                    $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
+                    $this->enleverStock($idAsso, $panierClient);
+                    $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
+                    $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
+                }
+
             }
+        }
+    }
+    // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
+    public function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
+        $this->modele->insertCommande($idUtilisateur, date('Y-m-d'), "Encours", $idAsso);
+        $idCommande = $this->modele->getIdCommandeClient($idUtilisateur, $idAsso);
+        foreach ($panierClient as $lignePanier){
+            $this->modele->insertLigneCommande($idCommande, $lignePanier['id'], $lignePanier['quantite']);
+        }
+    }
+
+    // update le stock -> ce que le client a acheté
+    public function enleverStock($idAsso, $panierClient){
+        $idInventaire = $this->modele->getIdInventaire($idAsso);
+        foreach ($panierClient as $lignePanier){
+            $this->modele->updateLigneInventaire($idInventaire, $lignePanier['id'], $lignePanier['quantite']);
         }
     }
 
