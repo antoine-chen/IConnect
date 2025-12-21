@@ -5,7 +5,7 @@ class ModelePanier extends Connexion{
         $getPanier = self::$bdd->prepare('SELECT p.* ,l.quantite FROM panier pa 
                                                             INNER JOIN lignePanier l ON pa.id = l.idPanier
                                                             INNER JOIN produit p ON l.idProduit = p.id
-                                                            WHERE pa.idAssociation = ? AND pa.idUtilisateur = ?');
+                                                            WHERE pa.idAssociation = ? AND pa.idUtilisateur = ? AND l.quantite > 0');
         $getPanier->execute([$idAssociation, $idUtilisateur]);
         return $getPanier->fetchAll();
     }

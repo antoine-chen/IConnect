@@ -60,7 +60,7 @@ class ContPanier{
         if (isset($_GET['id']) && $_SESSION['role'] == 'Client'){
             $this->modele->updateLignePanierEnlever(
                 $this->modele->getIdPanier($_SESSION['asso'], $_SESSION['id']),
-                $_GET['id']
+                $_GET['id'] // idProduit
             );
             $this->panier();
         }
