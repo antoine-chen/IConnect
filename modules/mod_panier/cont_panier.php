@@ -90,13 +90,12 @@ class ContPanier{
                     $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
                     $this->enleverStock($idAsso, $panierClient);
                     $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
-                    $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
                     $this->panier("Votre panier a été validé, veuillez recuperer votre commande");
                 }else {
                     $this->panier("Erreur de stock, veuillez re faire à nouveau votre panier");
-                    $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
                 }
             }
+            $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
         }
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
