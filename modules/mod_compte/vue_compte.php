@@ -6,10 +6,13 @@ class VueCompte extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherFormRecharger(){
+    public function afficherFormRecharger($soldeClient = 0){
         echo '
             <div class="container border p-5 ">
-                <h2>Recharger son compte</h2>
+                <div class="d-flex justify-content-between align-items-center">
+                   <h3>Recharger son compte</h3>
+                   <p>'. $soldeClient.' €</p>
+                </div>
                 <form method="post" action="index.php?module=compte&action=recharger" class="mt-4 mb-4">
                    <div class="form-floating mb-2">
                        <input name="montant" class="form-control" placeholder="Montant">

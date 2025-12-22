@@ -10,8 +10,18 @@ class ContCompte{
         $this->modele = new ModeleCompte();
         $this->vue = new VueCompte();
     }
+
+    /**
+     * afficher le formulaire de rechargement + affiche son solde
+    */
     public function formRecharger(){
-        $this->vue->afficherFormRecharger(); // il faut verifier si c'est un client
+        if ($_SESSION['role'] == 'Client' && isset($_SESSION['asso'])){
+            $idClient = $_SESSION['id'];
+            $idAsso = $_SESSION['asso'];
+            $this->vue->afficherFormRecharger(
+                $this->modele->getSoldeClient($idClient, $idAsso)
+            );
+        }
     }
 
     /**
@@ -22,7 +32,7 @@ class ContCompte{
      * deja recharger -> UPDATE (son solde)
      */
     public function recharger(){
-        if (isset($_POST['montant']) && isset($_SESSION['id'])){ // il faut verifier si c'est un client
+        if ($_SESSION['role'] == 'Client' && isset($_POST['montant']) && isset($_SESSION['id'])){
             $montant = $_POST['montant'];
             $idClient = $_SESSION['id']; // $_SESSION['id']
             $idAsso = 1; // $_SESSION['asso'] idAsso quand j'ai choisi l'asso (cont_ass)
