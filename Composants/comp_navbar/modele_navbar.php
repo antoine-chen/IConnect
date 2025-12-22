@@ -17,7 +17,8 @@ class ModeleNavbar{
 
     public function getNavbarGestionnaire(){
         return array(
-            array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock")
+            array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
+            array("url" => "index.php?module=admin&action=formAjouterGestionnaireOuBarman", "action" => "Ajouter barman")
         );
     }
 

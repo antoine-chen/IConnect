@@ -23,11 +23,11 @@ class ModAdmin{
             case 'listerAssociation':
                 $this->controleur->listerAssociation();
                 break;
-            case 'formAjouterGestionnaire':
-                $this->controleur->formAjouterGestionnaire();
+            case 'formAjouterGestionnaireOuBarman':
+                $this->controleur->formAjouterGestionnaireOuBarman();
                 break;
-            case 'ajouterGestionnaire':
-                $this->controleur->ajouterGestionnaire();
+            case 'ajouterGestionnaireOuBarman':
+                $this->controleur->ajouterGestionnaireOuBarman();
                 break;
             default:
                 echo "action inconnue";
