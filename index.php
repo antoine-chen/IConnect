@@ -18,6 +18,6 @@ if (isset($_SESSION['login'])) {
 else {
     include_once 'modules/landingPage/mod_landingPage.php';
     $mod = new ModLandingPage();
-    $contenu = 'landing page';
+    $contenu = $mod->getAffichage();
 }
 include_once "template.php";
