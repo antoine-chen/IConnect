@@ -5,17 +5,6 @@ class VueConnexion extends VueGenerique {
     public function __construct() {
         parent::__construct();
     }
-    public function menu() {
-        echo '
-        <nav>
-            <ul>
-                <li><a href="index.php?actionComposant=form_connexion">Se connecter</a></li>
-                <li><a href="index.php?actionComposant=form_inscription">S inscrire</a></li>
-            </ul>
-        </nav>
-    ';
-    }
-
 
     public function form_inscription() {
         echo '
