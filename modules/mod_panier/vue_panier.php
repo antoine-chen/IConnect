@@ -19,7 +19,7 @@ class VuePanier extends VueGenerique{
             echo '
                 <div class="d-flex justify-content-between align-items-center border rounded m-4">
                     <div class="d-flex align-items-center">
-                       <img src="'. htmlspecialchars($produit['image']) .'" alt="">
+                       <img src="'. htmlspecialchars($produit['image']) .'" class="img-produit" alt="">
                        <div>
                           <p>'. htmlspecialchars($produit['nom']).'</p>
                           <p>Qté : '. htmlspecialchars($produit['quantite']) .'</p>
