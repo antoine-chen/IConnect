@@ -11,7 +11,8 @@
 <header>
     <h1>HEADER</h1>
     <?php
-        echo $contenuMenu;
+        if (isset($contenuMenu))
+            echo $contenuMenu;
     ?>
 
 </header>

@@ -7,7 +7,7 @@ class ModLandingPage {
 
     public function __construct() {
         $this->controleur = new ContLandingPage();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : '';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'landingPage';
         $this->exec();
     }
 

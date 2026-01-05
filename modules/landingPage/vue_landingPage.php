@@ -17,7 +17,7 @@ class VueLandingPage extends VueGenerique {
             <a href="">Fonctionnalités</a>
         </div>
         <div class="col">
-            <a href="" class="btn btn-primary">Se connecter</a>
+            <a href="index.php?actionComposant=form_connexion" class="btn btn-primary">Se connecter</a>
         </div>
     </nav>
 
@@ -34,7 +34,7 @@ class VueLandingPage extends VueGenerique {
                     <div>cette solution vous simplifies la vie.</div>
                 </div>
                 <div>
-                <a href="" class="btn btn-success mt-2">S\'inscrire</a>
+                <a href="index.php?actionComposant=form_inscription" class="btn btn-success mt-2">S\'inscrire</a>
                 </div>
             </div>
             <div>

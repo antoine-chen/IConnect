@@ -16,7 +16,10 @@ class ContConnexion {
     }
 
     public function form_inscription() {
-        $this->vue->form_inscription();
+        if (!isset($_SESSION['login'])){
+            $_SESSION['landing'] = 0;
+            $this->vue->form_inscription();
+        }
     }
 
     public function inscription() {
@@ -38,7 +41,12 @@ class ContConnexion {
     }
 
     public function form_connexion() {
-            $this->vue->form_connexion();
+        if (!isset($_SESSION['login'])){
+            $_SESSION['landing'] = 0;
+            if ($_SESSION['landing'] == 0){
+                $this->vue->form_connexion();
+            }
+        }
     }
 
     public function connexion() {
@@ -62,12 +70,13 @@ class ContConnexion {
 
     public function deconnexion() {
         unset($_SESSION['login']);
-        session_destroy();
-        $this->menu();
+        unset($_SESSION['id']);
+        unset($_SESSION['asso']);
+        unset($_SESSION['role']);
+        $_SESSION['landing'] = 1;
     }
 
-    public function getAffichage()
-    {
+    public function getAffichage(){
         return $this->vue->afficher();
     }
 

@@ -7,15 +7,12 @@ class ModConnexion {
 
     public function __construct() {
         $this->controleur = new ContConnexion();
-        $this->actionComposant = isset($_GET['actionComposant']) ? $_GET['actionComposant'] : 'menu';
+        $this->actionComposant = isset($_GET['actionComposant']) ? $_GET['actionComposant'] : '';
         $this->exec();
     }
 
     public function exec() {
         switch ($this->actionComposant) {
-            case 'menu':
-                $this->controleur->menu();
-                break;
             case 'form_inscription':
                 $this->controleur->form_inscription();
                 break;
