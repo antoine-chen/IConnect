@@ -81,14 +81,26 @@ class ModelePanier extends Connexion{
         $updateLigneInventaire->execute([$quantite, $idInventaire, $idProduit]);
     }
 
-    public function insertCommande($idUtilisateur, $date, $status, $idAssociation){
-        $insertCommande = self::$bdd->prepare('INSERT INTO commande(idUtilisateur, date, statut, idAssociation) VALUES (?, ?, ?, ?)');
-        $insertCommande->execute([$idUtilisateur, $date, $status, $idAssociation]);
+    public function recupreDate(){
+        $date = self::$bdd->prepare('SELECT NOW()');
+        $date->execute();
+        return $date->fetchColumn();
     }
 
-    public function insertLigneCommande($idCommande, $idProduit, $quantite){
-        $insertLigneCommande = self::$bdd->prepare('INSERT INTO ligneCommande(idCommande, idProduit, quantite) VALUES (?, ?, ?)');
-        $insertLigneCommande->execute([$idCommande, $idProduit, $quantite]);
+    public function idDernierCommandeDuJour($idAssociation, $date){
+        $requete = self::$bdd->prepare('SELECT id FROM commande WHERE idAssociation = ? AND CAST(date AS DATE) = CAST(? AS DATE) ORDER BY id DESC LIMIT 1');
+        $requete->execute([$idAssociation, $date]);
+        return $requete->fetchColumn();
+    }
+
+    public function insertCommande($id ,$idUtilisateur, $date, $status, $idAssociation){
+        $insertCommande = self::$bdd->prepare('INSERT INTO commande(id ,idUtilisateur, date, statut, idAssociation) VALUES (?,?,?,?,?)');
+        $insertCommande->execute([$id, $idUtilisateur, $date, $status, $idAssociation]);
+    }
+
+    public function insertLigneCommande($idCommande, $idProduit, $quantite, $date){
+        $insertLigneCommande = self::$bdd->prepare('INSERT INTO ligneCommande(idCommande, idProduit, quantite, date) VALUES (?, ?, ?, ?)');
+        $insertLigneCommande->execute([$idCommande, $idProduit, $quantite, $date]);
     }
 
     public function getIdCommandeClient($idUtilisateur, $idAssociation){

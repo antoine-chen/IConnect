@@ -100,10 +100,13 @@ class ContPanier{
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
     private function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
-        $this->modele->insertCommande($idUtilisateur, date('Y-m-d'), "Encours", $idAsso);
+        $date = $this->modele->recupreDate();
+        $idDerniereCommande = $this->modele->idDernierCommandeDuJour($idAsso, $date);
+
+        $this->modele->insertCommande($idDerniereCommande+1, $idUtilisateur, $date, "Encours", $idAsso);
         $idCommande = $this->modele->getIdCommandeClient($idUtilisateur, $idAsso);
         foreach ($panierClient as $lignePanier){
-            $this->modele->insertLigneCommande($idCommande, $lignePanier['id'], $lignePanier['quantite']);
+            $this->modele->insertLigneCommande($idDerniereCommande+1, $lignePanier['id'], $lignePanier['quantite'], $date);
         }
     }
 
