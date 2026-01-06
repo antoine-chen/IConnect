@@ -52,6 +52,8 @@ class ContPanier{
                         $this->modele->insertLignePanier($idPanier, $idProduit, 1);
                     }
                 }
+                header('Location: index.php?module=produit');
+                exit;
             }
         }
     }
