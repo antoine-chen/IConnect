@@ -6,13 +6,12 @@ class VuePanier extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherPanier($panier, $addition, $messageValidationPanier = ""){
+    public function afficherPanier($panier, $addition, $solde){
         echo '
             <div class="d-flex flex-column border rounded m-2">
-                <p class="text-center">'. $messageValidationPanier .'</p>
                 <div class="d-flex justify-content-between mx-4 mt-2">
                     <h3>Panier</h3>
-                    <p>Solde actuel : €</p>
+                    <p>Solde actuel : '.$solde.'€</p>
                 </div>
         ';
         foreach ($panier as $produit){

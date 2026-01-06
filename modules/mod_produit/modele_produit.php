@@ -10,4 +10,9 @@ class ModeleProduit extends Connexion{
         return $getProduits->fetchAll();
     }
 
+    public function getSoldeClient($idClient, $idAssociation){
+        $getSolde = self::$bdd->prepare('SELECT solde FROM solde WHERE idUtilisateur = ? AND idAssociation = ? AND solde > 0');
+        $getSolde->execute([$idClient, $idAssociation]);
+        return $getSolde->fetchColumn();
+    }
 }

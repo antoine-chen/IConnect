@@ -103,12 +103,6 @@ class ModelePanier extends Connexion{
         $insertLigneCommande->execute([$idCommande, $idProduit, $quantite, $date]);
     }
 
-    public function getIdCommandeClient($idUtilisateur, $idAssociation){
-        $getIdCommandeClient = self::$bdd->prepare('SELECT id FROM commande WHERE idUtilisateur = ? AND idAssociation = ?');
-        $getIdCommandeClient->execute([$idUtilisateur, $idAssociation]);
-        return $getIdCommandeClient->fetchColumn();
-    }
-
     public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){
         $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
 

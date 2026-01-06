@@ -6,9 +6,20 @@ class VueProduit extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherProduits($listeProduit){
+    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
 
-        echo '<div class="d-flex justify-content-center align-items-center flex-wrap w-75 container gap-5  p-3">';
+        echo '
+            <div class="text-center m-3">
+        ';
+                if (isset($_SESSION['messageOk']))
+                    echo '<div class="alert alert-success" role="alert">'.$_SESSION['messageOk'].'</div>';
+                if (isset($_SESSION['messagePasOk']))
+                    echo '<div class="alert alert-danger" role="alert">'.$_SESSION['messagePasOk'].'</div>';
+        echo '
+                <div>Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center flex-wrap w-75 container gap-5 p-3">
+        ';
         foreach ($listeProduit as $produit){
             echo '
                <div class="d-flex flex-column align-items-center">
@@ -24,7 +35,9 @@ class VueProduit extends VueGenerique{
                </div>
         ';
         }
-        echo '</div>';
+        echo '
+            </div>
+        ';
     }
 
     public function afficher() {

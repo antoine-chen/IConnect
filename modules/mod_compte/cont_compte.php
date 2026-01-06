@@ -16,10 +16,8 @@ class ContCompte{
     */
     public function formRecharger(){
         if ($_SESSION['role'] == 'Client' && isset($_SESSION['asso'])){
-            $idClient = $_SESSION['id'];
-            $idAsso = $_SESSION['asso'];
             $this->vue->afficherFormRecharger(
-                $this->modele->getSoldeClient($idClient, $idAsso)
+                $_SESSION['soldeClient']
             );
         }
     }
@@ -32,19 +30,22 @@ class ContCompte{
      * deja recharger -> UPDATE (son solde)
      */
     public function recharger(){
-        if ($_SESSION['role'] == 'Client' && isset($_POST['montant']) && isset($_SESSION['id'])){
+        if ($_SESSION['role'] == 'Client' && isset($_POST['montant']) && isset($_SESSION['id']) && isset($_SESSION['asso'])){
             $montant = $_POST['montant'];
-            $idClient = $_SESSION['id']; // $_SESSION['id']
-            $idAsso = 1; // $_SESSION['asso'] idAsso quand j'ai choisi l'asso (cont_ass)
+            $idClient = $_SESSION['id'];
+            $idAsso = $_SESSION['asso'];
             if ($montant > 0){
                 if (!$this->modele->chercherClient($idClient, $idAsso)){
-                    $this->modele->insertClientSole($idClient, $idAsso, $montant);
+                    $this->modele->insertClientSolde($idClient, $idAsso, $montant);
                 } else {
                     $this->modele->updateClientSolde($idClient, $idAsso, $montant);
                 }
+                $_SESSION['messageOk'] = "Rechargement Réussie";
             }else {
-                $this->vue->afficherFormRecharger();
+                $_SESSION['messagePasOk'] = "Erreur rechargement";
             }
+            header('Location: index.php?module=produit');
+            exit;
         }
     }
 
