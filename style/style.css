@@ -38,14 +38,10 @@
 
 .img-produit {
     height: 200px;
-    width: 150px;
+    width: 200px;
     object-fit: cover;
 }
 @media (max-width: 789px) {
-    .img-produit {
-        height: 100px;
-        width: 50px;
-    }
     .info-produit {
         display: flex;
         flex-direction: column;

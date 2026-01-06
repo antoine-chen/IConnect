@@ -10,6 +10,10 @@ class ContProduit{
         $this->modele = new ModeleProduit();
         $this->vue = new VueProduit();
     }
+
+    /**
+     * affiche la liste des produits d'une association
+     */
     public function listerProduits (){
         if ($_SESSION['role'] == 'Client'){
             $idAsso = $_SESSION['asso'];
@@ -18,10 +22,9 @@ class ContProduit{
         }
     }
 
-
-
     public function getVue(){
         return $this->vue->afficher();
     }
 
 }
+

@@ -5,8 +5,9 @@ class ModeleProduit extends Connexion{
         $getProduits = self::$bdd->prepare('SELECT p.*, l.stock FROM boutique b INNER JOIN produit p ON b.idProduit = p.id 
                                                         INNER JOIN ligneInventaire l ON l.idProduit = p.id
                                                         INNER JOIN inventaire i ON i.id = l.idInventaire
-                                            WHERE i.idAssociation = ?');
+                                            WHERE i.idAssociation = ? AND l.stock > 0');
         $getProduits->execute([$idAsso]);
         return $getProduits->fetchAll();
     }
+
 }

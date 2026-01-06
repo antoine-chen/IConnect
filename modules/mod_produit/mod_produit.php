@@ -27,3 +27,5 @@ class ModProduit{
         return $this->controleur->getVue();
     }
 }
+
+
