@@ -18,7 +18,7 @@ class VueProduit extends VueGenerique{
         echo '
                 <div>Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
             </div>
-            <div class="d-flex justify-content-center align-items-center flex-wrap w-75 container gap-5 p-3">
+            <div class="d-flex justify-content-center align-items-center flex-wrap container gap-5 p-3">
         ';
         foreach ($listeProduit as $produit){
             echo '
