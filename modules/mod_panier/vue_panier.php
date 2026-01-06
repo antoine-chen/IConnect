@@ -17,7 +17,7 @@ class VuePanier extends VueGenerique{
         ';
         foreach ($panier as $produit){
             echo '
-                <div class="d-flex justify-content-between align-items-center border rounded m-4">
+                <div class="d-flex justify-content-between align-items-center border rounded mx-5">
                     <div class="d-flex align-items-center">
                        <img src="'. htmlspecialchars($produit['image']) .'" class="img-produit" alt="">
                        <div>
@@ -26,7 +26,7 @@ class VuePanier extends VueGenerique{
                           <a href="index.php?module=panier&action=enleverProduit&id='. $produit['id'].'">Supprimer</a>
                        </div>
                     </div>
-                    <div>
+                    <div class="px-4">
                         <p>'. htmlspecialchars($produit['prix'] * $produit['quantite']).'€</p>
                     </div>
                 </div>
