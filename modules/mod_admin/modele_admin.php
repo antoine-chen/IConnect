@@ -24,8 +24,7 @@ class ModeleAdmin extends Connexion{
         $insert->execute([$login, $hash]);
     }
 
-    public function inserRoleGestionnaire($idUtilisateur, $idAssociation){
-        $role = "Gestionnaire";
+    public function insertRoleGestionnaire($idUtilisateur, $idAssociation, $role){
         $insert = self::$bdd->prepare('INSERT INTO role(idUtilisateur, idAssociation, role) VALUES (?, ?, ?)');
         $insert->execute([$idUtilisateur, $idAssociation, $role]);
     }
@@ -35,8 +34,7 @@ class ModeleAdmin extends Connexion{
         $insert->execute([$image, $idAsso]);
     }
 
-    public function idAsso($nomAsso)
-    {
+    public function idAsso($nomAsso){
         $get = self::$bdd->prepare('SELECT id FROM association where nom = (?)');
         $get->execute([$nomAsso]);
         return $get->fetchColumn();

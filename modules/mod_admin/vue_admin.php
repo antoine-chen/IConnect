@@ -44,7 +44,7 @@ class VueAdmin extends VueGenerique{
                         </a>
                     </th> 
                     <th>
-                        <a href="index.php?module=admin&action=formAjouterGestionnaire&id=' . $association['id'] . '">
+                        <a href="index.php?module=admin&action=formAjouterGestionnaireOuBarman&id=' . $association['id'] . '">
                             <button type="button" class="btn btn-primary">
                                 Ajouter un gestionnaire
                             </button>
@@ -60,10 +60,10 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficheFormAjouterGestionnaire($messageErreur){
+    public function afficheFormAjouterGestionnaireOuBarman($titre, $messageErreur = ""){
         echo '
-            <h2 class="text-center">Ajouter un gestionnaire</h2>
-            <form method="post" action="index.php?module=admin&action=ajouterGestionnaire" class="container taille-formulaire">
+            <h2 class="text-center">'.$titre.'</h2>
+            <form method="post" action="index.php?module=admin&action=ajouterGestionnaireOuBarman" class="container taille-formulaire">
                 <p class="text-danger">' . $messageErreur . '</p>
                  <div class="form-floating">
                     <input name="login" class="form-control" placeholder="login"/>
@@ -73,7 +73,7 @@ class VueAdmin extends VueGenerique{
                     <input name="pwd" class="form-control" placeholder="Mot de passe"/>
                     <label>Mot de passe : </label>
                 </div>
-                <button class="btn btn-primary" type="submit">Créer un gestionnaire</button>
+                <button class="btn btn-primary" type="submit">'. $titre.'</button>
             </form>
         ';
     }

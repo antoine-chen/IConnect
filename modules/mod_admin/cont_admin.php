@@ -48,10 +48,13 @@ class ContAdmin{
         }
     }
 
-    public function formAjouterGestionnaire($messageErreur = ''){
+    public function formAjouterGestionnaireOuBarman($messageErreur = ""){
         if (isset($_GET['id']) && $_SESSION['role'] == 'Admin'){
             $_SESSION['asso'] = $_GET['id'];
-            $this->vue->afficheFormAjouterGestionnaire($messageErreur);
+            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un gestionnaire", $messageErreur);
+        }
+        if ($_SESSION['role'] == 'Gestionnaire'){
+            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un barman", $messageErreur);
         }
     }
 
@@ -60,23 +63,35 @@ class ContAdmin{
         isset, regarde si les champs sont remplis
         si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
      */
-    public function ajouterGestionnaire(){
-        if ($_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
+    public function ajouterGestionnaireOuBarman(){
+        if (($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
             $login = $_POST['login'];
             $pwd = $_POST['pwd'];
-            $idAssociation = $_SESSION['asso'];
+            $idAssociation = $_SESSION['asso']; // voir formAjouterGestionnaire() si admin
             if (!empty($login) && !empty($pwd) && !$this->modele->getUtilisateur($login)){
-                // INSERT login pwd
-                $hash = password_hash($pwd, PASSWORD_DEFAULT);
-                $this->modele->insertUtilisateur($login, $hash);
-                // GET utilisateur
-                $idUtilisateur = $this->modele->getUtilisateur($login);
-                // INSERT role Gestionnaire
-                $this->modele->inserRoleGestionnaire($idUtilisateur, $idAssociation);
+                $idUtilisateur = $this->insertUtilisateur($pwd, $login);
+                $this->insertGestionnaireOuBarman($idUtilisateur, $idAssociation);
             }else {
                 $messageErreur = "il faut remplir les champs ou login deja existant";
-                $this->vue->afficheFormAjouterGestionnaire($messageErreur);
+                $this->formAjouterGestionnaireOuBarman($messageErreur);
             }
+        }
+    }
+
+    private function insertUtilisateur($pwd, $login){
+        // INSERT login pwd
+        $hash = password_hash($pwd, PASSWORD_DEFAULT);
+        $this->modele->insertUtilisateur($login, $hash);
+        // GET utilisateur
+        return $this->modele->getUtilisateur($login);
+    }
+
+    private function insertGestionnaireOuBarman($idUtilisateur, $idAssociation){
+        if ($_SESSION['role'] == 'Admin'){
+            $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Gestionnaire");
+        }
+        if ($_SESSION['role'] == 'Gestionnaire'){
+            $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Barman");
         }
     }
 
