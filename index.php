@@ -19,9 +19,11 @@ if (isset($_SESSION['login'])) {
     $contenuMenu = $mod->affiche();
 }
 else {
-    include_once 'modules/landingPage/mod_landingPage.php';
-    $mod = new ModLandingPage();
-    $contenu = $mod->getAffichage();
+    if ($_SESSION['landing'] == 1){
+        include_once 'modules/landingPage/mod_landingPage.php';
+        $mod = new ModLandingPage();
+        $contenu = $mod->getAffichage();
+    }
 }
 
 include_once "template.php";
