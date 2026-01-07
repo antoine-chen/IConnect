@@ -9,7 +9,7 @@ class VueLandingPage extends VueGenerique {
         echo '
             <nav class="row m-3 align-items-center mx-5">
         <div class="col">
-            <img src="../../modules/mod_asso/logos/logo.png" style="width: 50px;" alt="">
+            <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
         </div>
         <div class="col-8 d-flex justify-content-center gap-3 mx-5">
             <a href="">Accueil</a>
@@ -38,7 +38,7 @@ class VueLandingPage extends VueGenerique {
                 </div>
             </div>
             <div>
-                <img class="rounded img-fluid" style="height: 600px;" src="./img_landingPage/image.png"">
+                <img class="rounded img-fluid" style="height: 600px;" src="modules/landingPage/img_landingPage/image.png" alt="">
             </div>
         </div>
 
@@ -51,11 +51,11 @@ class VueLandingPage extends VueGenerique {
             <h2>Nos produits</h2>
             <div class="text-center d-flex justify-content-center gap-5">
                 <div>
-                    <img class="rounded img-fluid" style="height: 300px;" src="./img_landingPage/boisson.png" alt="">
+                    <img class="rounded img-fluid" style="height: 300px;" src="modules/landingPage/img_landingPage/boisson.png" alt="">
                     <p>Lorem ipsum dolor</p>
                 </div>
                 <div>
-                    <img class="rounded img-fluid" style="height: 300px;" src="./img_landingPage/snack.jpg" alt="">
+                    <img class="rounded img-fluid" style="height: 300px;" src="modules/landingPage/img_landingPage/snack.jpg" alt="">
                     <p>Lorem ipsum dolor</p>
                 </div>
             </div>
@@ -68,21 +68,21 @@ class VueLandingPage extends VueGenerique {
                     <h3 class="text-center">Charger son compte</h3>
                     <p>Après la connextion, vous pourvez charger votre compte en mettant que le montant que vous voulez puis valider.</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="./img_landingPage/rechargement.png" alt="">
+                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/rechargement.png" alt="">
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Liste des produits</h3>
                     <p>Vous pouvez consulter la liste des produits de chaque association  en cliquand sur l’association</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="./img_landingPage/listeProduits.png" alt="">
+                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/listeProduits.png" alt="">
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Panier</h3>
                     <p>Après avoir que vous avez fait votre panier il suffit de le valider le barman valide votre transition et vous donne ce que vous avez commander</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="./img_landingPage/validerPanier.png" alt="">
+                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/validerPanier.png" alt="">
             </div>
         </div>
 
