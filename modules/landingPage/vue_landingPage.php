@@ -9,7 +9,7 @@ class VueLandingPage extends VueGenerique {
         echo '
             <nav class="row m-3 align-items-center mx-5">
         <div class="col">
-            <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
+            <img src="modules/mod_asso/logos/logo.png" style="height: 50px" class="logo" alt="">
         </div>
         <div class="col-8 d-flex justify-content-center gap-3 mx-5">
             <a href="">Accueil</a>

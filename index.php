@@ -7,7 +7,7 @@ session_start();
 $_SESSION['landing'] = 1;
 
 $mod = new ModConnexion();
-$contenu = $mod->getAffichage();
+$contenuMenu = $mod->getAffichage();
 
 if (isset($_SESSION['login'])) {
     include_once 'modules/mod_asso/mod_asso.php';
