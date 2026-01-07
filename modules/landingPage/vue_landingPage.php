@@ -7,20 +7,6 @@ class VueLandingPage extends VueGenerique {
 
     public function afficherlandingPage(){
         echo '
-            <nav class="row m-3 align-items-center mx-5">
-        <div class="col">
-            <img src="modules/mod_asso/logos/logo.png" style="height: 50px" class="logo" alt="">
-        </div>
-        <div class="col-8 d-flex justify-content-center gap-3 mx-5">
-            <a href="">Accueil</a>
-            <a href="">Produits</a>
-            <a href="">Fonctionnalités</a>
-        </div>
-        <div class="col">
-            <a href="index.php?actionComposant=form_connexion" class="btn btn-primary">Se connecter</a>
-        </div>
-    </nav>
-
     <div>
         <div class="d-flex justify-content-center align-items-center gap-5 m-5">
             <div class="mx-5">
