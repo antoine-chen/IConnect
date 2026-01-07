@@ -103,6 +103,13 @@ class ModelePanier extends Connexion{
         $insertLigneCommande->execute([$idCommande, $idProduit, $quantite, $date]);
     }
 
+    public function deleteLignePanier($idUtilisateur, $idAssociation){
+        $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
+
+        $deleteLignePanier = self::$bdd->prepare('DELETE FROM lignePanier WHERE idPanier = ? AND quantite = 0');
+        $deleteLignePanier->execute([$idIdPanierClient]);
+    }
+
     public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){
         $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
 

@@ -19,6 +19,7 @@ class ContPanier{
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur)>0 ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
+            $this->modele->deleteLignePanier($idUtilisateur, $idAsso);
             $this->vue->afficherPanier(
                 $this->modele->getPanier($idAsso, $idUtilisateur),
                 $addition,
