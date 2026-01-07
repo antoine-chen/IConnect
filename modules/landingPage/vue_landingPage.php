@@ -38,7 +38,7 @@ class VueLandingPage extends VueGenerique {
                 </div>
             </div>
             <div>
-                <img class="rounded img-fluid" style="height: 600px;" src="./img_landingPage/image.png"">
+                <img class="rounded img-fluid" style="height: 600px;" src="./img_landingPage/image.png" alt="">
             </div>
         </div>
 

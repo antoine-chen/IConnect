@@ -8,7 +8,9 @@ class ContLandingPage {
     }
 
     public function landingPage(){
-        $this->vue->afficherlandingPage();
+        if ($_SESSION['landing'] == 1){
+            $this->vue->afficherlandingPage();
+        }
     }
 
     public function getVue(){
