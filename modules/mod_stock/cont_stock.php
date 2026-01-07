@@ -43,7 +43,7 @@ class ContStock {
         $this->modele->creerInventaire($idAsso);
         $idInventaire = $this->modele->idInventaire($idAsso);
         foreach ($stockProduits as $idProduit => $quantiteProduit) {
-            $this->modele->ajouterProduit($idInventaire,$idProduit,$quantiteProduit);
+            $this->modele->ajouterProduit($idInventaire['id'],$idProduit,$quantiteProduit);
         }
     }
 }

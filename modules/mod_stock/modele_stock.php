@@ -15,7 +15,7 @@ class ModeleStock extends Connexion{
         where boutique.idassociation = ?
     ');
         $get->execute([$idAssociation]);
-        return $get->fetchAll(PDO::FETCH_ASSOC);
+        return $get->fetchAll();
     }
 
 
@@ -46,7 +46,7 @@ class ModeleStock extends Connexion{
     public function idInventaire($idAsso)
     {
         $get = self::$bdd->prepare('
-            select max(id) 
+            select max(id) as id 
             from inventaire
             where idAssociation = (?)
         ');
