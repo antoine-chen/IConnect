@@ -12,13 +12,14 @@ class ContNavbar {
     }
 
     /**
-     * gestion de la navbar
+     * gestion de la navbar landing page, sans role et avec role
+     * s'il n'est pas connecté navbarLanding
      * regarde si connecter à une association
-     * si oui affiche la navbar selon le role (tableau 2 dimensions dans le modele)
+     * si oui affiche la navbar selon le role client, barman, gestionnaire, admin (get tab 2D dans le modele)
      * sinon affiche la navbar (sans role)
      */
     public function navbar(){
-        $acces = $this->modele->acces();
+        $acces = $this->modele->acces(); // indice : 0 -> quitter, 1 -> deconnecter, 2 -> connecter
         if (!isset($_SESSION['login'])){
             $this->vue->afficherNavbar(
                 $this->modele->getNavbarLandingPage(),
