@@ -60,7 +60,7 @@ class VueStock extends VueGenerique{
                     <td>'.htmlspecialchars($produit['prix']).'</td>
                     <td>'.htmlspecialchars($produit['stock']).'</td>
                     <td>
-                        <input type="number" name="stock[' . $produit['id'] . ']" min="0" />
+                        <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
                     </td>
                 </tr>
             ';

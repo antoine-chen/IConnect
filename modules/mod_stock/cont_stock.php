@@ -38,6 +38,12 @@ class ContStock {
 
     public function ajoutInventaire()
     {
-
+        $idAsso = $_SESSION['asso'];
+        $stockProduits = $_POST['stock'];
+        $this->modele->creerInventaire($idAsso);
+        $idInventaire = $this->modele->idInventaire($idAsso);
+        foreach ($stockProduits as $idProduit => $quantiteProduit) {
+            $this->modele->ajouterProduit($idInventaire,$idProduit,$quantiteProduit);
+        }
     }
 }

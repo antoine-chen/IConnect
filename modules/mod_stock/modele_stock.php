@@ -5,9 +5,12 @@ class ModeleStock extends Connexion{
 
     }
 
-    public function creerInventaire()
+    public function creerInventaire($idAsso)
     {
-
+        $insert = self::$bdd->prepare('
+            insert into inventaire (idAssociation) values (?)
+        ');
+        $insert->execute([$idAsso]);
     }
 
     public function stockActuel($idAssociation)
@@ -23,5 +26,24 @@ class ModeleStock extends Connexion{
             ');
         $get->execute([$idAssociation]);
         return $get->fetchAll();
+    }
+
+    public function idInventaire($idAsso)
+    {
+        $get = self::$bdd->prepare('
+            select max(id) 
+            from inventaire
+            where idAssociation = (?)
+        ');
+        $get->execute([$idAsso]);
+        return $get->fetch();
+    }
+
+    public function ajouterProduit($idInventaire,$idProduit,$stock)
+    {
+        $insert = self::$bdd->prepare('
+            insert into ligneInventaire (idInventaire,idProduit,stock) values (?,?,?)
+        ');
+        $insert->execute([$idInventaire,$idProduit,$stock]);
     }
 }
