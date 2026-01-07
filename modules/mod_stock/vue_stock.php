@@ -34,39 +34,43 @@ class VueStock extends VueGenerique{
         ';
     }
 
-    public function boutons($idAsso)
+    public function boutons()
     {
         echo '
-            <a href="index.php?module=stock&action=form_inventaire&id='.$idAsso.'">
+            <a href="index.php?module=stock&action=form_inventaire">
             <h6>Faire l inventaire</h6>
             </a>
             ';
     }
 
-    public function form_inventaire($idAsso,$donnes)
+    public function form_inventaire($donnes)
     {
-        echo '<p>'.htmlspecialchars(date('d/m/Y')).'</p>';
-        echo '
-            <form method="post" action="index.php?module=stock&action=ajoutInventaire&id='.$idAsso.' class="container taille-formulaire">
-                <thead>
-                    <th>Nom</th>
-                    <th>Prix</th>
-                    <th>Quantite</th>
-                </thead>';
+        echo '<p>' . htmlspecialchars(date('d/m/Y')) . '</p>';
+        echo '<form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-formulaire">';
+        echo '<table class="table">';
+        echo '<thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+            </tr>
+          </thead>';
+        echo '<tbody>';
         foreach ($donnes as $produit) {
-            echo '
-                <tr>
-                    <td>'.htmlspecialchars($produit['nom']).'</td>
-                    <td>'.htmlspecialchars($produit['prix']).'</td>
-                    <td>'.htmlspecialchars($produit['stock']).'</td>
-                    <td>
-                        <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
-                    </td>
-                </tr>
-            ';
+            echo '<tr>
+                <td>' . htmlspecialchars($produit['nom']) . '</td>
+                <td>' . htmlspecialchars($produit['prix']) . '</td>
+                <td>
+                    <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
+                </td>
+              </tr>';
         }
+        echo '</tbody>';
+        echo '</table>';
         echo '<button class="btn btn-primary" type="submit">Créer un inventaire</button>';
+        echo '</form>';
     }
+
 
     public function inventaireVide(){
         echo '<p>Aucune inventaire réalisée pour ce mois ci</p> ';

@@ -5,6 +5,20 @@ class ModeleStock extends Connexion{
 
     }
 
+    // Retourne la liste des produits de l'association
+    public function listeProduitsAsso($idAssociation)
+    {
+        $get = self::$bdd->prepare('
+        select produit.id, produit.nom, produit.image, produit.prix
+        from produit
+        inner join boutique on boutique.idproduit = produit.id
+        where boutique.idassociation = ?
+    ');
+        $get->execute([$idAssociation]);
+        return $get->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     public function creerInventaire($idAsso)
     {
         $insert = self::$bdd->prepare('
@@ -13,6 +27,7 @@ class ModeleStock extends Connexion{
         $insert->execute([$idAsso]);
     }
 
+    // Retourne le stock actuel des produits du mois actuel
     public function stockActuel($idAssociation)
     {
         $get = self::$bdd->prepare('
