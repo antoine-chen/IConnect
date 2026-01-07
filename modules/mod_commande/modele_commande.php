@@ -4,7 +4,7 @@ class ModeleCommande extends connexion {
 
     //fait une requette pour toute les commandes d'une association
     public function toutesLesCommandes(){
-        $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ?");
+        $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ? order by date");
         $req->execute([$_SESSION['asso']]);
         return $req->fetchAll();
     }
@@ -19,6 +19,10 @@ class ModeleCommande extends connexion {
         $req = self::$bdd->prepare("SELECT * from ligneCommande inner join produit on idProduit=id");
         $req->execute();
         return $req->fetchAll();
+    }
+    public function valideCommande($id){
+        $req = self::$bdd->prepare("UPDATE ligneCommande SET statut ='livrée' where id=?");
+        $req->execute([$id]);
     }
 
 }
