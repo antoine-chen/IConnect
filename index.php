@@ -9,12 +9,6 @@ $_SESSION['landing'] = 1;
 $mod = new ModConnexion();
 $contenuMenu = $mod->getAffichage();
 
-if ($_SESSION['landing'] == 1){
-    include_once "Composants/comp_navbar/comp_navbar.php";
-    $mod = new CompNavBar();
-    $contenuMenu = $mod->affiche();
-}
-
 if (isset($_SESSION['login'])) {
     include_once 'modules/mod_asso/mod_asso.php';
     $mod = new ModAsso();
@@ -26,6 +20,12 @@ else {
         $mod = new ModLandingPage();
         $contenu = $mod->getAffichage();
     }
+}
+
+if ($_SESSION['landing'] == 1){
+    include_once "Composants/comp_navbar/comp_navbar.php";
+    $mod = new CompNavBar();
+    $contenuMenu = $mod->affiche();
 }
 
 include_once "template.php";
