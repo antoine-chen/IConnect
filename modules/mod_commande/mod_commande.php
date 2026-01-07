@@ -6,7 +6,7 @@ private $controleur;
 private $action;
     public function __construct(){
         $this->controleur =new ContCommande();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'commandesComplete';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'commandeAvancée';
         $this->exec();
     }
 
@@ -20,7 +20,7 @@ private $action;
                 $this->controleur->details();
                 break;
 
-            case 'commandesComplete':
+            case 'commandeAvancée':
                 $this->controleur->commandeAvancée();
                 break;
             default:
