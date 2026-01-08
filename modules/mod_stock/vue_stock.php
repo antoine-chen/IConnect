@@ -34,8 +34,7 @@ class VueStock extends VueGenerique{
         ';
     }
 
-    public function boutons()
-    {
+    public function boutons(){
         echo '
             <a href="index.php?module=stock&action=form_inventaire">
             <h6>Faire l inventaire</h6>
@@ -43,32 +42,34 @@ class VueStock extends VueGenerique{
             ';
     }
 
-    public function form_inventaire($donnes)
-    {
-        echo '<p>' . htmlspecialchars(date('d/m/Y')) . '</p>';
-        echo '<form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-formulaire">';
-        echo '<table class="table">';
-        echo '<thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-            </tr>
-          </thead>';
-        echo '<tbody>';
+    public function form_inventaire($donnes){
+        echo '
+            <div class="text-center m-3">'.htmlspecialchars(date('d/m/Y')) .'</div>
+            <div class="table-responsive">
+            <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-formulaire">
+                <table class="table table-bordered table-hover text-center">
+                     <tr>
+                         <th style="width: 25%">Nom</th>
+                         <th style="width: 25%">Prix</th>
+                         <th style="width: 50%">Quantité</th>
+                     </tr>
+        ';
         foreach ($donnes as $produit) {
-            echo '<tr>
-                <td>' . htmlspecialchars($produit['nom']) . '</td>
-                <td>' . htmlspecialchars($produit['prix']) . '</td>
-                <td>
-                    <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
-                </td>
-              </tr>';
+            echo '
+                    <tr>
+                        <td>' . htmlspecialchars($produit['nom']) . '</td>
+                        <td>' . htmlspecialchars($produit['prix']) . '</td>
+                        <td>
+                            <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
+                        </td>
+                    </tr>';
         }
-        echo '</tbody>';
-        echo '</table>';
-        echo '<button class="btn btn-primary" type="submit">Créer un inventaire</button>';
-        echo '</form>';
+        echo '
+               </table>
+               <button class="btn btn-primary" type="submit">Créer un inventaire</button>
+           </form>
+           </div>
+        ';
     }
 
 
