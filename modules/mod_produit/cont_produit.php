@@ -22,8 +22,9 @@ class ContProduit{
             $loginClient = $_SESSION['login'];
             $_SESSION['soldeClient'] = $this->modele->getSoldeClient($idClient, $idAsso) ? $this->modele->getSoldeClient($idClient, $idAsso) : 0;
 
+            $idInventaire = $this->modele->idInventaire($idAsso);
             $this->vue->afficherProduits(
-                $this->modele->getProduits($idAsso),
+                $this->modele->getProduits($idAsso,$idInventaire['id']),
                 $loginClient,
                 $_SESSION['soldeClient']
             );
