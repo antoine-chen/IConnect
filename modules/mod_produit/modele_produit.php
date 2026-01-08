@@ -10,6 +10,17 @@ class ModeleProduit extends Connexion{
         return $getProduits->fetchAll();
     }
 
+    public function idInventaire($idAsso)
+    {
+        $get = self::$bdd->prepare('
+            select max(id) as id 
+            from inventaire
+            where idAssociation = (?)
+        ');
+        $get->execute([$idAsso]);
+        return $get->fetch();
+    }
+
     public function insertProduit($nomProduit, $prixProduit)
     {
         $insert = self::$bdd->prepare('
@@ -41,6 +52,14 @@ class ModeleProduit extends Connexion{
             update produit set image = (?) where id = (?)
         ');
         $insert->execute([$cheminFichier,$idProduit]);
+    }
+
+    public function ajoutProduitInventaire($idInventaire,$idProduit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into ligneInventaire (idInventaire,idProduit,stock,pertes) values (?,?,?,?)
+        ');
+        $insert->execute([$idInventaire,$idProduit,0,0]);
     }
 
 }

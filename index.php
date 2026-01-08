@@ -27,7 +27,4 @@ else {
     }
 }
 
-var_dump($_POST);
-var_dump($_FILES);
-
 include_once "template.php";

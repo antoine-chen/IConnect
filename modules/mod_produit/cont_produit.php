@@ -50,6 +50,9 @@ class ContProduit{
             $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
             move_uploaded_file($_FILES['imageProduit']['tmp_name'],$cheminFichier);
             $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
+
+            $idInventaire = $this->modele->idInventaire($idAsso);
+            $this->modele->ajoutProduitInventaire($idInventaire['id'],$idProduit['id']);
         }
     }
 
