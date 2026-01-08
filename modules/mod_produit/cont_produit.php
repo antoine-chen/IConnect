@@ -12,13 +12,24 @@ class ContProduit{
     }
 
     /**
-     * affiche la liste des produits d'une association
+     * affiche la liste des produits d'une association [avec un message de selon le cas ex: validation du panier réussie]
+     * actualisation du solde de client de l'association
      */
     public function listerProduits (){
-        if ($_SESSION['role'] == 'Client'){
+        if ($_SESSION['role'] == 'Client' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
             $idAsso = $_SESSION['asso'];
-            $listeProduit = $this->modele->getProduits($idAsso);
-            $this->vue->afficherProduits($listeProduit);
+            $idClient = $_SESSION['id'];
+            $loginClient = $_SESSION['login'];
+            $_SESSION['soldeClient'] = $this->modele->getSoldeClient($idClient, $idAsso) ? $this->modele->getSoldeClient($idClient, $idAsso) : 0;
+
+            $idInventaire = $this->modele->idInventaire($idAsso);
+            $this->vue->afficherProduits(
+                $this->modele->getProduits($idAsso,$idInventaire['id']),
+                $loginClient,
+                $_SESSION['soldeClient']
+            );
+            unset($_SESSION['messageOk']);
+            unset($_SESSION['messagePasOk']);
         }
     }
 

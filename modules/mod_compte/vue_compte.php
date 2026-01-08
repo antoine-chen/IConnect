@@ -6,7 +6,7 @@ class VueCompte extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherFormRecharger($soldeClient = 0){
+    public function afficherFormRecharger($soldeClient){
         echo '
             <div class="container border p-5 ">
                 <div class="d-flex justify-content-between align-items-center">

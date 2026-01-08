@@ -6,20 +6,19 @@ class VuePanier extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherPanier($panier, $addition, $messageValidationPanier = ""){
+    public function afficherPanier($panier, $addition, $solde){
         echo '
             <div class="d-flex flex-column border rounded m-2">
-                <p class="text-center">'. $messageValidationPanier .'</p>
                 <div class="d-flex justify-content-between mx-4 mt-2">
                     <h3>Panier</h3>
-                    <p>Solde actuel : €</p>
+                    <p>Solde actuel : '.$solde.'€</p>
                 </div>
         ';
         foreach ($panier as $produit){
             echo '
                 <div class="d-flex justify-content-between align-items-center border rounded mx-5">
                     <div class="d-flex align-items-center">
-                       <img src="'. htmlspecialchars($produit['image']) .'" class="img-produit" alt="">
+                       <img src="'. htmlspecialchars($produit['image']) .'" class="img-produit" style="height: 200px;" alt="">
                        <div>
                           <p>'. htmlspecialchars($produit['nom']).'</p>
                           <p>Qté : '. htmlspecialchars($produit['quantite']) .'</p>
