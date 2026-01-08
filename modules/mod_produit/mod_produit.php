@@ -17,6 +17,12 @@ class ModProduit{
             case "listerProduits":
                 $this->controleur->listerProduits();
                 break;
+            case "form_ajouterNouveauProduit" :
+                $this->controleur->form_ajouterNouveauProduit();
+                break;
+            case "ajouterNouveauProduit" :
+                $this->controleur->ajouterNouveauProduit();
+                break;
             default:
                 echo "action inconnue";
                 break;

@@ -34,6 +34,15 @@ class VueStock extends VueGenerique{
         ';
     }
 
+    public function boutons()
+    {
+        echo '
+            <a href="index.php?module=produit&action=form_ajouterNouveauProduit">
+            <h6>Ajouter un produit</h6>
+            </a>
+            ';
+    }
+
     public function inventaireVide(){
         echo '<p>Aucune inventaire réalisée pour ce mois ci</p> ';
     }

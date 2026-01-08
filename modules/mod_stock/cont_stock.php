@@ -12,8 +12,10 @@ class ContStock {
     }
 
     public function stockProduits(){
-        $idAsso = 1;
+        $idAsso = $_SESSION['asso'];
         $resultat = $this->modele->stockActuel($idAsso);
+
+        $this->vue->boutons();
         if(empty($resultat)) {
             $this->vue->inventaireVide();
         }

@@ -30,4 +30,19 @@ class VueProduit extends VueGenerique{
     public function afficher() {
         return $this->getAffichage();
     }
+
+    public function form_ajoutProduit()
+    {
+        echo '
+            <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" class="container taille-formulaire">
+                <h6>Ajouter un produit</h6>
+                <input name="nom" placeholder="Nom du produit" required>
+                <input name="prix" placeholder="Prix du produit" required>
+                <label for="imageProduit">Image du produit</label>
+                <input type="file" name="imageProduit" required>
+                
+                <button type="submit">Ajouter</button>
+            </form>
+        ';
+    }
 }
