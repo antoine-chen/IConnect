@@ -11,10 +11,6 @@ class ContConnexion {
         $this->vue = new VueConnexion();
     }
 
-    public function menu(){
-        $this->vue->menu();
-    }
-
     public function form_inscription() {
         if (!isset($_SESSION['login'])){
             $_SESSION['landing'] = 0;
@@ -43,9 +39,7 @@ class ContConnexion {
     public function form_connexion() {
         if (!isset($_SESSION['login'])){
             $_SESSION['landing'] = 0;
-            if ($_SESSION['landing'] == 0){
-                $this->vue->form_connexion();
-            }
+            $this->vue->form_connexion();
         }
     }
 
@@ -73,7 +67,7 @@ class ContConnexion {
         unset($_SESSION['id']);
         unset($_SESSION['asso']);
         unset($_SESSION['role']);
-        $_SESSION['landing'] = 1;
+        session_destroy();
     }
 
     public function getAffichage(){

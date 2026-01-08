@@ -36,10 +36,19 @@ class ModeleNavbar{
         );
     }
 
-    public function quitterOuDeconnexion(){
+    public function getNavbarLandingPage(){
+        return array(
+            array("url" => "#accueil", "action" => "Accueil"),
+            array("url" => "#produits", "action" => "Produits"),
+            array("url" => "#fonctionnalités", "action" => "Fonctionnalités")
+        );
+    }
+
+    public function acces(){
         return array(
             array("url" => "index.php?module=asso&action=afficherAsso", "action" => "Quitter" ),
-            array("url" => "index.php?actionComposant=deconnexion", "action" => "Se déconnecter" )
+            array("url" => "index.php?actionComposant=deconnexion", "action" => "Se déconnecter" ),
+            array("url" => "index.php?actionComposant=form_connexion", "action" => "Se connecter" )
         );
     }
 

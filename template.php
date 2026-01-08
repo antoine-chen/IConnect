@@ -19,8 +19,11 @@
 
 <main>
     <h1>Contenu du site : </h1>
+    <?php
+        if (isset($contenu))
+            echo $contenu;
+    ?>
 
-    <?php echo $contenu ?>
 </main>
 
 <footer>
