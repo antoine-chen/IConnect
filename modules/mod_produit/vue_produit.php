@@ -34,7 +34,7 @@ class VueProduit extends VueGenerique{
     public function form_ajoutProduit()
     {
         echo '
-            <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" class="container taille-formulaire">
+            <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" enctype="multipart/form-data" class="container taille-formulaire">
                 <h6>Ajouter un produit</h6>
                 <input name="nom" placeholder="Nom du produit" required>
                 <input name="prix" placeholder="Prix du produit" required>

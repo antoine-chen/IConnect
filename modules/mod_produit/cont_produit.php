@@ -47,7 +47,7 @@ class ContProduit{
             $this->modele->associerProduitAuAsso($idAsso,$idProduit['id']);
 
             $extension = pathinfo($_FILES['imageProduit']['name'], PATHINFO_EXTENSION);
-            $cheminFichier = 'modules/mod_produit/img_produits'.$idProduit['id'].'.'.$extension;
+            $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
             move_uploaded_file($_FILES['imageProduit']['tmp_name'],$cheminFichier);
             $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
         }
