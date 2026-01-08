@@ -36,9 +36,9 @@ class ModeleNavbar{
 
     public function getNavbarLandingPage(){
         return array(
-            array("url" => "", "action" => "Accueil"),
-            array("url" => "", "action" => "Produits"),
-            array("url" => "", "action" => "Fonctionnalités")
+            array("url" => "#accueil", "action" => "Accueil"),
+            array("url" => "#produits", "action" => "Produits"),
+            array("url" => "#fonctionnalités", "action" => "Fonctionnalités")
         );
     }
 
