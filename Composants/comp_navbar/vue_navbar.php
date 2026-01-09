@@ -10,7 +10,7 @@ class VueNavbar extends VueGenerique {
 
     public function afficherNavbar($listeUrlAction, $lien, $quitterOuDeconnexion){
         $this->contenu = '
-            <nav class="row align-items-center mx-5 border">
+            <nav class="row align-items-center m-3">
                 <div class="col">
                     <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
                 </div>

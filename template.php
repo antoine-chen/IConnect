@@ -9,7 +9,6 @@
 </head>
 <body>
 <header>
-    <h1>HEADER</h1>
     <?php
         if (isset($contenuMenu))
             echo $contenuMenu;
@@ -18,7 +17,6 @@
 </header>
 
 <main>
-    <h1>Contenu du site : </h1>
     <?php
         if (isset($contenu))
             echo $contenu;

@@ -16,7 +16,7 @@ class VuePanier extends VueGenerique{
         ';
         foreach ($panier as $produit){
             echo '
-                <div class="d-flex justify-content-between align-items-center border rounded mx-5">
+                <div class="d-flex justify-content-between align-items-center border rounded mx-5 mb-2">
                     <div class="d-flex align-items-center">
                        <img src="'. htmlspecialchars($produit['image']) .'" class="img-produit" style="height: 200px;" alt="">
                        <div>

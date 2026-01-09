@@ -22,7 +22,7 @@ class VueProduit extends VueGenerique{
         ';
         foreach ($listeProduit as $produit){
             echo '
-               <div class="d-flex flex-column align-items-center">
+               <div class="d-flex flex-column align-items-center border">
                   <img src="'. $produit["image"] .'" class="img-produit" alt="produit-item">
                   <div class="d-flex justify-content-between align-items-center gap-2 m-3 info-produit">
                     <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-black" style="text-decoration = none;">
