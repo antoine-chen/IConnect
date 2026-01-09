@@ -8,13 +8,13 @@ class VueFournisseur extends VueGenerique{
 
     public function afficherListeFournisseur($listeFournisseur){
         echo '
-            <div class="table-responsive">
+            <div class="table-responsive container">
                 <table class="table table-bordered table-hover text-center">
                     <tr> 
                         <th>Nom</th> 
                         <th>Email</th>
                         <th>Ville</th> 
-                        <th>Numéro</th>
+                        <th>Télephone</th>
                     </tr>    
         ';
         foreach ($listeFournisseur as $fournisseur) {
