@@ -18,16 +18,30 @@ class ContCommande {
     }
 
     public function commandeAvancée(){
-        $this->vue->afficheCommandeComplete(
-            $this->modele->toutesLesCommandes()
-            ,$this->modele->toutesLesLignesCommandes()
-        );
-
+        $commandes = $this->modele->toutesLesCommandes();
+        foreach ($commandes as $value){
+            $ligneCommandes =$this->modele->derouléCommande($value['id'],$value['date']);
+            $this->vue->afficheCommandeComplete($value,$ligneCommandes);
+        }
     }
+
     public function details(){
         $id =isset($_GET['id']) ? $_GET['id'] : '';
         $this->vue->afficheDetailsCommande(
             $this->modele->derouléCommande($id));
+    }
+    public function historique(){
+        $commandes = $this->modele->toutesLesCommandes();
+        foreach ($commandes as $value){
+            $ligneCommandes =$this->modele->derouléCommande($value['id'],$value['date']);
+         $this->vue->afficheCommandeComplete($value,$ligneCommandes);
+        }
+    }
+    public function valider(){
+        $id =isset($_GET['id']) ? $_GET['id'] : '';
+        $date =isset($_GET['date']) ? $_GET['date'] : '';
+        $this->modele->valideCommande($id,$date);
+
     }
 
     public function getVue(){

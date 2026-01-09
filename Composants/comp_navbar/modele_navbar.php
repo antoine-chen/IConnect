@@ -11,7 +11,8 @@ class ModeleNavbar{
 
     public function getNavbarBarman(){
         return array(
-            array("url" => "index.php?module=commande&action=commandes", "action" => "Commandes")
+            array("url" => "index.php?module=commande&action=commandeAvancee", "action" => "commande du jour"),
+            array("url" => "index.php?module=commande&action=historique", "action" => "historique")
         );
     }
 

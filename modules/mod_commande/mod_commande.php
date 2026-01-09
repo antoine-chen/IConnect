@@ -20,8 +20,14 @@ private $action;
                 $this->controleur->details();
                 break;
 
-            case 'commandeAvancée':
+            case 'commandeAvancee':
                 $this->controleur->commandeAvancée();
+                break;
+            case 'valideCommande':
+                $this->controleur->valider();
+                break;
+            case 'historique':
+                $this->controleur->historique();
                 break;
             default:
                 echo "action inconnue";
