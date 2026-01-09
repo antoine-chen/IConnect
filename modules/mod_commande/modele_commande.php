@@ -8,6 +8,9 @@ class ModeleCommande extends connexion {
         $req->execute([$_SESSION['asso']]);
         return $req->fetchAll();
     }
+    public function NOW(){
+
+    }
     public function toutesLesCommandesDuJour(){
         $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ? where (Cast date as date)=? order by date");
         $req->execute([$_SESSION['asso']]);
