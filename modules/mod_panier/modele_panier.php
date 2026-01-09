@@ -1,5 +1,7 @@
 <?php
+include_once "modele.php";
 class ModelePanier extends Connexion{
+    private $modele;
 
     public function getPanier($idAssociation, $idUtilisateur){
         $getPanier = self::$bdd->prepare('SELECT p.* ,l.quantite FROM panier pa 
@@ -69,10 +71,8 @@ class ModelePanier extends Connexion{
     }
 
     public function getIdInventaire($idAssociation){
-        $existe = self::$bdd->prepare('SELECT id FROM inventaire i 
-                                                INNER JOIN ligneInventaire l WHERE i.idAssociation = ? ');
-        $existe->execute([$idAssociation]);
-        return $existe->fetchColumn();
+        $this->modele = new Modele();
+        return $this->modele->idInventaire($idAssociation);
     }
     // quand je valide mon panier je baisse le stock de l'inventaide de l'association
     public function updateLigneInventaire($idInventaire, $idProduit, $quantite){

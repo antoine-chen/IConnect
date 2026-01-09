@@ -1,5 +1,8 @@
 <?php
-class ModeleStock extends Connexion{
+include_once "modele.php";
+class ModeleStock extends Connexion {
+    private $modele;
+
     public function inventaireActuel()
     {
 
@@ -45,13 +48,8 @@ class ModeleStock extends Connexion{
 
     public function idInventaire($idAsso)
     {
-        $get = self::$bdd->prepare('
-            select max(id) as id 
-            from inventaire
-            where idAssociation = (?)
-        ');
-        $get->execute([$idAsso]);
-        return $get->fetch();
+        $this->modele = new Modele();
+        return $this->modele->idInventaire($idAsso);
     }
 
     public function ajouterProduit($idInventaire,$idProduit,$stock)

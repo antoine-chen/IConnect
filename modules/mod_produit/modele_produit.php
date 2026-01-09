@@ -1,5 +1,7 @@
 <?php
-class ModeleProduit extends Connexion{
+include_once "modele.php";
+class ModeleProduit extends Connexion {
+    private $modele;
 
     public function getProduits($idAsso,$idInventaire){
         $getProduits = self::$bdd->prepare('SELECT p.*, l.stock FROM boutique b INNER JOIN produit p ON b.idProduit = p.id 
@@ -18,13 +20,8 @@ class ModeleProduit extends Connexion{
 
     public function idInventaire($idAsso)
     {
-        $get = self::$bdd->prepare('
-            select max(id) as id 
-            from inventaire
-            where idAssociation = (?)
-        ');
-        $get->execute([$idAsso]);
-        return $get->fetch();
+        $this->modele = new Modele();
+        return $this->modele->idInventaire($idAsso);
     }
 
 
