@@ -51,10 +51,13 @@ class ContAdmin{
     public function formAjouterGestionnaireOuBarman($messageErreur = ""){
         if (isset($_GET['id']) && $_SESSION['role'] == 'Admin'){
             $_SESSION['asso'] = $_GET['id'];
-            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un gestionnaire", $messageErreur);
+            $comptes = $this->modele->getUtilisateurNonRole($_SESSION['asso'], "Admin");
+
+            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un gestionnaire",$comptes, $messageErreur);
         }
         if ($_SESSION['role'] == 'Gestionnaire'){
-            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un barman", $messageErreur);
+            $comptes = $this->modele->getUtilisateurNonRole($_SESSION['asso'], "Gestionnaire");
+            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un barman",$comptes, $messageErreur);
         }
     }
 
@@ -64,16 +67,18 @@ class ContAdmin{
         si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
      */
     public function ajouterGestionnaireOuBarman(){
-        if (($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso']) && isset($_POST['login']) && isset($_POST['pwd'])){
-            $login = $_POST['login'];
-            $pwd = $_POST['pwd'];
+        if (($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso'])){
+
+            $idUtilisateur = $_GET['id'];
             $idAssociation = $_SESSION['asso']; // voir formAjouterGestionnaire() si admin
-            if (!empty($login) && !empty($pwd) && !$this->modele->getUtilisateur($login)){
-                $idUtilisateur = $this->insertUtilisateur($pwd, $login);
-                $this->insertGestionnaireOuBarman($idUtilisateur, $idAssociation);
-            }else {
-                $messageErreur = "il faut remplir les champs ou login deja existant";
-                $this->formAjouterGestionnaireOuBarman($messageErreur);
+
+            $this->insertGestionnaireOuBarman($idUtilisateur, $idAssociation);
+
+            if($_SESSION['role'] == 'Gestionnaire') {
+                header('Location: index.php?module=stock');
+            }
+            else if($_SESSION['role'] == 'Admin') {
+                header('Location: index.php');
             }
         }
     }

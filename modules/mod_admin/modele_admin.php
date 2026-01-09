@@ -45,4 +45,15 @@ class ModeleAdmin extends Modele {
         return $get->fetchColumn();
     }
 
+    public function getUtilisateurNonRole($idAssociation,$role)
+    {
+        $get = self::$bdd->prepare('
+            select distinct id,login,nom,prénom,date_naissance,mail,telephone,adresse
+            from utilisateurs inner join role on utilisateurs.id = role.idUtilisateur
+            where idAssociation = (?) and role != (?)
+        ');
+        $get->execute([$idAssociation,$role]);
+        return $get->fetchAll();
+    }
+
 }

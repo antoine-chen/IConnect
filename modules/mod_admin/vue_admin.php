@@ -60,21 +60,40 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficheFormAjouterGestionnaireOuBarman($titre, $messageErreur = ""){
+    public function afficheFormAjouterGestionnaireOuBarman($titre,$listeComptes, $messageErreur = ""){
         echo '
             <h2 class="text-center">'.$titre.'</h2>
-            <form method="post" action="index.php?module=admin&action=ajouterGestionnaireOuBarman" class="container taille-formulaire">
-                <p class="text-danger">' . $messageErreur . '</p>
-                 <div class="form-floating">
-                    <input name="login" class="form-control" placeholder="login"/>
-                    <label>Login : </label>
-                </div>
-                <div class="form-floating">
-                    <input name="pwd" class="form-control" placeholder="Mot de passe"/>
-                    <label>Mot de passe : </label>
-                </div>
-                <button class="btn btn-primary" type="submit">'. $titre.'</button>
-            </form>
+            <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <tr>
+                    <th>Login</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Date de naissance</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                    <th>Ajouter</th>
+                </tr>
+            ';
+        foreach ($listeComptes as $compte) {
+            echo '
+                <tr>
+                    <td>'.htmlspecialchars($compte['login']).'</td>
+                    <td>'.htmlspecialchars($compte['prénom']).'</td>
+                    <td>'.htmlspecialchars($compte['nom']).'</td>
+                    <td>'.htmlspecialchars($compte['date_naissance']).'</td>
+                    <td>'.htmlspecialchars($compte['mail']).'</td>
+                    <td>'.htmlspecialchars($compte['adresse']).'</td>
+                    <td>'.htmlspecialchars($compte['telephone']).'</td>
+                    <td><a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'">Ajouter</a></td>
+                </tr>
+            ';
+        }
+
+        echo '
+            </table>    
+            </div>
         ';
     }
 
