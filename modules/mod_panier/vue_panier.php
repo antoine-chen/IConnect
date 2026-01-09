@@ -34,7 +34,10 @@ class VuePanier extends VueGenerique{
         echo '
                 <div class="d-flex justify-content-between align-items-center mx-5">
                     <p>Total : '. $addition .' €</p>
-                    <a href="index.php?module=panier&action=validerPanier" class="btn btn-primary m-4">Valider</a>
+                    <div class="m-4">
+                        <a href="index.php?module=panier&action=viderPanier" class="btn btn-danger">Vider panier</a>
+                        <a href="index.php?module=panier&action=validerPanier" class="btn btn-primary">Valider</a>
+                    </div>
                 </div>
             </div>
         ';

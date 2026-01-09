@@ -122,6 +122,13 @@ class ContPanier{
         }
     }
 
+    public function viderPanier(){
+        if (isset($_SESSION['role'])){
+            $this->modele->deleteClientPanierEtLignePanier($_SESSION['id'], $_SESSION['asso']);
+            header('Location: index.php?module=panier&action=panier');
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }
