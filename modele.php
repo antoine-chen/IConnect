@@ -13,7 +13,7 @@ class Modele extends Connexion{
     public function getProfilUtilisateur($idUtilisateur){
         $profil = self::$bdd->prepare('SELECT login, nom, prenom, date_naissance, adresse, mail, telephone FROM utilisateurs WHERE id = ?');
         $profil->execute([$idUtilisateur]);
-        return $profil->fetch();
+        return $profil->fetch(PDO::FETCH_ASSOC);
     }
 
 }

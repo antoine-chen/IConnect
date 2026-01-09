@@ -50,7 +50,7 @@ class ContCompte{
     }
 
     public function profil(){
-        if (isset($_SESSION['role']) && $_SESSION['role'] = 'Client'){
+        if (isset($_SESSION['role'])){
             $this->vue->afficherProfil(
                 $this->modele->getProfil($_SESSION['id'])
             );

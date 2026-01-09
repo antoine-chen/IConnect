@@ -25,16 +25,27 @@ class VueCompte extends VueGenerique{
     }
 
     public function afficherProfil($profil){
+        echo '   
+            <div class="position-relative">
+                <div class="bg-primary position-absolute" style="height: 60px; width: 60px; top: 30%; left: 27%;"></div>
+                <div class="bg-secondary mx-auto w-50" style="height: 60px;"></div>
+                <div class="bg-dark mx-auto w-50" style="height: 60px;"></div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="w-50">
+        ';
+        foreach ($profil as $attribut => $dataUtilisateur){
+            echo '
+               <div class="d-flex justify-content-between align-items-center px-3 py-2 border">
+                  <div>
+                      <h6>'. $attribut.'</h6>
+                      <p>'. $dataUtilisateur.'</p>
+                  </div>
+                  <a href="" class="btn btn-secondary">Modifier</a>
+               </div>
+            ';
+        }
         echo '
-            <div class="d-flex justify-content-center align-items-center m-3">
-                <div>
-                    <div>'.$profil['login'].'</div>
-                    <div>'.$profil['nom'].'</div>
-                    <div>'.$profil['prenom'].'</div>
-                    <div>'.$profil['date_naissance'].'</div>
-                    <div>'.$profil['adresse'].'</div>
-                    <div>'.$profil['mail'].'</div>
-                    <div>'.$profil['telephone'].'</div>
                 </div>
             </div>
         ';
