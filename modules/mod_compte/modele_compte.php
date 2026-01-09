@@ -23,4 +23,8 @@ class ModeleCompte extends Modele {
         $insertClientSole->execute([$montant, $idClient, $idAsso]);
     }
 
+    public function getProfil($idUtilisateur){
+        return $this->modele->getProfilUtilisateur($idUtilisateur);
+    }
+
 }

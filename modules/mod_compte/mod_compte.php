@@ -20,6 +20,9 @@ class ModCompte{
             case 'recharger':
                 $this->controleur->recharger();
                 break;
+            case 'profil':
+                $this->controleur->profil();
+                break;
             default:
                 echo "action inconnue";
                 break;

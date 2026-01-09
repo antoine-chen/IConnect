@@ -23,6 +23,24 @@ class VueCompte extends VueGenerique{
             </div>
         ';
     }
+
+    public function afficherProfil($profil){
+        echo '
+            <div class="d-flex justify-content-center align-items-center m-3">
+                <div>
+                    <div>'.$profil['login'].'</div>
+                    <div>'.$profil['nom'].'</div>
+                    <div>'.$profil['prenom'].'</div>
+                    <div>'.$profil['date_naissance'].'</div>
+                    <div>'.$profil['adresse'].'</div>
+                    <div>'.$profil['mail'].'</div>
+                    <div>'.$profil['telephone'].'</div>
+                </div>
+            </div>
+        ';
+    }
+
+
     public function afficher() {
         return $this->getAffichage();
     }

@@ -49,6 +49,14 @@ class ContCompte{
         }
     }
 
+    public function profil(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] = 'Client'){
+            $this->vue->afficherProfil(
+                $this->modele->getProfil($_SESSION['id'])
+            );
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }
