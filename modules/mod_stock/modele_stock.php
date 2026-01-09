@@ -1,7 +1,12 @@
 <?php
 include_once "modele.php";
-class ModeleStock extends Connexion {
+class ModeleStock extends Modele {
     private $modele;
+
+    public function __construct()
+    {
+        $this->modele = new Modele();
+    }
 
     public function inventaireActuel()
     {
@@ -48,7 +53,6 @@ class ModeleStock extends Connexion {
 
     public function idInventaire($idAsso)
     {
-        $this->modele = new Modele();
         return $this->modele->idInventaire($idAsso);
     }
 

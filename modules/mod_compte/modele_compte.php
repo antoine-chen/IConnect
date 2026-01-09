@@ -1,6 +1,11 @@
 <?php
+include_once "modele.php";
+class ModeleCompte extends Modele {
+    private $modele;
 
-class ModeleCompte extends Connexion{
+    public function __construct() {
+        $this->modele = new Modele();
+    }
 
     public function chercherClient($idClient, $idAsso){
         $getUtilisateur = self::$bdd->prepare('SELECT * FROM solde WHERE idUtilisateur = ? AND idAssociation = ?');
