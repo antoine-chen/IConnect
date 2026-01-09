@@ -25,20 +25,21 @@ class VueCommande extends VueGenerique {
     public function afficheCommandeComplete($quer,$details){
         echo'<div class="d-flex flex-column align-items-center ">';
         foreach ($quer as $value1){
-            echo'<div class="row border rounded-3">'
-                .'<p class="card-title">'.htmlspecialchars('id commande: '.$value1['id']) .'</p>'.
-                '<div class="col-6">'.
-                htmlspecialchars('date: '.$value1 ['date']) .
-                '<p class="card-title">'.htmlspecialchars('satuts de la commande: '.$value1 ['statut']).'</p>'
-                .'</div>'.
-                '<div class="col-1">'.'</div>';
-            foreach ($details as $value2){
-                if($value2['idCommande']==$value1['id']){
-                echo htmlspecialchars($value2 ['nom']) .htmlspecialchars('|quantité:'.$value2['quantite']) .htmlspecialchars('|prix: '.$value2['prix']).'</br>' ;
+            if($value1 ['statut'] == "Encours") {
+                echo '<div class="row border rounded-3">'
+                    . '<p class="card-title">' . htmlspecialchars('id commande: ' . $value1['id']) . '</p>' .
+                    '<div class="col-6">' .
+                    htmlspecialchars('date: ' . $value1 ['date']) .
+                    '<p class="card-title">' . htmlspecialchars('satuts de la commande: ' . $value1 ['statut']) . '</p>'
+                    . '</div>' .
+                    '<div class="col-1">' . '</div>';
+                foreach ($details as $value2) {
+                    if ($value2['idCommande'] == $value1['id'] && $value2['date'] == $value1['date']) {
+                        echo htmlspecialchars($value2 ['nom']) . htmlspecialchars('|quantité:' . $value2['quantite']) . htmlspecialchars('|prix: ' . $value2['prix']) . '</br>';
+                    }
                 }
+                echo '</div>';
             }
-        echo '</div>';
-
         }
         echo'</div>';
 
