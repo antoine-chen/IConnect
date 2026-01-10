@@ -67,7 +67,7 @@ class ContAdmin{
         si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
      */
     public function ajouterGestionnaireOuBarman(){
-        if (($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso'])){
+        if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso'])){
 
             $idUtilisateur = $_GET['id'];
             $idAssociation = $_SESSION['asso']; // voir formAjouterGestionnaire() si admin
@@ -77,26 +77,20 @@ class ContAdmin{
             if($_SESSION['role'] == 'Gestionnaire') {
                 header('Location: index.php?module=stock');
             }
-            else if($_SESSION['role'] == 'Admin') {
+             if($_SESSION['role'] == 'Admin') {
                 header('Location: index.php');
             }
         }
     }
 
-    private function insertUtilisateur($pwd, $login){
-        // INSERT login pwd
-        $hash = password_hash($pwd, PASSWORD_DEFAULT);
-        $this->modele->insertUtilisateur($login, $hash);
-        // GET utilisateur
-        return $this->modele->getUtilisateur($login);
-    }
-
     private function insertGestionnaireOuBarman($idUtilisateur, $idAssociation){
-        if ($_SESSION['role'] == 'Admin'){
-            $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Gestionnaire");
-        }
-        if ($_SESSION['role'] == 'Gestionnaire'){
-            $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Barman");
+        if ($_SESSION['role']){
+            if ($_SESSION['role'] == 'Admin'){
+                $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Gestionnaire");
+            }
+            if ($_SESSION['role'] == 'Gestionnaire'){
+                $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Barman");
+            }
         }
     }
 
