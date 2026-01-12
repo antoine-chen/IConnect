@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleAdmin extends Modele {
-    private $modele;
-
-    public function __construct() {
-        $this->modele = new Modele();
-    }
 
     public function insertAssociation($nom){
         $insert = self::$bdd->prepare('INSERT INTO association (nom,image) VALUES (?, ?)');

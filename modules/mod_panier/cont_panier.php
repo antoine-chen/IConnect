@@ -116,7 +116,7 @@ class ContPanier{
 
     // update le stock -> ce que le client a acheté
     private function enleverStock($idAsso, $panierClient){
-        $idInventaire = $this->modele->getIdInventaire($idAsso);
+        $idInventaire = $this->modele->idInventaire($idAsso);
         foreach ($panierClient as $lignePanier){
             $this->modele->updateLigneInventaire($idInventaire, $lignePanier['id'], $lignePanier['quantite']);
         }

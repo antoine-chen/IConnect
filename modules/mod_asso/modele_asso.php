@@ -1,12 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleAsso extends Modele {
-    private $modele;
-
-    public function __construct()
-    {
-        $this->modele = new Modele();
-    }
 
     public function getListe()
     {
