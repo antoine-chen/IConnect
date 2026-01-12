@@ -18,9 +18,9 @@ class VueCompte extends VueGenerique{
                        <input name="montant" class="form-control" placeholder="Montant">
                        <label>Montant</label>
                    </div>
-                   <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmerForm">Confirmer</button>
+                   <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
         ';
-        $this->afficherConfirmationFormModal("Rechargement de compte", "Êtes vous sûr ?", "Confirmer");
+        $this->afficherConfirmationModal("Rechargement de compte", "Êtes vous sûr ?", "Confirmer");
         echo '
                 </form>
             </div>
