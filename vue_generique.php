@@ -17,7 +17,7 @@ class VueGenerique {
     public function afficherConfirmationModal($titre, $description, $action, $href){
         echo '
             <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
-            <div class="modal fade" id="confirm">
+            <div class="modal fade" id="confirmer">
                 <!-- centre la modal verticalement dans l’écran -->
                 <div class="modal-dialog modal-dialog-centered">
                     <!-- modal-content le rectangle blanc contient tout le contenu visible -->
@@ -32,6 +32,28 @@ class VueGenerique {
                             <!-- ferme le modal -->
                             <a class="btn btn-secondary" data-bs-dismiss="modal">Annuler</a>
                             <a href="'.$href.'" class="btn btn-primary">'.$action.'</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+    }
+
+    public function afficherConfirmationFormModal($titre, $description, $action){
+        echo '
+            <div class="modal fade" id="confirmerForm">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-4 border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>'.$titre.'</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div>'.$description.'</div>
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <!-- ferme le modal -->
+                            <a class="btn btn-secondary" data-bs-dismiss="modal">Annuler</a>
+                            <button type="submit" class="btn btn-primary">'.$action.'</button>
                         </div>
                     </div>
                 </div>

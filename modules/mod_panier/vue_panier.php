@@ -34,7 +34,7 @@ class VuePanier extends VueGenerique{
         echo '
                 <div class="d-flex justify-content-between align-items-center mx-5">
                     <p>Total : '. $addition .' €</p>
-                    <a class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirm">Valider</a>
+                    <button class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
                 </div>
             </div>
         ';
