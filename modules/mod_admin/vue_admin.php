@@ -69,9 +69,6 @@ class VueAdmin extends VueGenerique{
                     <th>Login</th>
                     <th>Prénom</th>
                     <th>Nom</th>
-                    <th>Date de naissance</th>
-                    <th>Email</th>
-                    <th>Adresse</th>
                     <th>Téléphone</th>
                     <th>Ajouter</th>
                 </tr>
@@ -80,11 +77,8 @@ class VueAdmin extends VueGenerique{
             echo '
                 <tr>
                     <td>'.htmlspecialchars($compte['login']).'</td>
-                    <td>'.htmlspecialchars($compte['prénom']).'</td>
+                    <td>'.htmlspecialchars($compte['prenom']).'</td>
                     <td>'.htmlspecialchars($compte['nom']).'</td>
-                    <td>'.htmlspecialchars($compte['date_naissance']).'</td>
-                    <td>'.htmlspecialchars($compte['mail']).'</td>
-                    <td>'.htmlspecialchars($compte['adresse']).'</td>
                     <td>'.htmlspecialchars($compte['telephone']).'</td>
                     <td><a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'">Ajouter</a></td>
                 </tr>

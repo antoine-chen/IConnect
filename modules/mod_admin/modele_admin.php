@@ -32,7 +32,7 @@ class ModeleAdmin extends Modele {
     public function getUtilisateurNonRole($idAssociation,$role)
     {
         $get = self::$bdd->prepare('
-            select distinct id,login,nom,prénom,date_naissance,mail,telephone,adresse
+            select distinct id,login,nom,prenom,telephone
             from utilisateurs inner join role on utilisateurs.id = role.idUtilisateur
             where idAssociation = (?) and role != (?)
         ');
