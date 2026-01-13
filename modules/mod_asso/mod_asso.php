@@ -52,6 +52,9 @@ class ModAsso
                     case 'afficherAssoPasInscris' :
                         $this->module->afficherAssoPasInscris();
                         break;
+                    case 'afficherAssoEnAttente':
+                        $this->module->afficherAssoEnAttente();
+                        break;
                 }
                 break;
             default:

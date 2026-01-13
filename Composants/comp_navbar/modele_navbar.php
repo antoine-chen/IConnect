@@ -32,8 +32,9 @@ class ModeleNavbar{
 
     public function getNavbarSansRole(){
         return array(
-            array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Les associations"),
-            array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations")
+            array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Mes associations"),
+            array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations"),
+            array("url" => "index.php?module=asso&action=afficherAssoEnAttente", "action" => "En attente")
 
         );
     }

@@ -41,6 +41,14 @@ class ContAsso {
         }
     }
 
+    public function afficherAssoEnAttente(){
+        if (isset($_SESSION['id'])){
+            $this->vue->afficherListeAsso(
+                $this->modele->getListeAssociationEnAttente($_SESSION['id'])
+            );
+        }
+    }
+
     /**
      * permet d'attribuer un role à un utilisateur dans une association : Gestionnaire, Barman ou client
      * si l'utilisateur n'est jamais aller une association il aura le role Client
@@ -55,24 +63,27 @@ class ContAsso {
 
             if($this->modele->existeAssociaion($idAsso)) {
                 if(empty($resultat)) {
-                    $this->modele->attribuerRoleClient($idAsso,$idUtilisateur);
+                    $this->modele->demandeAccesAssociation($idAsso,$idUtilisateur);
                 }
-                switch ($resultat['role']) {
-                    case 'Barman' :
-                        $_SESSION['role'] = 'Barman';
-                        header('Location: index.php?module=commande');
-                        break;
-                    case 'Gestionnaire' :
-                        $_SESSION['role'] = 'Gestionnaire';
-                        header('Location: index.php?module=stock');
-                        break;
-                    default :
-                        $_SESSION['role'] = 'Client';
-                        header('Location: index.php?module=produit');
-                        break;
+                elseif (isset($resultat['role']) && $resultat['role'] == 'enCours') return;
+                else {
+                    switch ($resultat['role']) {
+                        case 'Barman' :
+                            $_SESSION['role'] = 'Barman';
+                            header('Location: index.php?module=commande');
+                            break;
+                        case 'Gestionnaire' :
+                            $_SESSION['role'] = 'Gestionnaire';
+                            header('Location: index.php?module=stock');
+                            break;
+                        default :
+                            $_SESSION['role'] = 'Client';
+                            header('Location: index.php?module=produit');
+                            break;
+                    }
                 }
             } else {
-                $this->afficherAsso();
+                $this->afficherAssoPasInscris();
             }
 
         }
