@@ -22,11 +22,23 @@ class ContAsso {
     /**
      * si l'utilisateur quitte une association -> unset role et asso
     */
-    public function afficherAsso(){
+    public function afficherAssoInscris(){
         if (isset($_SESSION['role']) && isset($_SESSION['asso'])){
             $this->quitterAssoc();
         }
-        $this->vue->afficherListeAsso($this->modele->getListe());
+        if (isset($_SESSION['id'])){
+            $this->vue->afficherListeAsso(
+                $this->modele->getListeAssociationInscris($_SESSION['id'])
+            );
+        }
+    }
+
+    public function afficherAssoPasInscris(){
+        if (isset($_SESSION['id'])){
+            $this->vue->afficherListeAsso(
+                $this->modele->getListeAssociationPasIncris($_SESSION['id'])
+            );
+        }
     }
 
     /**

@@ -7,22 +7,8 @@ class VueLandingPage extends VueGenerique {
 
     public function afficherlandingPage(){
         echo '
-            <nav class="row m-3 align-items-center mx-5">
-        <div class="col">
-            <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
-        </div>
-        <div class="col-8 d-flex justify-content-center gap-3 mx-5">
-            <a href="">Accueil</a>
-            <a href="">Produits</a>
-            <a href="">Fonctionnalités</a>
-        </div>
-        <div class="col">
-            <a href="index.php?actionComposant=form_connexion" class="btn btn-primary">Se connecter</a>
-        </div>
-    </nav>
-
     <div>
-        <div class="d-flex justify-content-center align-items-center gap-5 m-5">
+        <div id="accueil" class="d-flex justify-content-center align-items-center gap-5 m-5">
             <div class="mx-5">
                 <div class="display-5 fw-bold">
                     <div>Gagnez du temps</div>
@@ -47,7 +33,7 @@ class VueLandingPage extends VueGenerique {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium expedita quidem beatae dicta asperiores dignissimos quaerat vero aspernatur sit assumenda. Numquam veritatis minima esse deleniti magnam nemo expedita! Dolores, quam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero adipisci deleniti, repellat, exercitationem ipsum ipsa nemo molestias quam doloribus neque accusantium eveniet eius molestiae recusandae vitae? Rerum sunt quaerat commodi. </p>
         </div>
 
-        <div class="m-5">
+        <div id="produits" class="m-5">
             <h2>Nos produits</h2>
             <div class="text-center d-flex justify-content-center gap-5">
                 <div>
@@ -61,7 +47,7 @@ class VueLandingPage extends VueGenerique {
             </div>
         </div>
 
-        <div class="m-5">
+        <div id="fonctionnalités" class="m-5">
             <h2>Fonctionnalités</h2>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">

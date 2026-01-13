@@ -1,5 +1,6 @@
 <?php
-class ModelePanier extends Connexion{
+include_once "modele.php";
+class ModelePanier extends Modele {
 
     public function getPanier($idAssociation, $idUtilisateur){
         $getPanier = self::$bdd->prepare('SELECT p.* ,l.quantite FROM panier pa 
@@ -68,12 +69,6 @@ class ModelePanier extends Connexion{
         $updateSolde->execute([$addition, $idUtilisateur, $idAssociation]);
     }
 
-    public function getIdInventaire($idAssociation){
-        $existe = self::$bdd->prepare('SELECT id FROM inventaire i 
-                                                INNER JOIN ligneInventaire l WHERE i.idAssociation = ? ');
-        $existe->execute([$idAssociation]);
-        return $existe->fetchColumn();
-    }
     // quand je valide mon panier je baisse le stock de l'inventaide de l'association
     public function updateLigneInventaire($idInventaire, $idProduit, $quantite){
         $updateLigneInventaire = self::$bdd->prepare('UPDATE ligneInventaire SET stock = stock - ?
@@ -103,10 +98,11 @@ class ModelePanier extends Connexion{
         $insertLigneCommande->execute([$idCommande, $idProduit, $quantite, $date]);
     }
 
-    public function getIdCommandeClient($idUtilisateur, $idAssociation){
-        $getIdCommandeClient = self::$bdd->prepare('SELECT id FROM commande WHERE idUtilisateur = ? AND idAssociation = ?');
-        $getIdCommandeClient->execute([$idUtilisateur, $idAssociation]);
-        return $getIdCommandeClient->fetchColumn();
+    public function deleteLignePanier($idUtilisateur, $idAssociation){
+        $idIdPanierClient =  $this->getIdPanier($idAssociation, $idUtilisateur);
+
+        $deleteLignePanier = self::$bdd->prepare('DELETE FROM lignePanier WHERE idPanier = ? AND quantite = 0');
+        $deleteLignePanier->execute([$idIdPanierClient]);
     }
 
     public function deleteClientPanierEtLignePanier($idUtilisateur, $idAssociation){

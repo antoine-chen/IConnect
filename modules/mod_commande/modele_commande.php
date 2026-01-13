@@ -1,6 +1,6 @@
 <?php
-
-class ModeleCommande extends connexion {
+include_once "modele.php";
+class ModeleCommande extends Modele {
 
     //fait une requette pour toute les commandes d'une association
     public function toutesLesCommandes(){

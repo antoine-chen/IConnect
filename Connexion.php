@@ -1,7 +1,9 @@
 <?php
 class connexion{
+
     static protected $bdd;
     public function __construct(){
+
     }
 
     public static function initConnexion(){

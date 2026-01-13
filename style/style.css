@@ -41,6 +41,10 @@
     object-fit: cover;
 }
 @media (max-width: 789px) {
+    .img-produit {
+        height: 150px;
+        width: 150px;
+    }
     .info-produit {
         display: flex;
         flex-direction: column;

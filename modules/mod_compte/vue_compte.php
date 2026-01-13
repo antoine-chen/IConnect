@@ -6,7 +6,7 @@ class VueCompte extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherFormRecharger($soldeClient = 0){
+    public function afficherFormRecharger($soldeClient){
         echo '
             <div class="container border p-5 ">
                 <div class="d-flex justify-content-between align-items-center">
@@ -18,11 +18,15 @@ class VueCompte extends VueGenerique{
                        <input name="montant" class="form-control" placeholder="Montant">
                        <label>Montant</label>
                    </div>
-                   <input class="btn btn-primary" type="submit" value="Confirmer">
+                   <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+        ';
+        $this->afficherConfirmationModal("Rechargement de compte", "Êtes vous sûr ?", "Confirmer");
+        echo '
                 </form>
             </div>
         ';
     }
+
     public function afficher() {
         return $this->getAffichage();
     }

@@ -14,15 +14,16 @@ class ContPanier{
     /**
      * affiche le panier d'un client dans une association
     */
-    public function panier($messageValidationPanier = ""){
+    public function panier(){
         if ($_SESSION['role'] == 'Client'){
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur)>0 ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
+            $this->modele->deleteLignePanier($idUtilisateur, $idAsso);
             $this->vue->afficherPanier(
                 $this->modele->getPanier($idAsso, $idUtilisateur),
                 $addition,
-                $messageValidationPanier
+                $_SESSION['soldeClient']
             );
         }
     }
@@ -52,6 +53,8 @@ class ContPanier{
                         $this->modele->insertLignePanier($idPanier, $idProduit, 1);
                     }
                 }
+                header('Location: index.php?module=produit');
+                exit;
             }
         }
     }
@@ -90,12 +93,14 @@ class ContPanier{
                     $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
                     $this->enleverStock($idAsso, $panierClient);
                     $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
-                    $this->panier("Votre panier a été validé, veuillez recuperer votre commande");
+                    $_SESSION['messageOk'] = "Votre panier a été validé, veuillez recuperer votre commande";
                 }else {
-                    $this->panier("Erreur de stock, veuillez re faire à nouveau votre panier");
+                    $_SESSION['messagePasOk'] = "Erreur de stock, veuillez re faire à nouveau votre panier";
                 }
             }
             $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
+            header("Location: index.php?module=produit");
+            exit;
         }
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
@@ -104,7 +109,6 @@ class ContPanier{
         $idDerniereCommande = $this->modele->idDernierCommandeDuJour($idAsso, $date);
 
         $this->modele->insertCommande($idDerniereCommande+1, $idUtilisateur, $date, "Encours", $idAsso);
-        $idCommande = $this->modele->getIdCommandeClient($idUtilisateur, $idAsso);
         foreach ($panierClient as $lignePanier){
             $this->modele->insertLigneCommande($idDerniereCommande+1, $lignePanier['id'], $lignePanier['quantite'], $date);
         }
@@ -112,9 +116,16 @@ class ContPanier{
 
     // update le stock -> ce que le client a acheté
     private function enleverStock($idAsso, $panierClient){
-        $idInventaire = $this->modele->getIdInventaire($idAsso);
+        $idInventaire = $this->modele->idInventaire($idAsso);
         foreach ($panierClient as $lignePanier){
             $this->modele->updateLigneInventaire($idInventaire, $lignePanier['id'], $lignePanier['quantite']);
+        }
+    }
+
+    public function viderPanier(){
+        if (isset($_SESSION['role'])){
+            $this->modele->deleteClientPanierEtLignePanier($_SESSION['id'], $_SESSION['asso']);
+            header('Location: index.php?module=panier&action=panier');
         }
     }
 

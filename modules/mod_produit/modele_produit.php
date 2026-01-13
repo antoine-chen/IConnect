@@ -1,13 +1,61 @@
 <?php
-class ModeleProduit extends Connexion{
+include_once "modele.php";
+class ModeleProduit extends Modele {
 
-    public function getProduits($idAsso){
+    public function getProduits($idAsso,$idInventaire){
         $getProduits = self::$bdd->prepare('SELECT p.*, l.stock FROM boutique b INNER JOIN produit p ON b.idProduit = p.id 
                                                         INNER JOIN ligneInventaire l ON l.idProduit = p.id
                                                         INNER JOIN inventaire i ON i.id = l.idInventaire
-                                            WHERE i.idAssociation = ? AND l.stock > 0');
-        $getProduits->execute([$idAsso]);
+                                            WHERE i.idAssociation = ? AND l.stock > 0 AND i.id = (?) and l.idInventaire = (?)');
+        $getProduits->execute([$idAsso,$idInventaire,$idInventaire]);
         return $getProduits->fetchAll();
+    }
+
+    public function getSoldeClient($idClient, $idAssociation){
+        $getSolde = self::$bdd->prepare('SELECT solde FROM solde WHERE idUtilisateur = ? AND idAssociation = ? AND solde > 0');
+        $getSolde->execute([$idClient, $idAssociation]);
+        return $getSolde->fetchColumn();
+    }
+
+    public function insertProduit($nomProduit, $prixProduit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into produit (nom,prix,image) values (?,?,?)
+        ');
+        $insert->execute([$nomProduit,$prixProduit,"vide"]);
+    }
+
+    public function lastProduitAjoute()
+    {
+        $get = self::$bdd->prepare('
+            select max(id) as id from produit;
+        ');
+        $get->execute();
+        return $get->fetch();
+    }
+
+    public function associerProduitAuAsso($idAsso, $produit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into boutique (idAssociation,idProduit) values (?,?)
+        ');
+        $insert->execute([$idAsso,$produit]);
+    }
+
+    public function ajoutImage($idProduit, $cheminFichier)
+    {
+        $insert = self::$bdd->prepare('
+            update produit set image = (?) where id = (?)
+        ');
+        $insert->execute([$cheminFichier,$idProduit]);
+    }
+
+    public function ajoutProduitInventaire($idInventaire,$idProduit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into ligneInventaire (idInventaire,idProduit,stock,pertes) values (?,?,?,?)
+        ');
+        $insert->execute([$idInventaire,$idProduit,0,0]);
     }
 
 }

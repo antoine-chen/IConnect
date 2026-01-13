@@ -34,6 +34,46 @@ class VueStock extends VueGenerique{
         ';
     }
 
+    public function boutons()
+    {
+        echo '
+            <div class="text-center m-3">
+                <a href="index.php?module=produit&action=form_ajouterNouveauProduit" class="btn btn-primary">Ajouter un produit</a>
+            </div>
+            ';
+    }
+
+    public function form_inventaire($donnes){
+        echo '
+            <div class="text-center m-3">'.htmlspecialchars(date('d/m/Y')) .'</div>
+            <div class="table-responsive">
+            <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-formulaire">
+                <table class="table table-bordered table-hover text-center">
+                     <tr>
+                         <th style="width: 25%">Nom</th>
+                         <th style="width: 25%">Prix</th>
+                         <th style="width: 50%">Quantité</th>
+                     </tr>
+        ';
+        foreach ($donnes as $produit) {
+            echo '
+                    <tr>
+                        <td>' . htmlspecialchars($produit['nom']) . '</td>
+                        <td>' . htmlspecialchars($produit['prix']) . '</td>
+                        <td>
+                            <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
+                        </td>
+                    </tr>';
+        }
+        echo '
+               </table>
+               <button class="btn btn-primary" type="submit">Créer un inventaire</button>
+           </form>
+           </div>
+        ';
+    }
+
+
     public function inventaireVide(){
         echo '<p>Aucune inventaire réalisée pour ce mois ci</p> ';
     }
