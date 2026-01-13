@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleAsso extends Modele {
-    private $modele;
-
-    public function __construct(){
-        $this->modele = new Modele();
-    }
 
     public function getListeAssociationInscris($idUtilisateur){
         $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?)');

@@ -36,11 +36,11 @@ class VuePanier extends VueGenerique{
                     <p>Total : '. $addition .' €</p>
                     <div class="m-4">
                         <a href="index.php?module=panier&action=viderPanier" class="btn btn-danger">Vider panier</a>
-                        <a href="index.php?module=panier&action=validerPanier" class="btn btn-primary">Valider</a>
+                        <button class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
                     </div>
                 </div>
-            </div>
         ';
+        $this->afficherConfirmationModal("Validation", "Êtes vous sur de confirmer votre panier ?","Valider", "index.php?module=panier&action=validerPanier");
     }
 
     public function afficher() {

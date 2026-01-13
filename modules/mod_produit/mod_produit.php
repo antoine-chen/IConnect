@@ -23,6 +23,14 @@ class ModProduit{
         }
     }
 
+    public function test()
+    {
+        echo '
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm">
+        Supprimer
+    </button>
+        ';
+    }
     public function getAffichage(){
         return $this->controleur->getVue();
     }

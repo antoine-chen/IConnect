@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleCommande extends Modele {
-    private $modele;
-
-    public function __construct() {
-        $this->modele = new Modele();
-    }
 
     //fait une requette pour toute les commandes d'une association
     public function toutesLesCommandes(){
