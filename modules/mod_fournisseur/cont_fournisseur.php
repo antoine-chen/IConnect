@@ -11,11 +11,42 @@ class ContFournisseur{
         $this->vue = new VueFournisseur();
     }
 
+    public function formAjouterFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire"){
+            $this->vue->afficherFormAjoutFournisseur();
+        }
+    }
+
+    public function ajouterFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire"){
+            if (isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["ville"]) && isset($_POST["telephone"])){
+                $nom = $_POST['nom'];
+                $email = $_POST["email"];
+                $ville = $_POST["ville"];
+                $telephone = $_POST["telephone"];
+
+                $this->modele->insertFournisseur($nom, $email, $ville, $telephone);
+                $this->listerFournisseur();
+            }else {
+                $this->formAjouterFournisseur();
+            }
+        }
+    }
+
     public function listerFournisseur(){
         if (isset($_SESSION['asso']) && $_SESSION['role'] == 'Gestionnaire'){
             $this->vue->afficherListeFournisseur(
-                $this->modele->getListeFournisseur($_SESSION['asso'])
+                $this->modele->getListeFournisseur()
             );
+        }
+    }
+
+    public function supprimerFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
+            $this->modele->deleteFournisseur(
+                $_GET['id'] // id du fourniseur lorsque le gestionnaire click sur le btn supp
+            );
+            $this->listerFournisseur();
         }
     }
 

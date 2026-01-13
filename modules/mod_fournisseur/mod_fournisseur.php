@@ -14,8 +14,17 @@ class ModFournisseur{
 
     public function exec(){
         switch ($this->action) {
+            case 'formAjouterFournisseur':
+                $this->controleur->formAjouterFournisseur();
+                break;
+            case 'ajouterFournisseur':
+                $this->controleur->ajouterFournisseur();
+                break;
             case 'listerFournisseur':
                 $this->controleur->listerFournisseur();
+                break;
+            case 'supprimerFournisseur':
+                $this->controleur->supprimerFournisseur();
                 break;
             default:
                 echo "action inconnue";
