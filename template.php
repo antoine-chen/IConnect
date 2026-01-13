@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="style/style.css">
     <title>I-CONNECT</title>
 </head>
+
+<style>
+    @keyframes vider {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+</style>
+
 <body>
 <header>
     <?php

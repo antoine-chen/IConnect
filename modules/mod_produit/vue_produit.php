@@ -11,10 +11,7 @@ class VueProduit extends VueGenerique{
         echo '
             <div class="text-center m-3">
         ';
-                if (isset($_SESSION['messageOk']))
-                    echo '<div class="alert alert-success" role="alert">'.$_SESSION['messageOk'].'</div>';
-                if (isset($_SESSION['messagePasOk']))
-                    echo '<div class="alert alert-danger" role="alert">'.$_SESSION['messagePasOk'].'</div>';
+        $this->confirmationProgressBar();
         echo '
                 <div>Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
             </div>
