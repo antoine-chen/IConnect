@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleCompte extends Modele {
-    private $modele;
-
-    public function __construct() {
-        $this->modele = new Modele();
-    }
 
     public function chercherClient($idClient, $idAsso){
         $getUtilisateur = self::$bdd->prepare('SELECT * FROM solde WHERE idUtilisateur = ? AND idAssociation = ?');
@@ -23,8 +18,9 @@ class ModeleCompte extends Modele {
         $insertClientSole->execute([$montant, $idClient, $idAsso]);
     }
 
-    public function getProfil($idUtilisateur){
-        return $this->modele->getProfilUtilisateur($idUtilisateur);
+    public function getProfilUtilisateur($idUtilisateur){
+        $profil = self::$bdd->prepare('SELECT login, nom, prenom, telephone FROM utilisateurs WHERE id = ?');
+        $profil->execute([$idUtilisateur]);
+        return $profil->fetch(PDO::FETCH_ASSOC);
     }
-
 }

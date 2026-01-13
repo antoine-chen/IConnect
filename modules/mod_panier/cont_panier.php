@@ -116,9 +116,16 @@ class ContPanier{
 
     // update le stock -> ce que le client a acheté
     private function enleverStock($idAsso, $panierClient){
-        $idInventaire = $this->modele->getIdInventaire($idAsso);
+        $idInventaire = $this->modele->idInventaire($idAsso);
         foreach ($panierClient as $lignePanier){
             $this->modele->updateLigneInventaire($idInventaire, $lignePanier['id'], $lignePanier['quantite']);
+        }
+    }
+
+    public function viderPanier(){
+        if (isset($_SESSION['role'])){
+            $this->modele->deleteClientPanierEtLignePanier($_SESSION['id'], $_SESSION['asso']);
+            header('Location: index.php?module=panier&action=panier');
         }
     }
 

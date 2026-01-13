@@ -34,11 +34,12 @@ class VueStock extends VueGenerique{
         ';
     }
 
-    public function boutons(){
+    public function boutons()
+    {
         echo '
-            <a href="index.php?module=stock&action=form_inventaire">
-            <h6>Faire l inventaire</h6>
-            </a>
+            <div class="text-center m-3">
+                <a href="index.php?module=produit&action=form_ajouterNouveauProduit" class="btn btn-primary">Ajouter un produit</a>
+            </div>
             ';
     }
 

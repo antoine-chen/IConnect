@@ -17,12 +17,26 @@ class ModProduit{
             case "listerProduits":
                 $this->controleur->listerProduits();
                 break;
+            case "form_ajouterNouveauProduit" :
+                $this->controleur->form_ajouterNouveauProduit();
+                break;
+            case "ajouterNouveauProduit" :
+                $this->controleur->ajouterNouveauProduit();
+                break;
             default:
                 echo "action inconnue";
                 break;
         }
     }
 
+    public function test()
+    {
+        echo '
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm">
+        Supprimer
+    </button>
+        ';
+    }
     public function getAffichage(){
         return $this->controleur->getVue();
     }

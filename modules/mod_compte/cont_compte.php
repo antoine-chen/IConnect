@@ -52,7 +52,7 @@ class ContCompte{
     public function profil(){
         if (isset($_SESSION['role'])){
             $this->vue->afficherProfil(
-                $this->modele->getProfil($_SESSION['id'])
+                $this->modele->getProfilUtilisateur($_SESSION['id'])
             );
         }
     }
