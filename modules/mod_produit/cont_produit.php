@@ -63,7 +63,7 @@ class ContProduit{
             $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
 
             $idInventaire = $this->modele->idInventaire($idAsso);
-            $this->modele->ajoutProduitInventaire($idInventaire['id'],$idProduit['id']);
+            $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
         }
     }
 
@@ -71,7 +71,6 @@ class ContProduit{
     {
         if($_SESSION['role']=='Gestionnaire') {
             $produit = $this->modele->getProduit($_GET['id']);
-            var_dump($produit);
             $this->vue->form_modifierProduit($produit);
         }
     }
@@ -79,18 +78,30 @@ class ContProduit{
     public function modifierProduit()
     {
         if($_SESSION['role']=='Gestionnaire') {
+            $idAsso = $_SESSION['asso'];
             $idProduit = $_GET['id'];
             $nom = $_POST['nom'];
             $prix = $_POST['prix'];
 
-            $this->modele->updateProduit($idProduit,$nom,$prix);
-            if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != '') {
+            $this->modele->updateProduit($idProduit, $nom, $prix);
+
+            if(!empty($_FILES['image']['tmp_name'])) {
+                $ancienProduit = $this->modele->getProduit($idProduit);
+                $ancienChemin = $ancienProduit['image'];
+                unlink($ancienChemin);
+
                 $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit.'.'.$extension;
-                move_uploaded_file($_FILES['image']['tmp_name'],$cheminFichier);
+                $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
+                move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
+
+
+                $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
+                $idInventaire = $this->modele->idInventaire($idAsso);
+                $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
             }
         }
     }
+
 
 }
 

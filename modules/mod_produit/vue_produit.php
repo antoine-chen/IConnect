@@ -70,22 +70,22 @@ class VueProduit extends VueGenerique{
     public function form_modifierProduit($produit)
     {
         echo '
-            <form method="post" action="index.php?module=produit&action=modifierProduit&id='.$produit['id'].'" class="container taille-formulaire">
-                <div class="mb-3">
-                    <label for="nom" class="form-label">Nom du produit</label>
-                    <input type="text" name="nom" class="form-control" value="'.htmlspecialchars($produit['nom']).'" ">
-                </div>
-                <div class="mb-3">
-                    <label for="prix" class="form-label">Prix du produit</label>
-                    <input type="number" name="prix" class="form-control" value="'.htmlspecialchars($produit['prix']).'" ">
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <input type="file" name="image" class="form-control"" ">
-                </div>
-                
-                <button class="btn btn-primary" type="submit">Valider</button>
-            </form>
-            ';
+    <form method="post" action="index.php?module=produit&action=modifierProduit&id='.$produit['id'].'" class="container taille-formulaire" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom du produit</label>
+            <input type="text" name="nom" class="form-control" value="'.htmlspecialchars($produit['nom']).'">
+        </div>
+        <div class="mb-3">
+            <label for="prix" class="form-label">Prix du produit</label>
+            <input type="number" name="prix" class="form-control" value="'.htmlspecialchars($produit['prix']).'">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+        <button class="btn btn-primary" type="submit">Valider</button>
+    </form>
+    ';
     }
+
 }
