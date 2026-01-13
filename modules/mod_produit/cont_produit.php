@@ -67,5 +67,30 @@ class ContProduit{
         }
     }
 
+    public function form_modifierProduit()
+    {
+        if($_SESSION['role']=='Gestionnaire') {
+            $produit = $this->modele->getProduit($_GET['id']);
+            var_dump($produit);
+            $this->vue->form_modifierProduit($produit);
+        }
+    }
+
+    public function modifierProduit()
+    {
+        if($_SESSION['role']=='Gestionnaire') {
+            $idProduit = $_GET['id'];
+            $nom = $_POST['nom'];
+            $prix = $_POST['prix'];
+
+            $this->modele->updateProduit($idProduit,$nom,$prix);
+            if(isset($_FILES['image']) && $_FILES['image']['tmp_name'] != '') {
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit.'.'.$extension;
+                move_uploaded_file($_FILES['image']['tmp_name'],$cheminFichier);
+            }
+        }
+    }
+
 }
 

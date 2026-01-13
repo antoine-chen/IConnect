@@ -23,6 +23,12 @@ class ModProduit{
             case "ajouterNouveauProduit" :
                 $this->controleur->ajouterNouveauProduit();
                 break;
+            case "form_modifierProduit" :
+                $this->controleur->form_modifierProduit();
+                break;
+            case "modifierProduit" :
+                $this->controleur->modifierProduit();
+                break;
             default:
                 echo "action inconnue";
                 break;

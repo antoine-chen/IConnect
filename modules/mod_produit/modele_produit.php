@@ -11,6 +11,17 @@ class ModeleProduit extends Modele {
         return $getProduits->fetchAll();
     }
 
+    public function getProduit($idProduit)
+    {
+        $get = self::$bdd->prepare('
+            select produit.id,produit.nom as nom, produit.image as image, produit.prix as prix 
+            from produit
+            where produit.id = (?)
+        ');
+        $get->execute([$idProduit]);
+        return $get->fetch();
+    }
+
     public function getSoldeClient($idClient, $idAssociation){
         $getSolde = self::$bdd->prepare('SELECT solde FROM solde WHERE idUtilisateur = ? AND idAssociation = ? AND solde > 0');
         $getSolde->execute([$idClient, $idAssociation]);
@@ -48,6 +59,14 @@ class ModeleProduit extends Modele {
             update produit set image = (?) where id = (?)
         ');
         $insert->execute([$cheminFichier,$idProduit]);
+    }
+
+    public function updateProduit($idProduit,$nom,$prix)
+    {
+        $update = self::$bdd->prepare('
+            update produit set nom = (?), prix = (?) where id = (?)
+        ');
+        $update->execute([$nom,$prix,$idProduit]);
     }
 
     public function ajoutProduitInventaire($idInventaire,$idProduit)
