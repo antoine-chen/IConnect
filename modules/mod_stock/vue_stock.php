@@ -37,9 +37,9 @@ class VueStock extends VueGenerique{
     public function boutons()
     {
         echo '
-            <a href="index.php?module=produit&action=form_ajouterNouveauProduit">
-            <h6>Ajouter un produit</h6>
-            </a>
+            <div class="text-center m-3">
+                <a href="index.php?module=produit&action=form_ajouterNouveauProduit" class="btn btn-primary">Ajouter un produit</a>
+            </div>
             ';
     }
 
