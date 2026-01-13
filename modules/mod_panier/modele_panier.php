@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModelePanier extends Modele {
-    private $modele;
-
-    public function __construct() {
-        $this->modele = new Modele();
-    }
 
     public function getPanier($idAssociation, $idUtilisateur){
         $getPanier = self::$bdd->prepare('SELECT p.* ,l.quantite FROM panier pa 
@@ -74,9 +69,6 @@ class ModelePanier extends Modele {
         $updateSolde->execute([$addition, $idUtilisateur, $idAssociation]);
     }
 
-    public function getIdInventaire($idAssociation){
-        return $this->modele->idInventaire($idAssociation);
-    }
     // quand je valide mon panier je baisse le stock de l'inventaide de l'association
     public function updateLigneInventaire($idInventaire, $idProduit, $quantite){
         $updateLigneInventaire = self::$bdd->prepare('UPDATE ligneInventaire SET stock = stock - ?

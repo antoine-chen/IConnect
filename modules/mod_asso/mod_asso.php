@@ -50,8 +50,11 @@ class ModAsso
                     case 'choisiAsso' :
                         $this->module->aChoisitAsso();
                         break;
-                    case 'afficherAsso' :
-                        $this->module->afficherAsso();
+                    case 'afficherAssoInscris' :
+                        $this->module->afficherAssoInscris();
+                        break;
+                    case 'afficherAssoPasInscris' :
+                        $this->module->afficherAssoPasInscris();
                         break;
                 }
                 break;

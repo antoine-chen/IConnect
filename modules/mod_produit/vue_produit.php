@@ -40,6 +40,29 @@ class VueProduit extends VueGenerique{
         ';
     }
 
+    public function form_ajoutProduit()
+    {
+        echo '
+            <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" enctype="multipart/form-data" class="container taille-formulaire">
+                <h6 class="text-center">Ajouter un produit</h6>
+                <div class="form-floating mt-3 mb-2">
+                    <input name="nom" class="form-control" placeholder="Nom du produit" required>
+                    <label>Nom du produit</label>
+                </div>
+                <div class="form-floating">
+                    <input name="prix" class="form-control" placeholder="Prix du produit" required>
+                    <label>Prix du produit</label>
+                </div>
+                <div class="mt-3 mb-3">
+                    <input type="file" name="imageProduit" required>
+                </div>
+                <div>
+                   <button class="btn btn-primary" type="submit">Ajouter</button>
+                </div>
+            </form>
+        ';
+    }
+
     public function afficher() {
         return $this->getAffichage();
     }
