@@ -18,17 +18,6 @@ class ModeleAdmin extends Modele {
         return $get->fetchAll();
     }
 
-    public function getUtilisateur($login) {
-        $req = self::$bdd->prepare("SELECT id FROM utilisateurs WHERE login = ?");
-        $req->execute([$login]);
-        return $req->fetchColumn(); // renvoie un int et pas un tableau
-    }
-
-    public function insertUtilisateur($login, $hash){
-        $insert = self::$bdd->prepare('INSERT INTO utilisateurs (login, pwd) VALUES (?, ?)');
-        $insert->execute([$login, $hash]);
-    }
-
     public function insertRoleGestionnaire($idUtilisateur, $idAssociation, $role){
         $insert = self::$bdd->prepare('INSERT INTO role(idUtilisateur, idAssociation, role) VALUES (?, ?, ?)');
         $insert->execute([$idUtilisateur, $idAssociation, $role]);
@@ -43,6 +32,17 @@ class ModeleAdmin extends Modele {
         $get = self::$bdd->prepare('SELECT id FROM association where nom = (?)');
         $get->execute([$nomAsso]);
         return $get->fetchColumn();
+    }
+
+    public function getUtilisateurNonRole($idAssociation,$role)
+    {
+        $get = self::$bdd->prepare('
+            select distinct id,login,nom,prénom,date_naissance,mail,telephone,adresse
+            from utilisateurs inner join role on utilisateurs.id = role.idUtilisateur
+            where idAssociation = (?) and role != (?)
+        ');
+        $get->execute([$idAssociation,$role]);
+        return $get->fetchAll();
     }
 
 }
