@@ -23,4 +23,9 @@ class ModeleCompte extends Modele {
         $profil->execute([$idUtilisateur]);
         return $profil->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updataProfilUtilisateur($idUtilisateur, $login){
+        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ? WHERE id = ?');
+        $updateProfil->execute([$login, $idUtilisateur]);
+    }
 }
