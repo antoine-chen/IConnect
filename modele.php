@@ -9,6 +9,6 @@ class Modele extends Connexion{
             where idAssociation = (?)
         ');
         $get->execute([$idAsso]);
-        return $get->fetch();
+        return $get->fetchColumn();
     }
 }

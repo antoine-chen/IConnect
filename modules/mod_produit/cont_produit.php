@@ -24,7 +24,7 @@ class ContProduit{
 
             $idInventaire = $this->modele->idInventaire($idAsso);
             $this->vue->afficherProduits(
-                $this->modele->getProduits($idAsso,$idInventaire['id']),
+                $this->modele->getProduits($idAsso,$idInventaire),
                 $loginClient,
                 $_SESSION['soldeClient']
             );

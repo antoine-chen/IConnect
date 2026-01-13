@@ -1,11 +1,6 @@
 <?php
 include_once "modele.php";
 class ModeleProduit extends Modele {
-    private $modele;
-
-    public function __construct() {
-        $this->modele = new Modele();
-    }
 
     public function getProduits($idAsso,$idInventaire){
         $getProduits = self::$bdd->prepare('SELECT p.*, l.stock FROM boutique b INNER JOIN produit p ON b.idProduit = p.id 
@@ -21,10 +16,5 @@ class ModeleProduit extends Modele {
         $getSolde->execute([$idClient, $idAssociation]);
         return $getSolde->fetchColumn();
     }
-
-    public function idInventaire($idAsso) {
-        return $this->modele->idInventaire($idAsso);
-    }
-
 
 }
