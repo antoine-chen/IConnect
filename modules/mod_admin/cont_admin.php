@@ -62,10 +62,10 @@ class ContAdmin{
     }
 
     /**
-        ajouter un gestionnaire dans une assocation
-        isset, regarde si les champs sont remplis
-        si oui, INSERT un utilisateur et GET l'utilisateur, mettre le role Gestionnaire
-     */
+     * ajouter un gestionnaire dans une assocation
+     *  l'admin a la liste des utilisateurs -> il peut donner le role gestionnaire
+     * le gestionnaire a la liste des clients (son asso) -> il peut donner le role barman à un client
+    */
     public function ajouterGestionnaireOuBarman(){
         if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso'])){
 
@@ -93,6 +93,40 @@ class ContAdmin{
             }
         }
     }
+
+    /**
+     * lister les demandes des utililisateurs (pour rejoindre l'asso du gestionnaire)
+     * accepterDemande() -> donne le role client dans l'asso
+     * refuserDemande() -> supp la ligne dans role
+     */
+    public function listerDemandeUtilisateur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso'])){
+            $this->vue->afficherListeDemandeUtilisateur(
+                $this->modele->getListeDemandeUtilisateur($_SESSION['asso'])
+            );
+        }
+    }
+
+    public function accepterDemande(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
+            $this->modele->accepterDemandeUtilisateur(
+                $_GET['id'],
+                $_SESSION['asso']
+            );
+            $this->listerDemandeUtilisateur();
+        }
+    }
+
+    public function refuserDemande(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
+            $this->modele->refuserDemandeUtilisateur(
+                $_GET['id'],
+                $_SESSION['asso']
+            );
+            $this->listerDemandeUtilisateur();
+        }
+    }
+
 
     public function getVue(){
         return $this->vue->afficher();

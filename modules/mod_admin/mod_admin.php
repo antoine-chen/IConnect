@@ -29,6 +29,15 @@ class ModAdmin{
             case 'ajouterGestionnaireOuBarman':
                 $this->controleur->ajouterGestionnaireOuBarman();
                 break;
+            case 'listerDemandeUtilisateur':
+                $this->controleur->listerDemandeUtilisateur();
+                break;
+            case 'accepterDemande':
+                $this->controleur->accepterDemande();
+                break;
+            case 'refuserDemande':
+                $this->controleur->refuserDemande();
+                break;
             default:
                 echo "action inconnue";
                 break;

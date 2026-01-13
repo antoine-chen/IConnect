@@ -8,6 +8,8 @@ class connexion{
 
     public static function initConnexion(){
             self::$bdd =new PDO('mysql:dbname=dutinfopw201668;host=database-etudiants.iut.univ-paris8.fr',"dutinfopw201668","bedegaje");
+            // NE PAS SUPPRIMER
+            // self::$bdd = new PDO('mysql:host=localhost;dbname=buvette;charset=utf8', 'root', '');
     }
 }
 

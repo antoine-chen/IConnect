@@ -91,6 +91,42 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
+    public function afficherListeDemandeUtilisateur($listeDemande){
+        echo '
+            <div class="table-responsive container">
+                <table class="table table-bordered table-hover text-center">
+                    <tr> 
+                        <th>Login</th> 
+                        <th>Nom</th>
+                        <th>Prénom</th> 
+                        <th>Télephone</th>
+                        <th style="width: 10%;"></th>
+                    </tr>    
+        ';
+        foreach ($listeDemande as $demande) {
+            echo '
+                <tr>
+                    <td>'. $demande['login'].'</td>
+                    <td>'. $demande['nom'].'</td>
+                    <td>'. $demande['prenom'].'</td>
+                    <td>'. $demande['telephone'].'</td>
+                    <td>
+                        <a href="index.php?module=admin&action=accepterDemande&id='.$demande['id'].'" class="btn btn-light border">
+                            <i class="bi bi-check-lg"></i>
+                        </a>
+                        <a href="index.php?module=admin&action=refuserDemande&id='.$demande['id'].'" class="btn btn-light border">
+                            <i class="bi bi-ban"></i>
+                        </a>
+                    </td>
+                </tr>
+            ';
+        }
+        echo '
+                </table>
+            </div>
+        ';
+    }
+
     public function afficher() {
         return $this->getAffichage();
     }

@@ -20,6 +20,7 @@ class ModeleNavbar{
         return array(
             array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
             array("url" => "index.php?module=admin&action=formAjouterGestionnaireOuBarman", "action" => "Ajouter barman"),
+            array("url" => "index.php?module=admin&action=listerDemandeUtilisateur", "action" => "Demande")
         );
     }
 
