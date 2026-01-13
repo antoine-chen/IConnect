@@ -17,4 +17,45 @@ class ModeleProduit extends Modele {
         return $getSolde->fetchColumn();
     }
 
+    public function insertProduit($nomProduit, $prixProduit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into produit (nom,prix,image) values (?,?,?)
+        ');
+        $insert->execute([$nomProduit,$prixProduit,"vide"]);
+    }
+
+    public function lastProduitAjoute()
+    {
+        $get = self::$bdd->prepare('
+            select max(id) as id from produit;
+        ');
+        $get->execute();
+        return $get->fetch();
+    }
+
+    public function associerProduitAuAsso($idAsso, $produit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into boutique (idAssociation,idProduit) values (?,?)
+        ');
+        $insert->execute([$idAsso,$produit]);
+    }
+
+    public function ajoutImage($idProduit, $cheminFichier)
+    {
+        $insert = self::$bdd->prepare('
+            update produit set image = (?) where id = (?)
+        ');
+        $insert->execute([$cheminFichier,$idProduit]);
+    }
+
+    public function ajoutProduitInventaire($idInventaire,$idProduit)
+    {
+        $insert = self::$bdd->prepare('
+            insert into ligneInventaire (idInventaire,idProduit,stock,pertes) values (?,?,?,?)
+        ');
+        $insert->execute([$idInventaire,$idProduit,0,0]);
+    }
+
 }
