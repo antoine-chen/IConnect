@@ -21,7 +21,7 @@ class VueCommande extends VueGenerique {
         }
     }
     //afiche les commande avec le details
-    public function afficheCommandeComplete($quer,$details){
+    public function afficheCommandeComplete($quer,$details,$mode){
         echo'<div class="d-flex flex-column align-items-center ">';
                 echo '<div class="row border rounded-3">'
                     . '<p class="card-title">' . htmlspecialchars('id commande: ' . $quer['id']) . '</p>' .
@@ -31,7 +31,15 @@ class VueCommande extends VueGenerique {
                     . '</div>' .
                     '<div class="col-1">' . '</div>';
                 $this->afficheDetailsCommande($details);
-                echo '<button><a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'"> valider</a></button></div></div>';
+        switch ($mode){
+            case 0:
+            echo '<button><a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'"> valider</a></button>';
+            echo '<button><a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'"> refuser</a></button></div></div>';
+            break;
+            default:
+                echo'</div></div>';
+                break;
+        }
 
     }
     public function afficher() {
