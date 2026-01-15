@@ -20,7 +20,8 @@ class ModeleNavbar{
         return array(
             array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
             array("url" => "index.php?module=admin&action=formAjouterGestionnaireOuBarman", "action" => "Ajouter barman"),
-            array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste les fournisseurs")
+            array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste les fournisseurs"),
+            array("url" => "index.php?module=admin&action=listerDemandeUtilisateur", "action" => "Demande")
         );
     }
 
@@ -33,8 +34,9 @@ class ModeleNavbar{
 
     public function getNavbarSansRole(){
         return array(
-            array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Les associations"),
-            array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations")
+            array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Mes associations"),
+            array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations"),
+            array("url" => "index.php?module=asso&action=afficherAssoEnAttente", "action" => "En attente")
 
         );
     }
