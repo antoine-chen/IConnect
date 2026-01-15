@@ -6,23 +6,29 @@ private $controleur;
 private $action;
     public function __construct(){
         $this->controleur =new ContCommande();
-
         $this->action = isset($_GET['action']) ? $_GET['action'] : 'commandesComplete';
         $this->exec();
     }
 
     public function exec(){
         switch ($this->action) {
-            case 'commandes':
-                $this->controleur->commande();
+//            case 'commandes':
+//                $this->controleur->commande();
+//                break;
+//            case 'details':
+//                $this->controleur->details();
+//                break;
+            case 'commandeAvancee':
+                $this->controleur->commandeAvancee();
                 break;
-                //affiche les details d'une commande //todo d'une seule association
-            case 'details':
-                $this->controleur->details();
+            case 'valideCommande':
+                $this->controleur->valider();
                 break;
-
-            case 'commandesComplete':
-                $this->controleur->commandeAvancée();
+            case 'historique':
+                $this->controleur->historique();
+                break;
+                case 'refuserCommande';
+                $this->controleur->refuser();
                 break;
             default:
                 echo "action inconnue";
