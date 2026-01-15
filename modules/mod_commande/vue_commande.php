@@ -21,13 +21,14 @@ class VueCommande extends VueGenerique {
         }
     }
     //afiche les commande avec le details
-    public function afficheCommandeComplete($quer,$details,$mode){
+    public function afficheCommandeComplete($quer,$details,$mode,$prix){
         echo'<div class="d-flex flex-column align-items-center ">';
                 echo '<div class="row border rounded-3">'
                     . '<p class="card-title">' . htmlspecialchars('id commande: ' . $quer['id']) . '</p>' .
                     '<div class="col-6">' .
                     htmlspecialchars('date: ' . $quer ['date']) .
                     '<p class="card-title">' . htmlspecialchars('satuts de la commande: ' . $quer ['statut']) . '</p>'
+                    .'<p>'.$prix.'€</p>'
                     . '</div>' .
                     '<div class="col-1">' . '</div>';
                 $this->afficheDetailsCommande($details);

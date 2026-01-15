@@ -12,16 +12,14 @@ private $action;
 
     public function exec(){
         switch ($this->action) {
-            case 'commandes':
-                $this->controleur->commande();
-                break;
-                //affiche les details d'une commande //todo d'une seule association
-            case 'details':
-                $this->controleur->details();
-                break;
-
+//            case 'commandes':
+//                $this->controleur->commande();
+//                break;
+//            case 'details':
+//                $this->controleur->details();
+//                break;
             case 'commandeAvancee':
-                $this->controleur->commandeAvancée();
+                $this->controleur->commandeAvancee();
                 break;
             case 'valideCommande':
                 $this->controleur->valider();
