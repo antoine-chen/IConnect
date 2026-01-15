@@ -1,6 +1,12 @@
 <?php
+include_once "modele.php";
 
-class ModeleConnexion extends Connexion {
+class ModeleConnexion extends Modele {
+    private $modele;
+
+    public function __construct() {
+        $this->modele = new Modele();
+    }
 
     public function ajouterUtilisateur($login, $hash) {
         $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd) VALUES (?, ?)");

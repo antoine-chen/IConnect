@@ -49,6 +49,27 @@ class ContCompte{
         }
     }
 
+    public function profil(){
+        if (isset($_SESSION['role'])){
+            $this->vue->afficherProfil(
+                $this->modele->getProfilUtilisateur($_SESSION['id']),
+                $_SESSION['id']
+            );
+        }
+    }
+
+    public function modifierProduit(){
+        echo $_GET['id'];
+        if (isset($_SESSION['role']) && isset($_POST['login'])){
+            $this->modele->updataProfilUtilisateur(
+                $_SESSION['id'],
+                $_POST['login']
+            );
+            $_SESSION['login'] = $_POST['login'];
+            $this->profil();
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

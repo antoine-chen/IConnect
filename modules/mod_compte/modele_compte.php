@@ -18,4 +18,14 @@ class ModeleCompte extends Modele {
         $insertClientSole->execute([$montant, $idClient, $idAsso]);
     }
 
+    public function getProfilUtilisateur($idUtilisateur){
+        $profil = self::$bdd->prepare('SELECT login, nom, prenom, telephone FROM utilisateurs WHERE id = ?');
+        $profil->execute([$idUtilisateur]);
+        return $profil->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updataProfilUtilisateur($idUtilisateur, $login){
+        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ? WHERE id = ?');
+        $updateProfil->execute([$login, $idUtilisateur]);
+    }
 }
