@@ -39,8 +39,9 @@ class ContPanier{
             $idProduit = $_GET['id']; // id produit que le client a cliqué
             $idAsso = $_SESSION['asso'];
             $idUtilisateur = $_SESSION['id'];
+            $idInventaire = $this->modele->idInventaire($idAsso);
 
-            if ($this->modele->assezDeStockProduit($idAsso ,$idProduit)){
+            if ($this->modele->assezDeStockProduit($idAsso ,$idProduit, $idInventaire)){
                 $idPanier = $this->modele->getIdPanier($idAsso, $idUtilisateur);
                 if (!$idPanier){
                     $this->modele->insertPanier($idAsso, $idUtilisateur);
@@ -53,9 +54,8 @@ class ContPanier{
                         $this->modele->insertLignePanier($idPanier, $idProduit, 1);
                     }
                 }
-                header('Location: index.php?module=produit');
-                exit;
             }
+            header('Location: index.php?module=produit');
         }
     }
 
@@ -81,19 +81,23 @@ class ContPanier{
             $idAsso = $_SESSION['asso'];
             $soldeUtilisateur = $this->modele->getSoldeUtilisateur($idUtilisateur, $idAsso) ? $this->modele->getSoldeUtilisateur($idUtilisateur, $idAsso) : 0;
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur) ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
+            $idInventaire = $this->modele->idInventaire($idAsso);
 
             if ($addition > 0 && $soldeUtilisateur >= $addition){
                 $panierClient = $this->modele->getPanier($idAsso, $idUtilisateur);
                 // regarde pour chaque produit s'il y a assez de stock
                 $assezStock = 1;
                 foreach ($panierClient as $lignePanier){
-                    if ($this->modele->assezDeStockProduit($idAsso, $lignePanier['id']) < 0) $assezStock = 0;
+                     $stockProduit = $this->modele->assezDeStockProduit($idAsso, $lignePanier['id'], $idInventaire);
+                     if($lignePanier['quantite'] > $stockProduit) {
+                         $assezStock = 0;
+                     }
                 }
                 if ($assezStock == 1){
                     $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
                     $this->enleverStock($idAsso, $panierClient);
                     $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
-                    $_SESSION['messageOk'] = "Votre panier a été validé, veuillez recuperer votre commande";
+                    $_SESSION['messageOk'] = "Votre panier a été valider";
                 }else {
                     $_SESSION['messagePasOk'] = "Erreur de stock, veuillez re faire à nouveau votre panier";
                 }

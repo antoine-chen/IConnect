@@ -20,12 +20,13 @@ class ModelePanier extends Modele {
         return $getPanier->fetchColumn();
     }
 
-    public function assezDeStockProduit($idAssociation, $idProduit){
-        $existe = self::$bdd->prepare('SELECT stock FROM inventaire i 
-                                                INNER JOIN ligneInventaire l WHERE i.idAssociation = ? AND l.idProduit = ?');
-        $existe->execute([$idAssociation ,$idProduit]);
+    public function assezDeStockProduit($idAssociation, $idProduit, $idInventaire){
+        $existe = self::$bdd->prepare('SELECT l.stock FROM inventaire i 
+                                                INNER JOIN ligneInventaire l ON l.idInventaire = i.id WHERE i.idAssociation = ? AND l.idProduit = ? AND i.id = ?');
+        $existe->execute([$idAssociation ,$idProduit, $idInventaire]);
         return $existe->fetchColumn();
     }
+
     public function insertPanier($idAssociation, $idUtilisateur){
         $insertPanier = self::$bdd->prepare('INSERT INTO panier (idAssociation, idUtilisateur) VALUES (?, ?)');
         $insertPanier->execute([$idAssociation, $idUtilisateur]);
