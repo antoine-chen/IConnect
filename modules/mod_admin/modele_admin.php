@@ -2,11 +2,6 @@
 include_once "modele.php";
 class ModeleAdmin extends Modele {
 
-    public function insertAssociation($nom){
-        $insert = self::$bdd->prepare('INSERT INTO association (nom,image) VALUES (?, ?)');
-        $insert->execute([$nom, "vide"]);
-    }
-
     public function getAssociations(){
         $get = self::$bdd->prepare('SELECT * FROM association');
         $get->execute();
@@ -16,17 +11,6 @@ class ModeleAdmin extends Modele {
     public function insertRoleGestionnaire($idUtilisateur, $idAssociation, $role){
         $insert = self::$bdd->prepare('INSERT INTO role(idUtilisateur, idAssociation, role) VALUES (?, ?, ?)');
         $insert->execute([$idUtilisateur, $idAssociation, $role]);
-    }
-
-    public function ajoutImage($idAsso,$image) {
-        $insert = self::$bdd->prepare('UPDATE association SET image = (?) where id= (?)');
-        $insert->execute([$image, $idAsso]);
-    }
-
-    public function idAsso($nomAsso){
-        $get = self::$bdd->prepare('SELECT id FROM association where nom = (?)');
-        $get->execute([$nomAsso]);
-        return $get->fetchColumn();
     }
 
     public function getUtilisateurNonRole($idAssociation,$role){

@@ -46,4 +46,14 @@ class ModeleAsso extends Modele {
         return $existe->fetch();
     }
 
+    public function insertAssociation($nom){
+        $insert = self::$bdd->prepare('INSERT INTO association (nom,image) VALUES (?, ?)');
+        $insert->execute([$nom, "vide"]);
+    }
+
+    public function ajoutImage($idAsso,$image) {
+        $insert = self::$bdd->prepare('UPDATE association SET image = (?) where id= (?)');
+        $insert->execute([$image, $idAsso]);
+    }
+
 }

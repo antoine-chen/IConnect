@@ -89,4 +89,34 @@ class ContAsso {
 
         }
     }
+
+    public function formAssociation($messageErreur = ''){
+        if (!isset($_SESSION['role'])){
+            $this->vue->afficherFormAssociation($messageErreur);
+        }
+    }
+
+    /**
+     * ajouter une association
+     * isset puis regarde si les champs sont vide
+     * si pas vide INSERT sinon re affiche le form avec un message d'erreur
+     */
+    public function ajouterAssociation(){
+        if (isset($_POST['nom']) && isset($_FILES['imageAso']) && $_SESSION['role'] == 'Admin') {
+            $nomAssociation = $_POST['nom'];
+
+            if (!empty($nomAssociation)){
+                $this->modele->insertAssociation($nomAssociation);
+
+                $nomFichier = $this->modele->idAsso($nomAssociation);
+                $extension = pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION);
+                $cheminFichier = 'modules/mod_asso/logos/'.$nomFichier.'.'.$extension;
+                move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
+                $this->modele->ajoutImage($nomFichier, $cheminFichier);
+            }else {
+                $messageErreur = "il faut remplir les champs ";
+                $this->formAssociation($messageErreur);
+            }
+        }
+    }
 }

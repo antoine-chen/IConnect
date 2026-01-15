@@ -32,4 +32,23 @@ class VueAsso extends VueGenerique {
         ';
     }
 
+    public function afficherFormAssociation($messageErreur){
+        echo '
+            <h2 class="text-center">Ajouter une association</h2>
+            <form action="index.php?module=asso&action=ajouterAssociation" method="post" enctype="multipart/form-data" class="container taille-formulaire">
+                <p class="text-danger">' . $messageErreur . '</p>
+                <div class="form-floating">
+                    <input name="nom" class="form-control" placeholder="Nom de l\'association">
+                    <label>Nom de l\'association :</label><br>
+                </div>
+                <div class="mb-3">
+                    <label for="imageAso" class="form-label">Choisissez une image :</label>
+                    <input type="file" name="imageAso" id="imageAso" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        
+        ';
+    }
+
 }
