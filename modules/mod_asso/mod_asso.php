@@ -4,14 +4,15 @@ class ModAsso
 {
     private $module;
 
-    public function __construct()
-    {
+    public function __construct(){
         $mod = isset($_GET['module']) ? $_GET['module'] : 'asso';
+
         if(isset($_SESSION['role'])) {
-            if($_SESSION['role']=='Admin') {
+            if($_SESSION['role']=='Admin' && $mod == 'asso') {
                 $mod = 'admin';
             }
         }
+
         switch ($mod) {
             case 'produit':
                 include_once 'modules/mod_produit/mod_produit.php';
@@ -44,7 +45,7 @@ class ModAsso
             case 'asso':
                 include_once 'modules/mod_asso/cont_asso.php';
                 $this->module = new ContAsso();
-                $action = isset($_GET['action']) ? $_GET['action'] : 'afficherAsso';
+                $action = isset($_GET['action']) ? $_GET['action'] : 'afficherAssoInscris';
 
                 switch ($action) {
                     case 'choisiAsso' :
