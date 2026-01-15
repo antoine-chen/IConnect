@@ -13,6 +13,7 @@ class VueStock extends VueGenerique{
                     <th>Prix</th>
                     <th>Quantité</th>
                     <th>Date</th>
+                    <th>Modifier Produit</th>
                 </thead>
     
                 <tbody>
@@ -24,13 +25,13 @@ class VueStock extends VueGenerique{
                    <td> '.htmlspecialchars($produit['prix']) .'</td>
                    <td> '.htmlspecialchars($produit['stock']-$produit['pertes']) .'</td>
                    <td> '.htmlspecialchars($produit['date']) .'</td>
+                   <td><a href="index.php?module=produit&action=form_modifierProduit&id='.$produit['id'].'">Modifier</a></td>
                </tr>                
                 ';
             }
         echo '
             </tbody>
         </table>
-        
         ';
     }
 
@@ -39,6 +40,7 @@ class VueStock extends VueGenerique{
         echo '
             <div class="text-center m-3">
                 <a href="index.php?module=produit&action=form_ajouterNouveauProduit" class="btn btn-primary">Ajouter un produit</a>
+                <a href="index.php?module=stock&action=form_inventaire" class="btn btn-primary">Faire l\'inventaire</a>
             </div>
             ';
     }
