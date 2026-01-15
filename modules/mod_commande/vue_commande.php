@@ -16,32 +16,57 @@ class VueCommande extends VueGenerique {
     }
     //affiche les details d'une commande
     public function afficheDetailsCommande($quer){
+        echo '
+            <div class="col-6 table-responsive container">
+                <table class="table table-bordered table-hover text-center">
+                    <tr> 
+                        <th>Nom</th> 
+                        <th>Quantité</th>
+                        <th>Prix</th> 
+                    </tr>    
+         ';
         foreach ($quer as $value) {
-            echo htmlspecialchars($value ['nom']) . htmlspecialchars('|quantité:' . $value['quantite']) . htmlspecialchars('|prix: ' . $value['prix']) . '</br>';
+            echo '
+                <tr>
+                    <td>'. htmlspecialchars($value ['nom']).'</td>
+                    <td>'. htmlspecialchars($value['quantite']).'</td>
+                    <td>'. htmlspecialchars($value['prix']) .'</td>
+                </tr>
+            ';
         }
+        echo '
+                </table>
+            </div>
+        ';
     }
     //afiche les commande avec le details
     public function afficheCommandeComplete($quer,$details,$mode,$prix){
-        echo'<div class="d-flex flex-column align-items-center ">';
-                echo '<div class="row border rounded-3">'
-                    . '<p class="card-title">' . htmlspecialchars('id commande: ' . $quer['id']) . '</p>' .
-                    '<div class="col-6">' .
-                    htmlspecialchars('date: ' . $quer ['date']) .
-                    '<p class="card-title">' . htmlspecialchars('satuts de la commande: ' . $quer ['statut']) . '</p>'
-                    .'<p>'.$prix.'€</p>'
-                    . '</div>' .
-                    '<div class="col-1">' . '</div>';
+        echo'
+                <div class="d-flex flex-column align-items-center ">
+                    <div class="row border rounded-3">
+                        <div class="col-6">
+                            <p class="card-title"> #'. htmlspecialchars($quer['id']) . '</p>
+                            <p> Date: '. htmlspecialchars($quer['date']) .'</p>
+                            <p class="card-title"> Satuts de la commande: '.htmlspecialchars($quer ['statut']).'</p>
+                            <p>'.$prix.'€</p>
+                        </div>
+        ';
                 $this->afficheDetailsCommande($details);
+
         switch ($mode){
             case 0:
-            echo '<button><a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'"> valider</a></button>';
-            echo '<button><a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'"> refuser</a></button></div></div>';
+                echo '
+                    <div class="col-12">
+                        <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> valider</a>
+                        <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> refuser</a>
+                    </div>
+                ';
             break;
-            default:
-                echo'</div></div>';
-                break;
         }
-
+        echo '
+                </div>
+            </div>
+        ';
     }
     public function afficher() {
         return $this->getAffichage();
