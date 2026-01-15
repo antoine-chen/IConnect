@@ -64,8 +64,9 @@ class ContAsso {
             if($this->modele->existeAssociaion($idAsso)) {
                 if(empty($resultat)) {
                     $this->modele->demandeAccesAssociation($idAsso,$idUtilisateur);
+                    $this->afficherAssoEnAttente();
                 }
-                elseif (isset($resultat['role']) && $resultat['role'] == 'enCours') return;
+                elseif (isset($resultat['role']) && $resultat['role'] == 'enCours') $this->afficherAssoEnAttente();
                 else {
                     switch ($resultat['role']) {
                         case 'Barman' :
