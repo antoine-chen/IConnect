@@ -1,0 +1,58 @@
+<?php
+include_once 'modele_fournisseur.php';
+include_once 'vue_fournisseur.php';
+
+class ContFournisseur{
+    private $modele;
+    private $vue;
+
+    public function __construct(){
+        $this->modele = new ModeleFournisseur();
+        $this->vue = new VueFournisseur();
+    }
+
+    public function formAjouterFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire"){
+            $this->vue->afficherFormAjoutFournisseur();
+        }
+    }
+
+    public function ajouterFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire"){
+            if (isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["ville"]) && isset($_POST["telephone"])){
+                $nom = $_POST['nom'];
+                $email = $_POST["email"];
+                $ville = $_POST["ville"];
+                $telephone = $_POST["telephone"];
+
+                $this->modele->insertFournisseur($nom, $email, $ville, $telephone);
+                $this->listerFournisseur();
+            }else {
+                $this->formAjouterFournisseur();
+            }
+        }
+    }
+
+    public function listerFournisseur(){
+        if (isset($_SESSION['asso']) && $_SESSION['role'] == 'Gestionnaire'){
+            $this->vue->afficherListeFournisseur(
+                $this->modele->getListeFournisseur()
+            );
+        }
+    }
+
+    public function supprimerFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
+            $this->modele->deleteFournisseur(
+                $_GET['id'] // id du fourniseur lorsque le gestionnaire click sur le btn supp
+            );
+            $this->listerFournisseur();
+        }
+    }
+
+    public function getVue(){
+        return $this->vue->afficher();
+    }
+
+}
+

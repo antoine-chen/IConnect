@@ -20,13 +20,14 @@ class ModeleNavbar{
         return array(
             array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
             array("url" => "index.php?module=admin&action=formAjouterGestionnaireOuBarman", "action" => "Ajouter barman"),
+            array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste les fournisseurs")
         );
     }
 
     public function getNavbarAdmin(){
         return array(
             array("url" => "index.php?module=admin&action=formAssociation", "action" => "Créer une association"),
-            array("url" => "index.php?module=admin&action=listerAssociation", "action" => "Liste des associations")
+            array("url" => "index.php?module=admin&action=listerAssociation", "action" => "Liste des associations"),
         );
     }
 
