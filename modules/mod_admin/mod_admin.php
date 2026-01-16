@@ -23,6 +23,9 @@ class ModAdmin{
             case 'ajouterGestionnaireOuBarman':
                 $this->controleur->ajouterGestionnaireOuBarman();
                 break;
+            case 'listeDemandeCreationAsso' :
+                $this->controleur->listeDemandeCreationAsso();
+                break;
             case 'listerDemandeUtilisateur':
                 $this->controleur->listerDemandeUtilisateur();
                 break;

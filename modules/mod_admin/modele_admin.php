@@ -42,4 +42,13 @@ class ModeleAdmin extends Modele {
         $updateRole->execute([$idUtilisateur, $idAssociation]);
     }
 
+    public function listeDemandeAsso()
+    {
+        $get = self::$bdd->prepare('
+            select a.nom,a.image,u.login from demandeCreationAsso d inner join association a on d.idAsso = a.id inner join utilisateurs u on d.idUtilisateur = u.id
+        ');
+        $get->execute();
+        return $get->fetchAll();
+    }
+
 }

@@ -56,4 +56,10 @@ class ModeleAsso extends Modele {
         $insert->execute([$image, $idAsso]);
     }
 
+    public function enregistrerDemande($idUtilisateur, $idAsso)
+    {
+        $insert = self::$bdd->prepare('insert into demandeCreationAsso (idUtilisateur,idAsso) values (?,?)');
+        $insert->execute([$idUtilisateur,$idAsso]);
+    }
+
 }
