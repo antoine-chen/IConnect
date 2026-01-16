@@ -112,40 +112,80 @@ class VueAdmin extends VueGenerique{
         return $this->getAffichage();
     }
 
+//    public function afficherListeDemandeCreationAsso($demandesAsso)
+//    {
+//        echo '<div class="container mt-4">
+//                <div class="row justify-content-center">
+//                    <div class="col-12 table-responsive border rounded-3 p-3">
+//                        <table class="table table-bordered table-hover text-center">
+//                      <thead>
+//                        <tr>
+//                            <th>Login</th>
+//                            <th>Nom de l\'association</th>
+//                            <th>Image</th>
+//                        </tr>
+//                      </thead>
+//                      <tbody>';
+//
+//        foreach ($demandesAsso as $element) {
+//            echo '
+//            <tr>
+//                <td>' . htmlspecialchars($element['login']) . '</td>
+//                <td>' . htmlspecialchars($element['nom']) . '</td>
+//                <td>
+//                    <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
+//                </td>
+//            </tr>
+//        ';
+//        }
+//
+//        echo '          </tbody>
+//                    </table>
+//                </div>
+//            </div>
+//        </div>';
+//    }
+
     public function afficherListeDemandeCreationAsso($demandesAsso)
     {
-        echo '<p>'.var_dump($demandesAsso).'</p>';
         echo '<div class="container mt-4">
-                <div class="row justify-content-center">
-                    <div class="col-12 table-responsive border rounded-3 p-3">
-                        <table class="table table-bordered table-hover text-center">
-                      <thead>
-                        <tr>
-                            <th>Login</th>
-                            <th>Nom de l\'association</th>
-                            <th>Image</th>
-                        </tr>
-                      </thead>
-                      <tbody>';
+            <div class="row justify-content-center">';
 
         foreach ($demandesAsso as $element) {
             echo '
-            <tr>
-                <td>' . htmlspecialchars($element['login']) . '</td>
-                <td>' . htmlspecialchars($element['nom']) . '</td>
-                <td>
-                    <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
-                </td>
-            </tr>
-        ';
-        }
+        <div class="col-12 mb-4 border rounded-3 p-3 table-responsive">
+            <table class="table table-bordered table-hover text-center mb-3">
+                <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>Nom de l\'association</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>' . htmlspecialchars($element['login']) . '</td>
+                        <td>' . htmlspecialchars($element['nom']) . '</td>
+                        <td>
+                            <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-        echo '          </tbody>
-                    </table>
-                </div>
+            <div class="col-12 text-center">
+                <a href="index.php?module=admin&action=validerDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-primary me-2">Valider</a>
+                <a href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-primary">Refuser</a>
             </div>
         </div>';
+        }
+
+        echo '    </div>
+        </div>';
     }
+
+
+
 
 
 }

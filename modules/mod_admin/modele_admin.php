@@ -45,10 +45,28 @@ class ModeleAdmin extends Modele {
     public function listeDemandeAsso()
     {
         $get = self::$bdd->prepare('
-            select a.nom,a.image,u.login from demandeCreationAsso d inner join association a on d.idAsso = a.id inner join utilisateurs u on d.idUtilisateur = u.id
+            select a.id as assoId,u.id as utilisateurId,a.nom,a.image,u.login 
+            from demandeCreationAsso d inner join association a on d.idAsso = a.id inner join utilisateurs u on d.idUtilisateur = u.id
+            where a.statut = ?
         ');
-        $get->execute();
+        $get->execute(["attente"]);
         return $get->fetchAll();
+    }
+
+    public function refuserAsso($idAsso)
+    {
+        $update = self::$bdd->prepare('
+            update association set statut = ? where id = ?
+        ');
+        $update->execute(["refus",$idAsso]);
+    }
+
+    public function accepterAsso($idAsso)
+    {
+        $update = self::$bdd->prepare('
+            update association set statut = ? where id = ?
+        ');
+        $update->execute(["valide",$idAsso]);
     }
 
 }

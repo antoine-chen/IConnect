@@ -107,4 +107,22 @@ class ContAdmin{
     public function getVue(){
         return $this->vue->afficher();
     }
+
+    public function validerDemandeAsso()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $idAsso = $_GET['assoId'];
+            $idUtilisateur = $_GET['utilisateurId'];
+            $this->modele->accepterAsso($idAsso);
+            $this->modele->insertRoleGestionnaire($idUtilisateur,$idAsso,"Gestionnaire");
+        }
+    }
+
+    public function refuserDemandeAsso()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $idAsso = $_GET['assoId'];
+            $this->modele->refuserAsso($idAsso);
+        }
+    }
 }

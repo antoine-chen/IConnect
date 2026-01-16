@@ -26,6 +26,12 @@ class ModAdmin{
             case 'listeDemandeCreationAsso' :
                 $this->controleur->listeDemandeCreationAsso();
                 break;
+            case 'validerDemandeAsso' :
+                $this->controleur->validerDemandeAsso();
+                break;
+            case 'refuserDemandeAsso' :
+                $this->controleur->refuserDemandeAsso();
+                break;
             case 'listerDemandeUtilisateur':
                 $this->controleur->listerDemandeUtilisateur();
                 break;
