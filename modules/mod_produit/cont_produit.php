@@ -26,15 +26,12 @@ class ContProduit{
             $this->vue->afficherProduits(
                 $this->modele->getProduits($idAsso,$idInventaire),
                 $loginClient,
-                $_SESSION['soldeClient']
+                $_SESSION['soldeClient'],
+                $idInventaire
             );
             unset($_SESSION['messageOk']);
             unset($_SESSION['messagePasOk']);
         }
-    }
-
-    public function getVue(){
-        return $this->vue->afficher();
     }
 
     public function form_ajouterNouveauProduit()
@@ -102,6 +99,8 @@ class ContProduit{
         }
     }
 
-
+    public function getVue(){
+        return $this->vue->afficher();
+    }
 }
 

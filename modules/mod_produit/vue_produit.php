@@ -6,14 +6,14 @@ class VueProduit extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
+    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur ,$i){
 
         echo '
             <div class="text-center m-3">
         ';
         $this->confirmationProgressBar();
         echo '
-                <div>Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
+                <div> '.$i.' Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
             </div>
             <div class="d-flex justify-content-center align-items-center flex-wrap container gap-5 p-3">
         ';

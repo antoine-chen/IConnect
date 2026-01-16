@@ -43,6 +43,10 @@ class VuePanier extends VueGenerique{
         $this->afficherConfirmationModal("Validation", "Êtes vous sur de confirmer votre panier ?","Valider", "index.php?module=panier&action=validerPanier");
     }
 
+    public function test(){
+        echo 'fdkfjlmqsdjfklqsdjfkqsdljqsdkl';
+    }
+
     public function afficher() {
         return $this->getAffichage();
     }
