@@ -60,9 +60,13 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficheFormAjouterGestionnaireOuBarman($titre,$listeComptes, $messageErreur = ""){
+    /**
+     * si je suis gestionnaire je peux donner le role barman à un client de mon asso
+     * si je suis admin je peux donner le role gestionnaire à un client
+    */
+    public function formAjouterBarman($listeComptes){
         echo '
-            <h2 class="text-center">'.$titre.'</h2>
+            <h2 class="text-center">Ajouter un barman</h2>
             <div class="table-responsive container taille-tableau">
             <table class="table table-sm table-bordered table-hover text-center">
                 <tr>
@@ -83,9 +87,29 @@ class VueAdmin extends VueGenerique{
                     <td>'.htmlspecialchars($compte['telephone']).'</td>
                     <td>'.htmlspecialchars($compte['role']).'</td>
                     <td>
-                        <a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'" class="btn btn-light border">
-                            <i class="bi bi-person-plus-fill"></i>
-                        </a>
+            ';
+            if ($_SESSION['role'] == 'Gestionnaire' && $compte['role'] == 'Client'){
+                echo '
+                    <a href="index.php?module=admin&action=donnerRoleBarman&id='.$compte['id'].'" class="btn btn-light border">
+                        <i class="bi bi-arrow-up-circle"></i>
+                    </a>
+                ';
+            }
+            if ($_SESSION['role'] == 'Gestionnaire' && $compte['role'] == 'Barman'){
+                echo '
+                   <a href="index.php?module=admin&action=enleverRoleBarman&id='.$compte['id'].'" class="btn btn-light border">
+                        <i class="bi bi-arrow-down-circle-fill"></i>
+                   </a>
+                ';
+            }
+            if ($compte['role'] != 'Gestionnaire'){
+                echo '
+                   <a href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'" class="btn btn-light border">
+                        <i class="bi bi-trash"></i>
+                   </a>
+                ';
+            }
+            echo'
                     </td>
                 </tr>
             ';

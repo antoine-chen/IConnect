@@ -48,49 +48,50 @@ class ContAdmin{
         }
     }
 
-    public function formAjouterGestionnaireOuBarman($messageErreur = ""){
-        if (isset($_GET['id']) && $_SESSION['role'] == 'Admin'){
-            $_SESSION['asso'] = $_GET['id'];
-            $comptes = $this->modele->getUtilisateurAssoAll($_SESSION['asso']);
-
-            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un gestionnaire",$comptes, $messageErreur);
-        }
-        if ($_SESSION['role'] == 'Gestionnaire'){
-            $comptes = $this->modele->getUtilisateurAsso($_SESSION['asso'], "Admin");
-            $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un barman",$comptes, $messageErreur);
+    public function afficherListeClient(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $this->vue->formAjouterBarman(
+                $this->modele->getUtilisateurAsso($_SESSION['asso'])
+            );
         }
     }
 
     /**
-     * ajouter un gestionnaire dans une assocation
-     *  l'admin a la liste des utilisateurs -> il peut donner le role gestionnaire
-     * le gestionnaire a la liste des clients (son asso) -> il peut donner le role barman à un client
+     * si le client n'a pas le role barman alors le gestiionnaire lui donne le role barman dans son asso
     */
-    public function ajouterGestionnaireOuBarman(){
-        if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Gestionnaire') && isset($_SESSION['asso'])){
-
+    public function donnerRoleBarman(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
             $idUtilisateur = $_GET['id'];
-            $idAssociation = $_SESSION['asso']; // voir formAjouterGestionnaire() si admin
+            $idAssociation = $_SESSION['asso'];
 
-            $this->insertGestionnaireOuBarman($idUtilisateur, $idAssociation);
-
-            if($_SESSION['role'] == 'Gestionnaire') {
-                header('Location: index.php?module=admin&action=formAjouterGestionnaireOuBarman');
+            if (!$this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
+                $this->modele->insertRoleBarman($idUtilisateur, $idAssociation, "Barman");
             }
-             if($_SESSION['role'] == 'Admin') {
-                header('Location: index.php');
-            }
+            header('Location: index.php?module=admin&action=afficherListeClient');
         }
     }
 
-    private function insertGestionnaireOuBarman($idUtilisateur, $idAssociation){
-        if ($_SESSION['role']){
-            if ($_SESSION['role'] == 'Admin'){
-                $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Gestionnaire");
+    public function enleverRoleBarman(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
+            $idUtilisateur = $_GET['id'];
+            $idAssociation = $_SESSION['asso'];
+
+            if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
+                $this->modele->deleteRoleBarman($idUtilisateur, $idAssociation, "Barman");
             }
-            if ($_SESSION['role'] == 'Gestionnaire'){
-                $this->modele->insertRoleGestionnaire($idUtilisateur, $idAssociation, "Barman");
+            header('Location: index.php?module=admin&action=afficherListeClient');
+        }
+    }
+
+    public function bannirUtilisateur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
+            $idUtilisateur = $_GET['id'];
+            $idAssociation = $_SESSION['asso'];
+
+            if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
+                $this->modele->deleteUtilisateur($idUtilisateur, $idAssociation);
             }
+            header('Location: index.php?module=admin&action=afficherListeClient');
         }
     }
 
