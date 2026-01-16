@@ -52,24 +52,17 @@ class VueCommande extends VueGenerique {
             <div class="p-4 mb-4">
                 <div class="row g-3 align-items-start">
                     <div class="col-md-6">
-                        <h5 class="fw-bold mb-3">
-                            Commande #'. htmlspecialchars($quer['id']) .'
-                        </h5>
+                        <h5 class="fw-bold mb-3">Commande #'. htmlspecialchars($quer['id']) .'</h5>
                         <p class="mb-1">
                             <i class="bi bi-calendar-event"></i>
                             <strong>Date :</strong> '. htmlspecialchars($quer['date']) .'
                         </p>
                         <p class="mb-1">
                             <i class="bi bi-info-circle"></i>
-                            <strong>Statut :</strong>
-                            <span class="badge bg-warning text-dark">
-                                '. htmlspecialchars($quer['statut']) .'
-                            </span>
+                            <strong>Statut :</strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
                         </p>
     
-                        <p class="fs-5 fw-bold text-success mt-2">
-                            Total : '. htmlspecialchars($prix) .' €
-                        </p>
+                        <p class="fs-5 fw-bold text-success mt-2">Total : '. htmlspecialchars($prix) .' €</p>
                     </div>
         ';
         $this->afficheDetailsCommande($details);
@@ -80,6 +73,13 @@ class VueCommande extends VueGenerique {
                     <div class="col-12 d-flex justify-content-end gap-2 mt-4">
                         <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> valider</a>
                         <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-danger"> refuser</a>
+                    </div>
+                ';
+                break;
+            case 1:
+                echo '
+                    <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+                        <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-success"> rembourser</a>
                     </div>
                 ';
                 break;
