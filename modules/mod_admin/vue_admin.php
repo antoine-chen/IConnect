@@ -63,14 +63,14 @@ class VueAdmin extends VueGenerique{
     public function afficheFormAjouterGestionnaireOuBarman($titre,$listeComptes, $messageErreur = ""){
         echo '
             <h2 class="text-center">'.$titre.'</h2>
-            <div class="table-responsive">
+            <div class="table-responsive container taille-tableau">
             <table class="table table-bordered table-hover text-center">
                 <tr>
                     <th>Login</th>
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Téléphone</th>
-                    <th>Ajouter</th>
+                    <th style="width: 10%"></th>
                 </tr>
             ';
         foreach ($listeComptes as $compte) {
@@ -93,7 +93,7 @@ class VueAdmin extends VueGenerique{
 
     public function afficherListeDemandeUtilisateur($listeDemande){
         echo '
-            <div class="table-responsive container">
+            <div class="table-responsive taille-tableau container">
                 <table class="table table-bordered table-hover text-center">
                     <tr> 
                         <th>Login</th> 

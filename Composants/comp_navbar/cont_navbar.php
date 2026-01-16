@@ -57,7 +57,6 @@ class ContNavbar {
                     );
                 }
             } else {
-                echo 'je suis sans role, je dois cliquer sur une association';
                 $this->vue->afficherNavbar(
                     $this->modele->getNavbarSansRole(),
                     $acces[1]['url'],

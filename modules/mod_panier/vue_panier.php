@@ -8,11 +8,12 @@ class VuePanier extends VueGenerique{
 
     public function afficherPanier($panier, $addition, $solde){
         echo '
-            <div class="d-flex flex-column border rounded m-2">
-                <div class="d-flex justify-content-between mx-4 mt-2">
-                    <h3>Panier</h3>
-                    <p>Solde actuel : '.$solde.'€</p>
-                </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex flex-column border rounded m-2 taille-panier">
+                    <div class="d-flex justify-content-between mx-4 mt-2">
+                        <h3>Panier</h3>
+                        <p>Solde actuel : '.$solde.'€</p>
+                    </div>
         ';
         foreach ($panier as $produit){
             echo '
@@ -39,6 +40,7 @@ class VuePanier extends VueGenerique{
                         <button class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
                     </div>
                 </div>
+            </div>
         ';
         $this->afficherConfirmationModal("Validation", "Êtes vous sur de confirmer votre panier ?","Valider", "index.php?module=panier&action=validerPanier");
     }

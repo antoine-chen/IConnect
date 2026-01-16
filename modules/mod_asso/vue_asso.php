@@ -18,7 +18,7 @@ class VueAsso extends VueGenerique {
         ';
         foreach ($associations as $elementAsso) {
             echo '
-                <div>
+                <div class="box-asso">
                     <a href="index.php?module=asso&action=choisiAsso&id='.$elementAsso['id'].'">
                       <img src="'. $elementAsso['image'] .'" class="img-association" alt="">
                       <h6>'. htmlspecialchars($elementAsso['nom']). '</h6>

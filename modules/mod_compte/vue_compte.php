@@ -8,7 +8,7 @@ class VueCompte extends VueGenerique{
 
     public function afficherFormRecharger($soldeClient){
         echo '
-            <div class="container border p-5 ">
+            <div class="taille-container container p-5 ">
                 <div class="d-flex justify-content-between align-items-center">
                    <h3>Recharger son compte</h3>
                    <p>'. $soldeClient.' €</p>
