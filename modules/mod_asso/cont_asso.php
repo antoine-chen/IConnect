@@ -53,40 +53,76 @@ class ContAsso {
      * permet d'attribuer un role à un utilisateur dans une association : Gestionnaire, Barman ou client
      * si l'utilisateur n'est jamais aller une association il aura le role Client
     */
-    public function aChoisitAsso(){
+    public function aAppuyeAsso() {
         if(isset($_GET['id']) && isset($_SESSION['login'])) {
             $idAsso = $_GET['id'];
             $_SESSION['asso'] = $idAsso;
             $idUtilisateur = $_SESSION['id'];
 
-            $resultat = $this->modele->estPresentDansAsso($idAsso,$idUtilisateur);
+            if(!$this->modele->existeAssociaion($idAsso)) {
+                $this->afficherAssoPasInscris();
+            } else {
+                $listeRoles = $this->modele->estPresentDansAsso($idAsso, $idUtilisateur);
 
-            if($this->modele->existeAssociaion($idAsso)) {
-                if(empty($resultat)) {
-                    $this->modele->demandeAccesAssociation($idAsso,$idUtilisateur);
+                if(empty($listeRoles)) {
+                    $this->modele->demandeAccesAssociation($idAsso, $idUtilisateur);
                     $this->afficherAssoEnAttente();
                 }
-                elseif (isset($resultat['role']) && $resultat['role'] == 'enCours') $this->afficherAssoEnAttente();
-                else {
-                    switch ($resultat['role']) {
-                        case 'Barman' :
-                            $_SESSION['role'] = 'Barman';
+                else if(isset($_GET['role'])) {
+                    $roleChoisi = $_GET['role'];
+                    $trouve = false;
+                    foreach($listeRoles as $element){
+                        if($element['role'] == $roleChoisi){
+                            $trouve = true;
+                            break;
+                        }
+                    }
+
+                    if($trouve){
+                        $_SESSION['role'] = $roleChoisi;
+
+                        if($roleChoisi == 'Barman'){
                             header('Location: index.php?module=commande');
-                            break;
-                        case 'Gestionnaire' :
-                            $_SESSION['role'] = 'Gestionnaire';
+                            exit();
+                        }
+                        if($roleChoisi == 'Gestionnaire'){
                             header('Location: index.php?module=stock');
-                            break;
-                        default :
-                            $_SESSION['role'] = 'Client';
+                            exit();
+                        }
+                        if($roleChoisi == 'Client'){
                             header('Location: index.php?module=produit');
-                            break;
+                            exit();
+                        }
+                    } else {
+                        header('Location: index.php?module=asso&action=afficherAssoInscris');
+                        exit();
                     }
                 }
-            } else {
-                $this->afficherAssoPasInscris();
-            }
+                else if(count($listeRoles) >= 2) {
+                    $this->vue->choixRole($listeRoles, $idAsso);
+                }
+                else {
+                    $roleChoisi = $listeRoles[0]['role'];
+                    $_SESSION['role'] = $roleChoisi;
 
+                    if($roleChoisi == 'Barman'){
+                        header('Location: index.php?module=commande');
+                        exit();
+                    }
+                    if($roleChoisi == 'Gestionnaire'){
+                        header('Location: index.php?module=stock');
+                        exit();
+                    }
+                    if($roleChoisi == 'Client'){
+                        header('Location: index.php?module=produit');
+                        exit();
+                    }
+                }
+            }
         }
     }
+
+
+
+
 }
