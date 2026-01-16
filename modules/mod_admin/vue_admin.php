@@ -64,7 +64,7 @@ class VueAdmin extends VueGenerique{
         echo '
             <h2 class="text-center">'.$titre.'</h2>
             <div class="table-responsive container taille-tableau">
-            <table class="table table-bordered table-hover text-center">
+            <table class="table table-sm table-bordered table-hover text-center">
                 <tr>
                     <th>Login</th>
                     <th>Prénom</th>
@@ -94,7 +94,7 @@ class VueAdmin extends VueGenerique{
     public function afficherListeDemandeUtilisateur($listeDemande){
         echo '
             <div class="table-responsive taille-tableau container">
-                <table class="table table-bordered table-hover text-center">
+                <table class="table table-sm table-bordered table-hover text-center">
                     <tr> 
                         <th>Login</th> 
                         <th>Nom</th>

@@ -8,7 +8,7 @@ class VueStock extends VueGenerique{
     public function afficherStockActuel($donnes){
         echo '
             <h5 class="text-center m-3">Inventaire du : '.$donnes[0]['date'].'</h5>
-            <table class="table table-bordered table-hover text-center table-responsive container taille-tableau">
+            <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau">
                 <thead>
                     <th>Produit</th>
                     <th>Prix</th>
