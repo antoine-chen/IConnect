@@ -42,18 +42,23 @@ class ContStock {
     }
 
     public function ajoutInventaire() {
-        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])) {
             $idAsso = $_SESSION['asso'];
             $stockProduits = $_POST['stock'];
+
             $idOldInventaire = $this->modele->idInventaire($idAsso);
             $this->modele->creerInventaire($idAsso);
             $idNewInventaire = $this->modele->idInventaire($idAsso);
+
             foreach ($stockProduits as $idProduit => $quantiteProduit) {
-                $this->modele->ajouterStockReel($idOldInventaire,$idProduit,$quantiteProduit);
+                if ($idOldInventaire !== null) {
+                    $this->modele->ajouterStockReel($idOldInventaire,$idProduit,$quantiteProduit);
+                }
                 $this->modele->ajouterProduit($idNewInventaire,$idProduit,$quantiteProduit);
             }
         }
         header("Location: index.php?module=stock");
         exit();
     }
+
 }
