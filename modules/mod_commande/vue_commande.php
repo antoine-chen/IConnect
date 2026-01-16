@@ -86,9 +86,9 @@ class VueCommande extends VueGenerique {
         }
 
         echo '
-                </div> <!-- row -->
-            </div> <!-- padding -->
-        </div> <!-- container-color -->
+                </div>
+            </div>
+        </div>
         ';
 
     }

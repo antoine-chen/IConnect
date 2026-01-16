@@ -8,7 +8,7 @@ class VueCompte extends VueGenerique{
 
     public function afficherFormRecharger($soldeClient){
         echo '
-            <div class="taille-container container p-5 container-color">
+            <div class="taille-container container p-5 container-color rounded-4 mt-5">
                 <div class="d-flex justify-content-between align-items-center">
                    <h3>Recharger son compte</h3>
                    <p>'. $soldeClient.' €</p>
@@ -29,29 +29,40 @@ class VueCompte extends VueGenerique{
 
     public function afficherProfil($profil, $idUtilisateur){
         echo '   
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="w-50">
-                     <div class="border d-flex justify-content-between align-items-center p-3">
-                        <div class="bg-primary" style="height: 60px; width: 60px;"></div>
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modifierProfil">Modifier</button>
+        <div class="container d-flex justify-content-center mt-5">
+            <div class="container-color rounded-4 p-4 w-75">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-circle bg-primary d-flex justify-content-center align-items-center text-white fw-bold" style="height:60px;width:60px;">
+                            <i class="bi bi-person fs-3"></i>
+                        </div>
+                        <h4>Mon profil</h4>
                     </div>
-        ';
+
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modifierProfil">
+                        <i class="bi bi-pencil"></i> Modifier
+                    </button>
+                </div>
+                <div class="list-group list-group-flush">
+    ';
         foreach ($profil as $attribut => $dataUtilisateur){
             echo '
-               <div class="d-flex justify-content-between align-items-center px-3 py-2 border">
-                  <div>
-                      <h6>'. $attribut.'</h6>
-                      <p>'. $dataUtilisateur.'</p>
-                  </div>
-               </div>
-            ';
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <small>'. htmlspecialchars($attribut) .'</small>
+                    <div class="fw-bold">'. htmlspecialchars($dataUtilisateur) .'</div>
+                </div>
+            </div>
+        ';
         }
         echo '
                 </div>
             </div>
-        ';
+        </div>
+    ';
         $this->afficherProfilModal($profil, $idUtilisateur, "index.php?module=compte&action=modifierProduit&id=");
     }
+
 
     public function afficherProfilModal($listeData, $idUtilisateur, $href){
         echo '
