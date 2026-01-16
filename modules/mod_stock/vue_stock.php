@@ -7,6 +7,7 @@ class VueStock extends VueGenerique{
 
     public function afficherStockActuel($donnes){
         echo '
+        <div>
             <h5 class="text-center m-3">Inventaire du : '.$donnes[0]['date'].'</h5>
             <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau">
                 <thead>
@@ -24,13 +25,18 @@ class VueStock extends VueGenerique{
                    <td> '.htmlspecialchars($produit['nom']).' </td>
                    <td> '.htmlspecialchars($produit['prix']) .'</td>
                    <td> '.htmlspecialchars($produit['stock']-$produit['pertes']) .'</td>
-                   <td><a href="index.php?module=produit&action=form_modifierProduit&id='.$produit['id'].'">Modifier</a></td>
+                   <td>
+                        <a href="index.php?module=produit&action=form_modifierProduit&id='.$produit['id'].'" class="btn btn-light border">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                   </td>
                </tr>                
                 ';
             }
         echo '
             </tbody>
         </table>
+        </div>
         ';
     }
 

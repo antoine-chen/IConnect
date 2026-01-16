@@ -9,7 +9,8 @@ class VueProduit extends VueGenerique{
     public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
 
         echo '
-            <div class="text-center m-3">
+            <div>
+                <div class="text-center m-3">
         ';
         $this->confirmationProgressBar();
         echo '
@@ -35,6 +36,7 @@ class VueProduit extends VueGenerique{
         ';
         }
         echo '
+                </div>
             </div>
         ';
     }

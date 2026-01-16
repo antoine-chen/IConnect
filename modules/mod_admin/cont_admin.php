@@ -51,12 +51,12 @@ class ContAdmin{
     public function formAjouterGestionnaireOuBarman($messageErreur = ""){
         if (isset($_GET['id']) && $_SESSION['role'] == 'Admin'){
             $_SESSION['asso'] = $_GET['id'];
-            $comptes = $this->modele->getUtilisateurNonRole($_SESSION['asso'], "Admin");
+            $comptes = $this->modele->getUtilisateurAssoAll($_SESSION['asso']);
 
             $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un gestionnaire",$comptes, $messageErreur);
         }
         if ($_SESSION['role'] == 'Gestionnaire'){
-            $comptes = $this->modele->getUtilisateurNonRole($_SESSION['asso'], "Gestionnaire");
+            $comptes = $this->modele->getUtilisateurAsso($_SESSION['asso'], "Admin");
             $this->vue->afficheFormAjouterGestionnaireOuBarman("Ajouter un barman",$comptes, $messageErreur);
         }
     }
@@ -75,7 +75,7 @@ class ContAdmin{
             $this->insertGestionnaireOuBarman($idUtilisateur, $idAssociation);
 
             if($_SESSION['role'] == 'Gestionnaire') {
-                header('Location: index.php?module=stock');
+                header('Location: index.php?module=admin&action=formAjouterGestionnaireOuBarman');
             }
              if($_SESSION['role'] == 'Admin') {
                 header('Location: index.php');

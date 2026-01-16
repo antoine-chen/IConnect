@@ -70,6 +70,7 @@ class VueAdmin extends VueGenerique{
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Téléphone</th>
+                    <th>Rôle</th>
                     <th style="width: 10%"></th>
                 </tr>
             ';
@@ -80,7 +81,12 @@ class VueAdmin extends VueGenerique{
                     <td>'.htmlspecialchars($compte['prenom']).'</td>
                     <td>'.htmlspecialchars($compte['nom']).'</td>
                     <td>'.htmlspecialchars($compte['telephone']).'</td>
-                    <td><a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'">Ajouter</a></td>
+                    <td>'.htmlspecialchars($compte['role']).'</td>
+                    <td>
+                        <a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'" class="btn btn-light border">
+                            <i class="bi bi-person-plus-fill"></i>
+                        </a>
+                    </td>
                 </tr>
             ';
         }
