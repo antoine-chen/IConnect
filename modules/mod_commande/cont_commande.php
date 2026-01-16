@@ -45,7 +45,7 @@ class ContCommande {
                 $this->vue->afficheCommandeComplete(
                     $value,
                     $ligneCommandes,
-                    1,
+                    0,
                     $this->modele->prixTotal($value['id'], $value['date'])
                 );
             }

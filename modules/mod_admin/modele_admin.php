@@ -39,7 +39,7 @@ class ModeleAdmin extends Modele {
         return $get->fetchAll();
     }
 
-    public function getUtilisateurAssoAll($idAssociation){
+    public function getUtilisateurAssoAll ($idAssociation){
         $get = self::$bdd->prepare('
             select distinct id,login,nom,prenom,telephone, r.role
             from utilisateurs inner join role r on utilisateurs.id = r.idUtilisateur
