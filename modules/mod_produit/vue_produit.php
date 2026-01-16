@@ -6,23 +6,25 @@ class VueProduit extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur ,$i){
+    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
 
         echo '
             <div class="text-center m-3">
         ';
         $this->confirmationProgressBar();
         echo '
-                <div> '.$i.' Solde de '.$loginClient.' : '. $soldeUtilisateur.'€</div>
+                <div>
+                    Solde de '.$loginClient.' : '. $soldeUtilisateur.'€
+                </div>
             </div>
             <div class="d-flex justify-content-center align-items-center flex-wrap container gap-5 p-3">
         ';
         foreach ($listeProduit as $produit){
             echo '
-               <div class="d-flex flex-column align-items-center border">
+               <div class="d-flex flex-column align-items-center box-produit">
                   <img src="'. $produit["image"] .'" class="img-produit" alt="produit-item">
                   <div class="d-flex justify-content-between align-items-center gap-2 m-3 info-produit">
-                    <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-black" style="text-decoration = none;">
+                    <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-black">
                                 <h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>
                                 <p class="card-title"> '. htmlspecialchars($produit['prix']).'€' .'</p>
                                 <p class="card-title">Qté :'. htmlspecialchars($produit['stock']) .'</p>

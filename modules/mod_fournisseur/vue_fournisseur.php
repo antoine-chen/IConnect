@@ -34,7 +34,7 @@ class VueFournisseur extends VueGenerique{
 
     public function afficherListeFournisseur($listeFournisseur){
         echo '
-            <div class="table-responsive container">
+            <div class="table-responsive taille-container container">
                 <table class="table table-bordered table-hover text-center">
                     <tr> 
                         <th>Nom</th> 

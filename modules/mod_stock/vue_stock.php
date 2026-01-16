@@ -13,7 +13,7 @@ class VueStock extends VueGenerique{
                     <th>Produit</th>
                     <th>Prix</th>
                     <th>Quantité</th>
-                    <th>Modifier Produit</th>
+                    <th style="width: 10%"></th>
                 </thead>
     
                 <tbody>
@@ -48,7 +48,7 @@ class VueStock extends VueGenerique{
         echo '
             <div class="text-center m-3">'.htmlspecialchars(date('d/m/Y')) .'</div>
             <div class="table-responsive">
-            <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-formulaire">
+            <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-tableau">
                 <table class="table table-bordered table-hover text-center">
                      <tr>
                          <th style="width: 25%">Nom</th>
