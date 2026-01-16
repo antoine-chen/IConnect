@@ -23,7 +23,7 @@ class ModeleNavbar{
         return array(
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
             array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
-            array("url" => "index.php?module=admin&action=afficherListeClient", "action" => "Ajouter barman"),
+            array("url" => "index.php?module=admin&action=afficherListeClient", "action" => "Gestion comptes"),
             array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste les fournisseurs"),
             array("url" => "index.php?module=admin&action=listerDemandeUtilisateur", "action" => "Demande")
         );

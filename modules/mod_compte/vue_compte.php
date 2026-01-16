@@ -8,7 +8,7 @@ class VueCompte extends VueGenerique{
 
     public function afficherFormRecharger($soldeClient){
         echo '
-            <div class="taille-container container p-5 container-color rounded-4 mt-5">
+            <div class="taille-container container p-5 container-color rounded-4">
                 <div class="d-flex justify-content-between align-items-center">
                    <h3>Recharger son compte</h3>
                    <p>'. $soldeClient.' €</p>
@@ -29,7 +29,7 @@ class VueCompte extends VueGenerique{
 
     public function afficherProfil($profil, $idUtilisateur){
         echo '   
-        <div class="container d-flex justify-content-center mt-5">
+        <div class="container d-flex justify-content-center">
             <div class="container-color rounded-4 p-4 w-75">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="d-flex align-items-center gap-3">

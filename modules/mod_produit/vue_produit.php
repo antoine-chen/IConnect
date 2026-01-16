@@ -10,7 +10,7 @@ class VueProduit extends VueGenerique{
 
         echo '
             <div>
-                <div class="text-center m-3">
+                <div class="text-center mb-3">
         ';
         $this->confirmationProgressBar();
         echo '
