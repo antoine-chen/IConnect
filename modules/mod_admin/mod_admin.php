@@ -7,7 +7,7 @@ class ModAdmin{
 
     public function __construct(){
         $this->controleur = new ContAdmin();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : 'formAssociation';
+        $this->action = isset($_GET['action']) ? $_GET['action'] : 'listerAssociation';
 
         $this->exec();
     }
@@ -39,7 +39,7 @@ class ModAdmin{
                 $this->controleur->refuserDemande();
                 break;
             default:
-                echo "ffffffffffffffffffffffffffffffffffff";
+                echo "Action inconnu";
                 break;
         }
     }
