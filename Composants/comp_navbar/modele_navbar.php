@@ -31,6 +31,7 @@ class ModeleNavbar{
 
     public function getNavbarAdmin(){
         return array(
+            array("url" => "index.php?module=admin&action=listeDemandeCreationAsso", "action" => "Demandes de création d'associations"),
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
             array("url" => "index.php?module=admin&action=listerAssociation", "action" => "Liste des associations")
         );

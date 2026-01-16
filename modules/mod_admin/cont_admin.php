@@ -98,9 +98,9 @@ class ContAdmin{
     }
 
     public function listeDemandeCreationAsso() {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
             $demandesAsso = $this->modele->listeDemandeAsso();
-
+            $this->vue->afficherListeDemandeCreationAsso($demandesAsso);
         }
     }
 

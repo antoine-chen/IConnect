@@ -112,4 +112,41 @@ class VueAdmin extends VueGenerique{
         return $this->getAffichage();
     }
 
+    public function afficherListeDemandeCreationAsso($demandesAsso)
+    {
+        echo '<p>'.var_dump($demandesAsso).'</p>';
+        echo '<div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 table-responsive border rounded-3 p-3">
+                        <table class="table table-bordered table-hover text-center">
+                      <thead>
+                        <tr>
+                            <th>Login</th>
+                            <th>Nom de l\'association</th>
+                            <th>Image</th>
+                        </tr>
+                      </thead>
+                      <tbody>';
+
+        foreach ($demandesAsso as $element) {
+            echo '
+            <tr>
+                <td>' . htmlspecialchars($element['login']) . '</td>
+                <td>' . htmlspecialchars($element['nom']) . '</td>
+                <td>
+                    <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
+                </td>
+            </tr>
+        ';
+        }
+
+        echo '          </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>';
+    }
+
+
 }
+
