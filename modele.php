@@ -17,4 +17,6 @@ class Modele extends Connexion{
         return $get->fetchColumn();
     }
 
+
+
 }

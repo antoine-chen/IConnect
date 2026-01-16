@@ -38,12 +38,12 @@ class VueAsso extends VueGenerique {
             <form action="index.php?module=asso&action=ajouterAssociation" method="post" enctype="multipart/form-data" class="container taille-formulaire">
                 <p class="text-danger">' . $messageErreur . '</p>
                 <div class="form-floating">
-                    <input name="nom" class="form-control" placeholder="Nom de l\'association">
+                    <input name="nom" class="form-control" placeholder="Nom de l\'association" required>
                     <label>Nom de l\'association :</label><br>
                 </div>
                 <div class="mb-3">
                     <label for="imageAso" class="form-label">Choisissez une image :</label>
-                    <input type="file" name="imageAso" id="imageAso" class="form-control">
+                    <input type="file" name="imageAso" id="imageAso" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
