@@ -40,7 +40,7 @@ class ContCompte{
                 } else {
                     $this->modele->updateClientSolde($idClient, $idAsso, $montant);
                 }
-                $_SESSION['messageOk'] = "Rechargement Réussie";
+                $_SESSION['messageOk'] = "Rechargement réussi";
             }else {
                 $_SESSION['messagePasOk'] = "Erreur rechargement";
             }

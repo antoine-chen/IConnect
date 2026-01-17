@@ -45,15 +45,26 @@ class VueGenerique {
     public function confirmationProgressBar(){
         if (isset($_SESSION['messageOk']))
             echo '
-                <div class="progress" style="height: 4px; background-color: #eee;">
-                    <div class="progress-bar bg-success" style="width: 100%; animation: vider 5s linear forwards;"></div> <!-- animation -->
-                </div>
-                <div class="alert alert-success" role="alert">
-                    '.$_SESSION['messageOk'].'
+                <div class="w-75 text-center mx-auto">
+                    <div class="progress" style="height: 4px; background-color: #eee;">
+                        <div class="progress-bar bg-success" style="width: 100%; animation: vider 5s linear forwards;"></div> <!-- animation -->
+                    </div>
+                    <div class="alert alert-success" role="alert">
+                            '.$_SESSION['messageOk'].'
+                    </div>
                 </div>
             ';
         if (isset($_SESSION['messagePasOk']))
-            echo '<div class="alert alert-danger" role="alert">'.$_SESSION['messagePasOk'].'</div>';
+            echo '
+                <div class="w-75 text-center mx-auto">
+                    <div class="progress" style="height: 4px; background-color: #eee;">
+                        <div class="progress-bar bg-danger" style="width: 100%; animation: vider 5s linear forwards;"></div> <!-- animation -->
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                            '.$_SESSION['messagePasOk'].'
+                    </div>
+                </div>
+            ';
     }
 
 }

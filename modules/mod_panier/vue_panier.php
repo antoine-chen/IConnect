@@ -7,6 +7,7 @@ class VuePanier extends VueGenerique{
     }
 
     public function afficherPanier($panier, $addition, $solde){
+        $this->confirmationProgressBar();
         echo '
             <div class="d-flex justify-content-center align-items-center">
                 <div class="d-flex flex-column border rounded m-2 taille-panier">
@@ -43,10 +44,6 @@ class VuePanier extends VueGenerique{
             </div>
         ';
         $this->afficherConfirmationModal("Validation", "Êtes vous sur de confirmer votre panier ?","Valider", "index.php?module=panier&action=validerPanier");
-    }
-
-    public function test(){
-        echo 'fdkfjlmqsdjfklqsdjfkqsdljqsdkl';
     }
 
     public function afficher() {

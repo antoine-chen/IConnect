@@ -25,6 +25,7 @@ class ContPanier{
                 $addition,
                 $_SESSION['soldeClient']
             );
+            unset($_SESSION['messagePasOk']);
         }
     }
 
@@ -83,28 +84,36 @@ class ContPanier{
             $addition = $this->modele->getPanierAddition($idAsso, $idUtilisateur) ? $this->modele->getPanierAddition($idAsso, $idUtilisateur) : 0;
             $idInventaire = $this->modele->idInventaire($idAsso);
 
-            if ($addition > 0 && $soldeUtilisateur >= $addition){
-                $panierClient = $this->modele->getPanier($idAsso, $idUtilisateur);
-                // regarde pour chaque produit s'il y a assez de stock
-                $assezStock = 1;
-                foreach ($panierClient as $lignePanier){
-                     $stockProduit = $this->modele->assezDeStockProduit($idAsso, $lignePanier['id'], $idInventaire);
-                     if($lignePanier['quantite'] > $stockProduit) {
-                         $assezStock = 0;
-                     }
-                }
-                if ($assezStock == 1){
-                    $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
-                    $this->enleverStock($idAsso, $panierClient);
-                    $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
-                    $_SESSION['messageOk'] = "Votre panier a été valider";
+            if ($addition > 0){
+                if ($soldeUtilisateur >= $addition) {
+                    $panierClient = $this->modele->getPanier($idAsso, $idUtilisateur);
+                    // regarde pour chaque produit s'il y a assez de stock
+                    $assezStock = 1;
+                    foreach ($panierClient as $lignePanier) {
+                        $stockProduit = $this->modele->assezDeStockProduit($idAsso, $lignePanier['id'], $idInventaire);
+                        if ($lignePanier['quantite'] > $stockProduit) {
+                            $assezStock = 0;
+                        }
+                    }
+                    if ($assezStock == 1) {
+                        $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
+                        $this->enleverStock($idAsso, $panierClient);
+                        $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
+                        $_SESSION['messageOk'] = "Votre panier a été valider";
+                        $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
+                        header("Location: index.php?module=produit");
+                        exit;
+                    } else {
+                        $_SESSION['messagePasOk'] = "Erreur de stock, veuillez re faire à nouveau votre panier";
+                    }
                 }else {
-                    $_SESSION['messagePasOk'] = "Erreur de stock, veuillez re faire à nouveau votre panier";
+                    $soldeManquant = $addition - $soldeUtilisateur;
+                    $_SESSION['messagePasOk'] = "Il vous manque " . $soldeManquant. "€ pour valider votre panier";
                 }
+            }else {
+                $_SESSION['messagePasOk'] = "Il faut ajouter un produit dans le panier";
             }
-            $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
-            header("Location: index.php?module=produit");
-            exit;
+            $this->panier();
         }
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
