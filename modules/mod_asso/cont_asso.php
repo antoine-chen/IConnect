@@ -114,5 +114,6 @@ class ContAsso {
                 $this->modele->ajoutImage($nomFichier, $cheminFichier);
                 $this->modele->enregistrerDemande($idUtilisateur,$nomFichier);
         }
+        $this->formAssociation();
     }
 }

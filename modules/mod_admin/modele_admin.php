@@ -76,4 +76,30 @@ class ModeleAdmin extends Modele {
         $update->execute(["valide",$idAsso]);
     }
 
+    public function getUtilisateurAsso($idAssociation){
+        $get = self::$bdd->prepare('
+            select distinct u.id, u.login, u.nom, u.prenom, u.telephone, r.role
+            from utilisateurs u inner join role r on u.id = r.idUtilisateur
+            where idAssociation = (?) AND r.role != "Admin" AND r.role != "enCours"
+        ');
+        $get->execute([$idAssociation]);
+        return $get->fetchAll();
+    }
+
+    public function deleteRoleBarman($idUtilisateur, $idAssociation, $role){
+        $delete = self::$bdd->prepare('DELETE FROM role WHERE idUtilisateur = ? AND idAssociation = ? AND role = ?');
+        $delete->execute([$idUtilisateur, $idAssociation, $role]);
+    }
+
+    public function deleteUtilisateur($idUtilisateur, $idAssociation){
+        $delete = self::$bdd->prepare('DELETE FROM role WHERE idUtilisateur = ? AND idAssociation = ?');
+        $delete->execute([$idUtilisateur, $idAssociation]);
+    }
+
+    public function insertRoleGestionnaire($idUtilisateur, $idAssociation, $role){
+        $insert = self::$bdd->prepare('INSERT INTO role(idUtilisateur, idAssociation, role) VALUES (?, ?, ?)');
+        $insert->execute([$idUtilisateur, $idAssociation, $role]);
+    }
+
+
 }

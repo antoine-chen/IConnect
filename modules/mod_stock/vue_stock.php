@@ -74,7 +74,7 @@ class VueStock extends VueGenerique{
         }
         echo '
                </table>
-               <button class="btn btn-primary" type="submit">Créer un inventaire</button>
+               <button class="btn btn-primary" type="submit">Valider</button>
            </form>
            </div>
         ';

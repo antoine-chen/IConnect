@@ -10,16 +10,20 @@ class ModeleAsso extends Modele {
     }
 
     public function getListeAssociationPasIncris($idUtilisateur){
-        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom 
-                                                FROM association a
-                                                EXCEPT 
-                                                SELECT distinct a.id, a.image, a.nom 
-                                                FROM association a INNER JOIN role r ON a.id = r.idAssociation 
-                                                WHERE r.idUtilisateur = (?) AND a.statut="valide"
-                                                ');
-        $getAssoInscris->execute([$idUtilisateur]);
-        return $getAssoInscris->fetchAll();
+        $sql = '
+        SELECT DISTINCT a.id, a.image, a.nom
+        FROM association a
+        WHERE a.id not in (
+            SELECT r.idAssociation
+            FROM role r
+            WHERE r.idUtilisateur = ?
+        ) AND a.statut = "valide"
+    ';
+        $stmt = self::$bdd->prepare($sql);
+        $stmt->execute([$idUtilisateur]);
+        return $stmt->fetchAll();
     }
+
 
     public function getListeAssociationEnAttente($idUtilisateur){
         $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role = "enCours" AND a.statut="valide"');

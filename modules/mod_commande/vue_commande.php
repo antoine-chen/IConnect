@@ -48,7 +48,7 @@ class VueCommande extends VueGenerique {
     // affiche la commande avec les détails
     public function afficheCommandeComplete($quer, $details, $mode, $prix){
         echo '
-            <div class="container-color rounded-4 p-4 mb-4 w-75 col-lg-8 mx-auto">
+            <div class="container-color rounded-4 p-4 mb-4 w-50 col-lg-8 mx-auto">
             <div class="p-4 mb-4">
                 <div class="row g-3 align-items-start">
                     <div class="col-md-6">
@@ -57,10 +57,10 @@ class VueCommande extends VueGenerique {
                             <i class="bi bi-calendar-event"></i>
                             <strong>Date :</strong> '. htmlspecialchars($quer['date']) .'
                         </p>
-                        <p class="mb-1">
+                        <div class="mb-1">
                             <i class="bi bi-info-circle"></i>
-                            <strong>Statut :</strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
-                        </p>
+                            <strong>Statut : </strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
+                        </div>
     
                         <p class="fs-5 fw-bold text-success mt-2">Total : '. htmlspecialchars($prix) .' €</p>
                     </div>

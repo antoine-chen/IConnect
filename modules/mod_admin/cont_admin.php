@@ -117,6 +117,7 @@ class ContAdmin{
             $this->modele->accepterAsso($idAsso);
             $this->modele->insertRoleGestionnaire($idUtilisateur,$idAsso,"Gestionnaire");
         }
+        $this->listeDemandeCreationAsso();
     }
 
     public function refuserDemandeAsso()
@@ -125,5 +126,6 @@ class ContAdmin{
             $idAsso = $_GET['assoId'];
             $this->modele->refuserAsso($idAsso);
         }
+        $this->listeDemandeCreationAsso();
     }
 }
