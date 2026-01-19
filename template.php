@@ -11,19 +11,20 @@
 </head>
 
 <body>
-<header>
-    <?php
+
+<main  class="d-flex flex-column min-vh-100">
+    <header>
+        <?php
         if (isset($contenuMenu))
             echo '
                 <div>
                     '.$contenuMenu.'
                 </div>
             ';
-    ?>
+        ?>
 
-</header>
+    </header>
 
-<main class="d-flex flex-column min-vh-100">
     <?php
         if (isset($contenu))
             echo '

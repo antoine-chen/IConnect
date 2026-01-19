@@ -60,34 +60,84 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficheFormAjouterGestionnaireOuBarman($titre,$listeComptes, $messageErreur = ""){
+    /**
+     * si je suis barman je peux donner le role barman à un client de mon asso
+     * je peux enlever le role barman et ban l'utilisateur
+    */
+    public function formAjouterBarman($listeComptes){
         echo '
-            <h2 class="text-center">'.$titre.'</h2>
-            <div class="table-responsive container taille-tableau">
-            <table class="table table-sm table-bordered table-hover text-center">
-                <tr>
+      <div class="container">  
+            <h3 class="text-center mb-4">
+                <i class="bi bi-people"></i> Gestion des comptes
+            </h3>
+       <div class="container-color rounded-4 p-4 w-75 container">    
+         <div class="table-responsive container taille-tableau">
+            <table class="table table-hover align-middle text-center">
+                <tr class="table-light">
                     <th>Login</th>
                     <th>Prénom</th>
                     <th>Nom</th>
                     <th>Téléphone</th>
+                    <th>Rôle</th>
                     <th style="width: 10%"></th>
                 </tr>
             ';
         foreach ($listeComptes as $compte) {
+            switch ($compte['role']) {
+                case 'Gestionnaire':
+                    $badge = '<span class="badge bg-dark">Gestionnaire</span>';
+                    break;
+                case 'Barman':
+                    $badge = '<span class="badge bg-primary">Barman</span>';
+                    break;
+                default:
+                    $badge = '<span class="badge bg-secondary">Client</span>';
+            }
+
             echo '
                 <tr>
                     <td>'.htmlspecialchars($compte['login']).'</td>
                     <td>'.htmlspecialchars($compte['prenom']).'</td>
                     <td>'.htmlspecialchars($compte['nom']).'</td>
                     <td>'.htmlspecialchars($compte['telephone']).'</td>
-                    <td><a href="index.php?module=admin&action=ajouterGestionnaireOuBarman&id='.$compte['id'].'">Ajouter</a></td>
+                    <td>'.$badge.'</td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+
+            ';
+            if ($_SESSION['role'] == 'Gestionnaire' && $compte['role'] == 'Client'){
+                echo '
+                    <a href="index.php?module=admin&action=donnerRoleBarman&id='.$compte['id'].'" class="btn btn-success">
+                        <i class="bi bi-arrow-up-circle"></i>
+                    </a>
+                ';
+            }
+            if ($_SESSION['role'] == 'Gestionnaire' && $compte['role'] == 'Barman'){
+                echo '
+                   <a href="index.php?module=admin&action=enleverRoleBarman&id='.$compte['id'].'" class="btn btn-warning">
+                        <i class="bi bi-arrow-down-circle-fill"></i>
+                   </a>
+                ';
+            }
+            if ($compte['role'] != 'Gestionnaire'){
+                echo '
+                   <a href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                   </a>
+                ';
+            }
+            echo'
+                        </div>
+                    </td>
                 </tr>
             ';
         }
 
         echo '
             </table>    
-            </div>
+           </div>
+          </div>  
+        </div>  
         ';
     }
 

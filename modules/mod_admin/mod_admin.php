@@ -23,11 +23,17 @@ class ModAdmin{
             case 'listerAssociation':
                 $this->controleur->listerAssociation();
                 break;
-            case 'formAjouterGestionnaireOuBarman':
-                $this->controleur->formAjouterGestionnaireOuBarman();
+            case 'afficherListeClient':
+                $this->controleur->afficherListeClient();
                 break;
-            case 'ajouterGestionnaireOuBarman':
-                $this->controleur->ajouterGestionnaireOuBarman();
+            case 'donnerRoleBarman':
+                $this->controleur->donnerRoleBarman();
+                break;
+            case 'enleverRoleBarman':
+                $this->controleur->enleverRoleBarman();
+                break;
+            case 'bannirUtilisateur':
+                $this->controleur->bannirUtilisateur();
                 break;
             case 'listerDemandeUtilisateur':
                 $this->controleur->listerDemandeUtilisateur();
