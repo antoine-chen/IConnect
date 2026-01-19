@@ -142,7 +142,7 @@ class ContAsso {
                 $nomFichier = $this->modele->idAsso($nomAssociation);
                 $extension = pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION);
                 $cheminFichier = 'modules/mod_asso/logos/'.$nomFichier.'.'.$extension;
-                move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
+            move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
                 $this->modele->ajoutImage($nomFichier, $cheminFichier);
                 $this->modele->enregistrerDemande($idUtilisateur,$nomFichier);
         }

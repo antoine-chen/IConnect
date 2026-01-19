@@ -101,6 +101,7 @@ class ContAdmin{
     public function listeDemandeCreationAsso() {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
             $demandesAsso = $this->modele->listeDemandeAsso();
+            var_dump($demandesAsso);
             $this->vue->afficherListeDemandeCreationAsso($demandesAsso);
         }
     }
