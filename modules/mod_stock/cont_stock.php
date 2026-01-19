@@ -14,7 +14,8 @@ class ContStock {
     public function stockProduits(){
         if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
             $idAsso = $_SESSION['asso'];
-            $resultat = $this->modele->stockActuel($idAsso);
+            $idInventaire = $this->modele->idInventaire($idAsso);
+            $resultat = $this->modele->stockActuel($idInventaire);
 
             if(empty($resultat)) {
                 $this->vue->inventaireVide();
@@ -41,14 +42,23 @@ class ContStock {
     }
 
     public function ajoutInventaire() {
-        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])) {
             $idAsso = $_SESSION['asso'];
             $stockProduits = $_POST['stock'];
+
+            $idOldInventaire = $this->modele->idInventaire($idAsso);
             $this->modele->creerInventaire($idAsso);
-            $idInventaire = $this->modele->idInventaire($idAsso);
+            $idNewInventaire = $this->modele->idInventaire($idAsso);
+
             foreach ($stockProduits as $idProduit => $quantiteProduit) {
-                $this->modele->ajouterProduit($idInventaire['id'],$idProduit,$quantiteProduit);
+                if ($idOldInventaire !== null) {
+                    $this->modele->ajouterStockReel($idOldInventaire,$idProduit,$quantiteProduit);
+                }
+                $this->modele->ajouterProduit($idNewInventaire,$idProduit,$quantiteProduit);
             }
         }
+        header("Location: index.php?module=stock");
+        exit();
     }
+
 }

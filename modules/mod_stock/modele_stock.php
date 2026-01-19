@@ -30,7 +30,7 @@ class ModeleStock extends Modele {
     }
 
     // Retourne le stock actuel des produits du mois actuel
-    public function stockActuel($idAssociation)
+    public function stockActuel($idInventaire)
     {
         $get = self::$bdd->prepare('
             select produit.id,produit.nom, produit.prix, ligneInventaire.stock, ligneInventaire.pertes,inventaire.date 
@@ -38,10 +38,9 @@ class ModeleStock extends Modele {
             from inventaire inner join ligneInventaire on ligneInventaire.idInventaire=inventaire.id
             inner join produit on ligneInventaire.idProduit=produit.id
                                             
-            where idAssociation = (?) and extract(month from inventaire.date) = extract(month from CURRENT_DATE)
-            and extract(year from inventaire.date) = extract(year from CURRENT_DATE);
+            where inventaire.id = (?)
             ');
-        $get->execute([$idAssociation]);
+        $get->execute([$idInventaire]);
         return $get->fetchAll();
     }
 
@@ -51,5 +50,13 @@ class ModeleStock extends Modele {
             insert into ligneInventaire (idInventaire,idProduit,stock) values (?,?,?)
         ');
         $insert->execute([$idInventaire,$idProduit,$stock]);
+    }
+
+    public function ajouterStockReel($idOldInventaire, $idProduit, $quantiteProduit)
+    {
+        $insert = self::$bdd->prepare('
+            update ligneInventaire set stockReel = (?) where idInventaire = (?) and idProduit = (?);
+        ');
+        $insert->execute([$quantiteProduit,$idOldInventaire,$idProduit]);
     }
 }
