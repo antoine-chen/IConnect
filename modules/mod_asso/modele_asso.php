@@ -33,10 +33,10 @@ class ModeleAsso extends Modele {
     }
 
     public function estPresentDansAsso($idAsso, $login){
-        $sql = "select role from role where idUtilisateur = (?) and idAssociation = (?)";
+        $sql = "select distinct role from role where idUtilisateur = (?) and idAssociation = (?)";
         $donnesBlocTexte = self::$bdd->prepare($sql);
         $donnesBlocTexte->execute([$login,$idAsso]);
-        return $donnesBlocTexte->fetch();
+        return $donnesBlocTexte->fetchAll();
     }
 
     public function demandeAccesAssociation($idAsso, $idUtilisateur){

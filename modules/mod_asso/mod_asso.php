@@ -49,7 +49,7 @@ class ModAsso
 
                 switch ($action) {
                     case 'choisiAsso' :
-                        $this->module->aChoisitAsso();
+                        $this->module->aAppuyeAsso();
                         break;
                     case 'afficherAssoInscris' :
                         $this->module->afficherAssoInscris();
