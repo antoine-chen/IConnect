@@ -27,8 +27,11 @@ private $action;
             case 'historique':
                 $this->controleur->historique();
                 break;
-                case 'refuserCommande';
+            case 'refuserCommande':
                 $this->controleur->refuser();
+                break;
+            case 'historiqueCommandeClient':
+                $this->controleur->historiqueCommandeClient();
                 break;
             default:
                 echo "action inconnue";

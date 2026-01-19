@@ -82,6 +82,14 @@ class ContCommande {
         }
     }
 
+    public function historiqueCommandeClient(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Client'){
+            $this->vue->afficherClientHistorique(
+                $this->modele->getCommandeClientHistorique($_SESSION['id'], $_SESSION['asso'])
+            );
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

@@ -66,4 +66,17 @@ class ModeleCommande extends Modele {
       return $req->fetchColumn();
     }
 
+    public function getCommandeClientHistorique($idUtilisateur, $idAssociation){
+        $get = self::$bdd->prepare('SELECT c.id, c.date, c.statut, a.nom AS nom_association, a.image, SUM(l.quantite) AS nbArticle, SUM(p.prix * l.quantite) AS addition
+                            FROM commande c INNER JOIN lignecommande l ON c.id = l.idCommande
+                            INNER JOIN association a ON c.idAssociation = a.id    
+                            INNER JOIN produit p ON l.idProduit = p.id             
+                            WHERE c.idUtilisateur = ? AND c.idAssociation = ?
+                            GROUP BY c.id, c.date, c.statut, a.nom, a.image
+                            ORDER BY c.date DESC
+        ');
+        $get->execute([$idUtilisateur, $idAssociation]);
+        return $get->fetchAll();
+    }
+
 }
