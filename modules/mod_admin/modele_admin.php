@@ -2,11 +2,6 @@
 include_once "modele.php";
 class ModeleAdmin extends Modele {
 
-    public function insertAssociation($nom){
-        $insert = self::$bdd->prepare('INSERT INTO association (nom,image) VALUES (?, ?)');
-        $insert->execute([$nom, "vide"]);
-    }
-
     public function getAssociations(){
         $get = self::$bdd->prepare('SELECT * FROM association');
         $get->execute();
@@ -25,34 +20,13 @@ class ModeleAdmin extends Modele {
         $insert->execute([$idUtilisateur, $idAssociation, $role]);
     }
 
-    public function deleteRoleBarman($idUtilisateur, $idAssociation, $role){
-        $delete = self::$bdd->prepare('DELETE FROM role WHERE idUtilisateur = ? AND idAssociation = ? AND role = ?');
-        $delete->execute([$idUtilisateur, $idAssociation, $role]);
-    }
-
-    public function deleteUtilisateur($idUtilisateur, $idAssociation){
-        $delete = self::$bdd->prepare('DELETE FROM role WHERE idUtilisateur = ? AND idAssociation = ?');
-        $delete->execute([$idUtilisateur, $idAssociation]);
-    }
-
-    public function ajoutImage($idAsso,$image) {
-        $insert = self::$bdd->prepare('UPDATE association SET image = (?) where id= (?)');
-        $insert->execute([$image, $idAsso]);
-    }
-
-    public function idAsso($nomAsso){
-        $get = self::$bdd->prepare('SELECT id FROM association where nom = (?)');
-        $get->execute([$nomAsso]);
-        return $get->fetchColumn();
-    }
-
-    public function getUtilisateurAsso($idAssociation){
+    public function getUtilisateurNonRole($idAssociation,$role){
         $get = self::$bdd->prepare('
-            select distinct u.id, u.login, u.nom, u.prenom, u.telephone, r.role
-            from utilisateurs u inner join role r on u.id = r.idUtilisateur
-            where idAssociation = (?) AND r.role != "Admin" AND r.role != "enCours"
+            select distinct id,login,nom,prenom,telephone
+            from utilisateurs inner join role on utilisateurs.id = role.idUtilisateur
+            where idAssociation = (?) and role != (?)
         ');
-        $get->execute([$idAssociation]);
+        $get->execute([$idAssociation,$role]);
         return $get->fetchAll();
     }
 
@@ -73,6 +47,33 @@ class ModeleAdmin extends Modele {
     public function refuserDemandeUtilisateur($idUtilisateur, $idAssociation){
         $updateRole = self::$bdd->prepare('DELETE FROM role WHERE idUtilisateur = ? AND idAssociation = ?');
         $updateRole->execute([$idUtilisateur, $idAssociation]);
+    }
+
+    public function listeDemandeAsso()
+    {
+        $get = self::$bdd->prepare('
+            select a.id as assoId,u.id as utilisateurId,a.nom,a.image,u.login 
+            from demandeCreationAsso d inner join association a on d.idAsso = a.id inner join utilisateurs u on d.idUtilisateur = u.id
+            where a.statut = ?
+        ');
+        $get->execute(["attente"]);
+        return $get->fetchAll();
+    }
+
+    public function refuserAsso($idAsso)
+    {
+        $update = self::$bdd->prepare('
+            update association set statut = ? where id = ?
+        ');
+        $update->execute(["refus",$idAsso]);
+    }
+
+    public function accepterAsso($idAsso)
+    {
+        $update = self::$bdd->prepare('
+            update association set statut = ? where id = ?
+        ');
+        $update->execute(["valide",$idAsso]);
     }
 
 }

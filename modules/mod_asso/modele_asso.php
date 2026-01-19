@@ -3,7 +3,7 @@ include_once "modele.php";
 class ModeleAsso extends Modele {
 
     public function getListeAssociationInscris($idUtilisateur){
-        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role != "enCours"');
+        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role != "enCours" AND a.statut="valide"');
         $getAssoInscris->execute([$idUtilisateur]);
 
         return $getAssoInscris->fetchAll();
@@ -15,14 +15,14 @@ class ModeleAsso extends Modele {
                                                 EXCEPT 
                                                 SELECT distinct a.id, a.image, a.nom 
                                                 FROM association a INNER JOIN role r ON a.id = r.idAssociation 
-                                                WHERE r.idUtilisateur = (?)
+                                                WHERE r.idUtilisateur = (?) AND a.statut="valide"
                                                 ');
         $getAssoInscris->execute([$idUtilisateur]);
         return $getAssoInscris->fetchAll();
     }
 
     public function getListeAssociationEnAttente($idUtilisateur){
-        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role = "enCours"');
+        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role = "enCours" AND a.statut="valide"');
         $getAssoInscris->execute([$idUtilisateur]);
 
         return $getAssoInscris->fetchAll();
@@ -44,6 +44,22 @@ class ModeleAsso extends Modele {
         $existe = self::$bdd->prepare('SELECT id FROM association WHERE id = ?');
         $existe->execute([$idAssociation]);
         return $existe->fetch();
+    }
+
+    public function insertAssociation($nom){
+        $insert = self::$bdd->prepare('INSERT INTO association (nom,image,statut) VALUES (?,?,?)');
+        $insert->execute([$nom, "vide","attente"]);
+    }
+
+    public function ajoutImage($idAsso,$image) {
+        $insert = self::$bdd->prepare('UPDATE association SET image = (?) where id= (?)');
+        $insert->execute([$image, $idAsso]);
+    }
+
+    public function enregistrerDemande($idUtilisateur, $idAsso)
+    {
+        $insert = self::$bdd->prepare('insert into demandeCreationAsso (idUtilisateur,idAsso) values (?,?)');
+        $insert->execute([$idUtilisateur,$idAsso]);
     }
 
 }

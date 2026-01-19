@@ -11,36 +11,6 @@ class ContAdmin{
         $this->vue = new VueAdmin();
     }
 
-    public function formAssociation($messageErreur = ''){
-        if ($_SESSION['role'] == 'Admin'){
-            $this->vue->afficherFormAssociation($messageErreur);
-        }
-    }
-
-    /**
-     * ajouter une association
-     * isset puis regarde si les champs sont vide
-     * si pas vide INSERT sinon re affiche le form avec un message d'erreur
-    */
-    public function ajouterAssociation(){
-        if (isset($_POST['nom']) && isset($_FILES['imageAso']) && $_SESSION['role'] == 'Admin') {
-            $nomAssociation = $_POST['nom'];
-
-            if (!empty($nomAssociation)){
-                $this->modele->insertAssociation($nomAssociation);
-
-                $nomFichier = $this->modele->idAsso($nomAssociation);
-                $extension = pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION);
-                $cheminFichier = 'modules/mod_asso/logos/'.$nomFichier.'.'.$extension;
-                move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
-                $this->modele->ajoutImage($nomFichier, $cheminFichier);
-            }else {
-                $messageErreur = "il faut remplir les champs ";
-                $this->formAssociation($messageErreur);
-            }
-        }
-    }
-
     public function listerAssociation(){
         if ($_SESSION['role'] == 'Admin'){
             $listeAssociations = $this->modele->getAssociations();
@@ -128,9 +98,32 @@ class ContAdmin{
         }
     }
 
+    public function listeDemandeCreationAsso() {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $demandesAsso = $this->modele->listeDemandeAsso();
+            $this->vue->afficherListeDemandeCreationAsso($demandesAsso);
+        }
+    }
 
     public function getVue(){
         return $this->vue->afficher();
     }
 
+    public function validerDemandeAsso()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $idAsso = $_GET['assoId'];
+            $idUtilisateur = $_GET['utilisateurId'];
+            $this->modele->accepterAsso($idAsso);
+            $this->modele->insertRoleGestionnaire($idUtilisateur,$idAsso,"Gestionnaire");
+        }
+    }
+
+    public function refuserDemandeAsso()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $idAsso = $_GET['assoId'];
+            $this->modele->refuserAsso($idAsso);
+        }
+    }
 }

@@ -14,12 +14,6 @@ class ModAdmin{
 
     public function exec(){
         switch ($this->action) {
-            case 'formAssociation':
-                $this->controleur->formAssociation();
-                break;
-            case 'ajouterAssociation':
-                $this->controleur->ajouterAssociation();
-                break;
             case 'listerAssociation':
                 $this->controleur->listerAssociation();
                 break;
@@ -34,6 +28,15 @@ class ModAdmin{
                 break;
             case 'bannirUtilisateur':
                 $this->controleur->bannirUtilisateur();
+                break;
+            case 'listeDemandeCreationAsso' :
+                $this->controleur->listeDemandeCreationAsso();
+                break;
+            case 'validerDemandeAsso' :
+                $this->controleur->validerDemandeAsso();
+                break;
+            case 'refuserDemandeAsso' :
+                $this->controleur->refuserDemandeAsso();
                 break;
             case 'listerDemandeUtilisateur':
                 $this->controleur->listerDemandeUtilisateur();

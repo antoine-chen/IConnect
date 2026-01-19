@@ -31,8 +31,8 @@ class ModeleNavbar{
 
     public function getNavbarAdmin(){
         return array(
+            array("url" => "index.php?module=admin&action=listeDemandeCreationAsso", "action" => "Demandes de création d'associations"),
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
-            array("url" => "index.php?module=admin&action=formAssociation", "action" => "Créer une association"),
             array("url" => "index.php?module=admin&action=listerAssociation", "action" => "Liste des associations")
         );
     }
@@ -41,8 +41,8 @@ class ModeleNavbar{
         return array(
             array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Mes associations"),
             array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations"),
-            array("url" => "index.php?module=asso&action=afficherAssoEnAttente", "action" => "En attente")
-
+            array("url" => "index.php?module=asso&action=afficherAssoEnAttente", "action" => "En attente"),
+            array("url" => "index.php?module=asso&action=formAssociation", "action" => "Créer une association"),
         );
     }
 

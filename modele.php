@@ -11,4 +11,12 @@ class Modele extends Connexion{
         return $get->fetchColumn();
     }
 
+    public function idAsso($nomAsso){
+        $get = self::$bdd->prepare('SELECT id FROM association where nom = (?)');
+        $get->execute([$nomAsso]);
+        return $get->fetchColumn();
+    }
+
+
+
 }

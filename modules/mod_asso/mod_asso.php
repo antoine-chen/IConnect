@@ -60,6 +60,12 @@ class ModAsso
                     case 'afficherAssoEnAttente':
                         $this->module->afficherAssoEnAttente();
                         break;
+                    case 'formAssociation':
+                        $this->module->formAssociation();
+                        break;
+                    case 'ajouterAssociation':
+                        $this->module->ajouterAssociation();
+                        break;
                 }
                 break;
             default:
