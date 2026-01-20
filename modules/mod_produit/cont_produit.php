@@ -103,6 +103,33 @@ class ContProduit{
         }
     }
 
+    public function listerProduitsFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $listeFournisseur = $this->modele->getListeFournisseur($_SESSION['asso']);
+            $produitsBruts = $this->modele->getProduitsFournisseur($_SESSION['asso']);
+
+            $this->vue->afficherListeProduitsFournisseur(
+                $listeFournisseur,
+                $produitsBruts
+            );
+        }
+    }
+
+    public function restockerProduit(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $idProduit = $_GET['id'];
+            $quantite = $_POST['quantite'];
+            $this->modele->insertRestock($_SESSION['id'], $idProduit, $_POST['quantite'], $_SESSION['asso'], $_GET['idFournisseur']);
+            $this->modele->updateLigneInventaire(
+                $this->modele->idInventaire($_SESSION['asso']),
+                $idProduit,
+                $quantite
+            );
+        }
+        header('Location: index.php?module=produit&action=listerProduitsFournisseur');
+        exit();
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

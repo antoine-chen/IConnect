@@ -36,12 +36,23 @@ class ContFournisseur{
     }
 
     public function listerFournisseur(){
-        if (isset($_SESSION['asso']) && $_SESSION['role'] == 'Gestionnaire'){
-            $this->vue->afficherListeFournisseur(
-                $this->modele->getListeFournisseur()
+        if (isset($_SESSION['asso']) && $_SESSION['role'] === 'Gestionnaire'){
+
+            $listeFournisseur = $this->modele->getListeFournisseur($_SESSION['asso']);
+            $produitsBruts = $this->modele->getProduitsFournisseur($_SESSION['asso']);
+
+            $produitsParFournisseur = [];
+            foreach ($produitsBruts as $ligne){
+                $produitsParFournisseur[$ligne['idFournisseur']][] = $ligne['nomProduit'];
+            }
+
+            $this->vue->afficherListeFournisseurEtProduits(
+                $listeFournisseur,
+                $produitsParFournisseur
             );
         }
     }
+
 
     public function supprimerFournisseur(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){

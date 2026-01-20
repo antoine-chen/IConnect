@@ -18,5 +18,22 @@ class Modele extends Connexion{
     }
 
 
+    public function getListeFournisseur($idAssociation){
+        $fournisseur = self::$bdd->prepare('SELECT id, ville, email, tel, nom FROM fournisseur WHERE idAssociation = ?');
+        $fournisseur->execute([$idAssociation]);
+        return $fournisseur->fetchAll();
+    }
+
+    public function getProduitsFournisseur($idAssociation){
+        $get = self::$bdd->prepare(' SELECT f.id AS idFournisseur, pr.id AS idProduit, pr.nom AS nomProduit FROM fournisseur f INNER JOIN produitsFournisseur pf ON f.id = pf.idFournisseur
+                                                        INNER JOIN produit pr ON pr.id = pf.idProduit
+                                                        WHERE f.idAssociation = ?
+                                                        ORDER BY f.id, pr.nom
+        ');
+        $get->execute([$idAssociation]);
+        return $get->fetchAll();
+    }
+
+
 
 }
