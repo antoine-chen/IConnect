@@ -4,7 +4,14 @@ class ModeleCommande extends Modele {
 
     //fait une requette pour toute les commandes d'une association
     public function toutesLesCommandes(){
-        $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ? order by date");
+        $req = self::$bdd->prepare("SELECT * 
+                                    from commande 
+                                    where idAssociation= ? 
+                                    Except 
+                                    select * 
+                                    from commande 
+                                    where statut='Encours'
+                                    order by date");
         $req->execute([$_SESSION['asso']]);
         return $req->fetchAll();
     }
@@ -23,14 +30,15 @@ class ModeleCommande extends Modele {
 
     //recupere toutes les ligne de commandes d'une commande
     public function derouleCommande($idCommande, $date){
-        $req = self::$bdd->prepare("SELECT idCommande,nom,quantite,prix,idProduit from ligneCommande inner join produit on idProduit=id where idCommande =? AND date =?");
-        $req->execute([$idCommande,$date]);
+        $req = self::$bdd->prepare("SELECT p.nom, SUM(l.quantite) AS quantite, p.prix FROM ligneCommande l INNER JOIN produit p ON l.idProduit = p.id WHERE l.idCommande = ? AND l.date = ? GROUP BY p.nom, p.prix");
+        $req->execute([$idCommande, $date]);
         return $req->fetchAll();
     }
 
+
     public function valideCommande($idCommande,$date){
-        $req = self::$bdd->prepare("UPDATE commande SET statut ='livrée' where id=? AND date=?");
-        $req->execute([$idCommande,$date]);
+        $req = self::$bdd->prepare("UPDATE commande SET statut ='livrée',idBarman = ? where id=? AND date=?");
+        $req->execute([$_SESSION['id'],$idCommande,$date]);
     }
 
     public function prixTotal($idCommande,$date){
@@ -45,8 +53,8 @@ class ModeleCommande extends Modele {
     }
     
     public function refuser($idCommande, $date){
-        $req = self::$bdd->prepare("UPDATE commande SET statut ='rembourser' where id=? AND date=?");
-        $req->execute([$idCommande,$date]);
+        $req = self::$bdd->prepare("UPDATE commande SET statut ='rembourser',idBarman = ? where id=? AND date=?");
+        $req->execute([$_SESSION['id'],$idCommande,$date]);
     }
 
     private function dernierInventaire(){
@@ -77,6 +85,15 @@ class ModeleCommande extends Modele {
         ');
         $get->execute([$idUtilisateur, $idAssociation]);
         return $get->fetchAll();
+    }
+
+    public function getLoginUtilisateur($idUtilisateur)
+    {
+        $get = self::$bdd->prepare('
+            select login from utilisateurs where id = (?)
+        ');
+        $get->execute([$idUtilisateur]);
+        return $get->fetchColumn();
     }
 
 }

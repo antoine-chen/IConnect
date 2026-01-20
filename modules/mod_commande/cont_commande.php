@@ -27,11 +27,12 @@ class ContCommande {
             $commandes = $this->modele->toutesLesCommandesDuJour();
             foreach ($commandes as $value) {
                 $ligneCommandes = $this->modele->derouleCommande($value['id'], $value['date']);
+                $nomClient = $this->modele->getLoginUtilisateur($this->modele->getClient($value['id'], $value['date']));
                 $this->vue->afficheCommandeComplete(
                     $value,
                     $ligneCommandes,
                     0,
-                    $this->modele->prixTotal($value['id'], $value['date'])
+                    $this->modele->prixTotal($value['id'], $value['date']),$nomClient,""
                 );
             }
         }
@@ -42,11 +43,13 @@ class ContCommande {
             $commandes = $this->modele->toutesLesCommandes();
             foreach ($commandes as $value) {
                 $ligneCommandes = $this->modele->derouleCommande($value['id'], $value['date']);
+                $nomClient = $this->modele->getLoginUtilisateur($this->modele->getClient($value['id'], $value['date']));
+                $barman = $this->modele->getLoginUtilisateur($value['idBarman']);
                 $this->vue->afficheCommandeComplete(
                     $value,
                     $ligneCommandes,
                     1,
-                    $this->modele->prixTotal($value['id'], $value['date'])
+                    $this->modele->prixTotal($value['id'], $value['date']),$nomClient,$barman
                 );
             }
         }
