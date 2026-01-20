@@ -7,7 +7,8 @@ class ModeleNavbar{
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
             array("url" => "index.php?module=compte&action=formRecharger", "action" => "Recharger"),
             array("url" => "index.php?module=produit&action=listerProduits", "action" => "Lister les produits"),
-            array("url" => "index.php?module=panier&action=panier", "action" => "Panier")
+            array("url" => "index.php?module=panier&action=panier", "action" => "Panier"),
+            array("url" => "index.php?module=commande&action=historiqueCommandeClient", "action" => "Historique")
         );
     }
 
