@@ -22,6 +22,12 @@ class ModStock {
             case 'ajoutInventaire' :
                 $this->controleur->ajoutInventaire();
                 break;
+            case 'formChoixInventaireRapport' :
+                $this->controleur->formChoixInventaireRapport();
+                break;
+            case 'rapport' :
+                $this->controleur->rapport();
+                break;
             default:
                 echo "action inconnue";
                 break;

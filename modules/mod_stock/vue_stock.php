@@ -89,4 +89,73 @@ class VueStock extends VueGenerique{
     public function afficher() {
         return $this->getAffichage();
     }
+
+    public function afficherRapport($valeursTresorerie)
+    {
+        echo '
+    <div class="container mt-4">
+        <h3 class="mb-4">Rapport de trésorerie de l\'inventaire</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité initiale</th>
+                        <th>Quantité actuel</th>
+                        <th>Ventes</th>
+                        <th>Pertes</th>
+                        <th>Variation de stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+    ';
+
+        foreach ($valeursTresorerie as $element) {
+            $stockInitiale = $element['quantiteInitiale'] ?? 0;
+            $stockActuel   = $element['quantiteActuel'] ?? $stockInitiale;
+            $ventes        = $element['ventes'] ?? 0;
+            $pertes        = $element['pertes'] ?? 0;
+            $variation     = $element['variationstock'] ?? ($stockActuel - $stockInitiale);
+
+            echo '
+            <tr>
+                <td>' . htmlspecialchars($element['nom']) . '</td>
+                <td>' . htmlspecialchars($element['prix']) . '</td>
+                <td>' . htmlspecialchars($stockInitiale) . '</td>
+                <td>' . htmlspecialchars($stockActuel) . '</td>
+                <td>' . htmlspecialchars($ventes) . '</td>
+                <td>' . htmlspecialchars($pertes) . '</td>
+                <td>' . htmlspecialchars($variation) . '</td>
+            </tr>
+        ';
+        }
+
+        echo '
+                </tbody>
+            </table>
+        </div>
+    </div>
+    ';
+    }
+
+
+    public function afficherChoixInventaireRapport($listeInventaire)
+    {
+        echo '
+        <p>Choisissez une date pour générer le rapport :</p>
+        <form method="post" action="index.php?module=stock&action=rapport">
+            <select name="idinventaire" class="form-select mb-3">
+    ';
+        foreach ($listeInventaire as $element) {
+            echo '<option value="' . htmlspecialchars($element['id']) . '">'
+                . htmlspecialchars($element['date']) . '</option>';
+        }
+        echo '
+            </select>
+            <button class="btn btn-primary" type="submit">Valider</button>
+        </form>
+    ';
+    }
+
 }

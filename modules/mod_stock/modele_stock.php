@@ -52,11 +52,59 @@ class ModeleStock extends Modele {
         $insert->execute([$idInventaire,$idProduit,$stock]);
     }
 
-    public function ajouterStockReel($idOldInventaire, $idProduit, $quantiteProduit)
+    public function getTresorerie($idinventaire, $asso, $date)
     {
-        $insert = self::$bdd->prepare('
-            update ligneInventaire set stockReel = (?) where idInventaire = (?) and idProduit = (?);
-        ');
-        $insert->execute([$quantiteProduit,$idOldInventaire,$idProduit]);
+        $get = self::$bdd->prepare('
+        select
+            p.id as idProduit,
+            p.nom as nom,
+            p.prix as prix,
+            lI.stock as quantiteInitiale,
+            (lI.stock + sum(h.quantite) - sum(lC.quantite)) as quantiteActuel,
+            sum(lC.quantite) as ventes,
+            lI.pertes,
+            ((lI.stock + sum(h.quantite) - sum(lC.quantite)) - lI.stock) as variationstock
+        from ligneInventaire lI
+        inner join produit p on lI.idproduit = p.id
+        left join historiqueRestock h 
+            on h.idproduit = p.id and h.idassociation = ? and h.date >= ?
+        left join ligneCommande lC
+            on lC.idproduit = p.id
+            and lC.idCommande in (
+                select c.id
+                from commande c
+                where c.statut = "livrée" and c.date >= ?
+            )
+        where lI.idinventaire = ?
+        group by p.id, p.nom, p.prix, lI.stock, lI.pertes
+        order by p.nom ASC
+    ');
+        $get->execute([$asso, $date, $date, $idinventaire]);
+        return $get->fetchAll();
     }
+
+
+
+
+
+    public function getDateInventaire($idInventaire)
+    {
+        $get = self::$bdd->prepare('
+            select date from inventaire where inventaire.id = (?)
+        ');
+        $get->execute([$idInventaire]);
+        return $get->fetchColumn();
+    }
+
+    public function getListeInventaires($asso)
+    {
+        $get = self::$bdd->prepare('
+            select id,date from inventaire
+            where idAssociation = (?)
+        ');
+        $get->execute([$asso]);
+        return $get->fetchAll();
+    }
+
+
 }

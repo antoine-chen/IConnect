@@ -12,7 +12,7 @@ class ContStock {
     }
 
     public function stockProduits(){
-        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
             $idAsso = $_SESSION['asso'];
             $idInventaire = $this->modele->idInventaire($idAsso);
             $resultat = $this->modele->stockActuel($idInventaire);
@@ -29,7 +29,7 @@ class ContStock {
     }
 
     public function form_inventaire() {
-        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
             $idAsso = $_SESSION['asso'];
             $resultat = $this->modele->listeProduitsAsso($idAsso);
 
@@ -37,25 +37,17 @@ class ContStock {
         }
     }
 
-    public function getVue(){
-        return $this->vue->afficher();
-    }
-
     public function ajoutInventaire()
     {
-        if (isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+        if (isset($_SESSION['role']) && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
             if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])) {
                 $idAsso = $_SESSION['asso'];
                 $stockProduits = $_POST['stock'];
 
-                $idOldInventaire = $this->modele->idInventaire($idAsso);
                 $this->modele->creerInventaire($idAsso);
                 $idNewInventaire = $this->modele->idInventaire($idAsso);
 
                 foreach ($stockProduits as $idProduit => $quantiteProduit) {
-                    if ($idOldInventaire !== null) {
-                        $this->modele->ajouterStockReel($idOldInventaire, $idProduit, $quantiteProduit);
-                    }
                     $this->modele->ajouterProduit($idNewInventaire, $idProduit, $quantiteProduit);
                 }
             }
@@ -64,4 +56,25 @@ class ContStock {
         }
     }
 
+    public function formChoixInventaireRapport()
+    {
+        if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+            $listeInventaire = $this->modele->getListeInventaires($_SESSION['asso']);
+            $this->vue->afficherChoixInventaireRapport($listeInventaire);
+        }
+    }
+
+    public function rapport()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+            $idInventaire = isset($_POST['idinventaire']) ? $_POST['idinventaire'] : $this->modele->idInventaire($_SESSION['asso']);
+            $dateInventaire = $this->modele->getDateInventaire($idInventaire);
+            $valeursTresorerie = $this->modele->getTresorerie($idInventaire, $_SESSION['asso'], $dateInventaire);
+            $this->vue->afficherRapport($valeursTresorerie);
+        }
+    }
+
+    public function getVue(){
+        return $this->vue->afficher();
+    }
 }
