@@ -83,7 +83,7 @@ class VueStock extends VueGenerique{
 
 
     public function inventaireVide(){
-        echo '<p>Aucune inventaire réalisée pour ce mois ci</p> ';
+        echo '<p>Aucune inventaire réalisée pour ce mois ci, veuillez créer un inventaire pour voir le stock actuel</p> ';
     }
 
     public function afficher() {
@@ -94,7 +94,7 @@ class VueStock extends VueGenerique{
     {
         echo '
     <div class="container mt-4">
-        <h3 class="mb-4">Rapport de trésorerie de l\'inventaire</h3>
+        <h3 class="mb-4"> WAWA Rapport de trésorerie de l\'inventaire</h3>
         <div class="table-responsive">
             <table class="table table-striped table-bordered text-center align-middle">
                 <thead class="table-light">
@@ -110,27 +110,19 @@ class VueStock extends VueGenerique{
                 </thead>
                 <tbody>
     ';
-
         foreach ($valeursTresorerie as $element) {
-            $stockInitiale = $element['quantiteInitiale'] ?? 0;
-            $stockActuel   = $element['quantiteActuel'] ?? $stockInitiale;
-            $ventes        = $element['ventes'] ?? 0;
-            $pertes        = $element['pertes'] ?? 0;
-            $variation     = $element['variationstock'] ?? ($stockActuel - $stockInitiale);
-
             echo '
-            <tr>
-                <td>' . htmlspecialchars($element['nom']) . '</td>
-                <td>' . htmlspecialchars($element['prix']) . '</td>
-                <td>' . htmlspecialchars($stockInitiale) . '</td>
-                <td>' . htmlspecialchars($stockActuel) . '</td>
-                <td>' . htmlspecialchars($ventes) . '</td>
-                <td>' . htmlspecialchars($pertes) . '</td>
-                <td>' . htmlspecialchars($variation) . '</td>
-            </tr>
-        ';
+                    <tr>
+                        <td>'.htmlspecialchars($element['nom']).'</td>
+                        <td>'.htmlspecialchars($element['prix']).'</td>
+                        <td>'.htmlspecialchars($element['quantiteInitiale']).'</td>
+                        <td>'.htmlspecialchars($element['quantiteActuel']).'</td>
+                        <td>'.htmlspecialchars($element['ventes']).'</td>
+                        <td>'.htmlspecialchars($element['pertes']).'</td>
+                        <td>'.htmlspecialchars($element['variationstock']).'</td>
+                    </tr>
+                ';
         }
-
         echo '
                 </tbody>
             </table>
@@ -138,7 +130,6 @@ class VueStock extends VueGenerique{
     </div>
     ';
     }
-
 
     public function afficherChoixInventaireRapport($listeInventaire)
     {
