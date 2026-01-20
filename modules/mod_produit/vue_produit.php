@@ -91,4 +91,47 @@ class VueProduit extends VueGenerique{
     ';
     }
 
+    public function afficherListeProduitsFournisseur($listeFournisseur, $produitsFournisseur){
+        $fournisseursParId = [];
+        foreach ($listeFournisseur as $fournisseur) {
+            $fournisseursParId[$fournisseur['id']] = $fournisseur;
+        }
+
+        echo '<div class="container mt-5">';
+        echo '<h3 class="text-center mb-4"><i class="bi bi-box-seam"></i> Produits par Fournisseur</h3>';
+
+        echo '<div class="row g-4">';
+        foreach ($produitsFournisseur as $produit) {
+            $fId = $produit['idFournisseur'];
+            $idProduit = $produit['idProduit'];
+            $fournisseur = $fournisseursParId[$fId];
+
+            echo '
+            <div class="col-md-6 col-lg-4">
+                <form action="index.php?module=produit&action=restockerProduit&idFournisseur='.$fId.'&id='.$idProduit.'" method="post" class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h3><span class="card-title badge bg-success">'.htmlspecialchars($produit['nomProduit']).'</span></h3>
+                        <p class="card-text mb-1"><strong>Fournisseur:</strong> '.htmlspecialchars($fournisseur['nom']).'</p>
+                        <p class="card-text mb-1"><strong>Email:</strong> '.htmlspecialchars($fournisseur['email']).'</p>
+                        <p class="card-text mb-1"><strong>Téléphone:</strong> '.htmlspecialchars($fournisseur['tel']).'</p>
+                        <p class="card-text mb-3"><strong>Ville:</strong> '.htmlspecialchars($fournisseur['ville']).'</p>
+    
+                        <div class="form-floating mb-3">
+                            <input name="quantite" type="number" min="0" class="form-control" id="quantite'.$idProduit.'" placeholder="Quantité" required>
+                            <label for="quantite'.$idProduit.'">Quantité</label>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            ';
+        }
+        echo '</div>';
+        echo '</div>';
+    }
+
+
+
 }

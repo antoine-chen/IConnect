@@ -29,6 +29,12 @@ class ModProduit{
             case "modifierProduit" :
                 $this->controleur->modifierProduit();
                 break;
+            case "listerProduitsFournisseur":
+                $this->controleur->listerProduitsFournisseur();
+                break;
+            case "restockerProduit":
+                $this->controleur->restockerProduit();
+                break;
             default:
                 echo "action inconnue";
                 break;
