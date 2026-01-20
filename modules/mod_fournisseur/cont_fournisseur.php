@@ -53,7 +53,6 @@ class ContFournisseur{
         }
     }
 
-
     public function supprimerFournisseur(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
             $this->modele->deleteFournisseur(
@@ -61,6 +60,18 @@ class ContFournisseur{
             );
             $this->listerFournisseur();
         }
+    }
+
+    public function formAjouterProduitFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] = 'Gestionnaire'){
+            $this->vue->afficherFormAjouterProduitFournisseur(
+                $this->modele->produitsPasFournitParFournisseur($_SESSION['asso'], $_GET['id'])
+            );
+        }
+    }
+
+    public function ajouterProduitFournisseur(){
+
     }
 
     public function getVue(){
