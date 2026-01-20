@@ -93,6 +93,12 @@ class ContCommande {
         }
     }
 
+    public function historiqueCommandeFournisseur(){
+        $this->vue->afficherHistoriqueCommandeFournisseur(
+            $this->modele->getCommandeFournisseur($_SESSION['asso'])
+        );
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }

@@ -81,19 +81,27 @@ class ModeleCommande extends Modele {
                             INNER JOIN produit p ON l.idProduit = p.id             
                             WHERE c.idUtilisateur = ? AND c.idAssociation = ?
                             GROUP BY c.id, c.date, c.statut, a.nom, a.image
-                            ORDER BY c.date DESC
-        ');
+                            ORDER BY c.date DESC');
         $get->execute([$idUtilisateur, $idAssociation]);
         return $get->fetchAll();
     }
 
-    public function getLoginUtilisateur($idUtilisateur)
-    {
+    public function getLoginUtilisateur($idUtilisateur){
         $get = self::$bdd->prepare('
             select login from utilisateurs where id = (?)
         ');
         $get->execute([$idUtilisateur]);
         return $get->fetchColumn();
+    }
+
+    public function getCommandeFournisseur ($idAssociation){
+        $get = self::$bdd->prepare('SELECT h.date, h.quantite, p.nom AS nomProduit, f.*, u.nom AS nomUtilisateur FROM historiqueRestock h INNER JOIN produit p ON h.idProduit = p.id
+                                                                INNER JOIN fournisseur f ON h.idFournisseur = f.id
+                                                                INNER JOIN utilisateurs u ON h.idGestionnaire = u.id
+                                        WHERE h.idAssociation = ?
+                                        ORDER BY h.id DESC ');
+        $get->execute([$idAssociation]);
+        return $get->fetchAll();
     }
 
 }

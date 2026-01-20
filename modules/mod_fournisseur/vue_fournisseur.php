@@ -38,7 +38,7 @@ class VueFournisseur extends VueGenerique{
         echo '
     <div class="container mt-5">
         <h3 class="text-center mb-4">
-            <i class="bi bi-truck"></i> Fournisseurs & produits
+            <i class="bi bi-truck"></i> Fournisseurs
         </h3>
 
         <div class="d-flex flex-column gap-3 align-items-center">

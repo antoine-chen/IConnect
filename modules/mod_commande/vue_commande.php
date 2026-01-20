@@ -167,6 +167,79 @@ class VueCommande extends VueGenerique {
     ';
     }
 
+    public function afficherHistoriqueCommandeFournisseur($historique){
+
+        echo '
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">
+            <i class="bi bi-clipboard-data"></i> Historique des commandes fournisseurs
+        </h3>
+
+        <div class="d-flex flex-column gap-4 align-items-center">
+    ';
+
+        foreach ($historique as $commande){
+
+            echo '
+        <div class="container-color rounded-4 p-4 w-75">
+            <div class="row g-3">
+
+                <!-- Infos commande -->
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-2">
+                        <i class="bi bi-box-seam"></i> Commande
+                    </h6>
+                    <p class="mb-1">
+                        <i class="bi bi-calendar-event"></i>
+                        <strong>Date :</strong> '.htmlspecialchars($commande['date']).'
+                    </p>
+                    <p class="mb-1">
+                        <strong>Produit :</strong> '.htmlspecialchars($commande['nomProduit']).'
+                    </p>
+                    <p class="mb-0">
+                        <strong>Quantité :</strong> '.htmlspecialchars($commande['quantite']).'
+                    </p>
+                </div>
+
+                <!-- Fournisseur -->
+                <div class="col-md-5">
+                    <h6 class="fw-bold mb-2">
+                        <i class="bi bi-truck"></i> Fournisseur
+                    </h6>
+                    <p class="mb-1"><i class="bi bi-person"></i>'.htmlspecialchars($commande['nom']).'</p>
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-envelope"></i> '.htmlspecialchars($commande['email']).'
+                    </p>
+                    <p class="mb-1">
+                        <i class="bi bi-geo-alt"></i> '.htmlspecialchars($commande['ville']).'
+                    </p>
+                    <p class="mb-0">
+                        <i class="bi bi-telephone"></i> '.htmlspecialchars($commande['tel']).'
+                    </p>
+                </div>
+
+                <!-- Utilisateur -->
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-2">
+                        <i class="bi bi-person"></i> Gestionnaire
+                    </h6>
+                    <span class="badge bg-secondary-subtle text-dark px-3 py-2">
+                        '.htmlspecialchars($commande['nomUtilisateur']).'
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        ';
+        }
+
+        echo '
+        </div>
+    </div>
+    ';
+    }
+
+
 
     public function afficher() {
         return $this->getAffichage();
