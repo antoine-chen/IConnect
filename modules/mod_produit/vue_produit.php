@@ -45,6 +45,7 @@ class VueProduit extends VueGenerique{
     {
         echo '
             <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" enctype="multipart/form-data" class="container taille-formulaire">
+            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                 <h6 class="text-center">Ajouter un produit</h6>
                 <div class="form-floating mt-3 mb-2">
                     <input name="nom" class="form-control" placeholder="Nom du produit" required>
@@ -72,6 +73,7 @@ class VueProduit extends VueGenerique{
     {
         echo '
     <form method="post" action="index.php?module=produit&action=modifierProduit&id='.$produit['id'].'" class="container taille-formulaire" enctype="multipart/form-data">
+    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
         <div class="mb-3">
             <label for="nom" class="form-label">Nom du produit</label>
             <input type="text" name="nom" class="form-control" value="'.htmlspecialchars($produit['nom']).'">

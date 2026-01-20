@@ -18,17 +18,19 @@ class ContFournisseur{
     }
 
     public function ajouterFournisseur(){
-        if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire"){
-            if (isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["ville"]) && isset($_POST["telephone"])){
-                $nom = $_POST['nom'];
-                $email = $_POST["email"];
-                $ville = $_POST["ville"];
-                $telephone = $_POST["telephone"];
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            if (isset($_SESSION['role']) && $_SESSION['role'] == "Gestionnaire") {
+                if (isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["ville"]) && isset($_POST["telephone"])) {
+                    $nom = $_POST['nom'];
+                    $email = $_POST["email"];
+                    $ville = $_POST["ville"];
+                    $telephone = $_POST["telephone"];
 
-                $this->modele->insertFournisseur($nom, $email, $ville, $telephone);
-                $this->listerFournisseur();
-            }else {
-                $this->formAjouterFournisseur();
+                    $this->modele->insertFournisseur($nom, $email, $ville, $telephone);
+                    $this->listerFournisseur();
+                } else {
+                    $this->formAjouterFournisseur();
+                }
             }
         }
     }

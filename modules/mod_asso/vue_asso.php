@@ -36,6 +36,7 @@ class VueAsso extends VueGenerique {
         echo '
             <h2 class="text-center">Ajouter une association</h2>
             <form action="index.php?module=asso&action=ajouterAssociation" method="post" enctype="multipart/form-data" class="container taille-formulaire">
+                <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                 <p class="text-danger">' . $messageErreur . '</p>
                 <div class="form-floating">
                     <input name="nom" class="form-control" placeholder="Nom de l\'association" required>

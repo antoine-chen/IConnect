@@ -59,14 +59,16 @@ class ContCompte{
     }
 
     public function modifierProduit(){
-        echo $_GET['id'];
-        if (isset($_SESSION['role']) && isset($_POST['login'])){
-            $this->modele->updataProfilUtilisateur(
-                $_SESSION['id'],
-                $_POST['login']
-            );
-            $_SESSION['login'] = $_POST['login'];
-            $this->profil();
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            echo $_GET['id'];
+            if (isset($_SESSION['role']) && isset($_POST['login'])) {
+                $this->modele->updataProfilUtilisateur(
+                    $_SESSION['id'],
+                    $_POST['login']
+                );
+                $_SESSION['login'] = $_POST['login'];
+                $this->profil();
+            }
         }
     }
 

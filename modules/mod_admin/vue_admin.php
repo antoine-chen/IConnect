@@ -45,7 +45,7 @@ class VueAdmin extends VueGenerique{
      * si je suis barman je peux donner le role barman à un client de mon asso
      * je peux enlever le role barman et ban l'utilisateur
     */
-    public function formAjouterBarman($listeComptes){
+    public function afficherTabGestionComptes($listeComptes){
         echo '
       <div class="container">  
             <h3 class="text-center mb-4">

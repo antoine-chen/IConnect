@@ -14,6 +14,7 @@ class VueCompte extends VueGenerique{
                    <p>'. $soldeClient.' €</p>
                 </div>
                 <form method="post" action="index.php?module=compte&action=recharger" class="mt-4 mb-4">
+                <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                    <div class="form-floating mb-2">
                        <input name="montant" class="form-control" placeholder="Montant">
                        <label>Montant</label>
@@ -74,6 +75,7 @@ class VueCompte extends VueGenerique{
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form method="post" action="'.$href.$idUtilisateur.'" class="container">
+                        <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                             <div class="form-floating mt-3 mb-2">
                                 <input name="login" class="form-control" value="'. $listeData['login'].'" placeholder="Login" required>
                                 <label>Login</label>

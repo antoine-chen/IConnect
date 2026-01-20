@@ -55,6 +55,7 @@ class VueStock extends VueGenerique{
             <div class="text-center m-3">'.htmlspecialchars(date('d/m/Y')) .'</div>
             <div class="table-responsive">
             <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-tableau">
+            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                 <table class="table table-bordered table-hover text-center">
                      <tr>
                          <th style="width: 25%">Nom</th>

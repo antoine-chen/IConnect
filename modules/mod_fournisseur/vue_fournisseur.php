@@ -10,6 +10,7 @@ class VueFournisseur extends VueGenerique{
         echo '
             
             <form method="post" action="index.php?module=fournisseur&action=ajouterFournisseur" class="container">
+            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                 <h2 class="text-center">Ajouter un fournisseur</h2>
                 <div class="form-floating mt-3 mb-2">
                     <input name="nom" class="form-control" placeholder="Nom" required>

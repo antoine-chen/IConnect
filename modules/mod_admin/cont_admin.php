@@ -20,7 +20,7 @@ class ContAdmin{
 
     public function afficherListeClient(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
-            $this->vue->formAjouterBarman(
+            $this->vue->afficherTabGestionComptes(
                 $this->modele->getUtilisateurAsso($_SESSION['asso'])
             );
         }

@@ -1,4 +1,5 @@
 <?php
+include_once 'token.php';
 include_once 'vue_connexion.php';
 include_once 'modele_connexion.php';
 
@@ -19,20 +20,22 @@ class ContConnexion {
     }
 
     public function inscription() {
-        if (isset($_POST['login']) && isset($_POST['pwd'])) {
-            $login = $_POST['login'];
-            $pwd = $_POST['pwd'];
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            if (isset($_POST['login']) && isset($_POST['pwd'])) {
+                $login = $_POST['login'];
+                $pwd = $_POST['pwd'];
 
-            if (!empty($login) && !empty($pwd)) {
-                if (!$this->modele->verifLoginExiste($login)) {
-                    $hash = password_hash($pwd, PASSWORD_DEFAULT);
-                    $this->modele->ajouterUtilisateur($login, $hash);
+                if (!empty($login) && !empty($pwd)) {
+                    if (!$this->modele->verifLoginExiste($login)) {
+                        $hash = password_hash($pwd, PASSWORD_DEFAULT);
+                        $this->modele->ajouterUtilisateur($login, $hash);
+                    }
+                } else {
+                    $this->vue->form_inscription();
                 }
             } else {
                 $this->vue->form_inscription();
             }
-        } else {
-            $this->vue->form_inscription();
         }
     }
 
@@ -44,21 +47,23 @@ class ContConnexion {
     }
 
     public function connexion() {
-        if (isset($_POST['login']) && isset($_POST['pwd'])) {
-            $login = $_POST['login'];
-            $pwd = $_POST['pwd'];
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            if (isset($_POST['login']) && isset($_POST['pwd'])) {
+                $login = $_POST['login'];
+                $pwd = $_POST['pwd'];
 
-            $utilisateur = $this->modele->getUtilisateur($login);
+                $utilisateur = $this->modele->getUtilisateur($login);
 
-            if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
-                $_SESSION['id'] = $utilisateur['id'];
-                $_SESSION['login'] = $utilisateur['login'];
-                if ($this->modele->estAdmin($login)) $_SESSION['role'] = $this->modele->estAdmin($login);
+                if ($utilisateur && password_verify($pwd, $utilisateur['pwd'])) {
+                    $_SESSION['id'] = $utilisateur['id'];
+                    $_SESSION['login'] = $utilisateur['login'];
+                    if ($this->modele->estAdmin($login)) $_SESSION['role'] = $this->modele->estAdmin($login);
+                } else {
+                    $this->vue->form_connexion();
+                }
             } else {
                 $this->vue->form_connexion();
             }
-        } else {
-            $this->vue->form_connexion();
         }
     }
 

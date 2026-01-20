@@ -43,24 +43,26 @@ class ContProduit{
 
     public function ajouterNouveauProduit()
     {
-        if($_SESSION['role']=='Gestionnaire') {
-            $idAsso = $_SESSION['asso'];
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            if($_SESSION['role']=='Gestionnaire') {
+                $idAsso = $_SESSION['asso'];
 
-            $nomProduit = $_POST['nom'];
-            $prixProduit = $_POST['prix'];
+                $nomProduit = $_POST['nom'];
+                $prixProduit = $_POST['prix'];
 
-            $this->modele->insertProduit($nomProduit,$prixProduit);
-            $idProduit = $this->modele->lastProduitAjoute();
+                $this->modele->insertProduit($nomProduit,$prixProduit);
+                $idProduit = $this->modele->lastProduitAjoute();
 
-            $this->modele->associerProduitAuAsso($idAsso,$idProduit['id']);
+                $this->modele->associerProduitAuAsso($idAsso,$idProduit['id']);
 
-            $extension = pathinfo($_FILES['imageProduit']['name'], PATHINFO_EXTENSION);
-            $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
-            move_uploaded_file($_FILES['imageProduit']['tmp_name'],$cheminFichier);
-            $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
+                $extension = pathinfo($_FILES['imageProduit']['name'], PATHINFO_EXTENSION);
+                $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
+                move_uploaded_file($_FILES['imageProduit']['tmp_name'],$cheminFichier);
+                $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
 
-            $idInventaire = $this->modele->idInventaire($idAsso);
-            $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
+                $idInventaire = $this->modele->idInventaire($idAsso);
+                $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
+            }
         }
     }
 
@@ -74,27 +76,29 @@ class ContProduit{
 
     public function modifierProduit()
     {
-        if($_SESSION['role']=='Gestionnaire') {
-            $idAsso = $_SESSION['asso'];
-            $idProduit = $_GET['id'];
-            $nom = $_POST['nom'];
-            $prix = $_POST['prix'];
+        if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            if ($_SESSION['role'] == 'Gestionnaire') {
+                $idAsso = $_SESSION['asso'];
+                $idProduit = $_GET['id'];
+                $nom = $_POST['nom'];
+                $prix = $_POST['prix'];
 
-            $this->modele->updateProduit($idProduit, $nom, $prix);
+                $this->modele->updateProduit($idProduit, $nom, $prix);
 
-            if(!empty($_FILES['image']['tmp_name'])) {
-                $ancienProduit = $this->modele->getProduit($idProduit);
-                $ancienChemin = $ancienProduit['image'];
-                unlink($ancienChemin);
+                if (!empty($_FILES['image']['tmp_name'])) {
+                    $ancienProduit = $this->modele->getProduit($idProduit);
+                    $ancienChemin = $ancienProduit['image'];
+                    unlink($ancienChemin);
 
-                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
-                move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
+                    $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                    $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
+                    move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
 
 
-                $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
-                $idInventaire = $this->modele->idInventaire($idAsso);
-                $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
+                    $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
+                    $idInventaire = $this->modele->idInventaire($idAsso);
+                    $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
+                }
             }
         }
     }

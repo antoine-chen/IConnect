@@ -10,6 +10,7 @@ class VueConnexion extends VueGenerique {
         echo '
             <div class="center-connexion bg-white">
                 <form method="post" action="index.php?actionComposant=inscription" class="taille-connexion container-color rounded-4">
+                    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                     <h2 class="text-center">Inscription</h2>
                     <div class="form-floating mt-3 mb-2">
                         <input name="login" class="form-control" placeholder="Login">
@@ -33,6 +34,7 @@ class VueConnexion extends VueGenerique {
             <div class="center-connexion bg-white">
                 <form method="post" action="index.php?actionComposant=connexion" class="taille-connexion container-color rounded-4">
                     <h2 class="text-center">Connexion</h2>
+                    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                     <div class="form-floating mt-3 mb-2">
                         <input name="login" class="form-control" placeholder="Login">
                         <label>Login</label>
