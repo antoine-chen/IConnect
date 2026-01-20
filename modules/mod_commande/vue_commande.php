@@ -106,11 +106,18 @@ class VueCommande extends VueGenerique {
 
         foreach ($historique as $commande){
             switch ($commande['statut']) {
-                case 'Validée':
+                case 'Encours':
+                    $badge = '<span class="badge bg-secondary">En cours</span>';
+                    break;
+                case 'rembourser':
+                    $badge = '<span class="badge bg-success">Remboursement</span>';
+                    break;
+                case 'livrée':
                     $badge = '<span class="badge bg-success">Validée</span>';
                     break;
                 default:
-                    $badge = '<span class="badge bg-warning text-dark">En attente</span>';
+                    $badge = '<span class="badge bg-warning text-dark">rien</span>';
+                    break;
             }
 
             echo '
