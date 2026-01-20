@@ -33,40 +33,70 @@ class VueFournisseur extends VueGenerique{
         ';
     }
 
-    public function afficherListeFournisseur($listeFournisseur){
+    public function afficherListeFournisseurEtProduits($listeFournisseur, $produitsFournisseur){
+
         echo '
-            <div class="table-responsive taille-container container">
-                <table class="table table-sm table-bordered table-hover text-center">
-                    <tr> 
-                        <th>Nom</th> 
-                        <th>Email</th>
-                        <th>Ville</th> 
-                        <th>Télephone</th>
-                    </tr>    
-        ';
-        foreach ($listeFournisseur as $fournisseur) {
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">
+            <i class="bi bi-truck"></i> Fournisseurs & produits
+        </h3>
+
+        <div class="d-flex flex-column gap-3 align-items-center">
+    ';
+
+        foreach ($listeFournisseur as $fournisseur){
+
             echo '
-                <tr>
-                    <td>'. $fournisseur['nom'].'</td>
-                    <td>'. $fournisseur['email'].'</td>
-                    <td>'. $fournisseur['ville'].'</td>
-                    <td>'. $fournisseur['tel'].'</td>
-                    <td>
-                        <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'" class="btn btn-light border">
-                            <i class="bi bi-trash-fill"></i>
-                        </a>
-                    </td>
-                </tr>
-            ';
-        }
-        echo '
-                </table>
-            </div>
-            <div class="text-center m-3">
-                <a href="index.php?module=fournisseur&action=formAjouterFournisseur" class="btn btn-primary">Ajouter un fournisseur</a>
-            </div>
+        <div class="container-color rounded-4 p-4 w-75">
+            <div class="row align-items-center">
+
+                <div class="col-md-4">
+                    <h5>'.htmlspecialchars($fournisseur['nom']).'</h5>
+                    <p><i class="bi bi-envelope"></i> '.htmlspecialchars($fournisseur['email']).'</p>
+                    <p><i class="bi bi-geo-alt"></i> '.htmlspecialchars($fournisseur['ville']).'</p>
+                    <p><i class="bi bi-telephone"></i> '.htmlspecialchars($fournisseur['tel']).'</p>
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Produits fournis :</strong>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
         ';
+
+            if (!empty($produitsFournisseur[$fournisseur['id']])){
+                foreach ($produitsFournisseur[$fournisseur['id']] as $produit){
+                    echo '
+                        <span class="badge bg-light text-dark border px-3 py-2">
+                             '.htmlspecialchars($produit) .'
+                        </span>
+                    ';
+                }
+            } else {
+                echo '<span class="text-muted">Aucun produit</span>';
+            }
+
+            echo '
+                    </div>
+                </div>
+
+                <div class="col-md-2 d-flex justify-content-end align-items-center">                    
+                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'"
+                       class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        ';
+        }
+
+        echo '
+            </div>
+        </div>
+    ';
     }
+
+
     public function afficher() {
         return $this->getAffichage();
     }
