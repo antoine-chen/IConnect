@@ -15,8 +15,8 @@ class ModeleNavbar extends Modele{
     public function getNavbarBarman(){
         return array(
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
-            array("url" => "index.php?module=commande&action=commandeAvancee", "action" => "commande du jour"),
-            array("url" => "index.php?module=commande&action=historique", "action" => "historique"),
+            array("url" => "index.php?module=commande&action=commandeAvancee", "action" => "Commandes du jour"),
+            array("url" => "index.php?module=commande&action=historique", "action" => "Historique"),
             array("url" => "index.php?module=stock&action=stockProduitBarman", "action" => "Stock")
         );
     }
@@ -26,11 +26,11 @@ class ModeleNavbar extends Modele{
             array("url" => "index.php?module=compte&action=profil", "action" => "Profil"),
             array("url" => "index.php?module=stock&action=stockProduits", "action" => "Stock"),
             array("url" => "index.php?module=admin&action=afficherListeClient", "action" => "Gestion comptes"),
-            array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste les fournisseurs"),
+            array("url" => "index.php?module=fournisseur&action=listerFournisseur", "action" => "Liste des fournisseurs"),
             array("url" => "index.php?module=admin&action=listerDemandeUtilisateur", "action" => "Demande"),
             array("url" => "index.php?module=stock&action=formChoixInventaireRapport", "action" => "Rapports"),
             array("url" => "index.php?module=produit&action=listerProduitsFournisseur", "action" => "Restocker"),
-            array("url" => "index.php?module=commande&action=historiqueCommandeFournisseur", "action" => "Historique restocks"),
+            array("url" => "index.php?module=commande&action=historiqueCommandeFournisseur", "action" => "Historique des restocks"),
             array("url" => "index.php?module=commande&action=historiqueCommandeAsso", "action" => "Commandes clients"),
         );
     }

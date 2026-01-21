@@ -226,8 +226,7 @@ class VueStock extends VueGenerique{
     {
         echo '
     <div class="container my-4">
-        <h3 class="text-center mb-3">Le stock chez '.$_SESSION['nomAsso'].'</h3>
-        <h5 class="text-center mb-4">Stock du : '.htmlspecialchars($donnes[0]['date']).'</h5>
+        <h5 class="text-center mb-4">Stock du : '.htmlspecialchars($donnes[0]['date']).' chez '.$_SESSION['nomAsso'].'</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered text-center align-middle">
                 <thead class="table-light">
