@@ -167,6 +167,7 @@ class VueCommande extends VueGenerique {
                     <!-- Infos commande -->
                     <div class="col-md-6">
                         <h5 class="mb-1">Commande #'. htmlspecialchars($commande['id']) .'</h5>
+                        <p class="mb-1"> code de retrait: '.htmlspecialchars($commande['code']).'</p>
                         <p class="mb-1 text-muted">
                             <i class="bi bi-shop"></i>
                             '. htmlspecialchars($commande['nom_association']) .'
