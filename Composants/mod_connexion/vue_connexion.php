@@ -13,11 +13,11 @@ class VueConnexion extends VueGenerique {
                     <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                     <h2 class="text-center">Inscription</h2>
                     <div class="form-floating mt-3 mb-2">
-                        <input name="login" class="form-control" placeholder="Login">
+                        <input name="login" class="form-control" placeholder="Login" type="text" minlength="3" required>
                         <label>Login</label>
                     </div>
                     <div class="form-floating">
-                        <input name="pwd" class="form-control" placeholder="Mot de passe">
+                        <input name="pwd" class="form-control" placeholder="Mot de passe" type="text" minlength="12" required>
                         <label>Mot de passe</label>
                     </div>
                     <div class="mb-3">
@@ -36,11 +36,11 @@ class VueConnexion extends VueGenerique {
                     <h2 class="text-center">Connexion</h2>
                     <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                     <div class="form-floating mt-3 mb-2">
-                        <input name="login" class="form-control" placeholder="Login">
+                        <input name="login" class="form-control" placeholder="Login" type="text" minlength="3" required>
                         <label>Login</label>
                     </div>
                     <div class="form-floating">
-                        <input name="pwd" class="form-control" placeholder="Mot de passe">
+                        <input name="pwd" class="form-control" placeholder="Mot de passe" type="text" minlength="12" required>
                         <label>Mot de passe</label>
                     </div>
                     <div class="mb-3">
