@@ -66,4 +66,12 @@ class ModeleAsso extends Modele {
         $insert->execute([$idUtilisateur,$idAsso]);
     }
 
+    public function deleteAsso($id)
+    {
+        $delete = self::$bdd->prepare('
+            delete from association where id =(?)
+        ');
+        $delete->execute([$id]);
+    }
+
 }

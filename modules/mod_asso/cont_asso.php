@@ -139,16 +139,26 @@ class ContAsso {
             if (!isset($_SESSION['role'])) {
                 $nomAssociation = $_POST['nom'];
                 $idUtilisateur = $_SESSION['id'];
+
+                $extension = strtolower(pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION));
                 $this->modele->insertAssociation($nomAssociation);
 
                 $nomFichier = $this->modele->idAsso($nomAssociation);
-                $extension = pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION);
-                $cheminFichier = 'modules/mod_asso/logos/' . $nomFichier . '.' . $extension;
-                move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
-                $this->modele->ajoutImage($nomFichier, $cheminFichier);
-                $this->modele->enregistrerDemande($idUtilisateur, $nomFichier);
+
+                // Vérification de l'extension
+                $extensionsAutorisees = ['jpg', 'jpeg', 'png', 'webp'];
+                if (in_array($extension, $extensionsAutorisees)) {
+                    $cheminFichier = 'modules/mod_asso/logos/' . $nomFichier . '.' . $extension;
+                    move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
+                    $this->modele->ajoutImage($nomFichier, $cheminFichier);
+                    $this->modele->enregistrerDemande($idUtilisateur, $nomFichier);
+                }
+                else {
+                    $this->modele->deleteAsso($nomFichier);
+                }
             }
             $this->formAssociation();
         }
     }
+
 }
