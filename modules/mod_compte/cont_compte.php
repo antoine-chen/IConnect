@@ -58,13 +58,17 @@ class ContCompte{
         }
     }
 
-    public function modifierProduit(){
+    public function modifierProfil(){
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
             echo $_GET['id'];
-            if (isset($_SESSION['role']) && isset($_POST['login'])) {
+            if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['email'])) {
                 $this->modele->updataProfilUtilisateur(
                     $_SESSION['id'],
-                    $_POST['login']
+                    $_POST['login'],
+                    $_POST['nom'],
+                    $_POST['prenom'],
+                    $_POST['telephone'],
+                    $_POST['email']
                 );
                 $_SESSION['login'] = $_POST['login'];
                 $this->profil();
