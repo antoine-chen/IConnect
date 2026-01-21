@@ -18,12 +18,14 @@ class ContAdmin{
         }
     }
 
-    public function afficherListeClient(){
+    public function gestionCompte(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
             $this->vue->afficherTabGestionComptes(
                 $this->modele->getUtilisateurAsso($_SESSION['asso'])
             );
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     /**
@@ -36,8 +38,12 @@ class ContAdmin{
 
             if (!$this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
                 $this->modele->insertRoleBarman($idUtilisateur, $idAssociation, "Barman");
+                $_SESSION['messageOk'] = 'Promotion success';
+            }else{
+                $_SESSION['messagePasOk'] = 'Promotion fail, cette personne est déjà barman';
             }
-            header('Location: index.php?module=admin&action=afficherListeClient');
+            header('Location: index.php?module=admin&action=gestionCompte');
+            exit();
         }
     }
 
@@ -48,21 +54,24 @@ class ContAdmin{
 
             if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
                 $this->modele->deleteRoleBarman($idUtilisateur, $idAssociation, "Barman");
+                $_SESSION['messageOk'] = 'Le role barman a bien été enlever';
             }
-            header('Location: index.php?module=admin&action=afficherListeClient');
+            header('Location: index.php?module=admin&action=gestionCompte');
+            exit();
         }
     }
 
     public function bannirUtilisateur(){
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
-            $idUtilisateur = $_GET['id'];
-            $idAssociation = $_SESSION['asso'];
-
-            if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Barman")){
-                $this->modele->deleteUtilisateur($idUtilisateur, $idAssociation);
-            }
-            header('Location: index.php?module=admin&action=afficherListeClient');
-        }
+        echo $_GET['id'];
+//        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
+//            $idUtilisateur = $_GET['id'];
+//            $idAssociation = $_SESSION['asso'];
+//            $loginUtilisateur = $this->modele->getLogin($idUtilisateur);
+//            $this->modele->deleteUtilisateur($idUtilisateur, $idAssociation);
+//            $_SESSION['messageOk'] = 'Vous avez banni '.$loginUtilisateur;
+//            header('Location: index.php?module=admin&action=gestionCompte');
+//            exit();
+//        }
     }
 
     /**
@@ -106,10 +115,6 @@ class ContAdmin{
         }
     }
 
-    public function getVue(){
-        return $this->vue->afficher();
-    }
-
     public function validerDemandeAsso()
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
@@ -128,5 +133,9 @@ class ContAdmin{
             $this->modele->refuserAsso($idAsso);
         }
         $this->listeDemandeCreationAsso();
+    }
+
+    public function getVue(){
+        return $this->vue->afficher();
     }
 }

@@ -46,6 +46,7 @@ class VueAdmin extends VueGenerique{
      * je peux enlever le role barman et ban l'utilisateur
     */
     public function afficherTabGestionComptes($listeComptes){
+        $this->confirmationProgressBar();
         echo '
       <div class="container">  
             <h3 class="text-center mb-4">
@@ -100,13 +101,10 @@ class VueAdmin extends VueGenerique{
                    </a>
                 ';
             }
-            if ($compte['role'] != 'Gestionnaire'){
-                echo '
-                <button class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmer"><i class="bi bi-trash"></i></button>
-                ';
-                $this->afficherConfirmationModal('Bannir', 'Voulez vous bannir cette utilisateur ?', 'Bannir',  'index.php?module=admin&action=bannirUtilisateur&id=' . $compte['id']);
-            }
             echo'
+                   <a class="btn btn btn-danger" href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'">
+                        <i class="bi bi-trash"></i>
+                   </a>
                         </div>
                     </td>
                 </tr>

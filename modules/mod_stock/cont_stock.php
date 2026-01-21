@@ -28,6 +28,8 @@ class ContStock {
             }
             $this->vue->boutons();
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     /**
@@ -51,8 +53,7 @@ class ContStock {
      */
     public function ajoutInventaire()
     {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
-            if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])) {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login']) && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
                 $idAsso = $_SESSION['asso'];
                 $stockProduits = $_POST['stock'];
 
@@ -62,7 +63,7 @@ class ContStock {
                 foreach ($stockProduits as $idProduit => $quantiteProduit) {
                     $this->modele->ajouterProduit($idNewInventaire, $idProduit, $quantiteProduit);
                 }
-            }
+            $_SESSION['messageOk'] = 'Nouveau inventaire success';
             header("Location: index.php?module=stock");
             exit();
         }
@@ -172,6 +173,10 @@ class ContStock {
 
             if($stockProduit['stock'] - $pertes >= 0) {
                 $this->modele->updatePerte($idInventaire,$idProduit,$pertes);
+                $_SESSION['messageOk'] = 'Enregistrement des '.$pertes.' perte(s) success';
+            }else {
+                $diff = $pertes -$stockProduit['stock'];
+                $_SESSION['messagePasOk'] = 'Erreur les pertes sont supérieur au stock de '. $diff;
             }
         }
         $this->stockProduits();

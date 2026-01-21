@@ -116,15 +116,14 @@ class VueFournisseur extends VueGenerique{
                             </button>
                         </div>
                     </form>
-                    <button class="btn btn-outline-danger btn-sm w-100" data-bs-toggle="modal" data-bs-target="#confirmer">
+                    <a class="btn btn-outline-danger btn-sm w-100" href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'">
                         <i class="bi bi-trash-fill"></i> Supprimer
-                    </button>
+                    </a>
                 </div>
 
             </div>
         </div>
         ';
-         $this->afficherConfirmationModal('Supprimer', 'Êtes vous sur de supprimer ce fournisseur ?', 'Supprimer', 'index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id']);
         }
 
         echo '
