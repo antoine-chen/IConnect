@@ -140,46 +140,74 @@ class VueStock extends VueGenerique{
     /**
      * Affiche le rapport d'un inventaire
      */
-    public function afficherRapport($valeursTresorerie,$dateChoisi)
+    public function afficherRapport($valeursTresorerie, $dateChoisi)
     {
         echo '
     <div class="container mt-4">
         <div class="card shadow-sm">
             <div class="card-header bg-light text-center fw-semibold">
-                Rapport de trésorerie — inventaire du '.$dateChoisi.'
+                Rapport de trésorerie — inventaire du ' . htmlspecialchars($dateChoisi) . '
             </div>
-
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered text-center align-middle mb-0">
                         <thead class="table-secondary">
                             <tr>
                                 <th>Produit</th>
-                                <th>Prix</th>
+                                <th>Prix (€)</th>
                                 <th>Quantité initiale</th>
                                 <th>Quantité actuelle</th>
-                                <th>Ventes</th>
-                                <th>Pertes</th>
+                                <th>Ventes (Qté)</th>
+                                <th>Ventes (€)</th>
+                                <th>Pertes (Qté)</th>
+                                <th>Pertes (€)</th>
                                 <th>Variation de stock</th>
+                                <th>Valeur stock actuel (€)</th>
                             </tr>
                         </thead>
                         <tbody>
     ';
+        $totalQuantiteVentes = 0;
+        $totalValeurVentes = 0;
+        $totalQuantitePertes = 0;
+        $totalValeurPertes = 0;
+        $totalValeurStock = 0;
         foreach ($valeursTresorerie as $element) {
+            $ventesMontant = $element['ventes'] * $element['prix'];
+            $pertesMontant = $element['pertes'] * $element['prix'];
+            $stockValeur = $element['quantiteActuel'] * $element['prix'];
+
+            $totalQuantiteVentes += $element['ventes'];
+            $totalValeurVentes += $ventesMontant;
+            $totalQuantitePertes += $element['pertes'];
+            $totalValeurPertes += $pertesMontant;
+            $totalValeurStock += $stockValeur;
             echo '
-                            <tr>
-                                <td>'.htmlspecialchars($element['nom']).'</td>
-                                <td>'.htmlspecialchars($element['prix']).'</td>
-                                <td>'.htmlspecialchars($element['quantiteInitiale']).'</td>
-                                <td>'.htmlspecialchars($element['quantiteActuel']).'</td>
-                                <td>'.htmlspecialchars($element['ventes']).'</td>
-                                <td>'.htmlspecialchars($element['pertes']).'</td>
-                                <td class="fw-semibold">
-                                    '.htmlspecialchars($element['variationstock']).'
-                                </td>
-                            </tr>
+            <tr>
+                <td>' . htmlspecialchars($element['nom']) . '</td>
+                <td>' . number_format($element['prix'], 2) . '</td>
+                <td>' . htmlspecialchars($element['quantiteInitiale']) . '</td>
+                <td>' . htmlspecialchars($element['quantiteActuel']) . '</td>
+                <td>' . htmlspecialchars($element['ventes']) . '</td>
+                <td>' . number_format($ventesMontant, 2) . '</td>
+                <td>' . htmlspecialchars($element['pertes']) . '</td>
+                <td>' . number_format($pertesMontant, 2) . '</td>
+                <td class="fw-semibold">' . htmlspecialchars($element['variationstock']) . '</td>
+                <td>' .number_format($stockValeur, 2) . '</td>
+            </tr>
         ';
         }
+        echo '
+        <tr class="table-secondary fw-bold">
+            <td colspan="4">Totaux</td>
+            <td>' . htmlspecialchars($totalQuantiteVentes) . '</td>
+            <td>' . number_format($totalValeurVentes, 2) . '</td>
+            <td>' . htmlspecialchars($totalQuantitePertes) . '</td>
+            <td>' . number_format($totalValeurPertes, 2) . '</td>
+            <td>-</td>
+            <td>' . number_format($totalValeurStock, 2) . '</td>
+        </tr>
+    ';
         echo '
                         </tbody>
                     </table>
