@@ -57,6 +57,8 @@ class ContAsso {
         if(isset($_GET['id']) && isset($_SESSION['login'])) {
             $idAsso = $_GET['id'];
             $_SESSION['asso'] = $idAsso;
+            $_SESSION['nomAsso'] = $this->modele->getNomAssociation($_SESSION['asso']);
+
             $idUtilisateur = $_SESSION['id'];
 
             if(!$this->modele->existeAssociaion($idAsso)) {
@@ -104,7 +106,6 @@ class ContAsso {
                 else {
                     $roleChoisi = $listeRoles[0]['role'];
                     $_SESSION['role'] = $roleChoisi;
-
                     if($roleChoisi == 'Barman'){
                         header('Location: index.php?module=commande');
                         exit();

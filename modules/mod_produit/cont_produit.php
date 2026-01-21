@@ -64,6 +64,7 @@ class ContProduit{
                 $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
             }
         }
+        header('Location: index.php?module=stock');
     }
 
     public function form_modifierProduit()
@@ -101,6 +102,8 @@ class ContProduit{
                 }
             }
         }
+        header('Location: index.php?module=stock');
+        exit();
     }
 
     public function listerProduitsFournisseur(){

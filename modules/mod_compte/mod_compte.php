@@ -23,7 +23,10 @@ class ModCompte{
             case 'profil':
                 $this->controleur->profil();
                 break;
-            case 'modifierProduit':
+            case 'formModifierProfil':
+                $this->controleur->formModifierProfil();
+                break;
+            case 'modifierProfil':
                 $this->controleur->modifierProfil();
                 break;
             default:

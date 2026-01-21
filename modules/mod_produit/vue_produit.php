@@ -14,7 +14,7 @@ class VueProduit extends VueGenerique{
         $this->confirmationProgressBar();
         echo '
             <div class="fw-semibold">
-                Solde de <span class="text-primary">'.htmlspecialchars($loginClient).'</span> : '. $soldeUtilisateur.'€
+                Solde de '.htmlspecialchars($loginClient).': '. $soldeUtilisateur.'€ chez '.$_SESSION['nomAsso'].'
             </div>
         </div>
 
@@ -66,12 +66,12 @@ class VueProduit extends VueGenerique{
                     <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
 
                     <div class="form-floating mb-3">
-                        <input name="nom" class="form-control" placeholder="Nom du produit" required>
+                        <input name="nom" class="form-control" placeholder="Nom du produit" type="text" required>
                         <label>Nom du produit</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input name="prix" class="form-control" placeholder="Prix du produit" required>
+                        <input name="prix" class="form-control" placeholder="Prix du produit" type="number" required>
                         <label>Prix du produit</label>
                     </div>
 
@@ -79,18 +79,15 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label fw-semibold">Image du produit</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
-
-                    <button class="btn btn-primary w-100" type="submit">Ajouter</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+        ';
+        $this->afficherConfirmationModal("Ajouter", "Êtes vous sûr d'ajouter un produit ?", "Ajouter");
+        echo '
                 </form>
             </div>
         </div>
     </div>
     ';
-    }
-
-
-    public function afficher() {
-        return $this->getAffichage();
     }
 
     public function form_modifierProduit($produit)
@@ -110,7 +107,10 @@ class VueProduit extends VueGenerique{
             <label for="image" class="form-label">Image</label>
             <input type="file" name="image" class="form-control">
         </div>
-        <button class="btn btn-primary" type="submit">Valider</button>
+        <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+    ';
+        $this->afficherConfirmationModal('Modifier', 'Êtes vous sûr de modifier ce produit ?', 'Modifier');
+    echo '   
     </form>
     ';
     }
@@ -122,7 +122,7 @@ class VueProduit extends VueGenerique{
         }
 
         echo '<div class="container mt-5">';
-        echo '<h3 class="text-center mb-4"><i class="bi bi-box-seam"></i> Produits par Fournisseur</h3>';
+        echo '<h3 class="text-center mb-4"><i class="bi bi-box-seam"></i> Les produits des fournisseurs de '.$_SESSION['nomAsso'].'</h3>';
 
         echo '<div class="row g-4">';
         foreach ($produitsFournisseur as $produit) {
@@ -145,9 +145,12 @@ class VueProduit extends VueGenerique{
                             <label for="quantite'.$idProduit.'">Quantité</label>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Valider</button>
+                            <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>                        
                         </div>
                     </div>
+             ';
+            $this->afficherConfirmationModal('Valider', 'Êtes vous sûr de vouloir restocker ?', 'Valider');
+        echo '   
                 </form>
             </div>
             ';
@@ -156,6 +159,7 @@ class VueProduit extends VueGenerique{
         echo '</div>';
     }
 
-
-
+    public function afficher() {
+        return $this->getAffichage();
+    }
 }

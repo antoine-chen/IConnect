@@ -34,6 +34,10 @@ class Modele extends Connexion{
         return $get->fetchAll();
     }
 
-
+    public function verifLoginExiste($login,$id) {
+        $req = self::$bdd->prepare("SELECT id FROM utilisateurs WHERE login = ? and utilisateurs.id != ?");
+        $req->execute([$login,$id]);
+        return $req->fetch();
+    }
 
 }

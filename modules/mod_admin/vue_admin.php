@@ -49,7 +49,7 @@ class VueAdmin extends VueGenerique{
         echo '
       <div class="container">  
             <h3 class="text-center mb-4">
-                <i class="bi bi-people"></i> Gestion des comptes
+                <i class="bi bi-people"></i> Gestion des comptes chez '.$_SESSION['nomAsso'].'
             </h3>
        <div class="container-color rounded-4 p-4 w-75 container">    
          <div class="table-responsive container taille-tableau">
@@ -124,6 +124,7 @@ class VueAdmin extends VueGenerique{
 
     public function afficherListeDemandeUtilisateur($listeDemande){
         echo '
+            <h2 class="text-center">Demandes d\'inscription chez '.$_SESSION['nomAsso'].'</h2>
             <div class="table-responsive taille-tableau container">
                 <table class="table table-sm table-bordered table-hover text-center">
                     <tr> 

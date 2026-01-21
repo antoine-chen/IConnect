@@ -26,13 +26,14 @@ class ContFournisseur{
                     $ville = $_POST["ville"];
                     $telephone = $_POST["telephone"];
 
-                    $this->modele->insertFournisseur($nom, $email, $ville, $telephone);
+                    $this->modele->insertFournisseur($nom, $email, $ville, $telephone, $_SESSION['asso']);
                     $this->listerFournisseur();
                 } else {
                     $this->formAjouterFournisseur();
                 }
             }
         }
+        header('Location: index.php?module=fournisseur&action=listerFournisseur');
     }
 
     public function listerFournisseur(){

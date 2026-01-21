@@ -74,4 +74,10 @@ class ModeleAsso extends Modele {
         $delete->execute([$id]);
     }
 
+    public function getNomAssociation($idAssociation){
+        $get = self::$bdd->prepare('SELECT nom FROM association WHERE id = ? ');
+        $get->execute([$idAssociation]);
+        return $get->fetchColumn();
+    }
+
 }

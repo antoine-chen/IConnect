@@ -98,7 +98,7 @@ class ModeleCommande extends Modele {
     }
 
     public function getCommandeFournisseur ($idAssociation){
-        $get = self::$bdd->prepare('SELECT h.date, h.quantite, p.nom AS nomProduit, f.*, u.nom AS nomUtilisateur FROM historiqueRestock h INNER JOIN produit p ON h.idProduit = p.id
+        $get = self::$bdd->prepare('SELECT h.date, h.quantite, p.nom AS nomProduit, f.*, u.login AS loginUtilisateur FROM historiqueRestock h INNER JOIN produit p ON h.idProduit = p.id
                                                                 INNER JOIN fournisseur f ON h.idFournisseur = f.id
                                                                 INNER JOIN utilisateurs u ON h.idGestionnaire = u.id
                                         WHERE h.idAssociation = ?

@@ -12,7 +12,7 @@ class VuePanier extends VueGenerique{
     <div class="container my-5">
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="mb-0">Panier</h3>
+                <h3 class="mb-0">Panier chez '.$_SESSION['nomAsso'].'</h3>
                 <p class="mb-0 fw-semibold">Solde actuel : '.$solde.'€</p>
             </div>
 
