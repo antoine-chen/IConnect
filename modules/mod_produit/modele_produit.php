@@ -88,4 +88,20 @@ class ModeleProduit extends Modele {
         $updateLigneInventaire->execute([$quantite, $idInventaire, $idProduit]);
     }
 
+    public function deleteProduit($id)
+    {
+        $delete = self::$bdd->prepare('
+            delete from produit where id = (?)
+        ');
+        $delete->execute([$id]);
+    }
+
+    public function deleteProduitBoutique($idAsso,$idProduit)
+    {
+        $delete = self::$bdd->prepare('
+            delete from boutique where idProduit = (?) and idAssociation = (?)
+        ');
+        $delete->execute([$idProduit,$idAsso]);
+    }
+
 }

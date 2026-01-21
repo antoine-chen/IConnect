@@ -76,7 +76,7 @@ class VueProduit extends VueGenerique{
                     </div>
 
                     <div class="mb-4">
-                        <label for="imageProduit" class="form-label fw-semibold">Image du produit</label>
+                        <label for="imageProduit" class="form-label fw-semibold">Image du produit (seul les formats jpg,jpeg,png,webp sont acceptés)</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
 
@@ -107,7 +107,7 @@ class VueProduit extends VueGenerique{
             <input type="number" name="prix" class="form-control" value="'.htmlspecialchars($produit['prix']).'">
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
+            <label for="image" class="form-label">Image du produit (seul les formats jpg,jpeg,png,webp sont acceptés)</label>
             <input type="file" name="image" class="form-control">
         </div>
         <button class="btn btn-primary" type="submit">Valider</button>

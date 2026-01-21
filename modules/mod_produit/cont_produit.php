@@ -55,16 +55,24 @@ class ContProduit{
 
                 $this->modele->associerProduitAuAsso($idAsso,$idProduit['id']);
 
-                $extension = pathinfo($_FILES['imageProduit']['name'], PATHINFO_EXTENSION);
-                $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
-                move_uploaded_file($_FILES['imageProduit']['tmp_name'],$cheminFichier);
-                $this->modele->ajoutImage($idProduit['id'],$cheminFichier);
+                $extensionsImagesAutorisees = ['jpg', 'jpeg', 'png', 'webp'];
+                $extension = strtolower(pathinfo($_FILES['imageProduit']['name'], PATHINFO_EXTENSION));
 
-                $idInventaire = $this->modele->idInventaire($idAsso);
-                $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
+                if (in_array($extension, $extensionsImagesAutorisees)) {
+                    $cheminFichier = 'modules/mod_produit/img_produits/'.$idProduit['id'].'.'.$extension;
+                    move_uploaded_file($_FILES['imageProduit']['tmp_name'], $cheminFichier);
+                    $this->modele->ajoutImage($idProduit['id'], $cheminFichier);
+
+                    $idInventaire = $this->modele->idInventaire($idAsso);
+                    $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
+                } else {
+                    $this->modele->deleteProduit($idProduit['id']);
+                    $this->modele->deleteProduitBoutique($idAsso, $idProduit['id']);
+                }
             }
         }
     }
+
 
     public function form_modifierProduit()
     {
@@ -86,22 +94,26 @@ class ContProduit{
                 $this->modele->updateProduit($idProduit, $nom, $prix);
 
                 if (!empty($_FILES['image']['tmp_name'])) {
-                    $ancienProduit = $this->modele->getProduit($idProduit);
-                    $ancienChemin = $ancienProduit['image'];
-                    unlink($ancienChemin);
+                    $extensionsImagesAutorisees = ['jpg', 'jpeg', 'png', 'webp'];
+                    $extension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
 
-                    $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                    $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
-                    move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
+                    if (in_array($extension, $extensionsImagesAutorisees)) {
+                        $ancienProduit = $this->modele->getProduit($idProduit);
+                        $ancienChemin = $ancienProduit['image'];
+                        unlink($ancienChemin);
 
+                        $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
+                        move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
 
-                    $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
-                    $idInventaire = $this->modele->idInventaire($idAsso);
-                    $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
+                        $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
+                        $idInventaire = $this->modele->idInventaire($idAsso);
+                        $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
+                    }
                 }
             }
         }
     }
+
 
     public function listerProduitsFournisseur(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
