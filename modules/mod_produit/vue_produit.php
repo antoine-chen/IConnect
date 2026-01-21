@@ -66,12 +66,12 @@ class VueProduit extends VueGenerique{
                     <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
 
                     <div class="form-floating mb-3">
-                        <input name="nom" class="form-control" placeholder="Nom du produit" required>
+                        <input name="nom" class="form-control" placeholder="Nom du produit" type="text" required>
                         <label>Nom du produit</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input name="prix" class="form-control" placeholder="Prix du produit" required>
+                        <input name="prix" class="form-control" placeholder="Prix du produit" type="number" required>
                         <label>Prix du produit</label>
                     </div>
 
@@ -79,8 +79,10 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label fw-semibold">Image du produit</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
-
-                    <button class="btn btn-primary w-100" type="submit">Ajouter</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+        ';
+        $this->afficherConfirmationModal("Ajouter", "Êtes vous sûr d'ajouter un produit ?", "Ajouter");
+        echo '
                 </form>
             </div>
         </div>
@@ -105,7 +107,10 @@ class VueProduit extends VueGenerique{
             <label for="image" class="form-label">Image</label>
             <input type="file" name="image" class="form-control">
         </div>
-        <button class="btn btn-primary" type="submit">Valider</button>
+        <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+    ';
+        $this->afficherConfirmationModal('Modifier', 'Êtes vous sûr de modifier ce produit ?', 'Modifier');
+    echo '   
     </form>
     ';
     }
@@ -140,9 +145,12 @@ class VueProduit extends VueGenerique{
                             <label for="quantite'.$idProduit.'">Quantité</label>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Valider</button>
+                            <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>                        
                         </div>
                     </div>
+             ';
+            $this->afficherConfirmationModal('Valider', 'Êtes vous sûr de vouloir restocker ?', 'Valider');
+        echo '   
                 </form>
             </div>
             ';

@@ -232,7 +232,7 @@ class VueCommande extends VueGenerique {
                         <i class="bi bi-person"></i> Gestionnaire
                     </h6>
                     <span class="badge bg-secondary-subtle text-dark px-3 py-2">
-                        '.htmlspecialchars($commande['nomUtilisateur']).'
+                        '.htmlspecialchars($commande['loginUtilisateur']).'
                     </span>
                 </div>
 

@@ -49,7 +49,7 @@ class VueAdmin extends VueGenerique{
         echo '
       <div class="container">  
             <h3 class="text-center mb-4">
-                <i class="bi bi-people"></i> Gestion des comptes
+                <i class="bi bi-people"></i> Gestion des comptes chez '.$_SESSION['nomAsso'].'
             </h3>
        <div class="container-color rounded-4 p-4 w-75 container">    
          <div class="table-responsive container taille-tableau">

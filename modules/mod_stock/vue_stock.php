@@ -85,7 +85,7 @@ class VueStock extends VueGenerique{
         <div class="container mt-4" style="max-width: 900px;">
             <div class="card shadow-sm">
                 <div class="card-header text-center fw-semibold">
-                    Inventaire du '.htmlspecialchars(date('d/m/Y')).'
+                    Inventaire du '.htmlspecialchars(date('d/m/Y')).' chez '.$_SESSION['nomAsso'].'
                 </div>
 
                 <div class="card-body p-0">
@@ -118,10 +118,12 @@ class VueStock extends VueGenerique{
                         </table>
 
                         <div class="p-3 text-center">
-                            <button class="btn btn-primary px-4" type="submit">
-                                Valider l\'inventaire
-                            </button>
+                            <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
                         </div>
+        ';
+        $this->afficherConfirmationModal('Valider', 'Êtes vous sur de faire un inventaire', 'Valider');
+        echo '                
+                        
                     </form>
                 </div>
             </div>
