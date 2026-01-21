@@ -139,26 +139,41 @@ class ContAsso {
             if (!isset($_SESSION['role'])) {
                 $nomAssociation = $_POST['nom'];
                 $idUtilisateur = $_SESSION['id'];
-
                 $extension = strtolower(pathinfo($_FILES['imageAso']['name'], PATHINFO_EXTENSION));
                 $this->modele->insertAssociation($nomAssociation);
-
                 $nomFichier = $this->modele->idAsso($nomAssociation);
 
-                // Vérification de l'extension
-                $extensionsAutorisees = ['jpg', 'jpeg', 'png', 'webp'];
-                if (in_array($extension, $extensionsAutorisees)) {
-                    $cheminFichier = 'modules/mod_asso/logos/' . $nomFichier . '.' . $extension;
-                    move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminFichier);
-                    $this->modele->ajoutImage($nomFichier, $cheminFichier);
-                    $this->modele->enregistrerDemande($idUtilisateur, $nomFichier);
+                $extensionsImagesAutorisees = ['jpg', 'jpeg', 'png', 'webp'];
+                $fichiersPDF = ['carteIdentite', 'statutAsso', 'procesVerbal'];
+                $tousPDF = true;
+                foreach ($fichiersPDF as $fichier) {
+                    $ext = strtolower(pathinfo($_FILES[$fichier]['name'], PATHINFO_EXTENSION));
+                    if ($ext !== 'pdf') {
+                        $tousPDF = false;
+                        break;
+                    }
                 }
-                else {
+                if (in_array($extension, $extensionsImagesAutorisees) && $tousPDF) {
+                    $cheminImage = 'modules/mod_asso/logos/' . $nomFichier . '.' . $extension;
+                    move_uploaded_file($_FILES['imageAso']['tmp_name'], $cheminImage);
+                    $this->modele->ajoutImage($nomFichier, $cheminImage);
+                    $cheminCarte = 'documentsLegaux/carteIdentite_' . $nomFichier . '.pdf';
+                    $cheminStatut = 'documentsLegaux/statutAsso_' . $nomFichier . '.pdf';
+                    $cheminProces = 'documentsLegaux/procesVerbal_' . $nomFichier . '.pdf';
+
+                    move_uploaded_file($_FILES['carteIdentite']['tmp_name'], $cheminCarte);
+                    move_uploaded_file($_FILES['statutAsso']['tmp_name'], $cheminStatut);
+                    move_uploaded_file($_FILES['procesVerbal']['tmp_name'], $cheminProces);
+
+                    $this->modele->enregistrerDemande($idUtilisateur, $nomFichier, $cheminCarte, $cheminStatut, $cheminProces);
+                } else {
                     $this->modele->deleteAsso($nomFichier);
                 }
             }
             $this->formAssociation();
         }
     }
+
+
 
 }

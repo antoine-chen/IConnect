@@ -52,7 +52,7 @@ class ModeleAdmin extends Modele {
     public function listeDemandeAsso()
     {
         $get = self::$bdd->prepare('
-            select a.id as assoId,u.id as utilisateurId,a.nom,a.image,u.login 
+            select a.id as assoId,u.id as utilisateurId,a.nom,a.image,u.login,d.carteIdentitePDF, d.statutAssoPDF, d.procesVerbalPDF
             from demandeCreationAsso d inner join association a on d.idAsso = a.id inner join utilisateurs u on d.idUtilisateur = u.id
             where a.statut = ?
         ');

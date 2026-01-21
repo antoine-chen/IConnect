@@ -158,85 +158,62 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficher() {
-        return $this->getAffichage();
-    }
-
-//    public function afficherListeDemandeCreationAsso($demandesAsso)
-//    {
-//        echo '<div class="container mt-4">
-//                <div class="row justify-content-center">
-//                    <div class="col-12 table-responsive border rounded-3 p-3">
-//                        <table class="table table-bordered table-hover text-center">
-//                      <thead>
-//                        <tr>
-//                            <th>Login</th>
-//                            <th>Nom de l\'association</th>
-//                            <th>Image</th>
-//                        </tr>
-//                      </thead>
-//                      <tbody>';
-//
-//        foreach ($demandesAsso as $element) {
-//            echo '
-//            <tr>
-//                <td>' . htmlspecialchars($element['login']) . '</td>
-//                <td>' . htmlspecialchars($element['nom']) . '</td>
-//                <td>
-//                    <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
-//                </td>
-//            </tr>
-//        ';
-//        }
-//
-//        echo '          </tbody>
-//                    </table>
-//                </div>
-//            </div>
-//        </div>';
-//    }
-
     public function afficherListeDemandeCreationAsso($demandesAsso)
     {
         echo '<div class="container mt-4">
-            <div class="row justify-content-center">';
+            <div class="row justify-content-center g-4">';
 
         foreach ($demandesAsso as $element) {
             echo '
-        <div class="col-12 mb-4 border rounded-3 p-3 table-responsive">
-            <table class="table table-bordered table-hover text-center mb-3">
-                <thead>
-                    <tr>
-                        <th>Login</th>
-                        <th>Nom de l\'association</th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>' . htmlspecialchars($element['login']) . '</td>
-                        <td>' . htmlspecialchars($element['nom']) . '</td>
-                        <td>
-                            <img src="' . htmlspecialchars($element['image']) . '" class="img-association" alt="image-Asso">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="col-12 text-center">
-                <a href="index.php?module=admin&action=validerDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-primary me-2">Valider</a>
-                <a href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-primary">Refuser</a>
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered text-center align-middle mb-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Login</th>
+                                    <th>Nom de l\'association</th>
+                                    <th>Image</th>
+                                    <th>Carte d\'identité</th>
+                                    <th>Statut Asso</th>
+                                    <th>Procès verbal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>' . htmlspecialchars($element['login']) . '</td>
+                                    <td>' . htmlspecialchars($element['nom']) . '</td>
+                                    <td>
+                                        <img src="' . htmlspecialchars($element['image']) . '" class="img-fluid rounded" style="height:100px; object-fit:cover;" alt="image-Asso">
+                                    </td>
+                                    <td>
+                                        <a href="' . htmlspecialchars($element['carteIdentitePDF']) . '" target="_blank" class="btn btn-sm btn-outline-primary">Voir PDF</a>
+                                    </td>
+                                    <td>
+                                        <a href="' . htmlspecialchars($element['statutAssoPDF']) . '" target="_blank" class="btn btn-sm btn-outline-primary">Voir PDF</a>
+                                    </td>
+                                    <td>
+                                        <a href="' . htmlspecialchars($element['procesVerbalPDF']) . '" target="_blank" class="btn btn-sm btn-outline-primary">Voir PDF</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="index.php?module=admin&action=validerDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-success me-2">Valider</a>
+                        <a href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-danger">Refuser</a>
+                    </div>
+                </div>
             </div>
         </div>';
         }
-
         echo '    </div>
         </div>';
     }
 
-
-
-
-
+    public function afficher() {
+        return $this->getAffichage();
+    }
 }
 

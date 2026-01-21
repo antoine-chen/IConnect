@@ -60,10 +60,10 @@ class ModeleAsso extends Modele {
         $insert->execute([$image, $idAsso]);
     }
 
-    public function enregistrerDemande($idUtilisateur, $idAsso)
+    public function enregistrerDemande($idUtilisateur, $idAsso,$carte,$statut,$proces)
     {
-        $insert = self::$bdd->prepare('insert into demandeCreationAsso (idUtilisateur,idAsso) values (?,?)');
-        $insert->execute([$idUtilisateur,$idAsso]);
+        $insert = self::$bdd->prepare('insert into demandeCreationAsso (idUtilisateur,idAsso,carteIdentitePDF,statutAssoPDF,procesVerbalPDF) values (?,?,?,?,?)');
+        $insert->execute([$idUtilisateur,$idAsso,$carte,$statut,$proces]);
     }
 
     public function deleteAsso($id)
