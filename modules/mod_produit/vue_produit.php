@@ -55,26 +55,39 @@ class VueProduit extends VueGenerique{
     public function form_ajoutProduit()
     {
         echo '
-            <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" enctype="multipart/form-data" class="container taille-formulaire">
-            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                <h6 class="text-center">Ajouter un produit</h6>
-                <div class="form-floating mt-3 mb-2">
-                    <input name="nom" class="form-control" placeholder="Nom du produit" required>
-                    <label>Nom du produit</label>
-                </div>
-                <div class="form-floating">
-                    <input name="prix" class="form-control" placeholder="Prix du produit" required>
-                    <label>Prix du produit</label>
-                </div>
-                <div class="mt-3 mb-3">
-                    <input type="file" name="imageProduit" required>
-                </div>
-                <div>
-                   <button class="btn btn-primary" type="submit">Ajouter</button>
-                </div>
-            </form>
-        ';
+    <div class="container my-5" style="max-width: 500px;">
+        <div class="card shadow-sm">
+            <div class="card-header text-center fw-semibold">
+                Ajouter un produit
+            </div>
+            <div class="card-body">
+                <form method="post" action="index.php?module=produit&action=ajouterNouveauProduit" enctype="multipart/form-data">
+
+                    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+
+                    <div class="form-floating mb-3">
+                        <input name="nom" class="form-control" placeholder="Nom du produit" required>
+                        <label>Nom du produit</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input name="prix" class="form-control" placeholder="Prix du produit" required>
+                        <label>Prix du produit</label>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="imageProduit" class="form-label fw-semibold">Image du produit</label>
+                        <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
+                    </div>
+
+                    <button class="btn btn-primary w-100" type="submit">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    ';
     }
+
 
     public function afficher() {
         return $this->getAffichage();
