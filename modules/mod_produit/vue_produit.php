@@ -34,7 +34,6 @@ class VueProduit extends VueGenerique{
                         <p class="mb-1">'. htmlspecialchars($produit['prix']).'€</p>
                         <p class="mb-0">Qté : '. htmlspecialchars($produit['stock']) .'</p>
                     </a>
-
                     <a href="index.php?module=panier&action=ajouterDansPanier&id='.$produit['id'].'" class="btn btn-outline-primary mt-auto">
                         Ajouter
                     </a>
@@ -76,7 +75,7 @@ class VueProduit extends VueGenerique{
                     </div>
 
                     <div class="mb-4">
-                        <label for="imageProduit" class="form-label fw-semibold">Image du produit (seul les formats jpg,jpeg,png,webp sont acceptés)</label>
+                        <label for="imageProduit" class="form-label fw-semibold">Image du produit (jpg, jpeg, png, webp)</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
 
@@ -96,24 +95,34 @@ class VueProduit extends VueGenerique{
     public function form_modifierProduit($produit)
     {
         echo '
-    <form method="post" action="index.php?module=produit&action=modifierProduit&id='.$produit['id'].'" class="container taille-formulaire" enctype="multipart/form-data">
-    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-        <div class="mb-3">
-            <label for="nom" class="form-label">Nom du produit</label>
-            <input type="text" name="nom" class="form-control" value="'.htmlspecialchars($produit['nom']).'">
+    <div class="container my-4" style="max-width: 600px;">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title mb-4 text-center">Modifier le produit</h5>
+                <form method="post" action="index.php?module=produit&action=modifierProduit&id='.$produit['id'].'" class="needs-validation" enctype="multipart/form-data">
+                    <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="nom" class="form-control" id="nomProduit" value="'.htmlspecialchars($produit['nom']).'" placeholder="Nom du produit" required>
+                        <label for="nomProduit">Nom du produit</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" name="prix" class="form-control" id="prixProduit" value="'.htmlspecialchars($produit['prix']).'" placeholder="Prix du produit" required>
+                        <label for="prixProduit">Prix du produit</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageProduit" class="form-label">Image du produit (jpg, jpeg, png, webp)</label>
+                        <input type="file" name="image" id="imageProduit" class="form-control">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Valider</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="prix" class="form-label">Prix du produit</label>
-            <input type="number" name="prix" class="form-control" value="'.htmlspecialchars($produit['prix']).'">
-        </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Image du produit (seul les formats jpg,jpeg,png,webp sont acceptés)</label>
-            <input type="file" name="image" class="form-control">
-        </div>
-        <button class="btn btn-primary" type="submit">Valider</button>
-    </form>
+    </div>
     ';
     }
+
 
     public function afficherListeProduitsFournisseur($listeFournisseur, $produitsFournisseur){
         $fournisseursParId = [];
