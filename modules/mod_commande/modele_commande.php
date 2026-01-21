@@ -135,5 +135,10 @@ class ModeleCommande extends Modele {
         $get->execute([$idAssociation, $this->recupererDate()]);
         return $get->fetchColumn();
     }
+    public function verifCode($code,$idCommande,$date){
+        $req = self::$bdd->prepare("select code from commande where id=? AND date=?");
+        $req->execute([$idCommande,$date]);
+        if($req->fetchColumn()==$code){return true;}return false;
+    }
 
 }

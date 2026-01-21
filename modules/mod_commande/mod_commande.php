@@ -22,7 +22,10 @@ private $action;
                 $this->controleur->commandeAvancee();
                 break;
             case 'valideCommande':
-                $this->controleur->valider();
+                $this->controleur->confirmationRetrait();
+                break;
+            case 'validationDuRetrait':
+                $this->controleur->verifierCodeDeRetrait();
                 break;
             case 'historique':
                 $this->controleur->historique();

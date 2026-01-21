@@ -64,14 +64,29 @@ class ContCommande {
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
 //            $idCommande = isset($_GET['id']) ? $_GET['id'] : exit();
 //            $date = isset($_GET['date']) ? $_GET['date'] : exit();
-            $this->modele->valideCommande(
-                $_GET['id'],
-                $_GET['date']
-            );
+
+                $this->modele->valideCommande(
+                    $_GET['id'],
+                    $_GET['date']
+                );
         }
         header("Location: index.php?module=commande&action=commandeAvancee", true, 303);
         exit();
     }
+    public function confirmationRetrait(){
+    $this->vue->confirmerRetrait();
+    }
+    public function verifierCodeDeRetrait($id,$date){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])&& isset($_GET['code'])) {
+            if($this->modele->verifCode($_GET['code'],
+                $_GET['id'],
+                $_GET['date'])){
+                    $this->valider();
+            }
+        }
+    }
+
+
     public function refuser(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
 //            $idCommande = isset($_GET['id']) ? $_GET['id'] : '';
