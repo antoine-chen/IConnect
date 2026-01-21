@@ -106,7 +106,6 @@ class ContAsso {
                 else {
                     $roleChoisi = $listeRoles[0]['role'];
                     $_SESSION['role'] = $roleChoisi;
-
                     if($roleChoisi == 'Barman'){
                         header('Location: index.php?module=commande');
                         exit();

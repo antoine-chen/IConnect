@@ -28,4 +28,12 @@ class ModeleCompte extends Modele {
         $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ?, nom = ?, prenom = ?, telephone = ?, email = ? WHERE id = ?');
         $updateProfil->execute([$login, $nom, $prenom, $telephone, $email, $idUtilisateur]);
     }
+
+    public function updatePassword($id,$mdp)
+    {
+        $update = self::$bdd->prepare('
+            update utilisateurs set pwd = (?) where id = (?)
+        ');
+        $update->execute([$mdp,$id]);
+    }
 }
