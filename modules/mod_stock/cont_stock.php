@@ -27,7 +27,6 @@ class ContStock {
                 $this->vue->afficherStockActuel($resultat);
             }
             $this->vue->boutons();
-
         }
     }
 
@@ -176,6 +175,17 @@ class ContStock {
             }
         }
         $this->stockProduits();
+    }
+
+    public function stockProduitBarman()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
+            $idAsso = $_SESSION['asso'];
+            $idInventaire = $this->modele->idInventaire($idAsso);
+            $resultat = $this->modele->stockActuel($idInventaire);
+
+            $this->vue->stockProduitBarman($resultat);
+        }
     }
 
     public function getVue(){

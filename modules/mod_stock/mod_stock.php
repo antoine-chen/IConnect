@@ -16,6 +16,9 @@ class ModStock {
             case 'stockProduits':
                 $this->controleur->stockProduits();
                 break;
+            case 'stockProduitBarman':
+                $this->controleur->stockProduitBarman();
+                break;
             case 'form_inventaire' :
                 $this->controleur->form_inventaire();
                 break;

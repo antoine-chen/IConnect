@@ -222,6 +222,40 @@ class VueStock extends VueGenerique{
     ';
     }
 
+    public function stockProduitBarman($donnes)
+    {
+        echo '
+    <div class="container my-4">
+        <h5 class="text-center mb-4">Stock du : '.htmlspecialchars($donnes[0]['date']).'</h5>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody>
+    ';
+
+        foreach ($donnes as $produit){
+            echo '
+                    <tr>
+                        <td>'.htmlspecialchars($produit['nom']).'</td>
+                        <td>'.htmlspecialchars($produit['prix']).'€</td>
+                        <td>'.htmlspecialchars($produit['stock']).'</td>
+                    </tr>
+        ';
+        }
+
+        echo '
+                </tbody>
+            </table>
+        </div>
+    </div>
+    ';
+    }
 
     public function afficher() {
         return $this->getAffichage();
