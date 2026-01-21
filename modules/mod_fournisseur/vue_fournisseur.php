@@ -78,24 +78,40 @@ class VueFournisseur extends VueGenerique{
                     </div>
                 </div>
 
-                <div class="col-md-2 d-flex justify-content-end align-items-center">                    
-                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'"
-                       class="btn btn-outline-danger btn-sm">
+                <div class="col-md-2 d-flex justify-content-end align-items-center gap-1">  
+                    <a href="index.php?module=fournisseur&action=formAjouterProduitFournisseur&id='.$fournisseur['id'].'" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-plus-lg"></i>
+                    </a>           
+                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'" class="btn btn-outline-danger btn-sm">
                         <i class="bi bi-trash-fill"></i>
-                    </a>
+                    </a>    
                 </div>
-
             </div>
         </div>
         ';
         }
-
         echo '
             </div>
         </div>
     ';
     }
 
+    public function afficherFormAjouterProduitFournisseur($produitsPasFournitParFournisseur){
+        echo '
+                  <form action="" method="post">
+                          <label for="produit">Catégorie :</label>
+                          <select name="nomProduit">
+                               <option value="" id="produit"></option>
+
+        ';
+        foreach ($produitsPasFournitParFournisseur as $produit){
+            echo '<option value="'.$produit['nom'].'" id="produit">'.$produit['nom'].'</option>';
+        }
+        echo '
+                 </select>
+                 </form>  
+        ';
+    }
 
     public function afficher() {
         return $this->getAffichage();
