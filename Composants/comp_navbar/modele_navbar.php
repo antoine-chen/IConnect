@@ -1,6 +1,6 @@
 <?php
 
-class ModeleNavbar{
+class ModeleNavbar extends Modele{
 
     public function getNavbarClient(){
         return array(

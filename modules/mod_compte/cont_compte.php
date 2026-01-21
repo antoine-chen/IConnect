@@ -58,21 +58,35 @@ class ContCompte{
         }
     }
 
+    public function formModifierProfil(){
+        if (isset($_SESSION['role'])){
+            $this->vue->afficherFormModifierProfil(
+                $this->modele->getProfilUtilisateur($_SESSION['id']),
+                $_SESSION['id']
+            );
+        }
+    }
+
     public function modifierProfil(){
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
-            echo $_GET['id'];
             if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['email'])) {
-                $this->modele->updataProfilUtilisateur(
-                    $_SESSION['id'],
-                    $_POST['login'],
-                    $_POST['nom'],
-                    $_POST['prenom'],
-                    $_POST['telephone'],
-                    $_POST['email']
-                );
-                $_SESSION['login'] = $_POST['login'];
-                $this->profil();
+                if (!$this->modele->verifLoginExiste($_POST['login'])){
+                    $this->modele->updataProfilUtilisateur(
+                        $_SESSION['id'],
+                        $_POST['login'],
+                        $_POST['nom'],
+                        $_POST['prenom'],
+                        $_POST['telephone'],
+                        $_POST['email']
+                    );
+                    $_SESSION['login'] = $_POST['login'];
+                    $_SESSION['messageOk'] = "Votre profil a été modifié avec succès";
+                }else {
+                    $_SESSION['messagePasOk'] = "Le login existe déjà ";
+                }
             }
+            header('Location: index.php?module=produit');
+            exit();
         }
     }
 

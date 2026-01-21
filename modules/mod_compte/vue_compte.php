@@ -10,13 +10,13 @@ class VueCompte extends VueGenerique{
         echo '
             <div class="taille-container container p-5 container-color rounded-4">
                 <div class="d-flex justify-content-between align-items-center">
-                   <h3>Recharger son compte</h3>
+                   <h3>Recharger son compte dans '.$_SESSION['nomAsso'] .'</h3>
                    <p>'. $soldeClient.' €</p>
                 </div>
                 <form method="post" action="index.php?module=compte&action=recharger" class="mt-4 mb-4">
                 <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                    <div class="form-floating mb-2">
-                       <input name="montant" class="form-control" placeholder="Montant">
+                       <input name="montant" class="form-control" placeholder="Montant" type="number" min="1" required>
                        <label>Montant</label>
                    </div>
                    <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
@@ -28,7 +28,7 @@ class VueCompte extends VueGenerique{
         ';
     }
 
-    public function afficherProfil($profil, $idUtilisateur){
+    public function afficherProfil($profil){
         echo '   
         <div class="container d-flex justify-content-center">
             <div class="container-color rounded-4 p-4 w-75">
@@ -37,12 +37,12 @@ class VueCompte extends VueGenerique{
                         <div class="rounded-circle bg-primary d-flex justify-content-center align-items-center text-white fw-bold" style="height:60px;width:60px;">
                             <i class="bi bi-person fs-3"></i>
                         </div>
-                        <h4>Mon profil</h4>
+                        <h4>Mon profil chez '.$_SESSION['nomAsso'] .'</h4>
                     </div>
 
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modifierProfil">
+                    <a class="btn btn-outline-primary" href="index.php?module=compte&action=formModifierProfil">
                         <i class="bi bi-pencil"></i> Modifier
-                    </button>
+                    </a>
                 </div>
                 <div class="list-group list-group-flush">
     ';
@@ -61,50 +61,46 @@ class VueCompte extends VueGenerique{
             </div>
         </div>
     ';
-        $this->afficherProfilModal($profil, $idUtilisateur, "index.php?module=compte&action=modifierProduit&id=");
     }
 
 
-    public function afficherProfilModal($listeData, $idUtilisateur, $href){
+    public function afficherFormModifierProfil($listeData, $idUtilisateur){
         echo '
-            <div class="modal fade" id="modifierProfil">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content p-4 border-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4>Modifier le compte</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" action="'.$href.$idUtilisateur.'" class="container">
-                        <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                            <div class="form-floating mb-1 mt-3">
-                                <input name="login" class="form-control" value="'. $listeData['login'].'" placeholder="Login" required>
-                                <label>Login</label>
-                            </div>
-                            <div class="form-floating mb-1">
-                                <input name="nom" class="form-control" value="'. $listeData['nom'].'" placeholder="Nom" required>
-                                <label>Nom</label>
-                            </div>
-                            <div class="form-floating mb-1">
-                                <input name="prenom" class="form-control" value="'. $listeData['prenom'].'" placeholder="Prenom" required>
-                                <label>Prenom</label>
-                            </div>
-                            <div class="form-floating mb-1">
-                                <input name="telephone" class="form-control" value="'. $listeData['telephone'].'" placeholder="Telephone" required>
-                                <label>Login</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <input name="email" class="form-control" value="'. $listeData['email'].'" placeholder="Email" required>
-                                <label>Email</label>
-                            </div>
-                            <div class="d-flex justify-content-end gap-2">
+              <div class="d-flex justify-content-between align-items-center">
+                   <h5>Modifier le compte chez '.$_SESSION['nomAsso'] .'</h5>
+              </div>
+              <form method="post" action="index.php?module=compte&action=modifierProfil&id='.$idUtilisateur.'" class="container">
+                   <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+                   <div class="form-floating mb-1 mt-3">
+                       <input name="login" class="form-control" value="'. $listeData['login'].'" placeholder="Login" required>
+                       <label>Login</label>
+                   </div>
+                   <div class="form-floating mb-1">
+                       <input name="nom" class="form-control" value="'. $listeData['nom'].'" placeholder="Nom" required>
+                       <label>Nom</label>
+                   </div>
+                   <div class="form-floating mb-1">
+                       <input name="prenom" class="form-control" value="'. $listeData['prenom'].'" placeholder="Prenom" required>
+                       <label>Prenom</label>
+                   </div>
+                   <div class="form-floating mb-1">
+                        <input name="telephone" class="form-control" value="'. $listeData['telephone'].'" placeholder="Telephone" required>
+                        <label>Login</label>
+                   </div>
+                   <div class="form-floating mb-4">
+                        <input name="email" class="form-control" value="'. $listeData['email'].'" placeholder="Email" required>
+                        <label>Email</label>
+                   </div>
+                   <div class="d-flex justify-content-end gap-2">
                                 <!-- ferme le modal -->
-                                <a class="btn btn-secondary" data-bs-dismiss="modal">Annuler</a>
-                                <button type="submit" class="btn btn-primary">Modifier</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                       <a class="btn btn-secondary" data-bs-dismiss="modal">Annuler</a>
+                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">Modifier</button>
+                   </div>
+        ';
+        $this->afficherConfirmationModal("Changement de profil", "Êtes vous sur de changer votre profil ?", "Modifier");
+        echo'
+              </form>
+        
         ';
     }
 

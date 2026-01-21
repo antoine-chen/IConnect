@@ -14,7 +14,7 @@ class VueProduit extends VueGenerique{
         $this->confirmationProgressBar();
         echo '
             <div class="fw-semibold">
-                Solde de <span class="text-primary">'.htmlspecialchars($loginClient).'</span> : '. $soldeUtilisateur.'€
+                Solde de '.htmlspecialchars($loginClient).': '. $soldeUtilisateur.'€ chez '.$_SESSION['nomAsso'].'
             </div>
         </div>
 
@@ -88,11 +88,6 @@ class VueProduit extends VueGenerique{
     ';
     }
 
-
-    public function afficher() {
-        return $this->getAffichage();
-    }
-
     public function form_modifierProduit($produit)
     {
         echo '
@@ -122,7 +117,7 @@ class VueProduit extends VueGenerique{
         }
 
         echo '<div class="container mt-5">';
-        echo '<h3 class="text-center mb-4"><i class="bi bi-box-seam"></i> Produits par Fournisseur</h3>';
+        echo '<h3 class="text-center mb-4"><i class="bi bi-box-seam"></i> Les produits des fournisseurs de '.$_SESSION['nomAsso'].'</h3>';
 
         echo '<div class="row g-4">';
         foreach ($produitsFournisseur as $produit) {
@@ -156,6 +151,7 @@ class VueProduit extends VueGenerique{
         echo '</div>';
     }
 
-
-
+    public function afficher() {
+        return $this->getAffichage();
+    }
 }

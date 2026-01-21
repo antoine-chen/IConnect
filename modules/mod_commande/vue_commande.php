@@ -100,14 +100,13 @@ class VueCommande extends VueGenerique {
             </div>
         </div>
         ';
-
     }
 
     public function afficherClientHistorique($historique){
         echo '
         <div class="container mt-5">
             <h3 class="text-center mb-4">
-                <i class="bi bi-clock-history"></i> Historique de mes commandes
+                <i class="bi bi-clock-history"></i> Historique de mes commandes chez '.$_SESSION['nomAsso'].'
             </h3>
 
             <div class="d-flex flex-column align-items-center gap-3">
@@ -181,7 +180,7 @@ class VueCommande extends VueGenerique {
         echo '
     <div class="container mt-5">
         <h3 class="text-center mb-4">
-            <i class="bi bi-clipboard-data"></i> Historique des commandes fournisseurs
+            <i class="bi bi-clipboard-data"></i> Historique des commandes fournisseurs de '.$_SESSION['nomAsso'].'
         </h3>
 
         <div class="d-flex flex-column gap-4 align-items-center">
@@ -253,7 +252,7 @@ class VueCommande extends VueGenerique {
         echo '
         <div class="container mt-5">
             <h3 class="text-center mb-4">
-                <i class="bi bi-clock-history"></i> Historique des commandes clients
+                <i class="bi bi-clock-history"></i> Historique des commandes clients chez '.$_SESSION['nomAsso'].'
             </h3>
 
             <div class="d-flex flex-column align-items-center gap-3">
@@ -324,6 +323,10 @@ class VueCommande extends VueGenerique {
             </div>
         </div>
     ';
+    }
+
+    public function afficherNomAsso(){
+        echo '<h3 class="text-center mb-3">Les commandes du jour chez '.$_SESSION['nomAsso'].'</h3>';
     }
 
     public function afficher() {

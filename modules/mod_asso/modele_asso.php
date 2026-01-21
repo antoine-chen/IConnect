@@ -60,10 +60,15 @@ class ModeleAsso extends Modele {
         $insert->execute([$image, $idAsso]);
     }
 
-    public function enregistrerDemande($idUtilisateur, $idAsso)
-    {
+    public function enregistrerDemande($idUtilisateur, $idAsso){
         $insert = self::$bdd->prepare('insert into demandeCreationAsso (idUtilisateur,idAsso) values (?,?)');
         $insert->execute([$idUtilisateur,$idAsso]);
+    }
+
+    public function getNomAssociation($idAssociation){
+        $get = self::$bdd->prepare('SELECT nom FROM association WHERE id = ? ');
+        $get->execute([$idAssociation]);
+        return $get->fetchColumn();
     }
 
 }

@@ -8,10 +8,9 @@ class VueFournisseur extends VueGenerique{
 
     public function afficherFormAjoutFournisseur(){
         echo '
-            
+            <h3 class="text-center mb-3">Ajoutez un fournisseur chez '.$_SESSION['nomAsso'].'</h3>
             <form method="post" action="index.php?module=fournisseur&action=ajouterFournisseur" class="container">
             <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                <h2 class="text-center">Ajouter un fournisseur</h2>
                 <div class="form-floating mt-3 mb-2">
                     <input name="nom" class="form-control" placeholder="Nom" required>
                     <label>Nom</label>
@@ -38,8 +37,9 @@ class VueFournisseur extends VueGenerique{
         echo '
     <div class="container mt-5">
         <h3 class="text-center mb-4">
-            <i class="bi bi-truck"></i> Gestion des fournisseurs
+            <i class="bi bi-truck"></i> Gestion des fournisseurs chez '.$_SESSION['nomAsso'].'
         </h3>
+                <div class="text-center my-4"><a href="index.php?module=fournisseur&action=formAjouterFournisseur" class="btn btn-primary">Ajouter un fournisseur</a></div>
 
         <div class="d-flex flex-column gap-4 align-items-center">
     ';
@@ -113,7 +113,7 @@ class VueFournisseur extends VueGenerique{
                             </button>
                         </div>
                     </form>
-                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm(\'Supprimer ce fournisseur ?\')">
+                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'" class="btn btn-outline-danger btn-sm w-100">
                         <i class="bi bi-trash-fill"></i> Supprimer
                     </a>
                 </div>

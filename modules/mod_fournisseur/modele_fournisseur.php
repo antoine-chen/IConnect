@@ -2,9 +2,9 @@
 
 class ModeleFournisseur extends Modele{
 
-    public function insertFournisseur($nom, $email, $ville, $telephone){
-        $insertFournisseur = self::$bdd->prepare('INSERT INTO fournisseur(nom, email, ville, tel) VALUES (?, ?, ?, ?)');
-        $insertFournisseur->execute([$nom, $email, $ville, $telephone]);
+    public function insertFournisseur($nom, $email, $ville, $telephone, $idAssociation){
+        $insertFournisseur = self::$bdd->prepare('INSERT INTO fournisseur(nom, email, ville, tel, idAssociation) VALUES (?, ?, ?, ?, ?)');
+        $insertFournisseur->execute([$nom, $email, $ville, $telephone, $idAssociation]);
     }
 
     public function deleteFournisseur($idFournisseur){

@@ -11,7 +11,7 @@ class VueStock extends VueGenerique{
     public function afficherStockActuel($donnes){
         echo '
     <div>
-        <h5 class="text-center m-3">Inventaire du : '.$donnes[0]['date'].'</h5>
+        <h5 class="text-center m-3">Inventaire de '.$_SESSION['nomAsso'].' du '.$donnes[0]['date'].'</h5>
         <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau align-middle">
             <thead>
                 <th>Produit</th>
@@ -199,7 +199,7 @@ class VueStock extends VueGenerique{
         echo '
     <div class="container mt-4" style="max-width: 420px;">
         <p class="text-center fw-semibold mb-3">
-            Choisissez une date pour générer le rapport
+            Choisissez une date pour générer le rapport chez '.$_SESSION['nomAsso'].'
         </p>
         <form method="post" action="index.php?module=stock&action=rapport" class="card p-3 shadow-sm">
             <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
@@ -226,6 +226,7 @@ class VueStock extends VueGenerique{
     {
         echo '
     <div class="container my-4">
+        <h3 class="text-center mb-3">Le stock chez '.$_SESSION['nomAsso'].'</h3>
         <h5 class="text-center mb-4">Stock du : '.htmlspecialchars($donnes[0]['date']).'</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered text-center align-middle">

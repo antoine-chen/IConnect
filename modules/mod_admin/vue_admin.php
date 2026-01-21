@@ -124,6 +124,7 @@ class VueAdmin extends VueGenerique{
 
     public function afficherListeDemandeUtilisateur($listeDemande){
         echo '
+            <h2 class="text-center">Demandes d\'inscription chez '.$_SESSION['nomAsso'].'</h2>
             <div class="table-responsive taille-tableau container">
                 <table class="table table-sm table-bordered table-hover text-center">
                     <tr> 
