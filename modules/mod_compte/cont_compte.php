@@ -70,23 +70,32 @@ class ContCompte{
     public function modifierProfil(){
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
             if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['email'])) {
-                if (!$this->modele->verifLoginExiste($_POST['login'])){
-                    $this->modele->updataProfilUtilisateur(
-                        $_SESSION['id'],
-                        $_POST['login'],
-                        $_POST['nom'],
-                        $_POST['prenom'],
-                        $_POST['telephone'],
-                        $_POST['email']
-                    );
+                if (!$this->modele->verifLoginExiste($_POST['login'],$_SESSION['id'])){
+                    $this->modele->updataProfilUtilisateur($_SESSION['id'], $_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['email']);
+                    if (!empty($_POST['pwd'])) {
+                        $hash = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+                        $this->modele->updatePassword($_SESSION['id'], $hash);
+                    }
                     $_SESSION['login'] = $_POST['login'];
                     $_SESSION['messageOk'] = "Votre profil a été modifié avec succès";
-                }else {
+                } else {
                     $_SESSION['messagePasOk'] = "Le login existe déjà ";
                 }
             }
-            header('Location: index.php?module=produit');
-            exit();
+        }
+        switch ($_SESSION['role']) {
+            case 'Client' :
+                header('Location: index.php?module=produit');
+                exit();
+            case 'Barman' :
+                header('Location: index.php?module=commande');
+                exit();
+            case 'Gestionnaire' :
+                header('Location: index.php?module=stock');
+                exit();
+            case 'Admin' :
+                header('Location: index.php?module=admin');
+                exit();
         }
     }
 
