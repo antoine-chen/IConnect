@@ -46,13 +46,29 @@ class ContFournisseur{
                 $produitsParFournisseur[$ligne['idFournisseur']][] = $ligne['nomProduit'];
             }
 
+            $produitsNonFournis = [];
+            foreach ($listeFournisseur as $fournisseur){
+                $produitsNonFournis[$fournisseur['id']] =
+                    $this->modele->produitsPasFournitParFournisseur(
+                        $_SESSION['asso'],
+                        $fournisseur['id']
+                    );
+            }
+
             $this->vue->afficherListeFournisseurEtProduits(
                 $listeFournisseur,
-                $produitsParFournisseur
+                $produitsParFournisseur,
+                $produitsNonFournis
             );
         }
     }
 
+    public function ajouterProduitFournisseur(){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $this->modele->insertProduitFournisseur($_POST['idProduit'], $_GET['idFournisseur']);
+        }
+        $this->listerFournisseur();
+    }
 
     public function supprimerFournisseur(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_GET['id'])){
