@@ -89,9 +89,9 @@ class ModelePanier extends Modele {
         return $requete->fetchColumn();
     }
 
-    public function insertCommande($id ,$idUtilisateur, $date, $status, $idAssociation){
-        $insertCommande = self::$bdd->prepare('INSERT INTO commande(id ,idUtilisateur, date, statut, idAssociation) VALUES (?,?,?,?,?)');
-        $insertCommande->execute([$id, $idUtilisateur, $date, $status, $idAssociation]);
+    public function insertCommande($id ,$idUtilisateur, $date, $status, $idAssociation,$code){
+        $insertCommande = self::$bdd->prepare('INSERT INTO commande(id ,idUtilisateur, date, statut, idAssociation,code) VALUES (?,?,?,?,?,?)');
+        $insertCommande->execute([$id, $idUtilisateur, $date, $status, $idAssociation,$code]);
     }
 
     public function insertLigneCommande($idCommande, $idProduit, $quantite, $date){
@@ -115,5 +115,9 @@ class ModelePanier extends Modele {
         $deleteClientPanier = self::$bdd->prepare('DELETE FROM panier WHERE idAssociation = ? AND idUtilisateur = ?');
         $deleteClientPanier->execute([$idAssociation, $idUtilisateur]);
     }
-
+    public function getCode(){
+        var_dump('salut bis');
+        var_dump(bin2hex(random_bytes(5)));
+        return bin2hex(random_bytes(5));
+    }
 }
