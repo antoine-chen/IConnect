@@ -7,39 +7,50 @@ class VueProduit extends VueGenerique{
     }
 
     public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
-
         echo '
-            <div>
-                <div class="text-center mb-3">
-        ';
+    <div class="container">
+        <div class="text-center mb-4">
+    ';
         $this->confirmationProgressBar();
         echo '
-                <div>
-                    Solde de '.$loginClient.' : '. $soldeUtilisateur.'€
-                </div>
+            <div class="fw-semibold">
+                Solde de <span class="text-primary">'.htmlspecialchars($loginClient).'</span> : '. $soldeUtilisateur.'€
             </div>
-            <div class="d-flex justify-content-center align-items-center flex-wrap container gap-5 p-3">
-        ';
+        </div>
+
+        <div class="row justify-content-center g-4">
+    ';
         foreach ($listeProduit as $produit){
             echo '
-               <div class="d-flex flex-column align-items-center box-produit">
-                  <img src="'. $produit["image"] .'" class="img-produit" alt="produit-item">
-                  <div class="d-flex justify-content-between align-items-center gap-2 m-3 info-produit">
-                    <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-black">
-                                <h6 class="card-title"> '. htmlspecialchars($produit['nom']) .'</h6>
-                                <p class="card-title"> '. htmlspecialchars($produit['prix']).'€' .'</p>
-                                <p class="card-title">Qté :'. htmlspecialchars($produit['stock']) .'</p>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100 shadow-sm text-center">
+                <div class="ratio ratio-1x1 bg-light">
+                    <img src="'. htmlspecialchars($produit["image"]) .'" 
+                         class="card-img-top img-fluid"  alt="produit-item"  style="object-fit: contain; padding:10px;">
+                </div>
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <a href="index.php?module=admin&action=listerAssociation&id=' . $produit['id'] . '" class="text-decoration-none text-dark mb-3">
+                        <h6 class="fw-semibold mb-1">'. htmlspecialchars($produit['nom']) .'</h6>
+                        <p class="mb-1">'. htmlspecialchars($produit['prix']).'€</p>
+                        <p class="mb-0">Qté : '. htmlspecialchars($produit['stock']) .'</p>
                     </a>
-                    <a href="index.php?module=panier&action=ajouterDansPanier&id='.$produit['id'].'" class="btn btn-outline-secondary">Ajouter</a>
-                  </div>
-               </div>
-        ';
-        }
-        echo '
+
+                    <a href="index.php?module=panier&action=ajouterDansPanier&id='.$produit['id'].'" class="btn btn-outline-primary mt-auto">
+                        Ajouter
+                    </a>
                 </div>
             </div>
+        </div>
         ';
+        }
+
+        echo '
+        </div>
+    </div>
+    ';
     }
+
+
 
     public function form_ajoutProduit()
     {
