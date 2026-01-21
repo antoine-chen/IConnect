@@ -29,8 +29,8 @@ class ModeleNavbar{
             array("url" => "index.php?module=admin&action=listerDemandeUtilisateur", "action" => "Demande"),
             array("url" => "index.php?module=stock&action=formChoixInventaireRapport", "action" => "Rapports"),
             array("url" => "index.php?module=produit&action=listerProduitsFournisseur", "action" => "Restocker"),
-            array("url" => "index.php?module=produit&action=listerProduitsFournisseur", "action" => "Restocker"),
-            array("url" => "index.php?module=commande&action=historiqueCommandeFournisseur", "action" => "Historique gestionnaire")
+            array("url" => "index.php?module=commande&action=historiqueCommandeFournisseur", "action" => "Historique restocks"),
+            array("url" => "index.php?module=commande&action=historiqueCommandeAsso", "action" => "Commandes clients"),
         );
     }
 

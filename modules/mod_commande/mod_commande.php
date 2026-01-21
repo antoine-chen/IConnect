@@ -36,6 +36,9 @@ private $action;
             case 'historiqueCommandeFournisseur':
                 $this->controleur->historiqueCommandeFournisseur();
                 break;
+            case 'historiqueCommandeAsso':
+                $this->controleur->historiqueCommandeAsso();
+                break;
             default:
                 echo "action inconnue";
                 break;

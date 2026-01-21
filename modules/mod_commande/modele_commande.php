@@ -75,10 +75,13 @@ class ModeleCommande extends Modele {
     }
 
     public function getCommandeClientHistorique($idUtilisateur, $idAssociation){
-        $get = self::$bdd->prepare('SELECT c.id, c.date, c.statut, a.nom AS nom_association, a.image, SUM(l.quantite) AS nbArticle, SUM(p.prix * l.quantite) AS addition
+        $get = self::$bdd->prepare('
+                            SELECT c.id, c.date, c.statut, u1.login as client, u2.login as barman, a.nom AS nom_association, a.image, SUM(l.quantite) AS nbArticle, SUM(p.prix * l.quantite) AS addition
                             FROM commande c INNER JOIN ligneCommande l ON c.id = l.idCommande
-                            INNER JOIN association a ON c.idAssociation = a.id    
-                            INNER JOIN produit p ON l.idProduit = p.id             
+                                INNER JOIN association a ON c.idAssociation = a.id    
+                                INNER JOIN produit p ON l.idProduit = p.id
+                                inner join utilisateurs u1 on c.idUtilisateur = u1.id
+                                left join utilisateurs u2 on c.idBarman = u2.id
                             WHERE c.idUtilisateur = ? AND c.idAssociation = ?
                             GROUP BY c.id, c.date, c.statut, a.nom, a.image
                             ORDER BY c.date DESC');
@@ -101,6 +104,22 @@ class ModeleCommande extends Modele {
                                         WHERE h.idAssociation = ?
                                         ORDER BY h.id DESC ');
         $get->execute([$idAssociation]);
+        return $get->fetchAll();
+    }
+
+    public function getHistoriqueCommandesAsso($asso)
+    {
+        $get = self::$bdd->prepare('
+                            SELECT c.id, c.date, c.statut, u1.login as client, u2.login as barman, a.nom AS nom_association, a.image, SUM(l.quantite) AS nbArticle, SUM(p.prix * l.quantite) AS addition
+                            FROM commande c INNER JOIN ligneCommande l ON c.id = l.idCommande
+                                INNER JOIN association a ON c.idAssociation = a.id    
+                                INNER JOIN produit p ON l.idProduit = p.id
+                                inner join utilisateurs u1 on c.idUtilisateur = u1.id
+                                left join utilisateurs u2 on c.idBarman = u2.id
+                            WHERE c.idAssociation = ?
+                            GROUP BY c.id, c.date, c.statut, a.nom, a.image
+                            ORDER BY c.date DESC');
+        $get->execute([$asso]);
         return $get->fetchAll();
     }
 
