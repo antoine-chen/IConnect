@@ -94,7 +94,6 @@ class ContProduit{
                     $cheminNouveauFichier = 'modules/mod_produit/img_produits/' . $idProduit . '.' . $extension;
                     move_uploaded_file($_FILES['image']['tmp_name'], $cheminNouveauFichier);
 
-
                     $this->modele->ajoutImage($idProduit, $cheminNouveauFichier);
                     $idInventaire = $this->modele->idInventaire($idAsso);
                     $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
