@@ -19,13 +19,13 @@ class ModeleCompte extends Modele {
     }
 
     public function getProfilUtilisateur($idUtilisateur){
-        $profil = self::$bdd->prepare('SELECT login, nom, prenom, telephone FROM utilisateurs WHERE id = ?');
+        $profil = self::$bdd->prepare('SELECT login, nom, prenom, telephone, email FROM utilisateurs WHERE id = ?');
         $profil->execute([$idUtilisateur]);
         return $profil->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updataProfilUtilisateur($idUtilisateur, $login){
-        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ? WHERE id = ?');
-        $updateProfil->execute([$login, $idUtilisateur]);
+    public function updataProfilUtilisateur($idUtilisateur, $login, $nom, $prenom, $telephone, $email){
+        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ?, nom = ?, prenom = ?, telephone = ?, email = ? WHERE id = ?');
+        $updateProfil->execute([$login, $nom, $prenom, $telephone, $email, $idUtilisateur]);
     }
 }

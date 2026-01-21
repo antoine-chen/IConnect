@@ -76,9 +76,25 @@ class VueCompte extends VueGenerique{
                         </div>
                         <form method="post" action="'.$href.$idUtilisateur.'" class="container">
                         <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                            <div class="form-floating mt-3 mb-2">
+                            <div class="form-floating mb-1 mt-3">
                                 <input name="login" class="form-control" value="'. $listeData['login'].'" placeholder="Login" required>
                                 <label>Login</label>
+                            </div>
+                            <div class="form-floating mb-1">
+                                <input name="nom" class="form-control" value="'. $listeData['nom'].'" placeholder="Nom" required>
+                                <label>Nom</label>
+                            </div>
+                            <div class="form-floating mb-1">
+                                <input name="prenom" class="form-control" value="'. $listeData['prenom'].'" placeholder="Prenom" required>
+                                <label>Prenom</label>
+                            </div>
+                            <div class="form-floating mb-1">
+                                <input name="telephone" class="form-control" value="'. $listeData['telephone'].'" placeholder="Telephone" required>
+                                <label>Login</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input name="email" class="form-control" value="'. $listeData['email'].'" placeholder="Email" required>
+                                <label>Email</label>
                             </div>
                             <div class="d-flex justify-content-end gap-2">
                                 <!-- ferme le modal -->

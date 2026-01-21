@@ -24,7 +24,7 @@ class ModCompte{
                 $this->controleur->profil();
                 break;
             case 'modifierProduit':
-                $this->controleur->modifierProduit();
+                $this->controleur->modifierProfil();
                 break;
             default:
                 echo "action inconnue";
