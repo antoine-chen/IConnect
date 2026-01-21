@@ -104,7 +104,6 @@ class VueCommande extends VueGenerique {
     }
 
     public function afficherClientHistorique($historique){
-
         echo '
         <div class="container mt-5">
             <h3 class="text-center mb-4">
@@ -148,6 +147,16 @@ class VueCommande extends VueGenerique {
                             <i class="bi bi-calendar-event"></i>
                             '. htmlspecialchars($commande['date']) .'
                         </p>
+                ';
+                        if($commande['barman']) {
+                            echo '
+                                <p class="mb-1">
+                                    <i class="bi bi-person"></i>
+                                    Géré par : '.htmlspecialchars($commande['barman']).'
+                                </p> 
+                            ';
+                        }
+                echo '
                         <p class="mb-0">'.$badge.'</p>
                     </div>
 
@@ -239,7 +248,83 @@ class VueCommande extends VueGenerique {
     ';
     }
 
+    public function afficherHistoriqueCommandeAsso($commandes)
+    {
+        echo '
+        <div class="container mt-5">
+            <h3 class="text-center mb-4">
+                <i class="bi bi-clock-history"></i> Historique des commandes clients
+            </h3>
 
+            <div class="d-flex flex-column align-items-center gap-3">
+    ';
+
+        foreach ($commandes as $commande){
+            switch ($commande['statut']) {
+                case 'Encours':
+                    $badge = '<span class="badge bg-secondary">En cours</span>';
+                    break;
+                case 'rembourser':
+                    $badge = '<span class="badge bg-success">Remboursement</span>';
+                    break;
+                case 'livrée':
+                    $badge = '<span class="badge bg-success">Validée</span>';
+                    break;
+                default:
+                    $badge = '<span class="badge bg-warning text-dark">rien</span>';
+                    break;
+            }
+
+            echo '
+            <div class="container-color rounded-4 p-4 w-75">
+                <div class="row align-items-center">
+                    <!-- Image asso -->
+                    <div class="col-md-3 text-center">
+                        <img src="'. htmlspecialchars($commande['image']) .'" alt="" class="img-fluid rounded" style="max-height:100px;">
+                    </div>
+                    <!-- Infos commande -->
+                    <div class="col-md-6">
+                        <h5 class="mb-1">Commande #'. htmlspecialchars($commande['id']) .'</h5>
+                        <p class="mb-1 text-muted">
+                            <i class="bi bi-shop"></i>
+                            '. htmlspecialchars($commande['nom_association']) .'
+                        </p>
+                        <p class="mb-1">
+                            <i class="bi bi-calendar-event"></i>
+                            '. htmlspecialchars($commande['date']) .'
+                        </p>
+                        <p class="mb-1">
+                            <i class="bi bi-person"></i>
+                            Client : '.htmlspecialchars($commande['client']).'
+                        </p> 
+                ';
+            if($commande['barman']) {
+                echo '
+                                <p class="mb-1">
+                                    <i class="bi bi-person"></i>
+                                    Géré par : '.htmlspecialchars($commande['barman']).'
+                                </p> 
+                            ';
+            }
+            echo '
+                        <p class="mb-0">'.$badge.'</p>
+                    </div>
+
+                    <!-- Totaux -->
+                    <div class="col-md-3 text-end">
+                        <p class="mb-1"><strong>Articles :</strong> '. htmlspecialchars($commande['nbArticle']) .'</p>
+                        <p class="fs-5 fw-bold text-success mb-0">'. $commande['addition'] .' €</p>
+                    </div>
+                </div>
+            </div>
+        ';
+        }
+
+        echo '
+            </div>
+        </div>
+    ';
+    }
 
     public function afficher() {
         return $this->getAffichage();

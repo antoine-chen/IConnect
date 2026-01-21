@@ -99,6 +99,14 @@ class ContCommande {
         );
     }
 
+    public function historiqueCommandeAsso()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $commandes = $this->modele->getHistoriqueCommandesAsso($_SESSION['asso']);
+            $this->vue->afficherHistoriqueCommandeAsso($commandes);
+        }
+    }
+
     public function getVue(){
         return $this->vue->afficher();
     }
