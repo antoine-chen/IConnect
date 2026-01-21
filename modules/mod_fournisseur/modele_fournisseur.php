@@ -13,16 +13,17 @@ class ModeleFournisseur extends Modele{
     }
 
     public function produitsPasFournitParFournisseur($idAssociation, $idFournisseur){
-        $get = self::$bdd->prepare('SELECT pr.nom FROM produit pr INNER JOIN boutique b ON b.idProduit = pr.id WHERE b.idAssociation = ? 
+        $get = self::$bdd->prepare('SELECT pr.id AS idProduit, pr.nom FROM produit pr INNER JOIN boutique b ON b.idProduit = pr.id WHERE b.idAssociation = ? 
                                     EXCEPT
-                                    SELECT pr.nom FROM fournisseur f INNER JOIN produitsFournisseur p ON f.id = p.idFournisseur
+                                    SELECT pr.id AS idProduit, pr.nom FROM fournisseur f INNER JOIN produitsFournisseur p ON f.id = p.idFournisseur
                                                                     INNER JOIN produit pr ON pr.id = p.idProduit
                                         WHERE f.idAssociation = ? AND f.id = ?');
         $get->execute([$idAssociation, $idAssociation, $idFournisseur]);
         return $get->fetchAll();
     }
 
-    public function insertProduitFournisseur(){
-
+    public function insertProduitFournisseur($idProduit, $idFournisseur){
+        $insert = self::$bdd->prepare('INSERT INTO produitsFournisseur(idProduit, idFournisseur) VALUES (?, ?)');
+        $insert->execute([$idProduit, $idFournisseur]);
     }
 }

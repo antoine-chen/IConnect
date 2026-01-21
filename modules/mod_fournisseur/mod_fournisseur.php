@@ -26,9 +26,6 @@ class ModFournisseur{
             case 'supprimerFournisseur':
                 $this->controleur->supprimerFournisseur();
                 break;
-            case 'formAjouterProduitFournisseur':
-                $this->controleur->formAjouterProduitFournisseur();
-                break;
             case 'ajouterProduitFournisseur':
                 $this->controleur->ajouterProduitFournisseur();
                 break;
