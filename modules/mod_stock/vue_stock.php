@@ -5,6 +5,9 @@ class VueStock extends VueGenerique{
         parent::__construct();
     }
 
+    /**
+     * Affiche l'inventaire le plus récent
+     */
     public function afficherStockActuel($donnes){
         echo '
     <div>
@@ -61,7 +64,9 @@ class VueStock extends VueGenerique{
     ';
     }
 
-
+    /**
+     * Affiche les boutons pour ajouter un produit ou faire un inventaire
+     */
     public function boutons()
     {
         echo '
@@ -72,104 +77,154 @@ class VueStock extends VueGenerique{
             ';
     }
 
+    /**
+     * Affiche le formulaire d'inventaire
+     */
     public function form_inventaire($donnes){
         echo '
-            <div class="text-center m-3">'.htmlspecialchars(date('d/m/Y')) .'</div>
-            <div class="table-responsive">
-            <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="container taille-tableau">
-            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                <table class="table table-bordered table-hover text-center">
-                     <tr>
-                         <th style="width: 25%">Nom</th>
-                         <th style="width: 25%">Prix</th>
-                         <th style="width: 50%">Quantité</th>
-                     </tr>
-        ';
+        <div class="container mt-4" style="max-width: 900px;">
+            <div class="card shadow-sm">
+                <div class="card-header text-center fw-semibold">
+                    Inventaire du '.htmlspecialchars(date('d/m/Y')).'
+                </div>
+
+                <div class="card-body p-0">
+                    <form method="post" action="index.php?module=stock&action=ajoutInventaire" class="table-responsive">
+
+                        <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+
+                        <table class="table table-hover table-bordered text-center align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 30%">Nom</th>
+                                    <th style="width: 20%">Prix</th>
+                                    <th style="width: 50%">Quantité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+    ';
         foreach ($donnes as $produit) {
             echo '
-                    <tr>
-                        <td>' . htmlspecialchars($produit['nom']) . '</td>
-                        <td>' . htmlspecialchars($produit['prix']) . '</td>
-                        <td>
-                            <input type="number" name="stock[' . $produit['id'] . ']" min="0" required/>
-                        </td>
-                    </tr>';
+                                <tr>
+                                    <td>'.htmlspecialchars($produit['nom']).'</td>
+                                    <td>'.htmlspecialchars($produit['prix']).'</td>
+                                    <td>
+                                        <input type="number" name="stock['.$produit['id'].']" min="0" required class="form-control form-control-sm mx-auto" style="max-width: 120px;">
+                                    </td>
+                                </tr>';
         }
         echo '
-               </table>
-               <button class="btn btn-primary" type="submit">Valider</button>
-           </form>
-           </div>
-        ';
+                            </tbody>
+                        </table>
+
+                        <div class="p-3 text-center">
+                            <button class="btn btn-primary px-4" type="submit">
+                                Valider l\'inventaire
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    ';
     }
 
 
+    /**
+     * Affiche cette phrase quand aucune inventaire a été crée pour l'association
+     */
     public function inventaireVide(){
-        echo '<p>Aucune inventaire réalisée pour ce mois ci, veuillez créer un inventaire pour voir le stock actuel</p> ';
+        echo '<p>Aucune inventaire a été réalisé pour cette association, veuillez créer un inventaire pour voir le stock actuel</p> ';
     }
 
-    public function afficher() {
-        return $this->getAffichage();
-    }
-
-    public function afficherRapport($valeursTresorerie)
+    /**
+     * Affiche le rapport d'un inventaire
+     */
+    public function afficherRapport($valeursTresorerie,$dateChoisi)
     {
         echo '
     <div class="container mt-4">
-        <h3 class="mb-4">Rapport de trésorerie de l\'inventaire</h3>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered text-center align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>Produit</th>
-                        <th>Prix</th>
-                        <th>Quantité initiale</th>
-                        <th>Quantité actuel</th>
-                        <th>Ventes</th>
-                        <th>Pertes</th>
-                        <th>Variation de stock</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="card shadow-sm">
+            <div class="card-header bg-light text-center fw-semibold">
+                Rapport de trésorerie — inventaire du '.$dateChoisi.'
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered text-center align-middle mb-0">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>Produit</th>
+                                <th>Prix</th>
+                                <th>Quantité initiale</th>
+                                <th>Quantité actuelle</th>
+                                <th>Ventes</th>
+                                <th>Pertes</th>
+                                <th>Variation de stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
     ';
         foreach ($valeursTresorerie as $element) {
             echo '
-                    <tr>
-                        <td>'.htmlspecialchars($element['nom']).'</td>
-                        <td>'.htmlspecialchars($element['prix']).'</td>
-                        <td>'.htmlspecialchars($element['quantiteInitiale']).'</td>
-                        <td>'.htmlspecialchars($element['quantiteActuel']).'</td>
-                        <td>'.htmlspecialchars($element['ventes']).'</td>
-                        <td>'.htmlspecialchars($element['pertes']).'</td>
-                        <td>'.htmlspecialchars($element['variationstock']).'</td>
-                    </tr>
-                ';
+                            <tr>
+                                <td>'.htmlspecialchars($element['nom']).'</td>
+                                <td>'.htmlspecialchars($element['prix']).'</td>
+                                <td>'.htmlspecialchars($element['quantiteInitiale']).'</td>
+                                <td>'.htmlspecialchars($element['quantiteActuel']).'</td>
+                                <td>'.htmlspecialchars($element['ventes']).'</td>
+                                <td>'.htmlspecialchars($element['pertes']).'</td>
+                                <td class="fw-semibold">
+                                    '.htmlspecialchars($element['variationstock']).'
+                                </td>
+                            </tr>
+        ';
         }
         echo '
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     ';
     }
 
+
+    /**
+     * Affiche un formulaire pour choisir la date d'un inventaire pour générer son rapport
+     */
     public function afficherChoixInventaireRapport($listeInventaire)
     {
         echo '
-        <p>Choisissez une date pour générer le rapport :</p>
-        <form method="post" action="index.php?module=stock&action=rapport">
-        <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+    <div class="container mt-4" style="max-width: 420px;">
+        <p class="text-center fw-semibold mb-3">
+            Choisissez une date pour générer le rapport
+        </p>
+        <form method="post" action="index.php?module=stock&action=rapport" class="card p-3 shadow-sm">
+            <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
+
             <select name="idinventaire" class="form-select mb-3">
     ';
         foreach ($listeInventaire as $element) {
-            echo '<option value="' . htmlspecialchars($element['id']) . '">'
-                . htmlspecialchars($element['date']) . '</option>';
+            echo '
+                <option value="' . htmlspecialchars($element['id']) . '">
+                    ' . htmlspecialchars($element['date']) . '
+                </option>';
         }
         echo '
             </select>
-            <button class="btn btn-primary" type="submit">Valider</button>
+            <button class="btn btn-primary w-100" type="submit">
+                Générer le rapport
+            </button>
         </form>
+    </div>
     ';
+    }
+
+
+    public function afficher() {
+        return $this->getAffichage();
     }
 
 }

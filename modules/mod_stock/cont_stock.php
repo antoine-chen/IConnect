@@ -153,7 +153,7 @@ class ContStock {
                     'variationstock' => $variation
                 ];
             }
-            $this->vue->afficherRapport($rapport);
+            $this->vue->afficherRapport($rapport,$dateChoisi);
         }
     }
 
