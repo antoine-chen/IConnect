@@ -2,6 +2,7 @@
 include_once 'vue_commande.php';
 include_once 'modele_commande.php';
 
+
 class ContCommande {
     private $modele;
     private $vue;
@@ -86,6 +87,26 @@ class ContCommande {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Client'){
             $this->vue->afficherClientHistorique(
                 $this->modele->getCommandeClientHistorique($_SESSION['id'], $_SESSION['asso'])
+            );
+        }
+    }
+
+    public function afficherProfile(){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
+            $client=$this->modele->getClient($_GET['id'], $_GET['date']);
+            $this->profilDunUtilisateur($client);
+
+        }
+    }
+    private function profilDunUtilisateur($id){
+        require_once 'modules\mod_compte/vue_compte.php';
+        require_once 'modules\mod_compte\modele_compte.php';
+        $modeleCompte =new ModeleCompte();
+        $vueCompte = new VueCompte();
+        if (isset($_SESSION['role'])&& $_SESSION['role']='barman'&&isset($_GET['id'])){
+            $vueCompte->afficherProfil(
+                $modeleCompte->getProfilUtilisateur($id),
+                $id
             );
         }
     }

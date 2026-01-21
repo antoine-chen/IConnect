@@ -60,7 +60,7 @@ class VueCommande extends VueGenerique {
                         <div class="mb-1">
                             <i class="bi bi-info-circle"></i>
                             <strong>Statut : </strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
-                        </div>
+                            <p><a href="index.php?module=commande&action=afficherProfile&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> afficher profil</a></p>                        </div>
     
                         <p class="fs-5 fw-bold text-success mt-2">Total : '. htmlspecialchars($prix) .' €</p>
                     </div>

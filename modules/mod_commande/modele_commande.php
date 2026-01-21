@@ -65,6 +65,14 @@ class ModeleCommande extends Modele {
       $req->execute([$idCommande,$date]);
       return $req->fetchColumn();
     }
+    public function profilDunUtilisateur(){
+        if (isset($_SESSION['role'])&& $_SESSION['role']='barman'&&isset($_GET['id'])){
+            $this->vue->afficherProfil(
+                $this->modele->getProfilUtilisateur($_GET),
+                $_GET['id']
+            );
+        }
+    }
 
     public function getCommandeClientHistorique($idUtilisateur, $idAssociation){
         $get = self::$bdd->prepare('SELECT c.id, c.date, c.statut, a.nom AS nom_association, a.image, SUM(l.quantite) AS nbArticle, SUM(p.prix * l.quantite) AS addition
