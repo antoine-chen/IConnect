@@ -25,6 +25,9 @@ class ModStock {
             case 'formChoixInventaireRapport' :
                 $this->controleur->formChoixInventaireRapport();
                 break;
+            case 'ajouterPertes' :
+                $this->controleur->ajouterPertes();
+                break;
             case 'rapport' :
                 $this->controleur->rapport();
                 break;

@@ -7,38 +7,60 @@ class VueStock extends VueGenerique{
 
     public function afficherStockActuel($donnes){
         echo '
-        <div>
-            <h5 class="text-center m-3">Inventaire du : '.$donnes[0]['date'].'</h5>
-            <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau">
-                <thead>
-                    <th>Produit</th>
-                    <th>Prix</th>
-                    <th>Quantité</th>
-                    <th style="width: 10%"></th>
-                </thead>
-    
-                <tbody>
-        ';
+    <div>
+        <h5 class="text-center m-3">Inventaire du : '.$donnes[0]['date'].'</h5>
+        <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau align-middle">
+            <thead>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Pertes</th>
+                <th style="width: 20%">Ajouter une perte</th>
+                <th style="width: 10%">Modifier</th>
+            </thead>
+
+            <tbody>
+    ';
+        $token = Token::genererToken();
         foreach ($donnes as $produit){
             echo '
-               <tr>
-                   <td> '.htmlspecialchars($produit['nom']).' </td>
-                   <td> '.htmlspecialchars($produit['prix']) .'</td>
-                   <td> '.htmlspecialchars($produit['stock']-$produit['pertes']) .'</td>
-                   <td>
-                        <a href="index.php?module=produit&action=form_modifierProduit&id='.$produit['id'].'" class="btn btn-light border">
-                            <i class="bi bi-gear"></i>
-                        </a>
-                   </td>
-               </tr>                
-                ';
-            }
-        echo '
-            </tbody>
-        </table>
-        </div>
+           <tr>
+               <td>'.htmlspecialchars($produit['nom']).'</td>
+               <td>'.htmlspecialchars($produit['prix']).'</td>
+               <td>'.htmlspecialchars($produit['stock']).'</td>
+               <td>'.htmlspecialchars($produit['pertes']).'</td>
+               <td>
+                    <form method="post"
+                          action="index.php?module=stock&action=ajouterPertes&id='.$produit['id'].'"
+                          class="d-flex justify-content-center align-items-center gap-2">
+                        <input type="hidden" name="tokenCSRF" value="'.htmlspecialchars($token).'">
+                        <input type="number"
+                               name="perte"
+                               min="0"
+                               required
+                               class="form-control form-control-sm w-50">
+
+                        <button class="btn btn-sm btn-primary" type="submit">
+                            ✔
+                        </button>
+                    </form>
+               </td>
+               <td>
+                    <a href="index.php?module=produit&action=form_modifierProduit&id='.$produit['id'].'"
+                       class="btn btn-light btn-sm border">
+                        <i class="bi bi-gear"></i>
+                    </a>
+               </td>
+           </tr>
         ';
+        }
+        echo '
+        </tbody>
+    </table>
+    </div>
+    ';
     }
+
 
     public function boutons()
     {
@@ -94,7 +116,7 @@ class VueStock extends VueGenerique{
     {
         echo '
     <div class="container mt-4">
-        <h3 class="mb-4"> WAWA Rapport de trésorerie de l\'inventaire</h3>
+        <h3 class="mb-4">Rapport de trésorerie de l\'inventaire</h3>
         <div class="table-responsive">
             <table class="table table-striped table-bordered text-center align-middle">
                 <thead class="table-light">
@@ -136,6 +158,7 @@ class VueStock extends VueGenerique{
         echo '
         <p>Choisissez une date pour générer le rapport :</p>
         <form method="post" action="index.php?module=stock&action=rapport">
+        <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
             <select name="idinventaire" class="form-select mb-3">
     ';
         foreach ($listeInventaire as $element) {

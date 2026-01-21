@@ -85,7 +85,7 @@ class ContStock {
      *              D : Envoie les donnnées dans la méthode de la vue pour afficher
      */
     public function rapport() {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire') {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
             $idAssociation = $_SESSION['asso'];
             $idInventaireChoisi = $_POST['idinventaire'];
             $dateChoisi = $this->modele->getDateInventaire($idInventaireChoisi);
@@ -149,6 +149,21 @@ class ContStock {
             }
             $this->vue->afficherRapport($rapport);
         }
+    }
+
+    public function ajouterPertes()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
+            $idProduit = $_GET['id'];
+            $pertes = $_POST['perte'];
+            $idInventaire = $this->modele->idInventaire($_SESSION['asso']);
+            $stockProduit = $this->modele->getStockProduit($idInventaire,$idProduit);
+
+            if($stockProduit['stock'] - $pertes >= 0) {
+                $this->modele->updatePerte($idInventaire,$idProduit,$pertes);
+            }
+        }
+        $this->stockProduits();
     }
 
     public function getVue(){

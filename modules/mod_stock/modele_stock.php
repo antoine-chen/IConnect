@@ -31,7 +31,7 @@ class ModeleStock extends Modele {
     public function stockActuel($idInventaire)
     {
         $get = self::$bdd->prepare('
-            select produit.id,produit.nom, produit.prix, ligneInventaire.stock, ligneInventaire.pertes,inventaire.date 
+            select produit.id,produit.nom, produit.prix, ligneInventaire.stock, ligneInventaire.pertes,inventaire.date, ligneInventaire.pertes 
             
             from inventaire inner join ligneInventaire on ligneInventaire.idInventaire=inventaire.id
             inner join produit on ligneInventaire.idProduit=produit.id
@@ -81,9 +81,10 @@ class ModeleStock extends Modele {
      */
     public function getInventaireSuivant($idAssociation, $date) {
         $get = self::$bdd->prepare('
-            SELECT * FROM inventaire 
-            WHERE idAssociation = ? AND date > ?
-            ORDER BY date ASC LIMIT 1
+            select * from inventaire 
+            where idAssociation = (?) and date > (?)
+            order by date ASC 
+            limit 1
         ');
         $get->execute([$idAssociation, $date]);
         return $get->fetch();
@@ -93,7 +94,11 @@ class ModeleStock extends Modele {
      * Retourne le stock actuel (stock), stock initial et pertes du produit d'un inventaire
      */
     public function getStockProduit($idInventaire, $idProduit) {
-        $get = self::$bdd->prepare('SELECT stock, stockInitial, pertes FROM ligneInventaire WHERE idInventaire = ? AND idProduit = ?');
+        $get = self::$bdd->prepare('
+            select stock, stockInitial, pertes 
+            from ligneInventaire 
+            where idInventaire = (?) and idProduit = (?)
+        ');
         $get->execute([$idInventaire, $idProduit]);
         return $get->fetch();
     }
@@ -103,13 +108,13 @@ class ModeleStock extends Modele {
      */
     public function getVentesProduit($idProduit, $idAssociation, $dateDebut, $dateFin) {
         $get = self::$bdd->prepare('
-            SELECT SUM(lC.quantite) as ventes
-            FROM ligneCommande lC
-            INNER JOIN commande c ON c.id = lC.idCommande
-            WHERE lC.idProduit = ? 
-              AND c.idAssociation = ?
-              AND c.statut = "livrée"
-              AND c.date BETWEEN ? AND ?
+            select sum(lC.quantite) as ventes
+            from ligneCommande lC
+            inner join commande c on c.id = lC.idCommande
+            where lC.idProduit = ? 
+              and c.idAssociation = ?
+              and c.statut = "livrée"
+              and c.date between (?) and (?)
         ');
         $get->execute([$idProduit, $idAssociation, $dateDebut, $dateFin]);
         return $get->fetchColumn();
@@ -120,11 +125,11 @@ class ModeleStock extends Modele {
      */
     public function getRestocksProduit($idProduit, $idAssociation, $dateDebut, $dateFin) {
         $get = self::$bdd->prepare('
-            SELECT SUM(quantite) as restocks
-            FROM historiqueRestock
-            WHERE idProduit = ? 
-              AND idAssociation = ?
-              AND date BETWEEN ? AND ?
+            select SUM(quantite) as restocks
+            from historiqueRestock
+            where idProduit = ? 
+              and idAssociation = ?
+              and date between (?) and (?)
         ');
         $get->execute([$idProduit, $idAssociation, $dateDebut, $dateFin]);
         return $get->fetchColumn();
@@ -137,5 +142,13 @@ class ModeleStock extends Modele {
         $date = self::$bdd->prepare('SELECT NOW()');
         $date->execute();
         return $date->fetchColumn();
+    }
+
+    public function updatePerte($idInventaire, $idProduit, $pertes)
+    {
+        $update = self::$bdd->prepare('
+            update ligneInventaire set pertes = pertes + (?),stock = stock - (?) where idProduit =(?) and idInventaire = (?)
+        ');
+        $update->execute([$pertes,$pertes,$idProduit,$idInventaire]);
     }
 }
