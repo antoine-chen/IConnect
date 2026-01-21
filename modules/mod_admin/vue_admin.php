@@ -102,10 +102,9 @@ class VueAdmin extends VueGenerique{
             }
             if ($compte['role'] != 'Gestionnaire'){
                 echo '
-                   <a href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'" class="btn btn-danger">
-                        <i class="bi bi-trash"></i>
-                   </a>
+                <button class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmer"><i class="bi bi-trash"></i></button>
                 ';
+                $this->afficherConfirmationModal('Bannir', 'Voulez vous bannir cette utilisateur ?', 'Bannir',  'index.php?module=admin&action=bannirUtilisateur&id=' . $compte['id']);
             }
             echo'
                         </div>
@@ -229,6 +228,8 @@ class VueAdmin extends VueGenerique{
                 <a href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId'] . '" class="btn btn-primary">Refuser</a>
             </div>
         </div>';
+            $this->afficherConfirmationModal('Accepter', 'Voulez vous accepter cette personne à dans l\'association ?','Accepter',  'index.php?module=admin&action=validerDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId']);
+            $this->afficherConfirmationModal('Accepter', 'Voulez vous refuser cette personne à dans l\'association ?', 'Refuser', 'href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId']);
         }
 
         echo '    </div>

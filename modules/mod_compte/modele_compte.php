@@ -36,4 +36,10 @@ class ModeleCompte extends Modele {
         ');
         $update->execute([$mdp,$id]);
     }
+
+    public function verifLoginExisteProfil($login, $id) {
+        $req = self::$bdd->prepare("SELECT id FROM utilisateurs WHERE login = ? and utilisateurs.id != ?");
+        $req->execute([$login,$id]);
+        return $req->fetch();
+    }
 }

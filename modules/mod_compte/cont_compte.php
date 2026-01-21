@@ -70,7 +70,7 @@ class ContCompte{
     public function modifierProfil(){
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
             if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['email'])) {
-                if (!$this->modele->verifLoginExiste($_POST['login'],$_SESSION['id'])){
+                if (!$this->modele->verifLoginExisteProfil($_POST['login'],$_SESSION['id'])){
                     $this->modele->updataProfilUtilisateur($_SESSION['id'], $_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['email']);
                     if (!empty($_POST['pwd'])) {
                         $hash = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
