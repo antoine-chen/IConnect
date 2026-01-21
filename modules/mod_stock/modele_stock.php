@@ -17,6 +17,9 @@ class ModeleStock extends Modele {
         return $get->fetchAll();
     }
 
+    /**
+     * Crée un inventaire pour une association
+     */
     public function creerInventaire($idAsso)
     {
         $insert = self::$bdd->prepare('
@@ -42,6 +45,9 @@ class ModeleStock extends Modele {
         return $get->fetchAll();
     }
 
+    /**
+     * Ajoute une ligne dans ligneInventaire pour un idInventaire et produit précis
+     */
     public function ajouterProduit($idInventaire,$idProduit,$stock)
     {
         $insert = self::$bdd->prepare('
@@ -144,6 +150,9 @@ class ModeleStock extends Modele {
         return $date->fetchColumn();
     }
 
+    /**
+     * Incrémente la colonne pertes du produit du ligneInventaire, et décrémente la colonne stock par les pertes
+     */
     public function updatePerte($idInventaire, $idProduit, $pertes)
     {
         $update = self::$bdd->prepare('

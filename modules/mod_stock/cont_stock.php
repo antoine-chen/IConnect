@@ -31,6 +31,9 @@ class ContStock {
         }
     }
 
+    /**
+     * Affiche le formulaire pour faire l'inventaire pour une association, vérifie toutefois le role et session, login avant d'afficher
+     */
     public function form_inventaire() {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])){
             $idAsso = $_SESSION['asso'];
@@ -66,6 +69,9 @@ class ContStock {
         }
     }
 
+    /**
+     * Affiche le formulaire pour choisir la date d'un inventaire pour faire le rapport, vérifie toutefois le role et session, login avant d'afficher
+     */
     public function formChoixInventaireRapport()
     {
         if ($_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_SESSION['login'])) {
@@ -151,6 +157,12 @@ class ContStock {
         }
     }
 
+    /**
+     * Traite le formulaire pour ajouter une perte à un produit, fonctionne comme ceci :
+     *      1 : Vérifie le role et le token
+     *      2 : Récupère les données du formulaire (idProduit, pertes) ainsi que l'idiventaire actuel, et le stock actuel du produit qu'on veut modifier les pertes
+     *      3 : Vérifie si stock actuel - pertes >= 0 (on doit pas pouvoir indiquer 6 de pertes si on a que 5 en stock par exemple), si oui on modifie la table
+     */
     public function ajouterPertes()
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
