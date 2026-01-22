@@ -15,11 +15,13 @@ class VueProduit extends VueGenerique{
         echo '
             <div class="fw-semibold d-flex justify-content-between px-5">
                 Solde de '.htmlspecialchars($loginClient).': '. $soldeUtilisateur.'€ chez '.$_SESSION['nomAsso'].'
-                <div class="position-relative d-inline-block">
-                    <i class="bi bi-cart3"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        '.$nbProduis.'
-                    </span>
+                <div class="position-relative d-inline-block" >
+                     <a href="index.php?module=panier&action=panier">
+                         <i class="bi bi-cart3"></i>
+                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            '.$nbProduis.'
+                         </span>
+                     </a>
                 </div>
             </div>
         </div>

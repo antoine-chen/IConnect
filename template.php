@@ -28,7 +28,7 @@
     <?php
         if (isset($contenu))
             echo '
-                <div class="flex-grow-1 mt-3">
+                <div class="flex-grow-1 mt-5">
                     '.$contenu.'
                 </div>
             ';

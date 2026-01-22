@@ -1,8 +1,9 @@
 /*background-color: #f8f9fa;*/
+/*background-color: #dee2e6;*/
 
 /*-------------GENERAL-----------------*/
 body {
-    background-color: #f8f9fa;
+    background-color: #cfd5db;
 }
 
 .container-color {
@@ -24,6 +25,15 @@ a {
 }
 
 /*-------------NAVBAR-----------------*/
+
+header {
+    background-color: #dee2e6;
+}
+
+footer {
+    background-color: #b2bcc5;
+}
+
 .navbar {
     display: flex;
     flex-direction: row;

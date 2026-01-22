@@ -21,13 +21,14 @@ class ContProduit{
             $idClient = $_SESSION['id'];
             $loginClient = $_SESSION['login'];
             $_SESSION['soldeClient'] = $this->modele->getSoldeClient($idClient, $idAsso) ? $this->modele->getSoldeClient($idClient, $idAsso) : 0;
-
             $idInventaire = $this->modele->idInventaire($idAsso);
-            $this->vue->afficherProduits(
+            $nbProduis = $this->modele->getNbProduitsDansPanier($_SESSION['asso'], $_SESSION['id']) ? $this->modele->getNbProduitsDansPanier($_SESSION['asso'], $_SESSION['id']) : 0;
+
+                $this->vue->afficherProduits(
                 $this->modele->getProduits($idAsso,$idInventaire),
                 $loginClient,
                 $_SESSION['soldeClient'],
-                $this->modele->getNbProduitsDansPanier($_SESSION['asso'], $_SESSION['id'])
+                $nbProduis
             );
             unset($_SESSION['messageOk']);
             unset($_SESSION['messagePasOk']);
