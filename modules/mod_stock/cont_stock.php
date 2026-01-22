@@ -19,12 +19,12 @@ class ContStock {
             $idAsso = $_SESSION['asso'];
             $idInventaire = $this->modele->idInventaire($idAsso);
             $resultat = $this->modele->stockActuel($idInventaire);
-
-            if(empty($resultat)) {
+            $date = $this->modele->getDateInventaire($idInventaire);
+            if(!$idInventaire) {
                 $this->vue->inventaireVide();
             }
             else {
-                $this->vue->afficherStockActuel($resultat);
+                $this->vue->afficherStockActuel($resultat,$date);
             }
             $this->vue->boutons();
         }

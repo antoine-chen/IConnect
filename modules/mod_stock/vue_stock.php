@@ -8,11 +8,11 @@ class VueStock extends VueGenerique{
     /**
      * Affiche l'inventaire le plus récent
      */
-    public function afficherStockActuel($donnes){
+    public function afficherStockActuel($donnes,$date){
         $this->confirmationProgressBar();
         echo '
     <div>
-        <h5 class="text-center m-3">Inventaire de '.$_SESSION['nomAsso'].' du '.$donnes[0]['date'].'</h5>
+        <h5 class="text-center m-3">Inventaire de '.$_SESSION['nomAsso'].' du '.$date.'</h5>
         <table class="table table-sm table-bordered table-hover text-center table-responsive container taille-tableau align-middle">
             <thead>
                 <th>Produit</th>

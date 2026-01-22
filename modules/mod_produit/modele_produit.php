@@ -69,13 +69,15 @@ class ModeleProduit extends Modele {
         $update->execute([$nom,$prix,$idProduit]);
     }
 
-    public function ajoutProduitInventaire($idInventaire,$idProduit)
+    public function ajoutProduitInventaire($idInventaire, $idProduit)
     {
         $insert = self::$bdd->prepare('
-            insert into ligneInventaire (idInventaire,idProduit,stock,pertes) values (?,?,?,?)
-        ');
-        $insert->execute([$idInventaire,$idProduit,0,0]);
+        INSERT INTO ligneInventaire (idInventaire, stockInitial, idProduit, stock, pertes) 
+        VALUES (?, ?, ?, ?, ?)
+    ');
+        $insert->execute([$idInventaire, 0, $idProduit, 0, 0]);
     }
+
 
     public function insertRestock($idGestionnaire, $idProduit, $quantite, $idAssociation, $idFournisseur){
         $insert = self::$bdd->prepare('INSERT INTO historiqueRestock (idGestionnaire, idProduit, quantite, idAssociation, idFournisseur) VALUES (?,?,?,?,?)');
