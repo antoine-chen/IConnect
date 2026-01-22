@@ -16,8 +16,8 @@ class VueLandingPage extends VueGenerique {
                     <div>de buvette associative</div>
                 </div>
                 <div class="fs-6 mt-4">
-                    <div>Oubliez les cartes physique,</div>
-                    <div>cette solution vous simplifies la vie.</div>
+                    <div>Oubliez les cartes physiques,</div>
+                    <div>cette solution vous simplifie la vie.</div>
                 </div>
                 <div>
                 <a href="index.php?actionComposant=form_inscription" class="btn btn-success mt-2">S\'inscrire</a>
@@ -52,21 +52,21 @@ class VueLandingPage extends VueGenerique {
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Charger son compte</h3>
-                    <p>Après la connextion, vous pourvez charger votre compte en mettant que le montant que vous voulez puis valider.</p>
+                    <p>Après la connexion, vous pouvez charger votre compte en mettant que le montant que vous voulez puis valider.</p>
                 </div>
                 <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/rechargement.png" alt="">
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Liste des produits</h3>
-                    <p>Vous pouvez consulter la liste des produits de chaque association  en cliquand sur l’association</p>
+                    <p>Vous pouvez consulter la liste des produits de chaque association  en cliquant sur l’association</p>
                 </div>
                 <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/listeProduits.png" alt="">
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Panier</h3>
-                    <p>Après avoir que vous avez fait votre panier il suffit de le valider le barman valide votre transition et vous donne ce que vous avez commander</p>
+                    <p>Après avoir que vous avez fait votre panier il suffit de le valider pour que le barman valide votre commande et vous donne ce que vous avez commandé</p>
                 </div>
                 <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/validerPanier.png" alt="">
             </div>
