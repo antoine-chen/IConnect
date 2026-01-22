@@ -119,9 +119,6 @@ class ContPanier{
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
     private function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
         $date = $this->modele->recupererDate();
-        var_dump('salut');
-        $code = $this->modele->getCode();
-        var_dump($code);
         $idDerniereCommande = $this->modele->idDernierCommandeDuJour($idAsso, $date);
         $this->modele->insertCommande($idDerniereCommande+1, $idUtilisateur, $date, "Encours", $idAsso,$code);
         foreach ($panierClient as $lignePanier){
