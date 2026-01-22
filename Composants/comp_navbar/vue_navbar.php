@@ -17,7 +17,7 @@ class VueNavbar extends VueGenerique {
                 <div class="col-8 d-flex justify-content-center gap-4">';
 
         foreach ($listeUrlAction as $ligne) {
-            $this->contenu .= '<a href="' . $ligne['url'] . '">' . $ligne['action'] . '</a>';
+            $this->contenu .= '<a class="text-dark" href="'.$ligne['url'].'">'. $ligne['action'] .'</a>';
         }
 
         $this->contenu .= '

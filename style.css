@@ -1,8 +1,9 @@
 /*background-color: #f8f9fa;*/
+/*background-color: #dee2e6;*/
 
 /*-------------GENERAL-----------------*/
 body {
-    background-color: #b3bbba;
+    background-color: #cfd5db;
 }
 
 .container-color {
@@ -24,11 +25,16 @@ a {
 }
 
 /*-------------NAVBAR-----------------*/
-header{
-    background-color: #9fa2a7;
+
+header {
+    background-color: #dee2e6;
 }
+
+footer {
+    background-color: #b2bcc5;
+}
+
 .navbar {
-    background-color: #9fa2a7;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -80,14 +86,12 @@ header{
 /*-------------PRODUIT----------------*/
 
 .img-produit {
-    background-color: #707e74;
     height: 200px;
     width: 200px;
     object-fit: cover;
 }
 
 .box-produit {
-    background-color: #707e74;
     border: 1px solid gray;
     border-radius: 15px;
     box-shadow: 1px 1px 4px 0;

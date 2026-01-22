@@ -15,87 +15,91 @@ class VueCommande extends VueGenerique {
         }
     }
 
-    // affiche les details d'une commande
+// affiche les details d'une commande
     public function afficheDetailsCommande($quer){
         echo '
-        <div class="col-md-3 table-responsive">
-            <table class="table table-sm table-hover align-middle text-center mb-0">
-                <thead class="table-light">
-                    <tr> 
-                        <th>Produit</th> 
-                        <th>Qté</th>
-                        <th>Prix (€)</th> 
-                    </tr>
-                </thead>
-                <tbody>
+    <div class="col-md-6 table-responsive">
+        <table class="table table-sm table-hover align-middle text-center mb-0">
+            <thead class="table-light">
+                <tr> 
+                    <th>Produit</th> 
+                    <th>Qté</th>
+                    <th>Prix (€)</th> 
+                </tr>
+            </thead>
+            <tbody>
     ';
         foreach ($quer as $value) {
             echo '
-            <tr>
-                <td class="fw-semibold">'. htmlspecialchars($value['nom']) .'</td>
-                <td>'. htmlspecialchars($value['quantite']) .'</td>
-                <td>'. htmlspecialchars($value['prix']) .'</td>
-            </tr>
-        ';
+        <tr>
+            <td class="fw-semibold">'. htmlspecialchars($value['nom']) .'</td>
+            <td>'. htmlspecialchars($value['quantite']) .'</td>
+            <td>'. htmlspecialchars($value['prix']) .'</td>
+        </tr>
+    ';
         }
         echo '
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
+    </div>
     ';
     }
 
-    // affiche la commande avec les détails
-    public function afficheCommandeComplete($quer, $details, $mode, $prix,$client,$barman){
+// affiche la commande avec les détails
+    public function afficheCommandeComplete($quer, $details, $mode, $prix, $client, $barman){
         echo '
-            <div class="container-color rounded-4 p-4 mb-4 w-50 col-lg-8 mx-auto">
+        <div class="container-color rounded-4 p-4 mb-4 w-50 col-lg-10 mx-auto">
             <div class="p-4 mb-4">
                 <div class="row g-3 align-items-start">
+                    
+                    <!-- Infos commande -->
                     <div class="col-md-6">
                         <h5 class="fw-bold mb-3">Commande #'. htmlspecialchars($quer['id']) .'</h5>
-                        <p>Client : '.htmlspecialchars($client).'</p>
+                        <div class="d-flex align-items-center gap-1">
+                            <p class="mb-0">Client : '.htmlspecialchars($client).'</p>
+                            <a href="index.php?module=commande&action=afficherProfile&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn badge text-bg-secondary btn-sm">
+                                Afficher profil
+                            </a>
+                        </div>
+
+
                         <p class="mb-1">
                             <i class="bi bi-calendar-event"></i>
                             <strong>Date :</strong> '. htmlspecialchars($quer['date']) .'
                         </p>
                         <div class="mb-1">
                             <i class="bi bi-info-circle"></i>
-                            <strong>Statut : </strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
-                            <p><a href="index.php?module=commande&action=afficherProfile&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> afficher profil</a></p>                        </div>
-    
+                            <strong>Statut : </strong><span class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</span>
                         </div>
-                        <p class="mb-1">
-                            ';
-                        if($mode==1) {
-                            echo '
-                                <strong>Géré par :</strong> '. htmlspecialchars($barman) .'
-                        </p>
-                            ';
-                        }
+    ';
+        if($mode==1) {
+            echo '<p><strong>Géré par :</strong> '. htmlspecialchars($barman) .'</p>';
+        }
         echo '
-                        </p>
                         <p class="fs-5 fw-bold text-success mt-2">Total : '. htmlspecialchars($prix) .' €</p>
                     </div>
-        ';
+
+                    <!-- Détails commande -->
+    ';
         $this->afficheDetailsCommande($details);
 
-        switch ($mode){
-            case 0:
-                echo '
-                    <div class="col-12 d-flex justify-content-end gap-2">
-                        <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary">Valider</a>
-                        <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-danger"> refuser</a>
-                    </div>
-                ';
-                break;
+        // boutons selon le mode
+        if($mode == 0){
+            echo '
+        <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+            <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary">Valider</a>
+            <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-danger">Refuser</a>
+        </div>
+        ';
         }
 
         echo '
                 </div>
             </div>
         </div>
-        ';
+    ';
     }
+
 
     public function afficherProfilModal($titre,$utilisateur){
         echo '
@@ -352,7 +356,7 @@ class VueCommande extends VueGenerique {
 
     public function afficherNomAsso($nbCommandes =""){
         echo '
-            <div class="d-flex justify-content-center mb-3">
+            <div class="d-flex justify-content-center mb-3 gap-2">
                 <h3>Les commandes du jour chez '.$_SESSION['nomAsso'].'</h3>
                 <div class="position-relative d-inline-block">
                     <i class="bi bi-receipt fs-4"></i>
