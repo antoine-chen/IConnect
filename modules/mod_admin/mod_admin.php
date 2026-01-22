@@ -17,8 +17,8 @@ class ModAdmin{
             case 'listerAssociation':
                 $this->controleur->listerAssociation();
                 break;
-            case 'afficherListeClient':
-                $this->controleur->afficherListeClient();
+            case 'gestionCompte':
+                $this->controleur->gestionCompte();
                 break;
             case 'donnerRoleBarman':
                 $this->controleur->donnerRoleBarman();

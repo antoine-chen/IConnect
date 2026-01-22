@@ -12,7 +12,11 @@ class VueGenerique {
     }
 
     /**
-     * @param $href utiliser pour le backend
+     * affiche le modal de confimation
+     * utilisation :
+     * <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
+     * si formulaire ne pas mettre de href en parametre
+     * sinon mettre un lien
      */
     public function afficherConfirmationModal($titre, $description, $action, $href=""){
         echo '

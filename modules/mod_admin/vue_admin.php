@@ -46,6 +46,7 @@ class VueAdmin extends VueGenerique{
      * je peux enlever le role barman et ban l'utilisateur
     */
     public function afficherTabGestionComptes($listeComptes){
+        $this->confirmationProgressBar();
         echo '
       <div class="container">  
             <h3 class="text-center mb-4">
@@ -100,14 +101,10 @@ class VueAdmin extends VueGenerique{
                    </a>
                 ';
             }
-            if ($compte['role'] != 'Gestionnaire'){
-                echo '
-                   <a href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'" class="btn btn-danger">
+            echo'
+                   <a class="btn btn btn-danger" href="index.php?module=admin&action=bannirUtilisateur&id='.$compte['id'].'">
                         <i class="bi bi-trash"></i>
                    </a>
-                ';
-            }
-            echo'
                         </div>
                     </td>
                 </tr>
@@ -208,6 +205,8 @@ class VueAdmin extends VueGenerique{
                 </div>
             </div>
         </div>';
+            $this->afficherConfirmationModal('Accepter', 'Voulez vous accepter cette personne à dans l\'association ?','Accepter',  'index.php?module=admin&action=validerDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId']);
+            $this->afficherConfirmationModal('Accepter', 'Voulez vous refuser cette personne à dans l\'association ?', 'Refuser', 'href="index.php?module=admin&action=refuserDemandeAsso&assoId=' . $element['assoId'] . '&utilisateurId=' . $element['utilisateurId']);
         }
         echo '    </div>
         </div>';

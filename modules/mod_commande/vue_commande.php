@@ -80,16 +80,9 @@ class VueCommande extends VueGenerique {
         switch ($mode){
             case 0:
                 echo '
-                    <div class="col-12 d-flex justify-content-end gap-2 mt-4">
-                        <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> valider</a>
+                    <div class="col-12 d-flex justify-content-end gap-2">
+                        <a href="index.php?module=commande&action=valideCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary">Valider</a>
                         <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-danger"> refuser</a>
-                    </div>
-                ';
-                break;
-            case 1:
-                echo '
-                    <div class="col-12 d-flex justify-content-end gap-2 mt-4">
-                        <a href="index.php?module=commande&action=refuserCommande&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-success"> rembourser</a>
                     </div>
                 ';
                 break;

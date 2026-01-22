@@ -62,6 +62,7 @@ class ContProduit{
 
                 $idInventaire = $this->modele->idInventaire($idAsso);
                 $this->modele->ajoutProduitInventaire($idInventaire,$idProduit['id']);
+                $_SESSION['messageOk'] = 'Ajout success';
             }
         }
         header('Location: index.php?module=stock');

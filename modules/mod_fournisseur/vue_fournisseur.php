@@ -27,7 +27,10 @@ class VueFournisseur extends VueGenerique{
                     <input name="telephone" class="form-control" placeholder="Téléphone" required>
                     <label>Téléphone</label>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Ajouter">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">Ajouter</button>
+        ';
+        $this->afficherConfirmationModal('Ajouter', 'Ajoutez ce fournisseur ?', 'Ajouter');
+        echo '
             </form>
         ';
     }
@@ -93,7 +96,7 @@ class VueFournisseur extends VueGenerique{
                         <label class="form-label small mb-1">Ajouter un produit</label>
                         <div class="input-group input-group-sm">
                             <select name="idProduit" class="form-select">
-                                <option value="">Choisir...</option>
+                                <option value="">Choisir</option>
         ';
 
             if (!empty($produitsPasFournitParFournisseur[$fournisseur['id']])){
@@ -113,7 +116,7 @@ class VueFournisseur extends VueGenerique{
                             </button>
                         </div>
                     </form>
-                    <a href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'" class="btn btn-outline-danger btn-sm w-100">
+                    <a class="btn btn-outline-danger btn-sm w-100" href="index.php?module=fournisseur&action=supprimerFournisseur&id='.$fournisseur['id'].'">
                         <i class="bi bi-trash-fill"></i> Supprimer
                     </a>
                 </div>

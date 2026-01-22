@@ -25,10 +25,10 @@ class ContCommande {
     public function commandeAvancee(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman') {
             $commandes = $this->modele->toutesLesCommandesDuJour();
+            $this->vue->afficherNomAsso();
             foreach ($commandes as $value) {
                 $ligneCommandes = $this->modele->derouleCommande($value['id'], $value['date']);
                 $nomClient = $this->modele->getLoginUtilisateur($this->modele->getClient($value['id'], $value['date']));
-                $this->vue->afficherNomAsso();
                 $this->vue->afficheCommandeComplete(
                     $value,
                     $ligneCommandes,
@@ -42,11 +42,11 @@ class ContCommande {
     public function historique(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman') {
             $commandes = $this->modele->toutesLesCommandes();
+            $this->vue->afficherNomAsso();
             foreach ($commandes as $value) {
                 $ligneCommandes = $this->modele->derouleCommande($value['id'], $value['date']);
                 $nomClient = $this->modele->getLoginUtilisateur($this->modele->getClient($value['id'], $value['date']));
                 $barman = $this->modele->getLoginUtilisateur($value['idBarman']);
-                $this->vue->afficherNomAsso();
                 $this->vue->afficheCommandeComplete(
                     $value,
                     $ligneCommandes,

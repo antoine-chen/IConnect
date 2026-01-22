@@ -80,7 +80,7 @@ class ModeleAdmin extends Modele {
         $get = self::$bdd->prepare('
             select distinct u.id, u.login, u.nom, u.prenom, u.telephone, r.role
             from utilisateurs u inner join role r on u.id = r.idUtilisateur
-            where idAssociation = (?) AND r.role != "Admin" AND r.role != "enCours"
+            where idAssociation = (?) AND r.role != "Admin" AND r.role != "enCours" AND r.role != "Gestionnaire"
         ');
         $get->execute([$idAssociation]);
         return $get->fetchAll();
@@ -101,5 +101,10 @@ class ModeleAdmin extends Modele {
         $insert->execute([$idUtilisateur, $idAssociation, $role]);
     }
 
+    public function getLogin($idUtilisateur){
+        $get = self::$bdd->prepare('SELECT login FROM utilisateurs WHERE id = ?');
+        $get->execute([$idUtilisateur]);
+        return $get->fetchColumn();
+    }
 
 }

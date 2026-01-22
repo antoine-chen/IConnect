@@ -145,11 +145,10 @@ class VueProduit extends VueGenerique{
                             <label for="quantite'.$idProduit.'">Quantité</label>
                         </div>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>                        
+                            <button type="submit" class="btn btn-primary m-4">Valider</button>
                         </div>
                     </div>
              ';
-            $this->afficherConfirmationModal('Valider', 'Êtes vous sûr de vouloir restocker ?', 'Valider');
         echo '   
                 </form>
             </div>
