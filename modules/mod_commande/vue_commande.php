@@ -119,6 +119,7 @@ class VueCommande extends VueGenerique {
                             <p>mail:'.$utilisateur['email'].'</p>
                             <p>solde:'.$utilisateur['solde'].'</p></div>
                         <hr>
+                      
                         <div class="d-flex justify-content-end gap-2">
                             <!-- ferme le modal -->
                             <a href="index.php?module=commande&action=commandeAvancee" class="btn btn-secondary"> Fermer</a>
@@ -372,4 +373,36 @@ class VueCommande extends VueGenerique {
     public function afficher() {
         return $this->getAffichage();
     }
+
+    public function confirmerRetrait($titre){
+        echo '
+        <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
+        <div class="modal fade" id="verifCode">
+            <!-- centre la modal verticalement dans l écran -->
+            <div class="modal-dialog modal-dialog-centered">
+                <!-- modal-content le rectangle blanc contient tout le contenu visible -->
+                <div class="modal-content p-4 border-0">
+                    <form method="POST" action="index.php?module=commande&action=validationDuRetrait">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>'.$titre.'</h4>
+                            <a href="index.php?module=commande&action=commandeAvancee" type="button" class="btn-close" aria-label="Close"></a>
+                        </div>
+                        <div class="form-floating">
+                             <textarea class="form-control" placeholder="code de retrait" id="floatingTextarea" name="code"></textarea>
+                            <label for="floatingTextarea">code</label>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                            <a href="index.php?module=commande&action=commandeAvancee" class="btn btn-secondary">Fermer</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        ';
+    echo '<script>const modal = new bootstrap.Modal(document.getElementById("verifCode"));
+    modal.show();</script>';
+}
 }

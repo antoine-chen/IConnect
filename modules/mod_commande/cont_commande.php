@@ -62,9 +62,6 @@ class ContCommande {
 
     public function valider(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
-//            $idCommande = isset($_GET['id']) ? $_GET['id'] : exit();
-//            $date = isset($_GET['date']) ? $_GET['date'] : exit();
-
                 $this->modele->valideCommande(
                     $_GET['id'],
                     $_GET['date']
@@ -74,11 +71,12 @@ class ContCommande {
         exit();
     }
     public function confirmationRetrait(){
-    $this->vue->confirmerRetrait();
+    $this->vue->confirmerRetrait('inserer code de retrait');
     }
-    public function verifierCodeDeRetrait($id,$date){
-        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])&& isset($_GET['code'])) {
-            if($this->modele->verifCode($_GET['code'],
+    public function verifierCodeDeRetrait(){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])&& isset($_POST['code'])) {
+            var_dump($_POST['code']);
+            if($this->modele->verifCode($_POST['code'],
                 $_GET['id'],
                 $_GET['date'])){
                     $this->valider();

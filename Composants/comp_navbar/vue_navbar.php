@@ -14,7 +14,7 @@ class VueNavbar extends VueGenerique {
                 <div class="col d-flex justify-content-center align-items-center">
                     <img src="modules/mod_asso/logos/logo.png" class="logo" alt="">
                 </div>
-                <div class="col-8 d-flex justify-content-center gap-4">';
+                <div class="col-8 d-flex justify-content-center gap-4 ">';
 
         foreach ($listeUrlAction as $ligne) {
             $this->contenu .= '<a class="text-dark" href="'.$ligne['url'].'">'. $ligne['action'] .'</a>';
