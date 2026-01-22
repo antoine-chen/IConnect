@@ -28,6 +28,9 @@ class ModConnexion {
             case 'deconnexion':
                 $this->controleur->deconnexion();
                 break;
+            case 'rgpd':
+                $this->controleur->avertissementRgpd();
+                break;
             default:
                 echo "action inconnue ";
                 break;

@@ -49,6 +49,9 @@ class VueCompte extends VueGenerique{
                     <a class="btn btn-outline-primary" href="index.php?module=compte&action=formModifierProfil">
                         <i class="bi bi-pencil"></i> Modifier
                     </a>
+                    <a class="btn btn-outline-primary" href="index.php?module=compte&action=modalSuprimerProfil">
+                        <i class="bi bi-pencil"></i> Supprimer mon compte
+                    </a>
                 </div>
                 <div class="list-group list-group-flush">
     ';
@@ -143,5 +146,41 @@ class VueCompte extends VueGenerique{
 
     public function afficher() {
         return $this->getAffichage();
+    }
+
+    public function modalSuprimer(){
+        echo '
+            <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
+            <div class="modal fade" id="rgpd">
+                <!-- centre la modal verticalement dans l’écran -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- modal-content le rectangle blanc contient tout le contenu visible -->
+                    <div class="modal-content p-4 border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>Cookies</h4>
+                            <a href="index.php" type="button" class="btn-close" aria-label="Close"></a>
+                        </div>
+                        <div>                            
+                        <p>
+                        la suppression de votre compte entraîne la suppression définitive de vos données personnelles
+                        (nom, prénom, adresse e-mail, numéro de téléphone) et la perte d’accès aux services de l’association.
+                        Cette action est irréversible.
+                        </p>
+                        <p>
+                            Cette suppression rend impossible l’accès aux services proposés par l’association.
+                        </p>
+                        <hr>
+                      en clickant sur la case "Suprimer" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
+                        <div class="d-flex justify-content-end gap-2">
+                            <!-- ferme le modal -->
+                            <a href="index.php" class="btn btn-secondary"> Annuler</a>
+                            <a href="index.php?module=compte&action=SuprimerProfil" class=" btn btn-secondary">Confirmer la suppression</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+        echo '<script>const modal = new bootstrap.Modal(document.getElementById("rgpd"));
+        modal.show();</script>';
     }
 }

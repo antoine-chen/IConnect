@@ -29,6 +29,12 @@ class ModCompte{
             case 'modifierProfil':
                 $this->controleur->modifierProfil();
                 break;
+                case 'modalSuprimerProfil';
+                $this->controleur->modalSuprimerProfil();
+                break;
+                case 'SuprimerProfil';
+                $this->controleur->suprimerProfil();
+                break;
             default:
                 $this->controleur->unrecognizedAction();
                 break;

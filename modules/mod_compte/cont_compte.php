@@ -102,7 +102,21 @@ class ContCompte{
         $this->vue->actionNonTrouver();
     }
     public function getVue(){
-        return $this->vue->afficher();
+        if (isset($_SESSION['role'])&&$_SESSION['role']!='Admin') {
+            return $this->vue->afficher();
+        }else{header("Location: index.php", true, 303);
+        exit();}
+
+    }
+
+    public function modalSuprimerProfil(){
+        $this->vue->modalSuprimer();
+    }
+    public function suprimerProfil(){
+        if (isset($_SESSION['role'])&&$_SESSION['role']!='Admin') {
+            $this->modele->suprimerProfil($_SESSION['id'], $_SESSION['login']);
+        }header("Location: index.php", true, 303);
+        exit();
     }
 
 }
