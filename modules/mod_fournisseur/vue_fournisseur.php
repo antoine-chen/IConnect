@@ -8,32 +8,43 @@ class VueFournisseur extends VueGenerique{
 
     public function afficherFormAjoutFournisseur(){
         echo '
-            <h3 class="text-center mb-3">Ajoutez un fournisseur chez '.$_SESSION['nomAsso'].'</h3>
-            <form method="post" action="index.php?module=fournisseur&action=ajouterFournisseur" class="container">
+        <form method="post" action="index.php?module=fournisseur&action=ajouterFournisseur" 
+              class="container container-color rounded-4 p-4" style="max-width: 500px;">
+              <h3 class="text-center mb-3">Ajoutez un fournisseur chez '.htmlspecialchars($_SESSION['nomAsso']).'</h3>
             <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
-                <div class="form-floating mt-3 mb-2">
-                    <input name="nom" class="form-control" placeholder="Nom" required>
-                    <label>Nom</label>
-                </div>
-                <div class="form-floating mt-3 mb-2">
-                    <input name="email" class="form-control" placeholder="Email" required>
-                    <label>Email</label>
-                </div>
-                <div class="form-floating mt-3 mb-2">
-                    <input name="ville" class="form-control" placeholder="Ville" required>
-                    <label>Ville</label>
-                </div>
-                <div class="form-floating mt-3 mb-2">
-                    <input name="telephone" class="form-control" placeholder="Téléphone" required>
-                    <label>Téléphone</label>
-                </div>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">Ajouter</button>
-        ';
+            <div class="form-floating mb-3">
+                <input name="nom" class="form-control" placeholder="Nom" required>
+                <label>Nom</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input name="email" class="form-control" placeholder="Email" required>
+                <label>Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input name="ville" class="form-control" placeholder="Ville" required>
+                <label>Ville</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input name="telephone" class="form-control" placeholder="Téléphone" required>
+                <label>Téléphone</label>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmer">
+                    Ajouter
+                </button>
+            </div>
+    ';
         $this->afficherConfirmationModal('Ajouter', 'Ajoutez ce fournisseur ?', 'Ajouter');
         echo '
-            </form>
-        ';
+        </form>
+    ';
     }
+
+
 
     public function afficherListeFournisseurEtProduits($listeFournisseur, $produitsFournisseur, $produitsPasFournitParFournisseur){
 
