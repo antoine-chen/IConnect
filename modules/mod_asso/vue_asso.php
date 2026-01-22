@@ -59,28 +59,28 @@ class VueAsso extends VueGenerique {
 
                         <div class="mb-4">
                             <label for="imageAso" class="form-label fw-semibold">
-                                Image de l\'association
+                                Image de l\'association (png, jpeg, jpg, webp)
                             </label>
                             <input type="file" name="imageAso" id="imageAso" class="form-control" required>
                         </div>
                         
                         <div class="mb-4">
                             <label for="carteIdentite" class="form-label fw-semibold">
-                                Carte d\'identité de l\'utilisateur
+                                Carte d\'identité de l\'utilisateur (pdf)
                             </label>
                             <input type="file" name="carteIdentite" id="carteIdentite" class="form-control" required>
                         </div>
                         
                         <div class="mb-4">
                             <label for="statutAsso" class="form-label fw-semibold">
-                                Statut de l\'association
+                                Statut de l\'association (pdf)
                             </label>
                             <input type="file" name="statutAsso" id="statutAsso" class="form-control" required>
                         </div>
                         
                         <div class="mb-4">
                             <label for="procesVerbal" class="form-label fw-semibold">
-                                Procès verbal
+                                Procès verbal (pdf)
                             </label>
                             <input type="file" name="procesVerbal" id="procesVerbal" class="form-control" required>
                         </div>
