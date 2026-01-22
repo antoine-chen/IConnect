@@ -10,7 +10,7 @@ class VueNavbar extends VueGenerique {
 
     public function afficherNavbar($listeUrlAction, $lien, $quitterOuDeconnexion){
         $this->contenu = '
-    <nav class="navbar navbar-expand-lg bg-light px-3">
+    <nav class="navbar navbar-expand-lg px-3">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="#">

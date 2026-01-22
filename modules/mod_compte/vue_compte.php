@@ -46,12 +46,14 @@ class VueCompte extends VueGenerique{
         echo '
                     </div>
 
-                    <a class="btn btn-outline-primary" href="index.php?module=compte&action=formModifierProfil">
-                        <i class="bi bi-pencil"></i> Modifier
-                    </a>
-                    <a class="btn btn-outline-primary" href="index.php?module=compte&action=modalSuprimerProfil">
-                        <i class="bi bi-pencil"></i> Supprimer mon compte
-                    </a>
+                    <div>
+                        <a class="btn btn-outline-primary" href="index.php?module=compte&action=formModifierProfil">
+                            <i class="bi bi-pencil"></i> Modifier
+                        </a>
+                        <a class="btn btn-outline-primary" href="index.php?module=compte&action=modalSuprimerProfil">
+                            <i class="bi bi-pencil"></i> Supprimer mon compte
+                        </a>
+                    </div>
                 </div>
                 <div class="list-group list-group-flush">
     ';
