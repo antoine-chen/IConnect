@@ -130,5 +130,10 @@ class ModeleCommande extends Modele {
         $get->execute([$asso]);
         return $get->fetchAll();
     }
+    public function getProfilUtilisateur($idUtilisateur){
+        $profil = self::$bdd->prepare('SELECT login, email, solde FROM utilisateurs inner join solde on id= WHERE id = ?');
+        $profil->execute([$idUtilisateur]);
+        return $profil->fetch(PDO::FETCH_ASSOC);
+    }
 
 }
