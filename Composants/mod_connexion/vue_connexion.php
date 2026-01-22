@@ -16,9 +16,26 @@ class VueConnexion extends VueGenerique {
                         <input name="login" class="form-control" placeholder="Login" type="text" minlength="3" required>
                         <label>Login</label>
                     </div>
-                    <div class="form-floating">
+                    <div class="form-floating mt-3">
                         <input name="pwd" class="form-control" placeholder="Mot de passe" type="text" minlength="12" required>
                         <label>Mot de passe</label>
+                    </div>
+                    
+                    <div class="form-floating mt-3">
+                        <input name="nom" class="form-control" placeholder="Nom" required>
+                        <label>Nom</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input name="prenom" class="form-control" placeholder="Prenom" required>
+                        <label>Prenom</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input name="email" class="form-control" placeholder="Email">
+                        <label>Email</label>
+                    </div>
+                    <div class="form-floating mt-3">
+                        <input name="telephone" class="form-control" placeholder="Téléphone">
+                        <label>Téléphone</label>
                     </div>
                     <div class="mb-3">
                         <a href="index.php?actionComposant=form_connexion"> Connectez-vous ici</a>

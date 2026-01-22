@@ -8,9 +8,9 @@ class ModeleConnexion extends Modele {
         $this->modele = new Modele();
     }
 
-    public function ajouterUtilisateur($login, $hash) {
-        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd) VALUES (?, ?)");
-        $req->execute([$login, $hash]);
+    public function ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone="", $email="") {
+        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd, nom, prenom, telephone, email) VALUES (?, ?, ?, ?, ?, ?)");
+        $req->execute([$login, $hash, $nom, $prenom, $telephone, $email]);
     }
 
     public function getUtilisateur($login) {

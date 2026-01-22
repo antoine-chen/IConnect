@@ -21,14 +21,23 @@ class ContConnexion {
 
     public function inscription() {
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
-            if (isset($_POST['login']) && isset($_POST['pwd'])) {
+            if (isset($_POST['login']) && isset($_POST['pwd']) && isset($_POST['nom'])&& isset($_POST['prenom'])) {
                 $login = $_POST['login'];
                 $pwd = $_POST['pwd'];
+                $nom = $_POST['nom'];
+                $prenom = $_POST['prenom'];
+                $telephone = $_POST['telephone'];
+                $email = $_POST['email'];
 
-                if (!empty($login) && !empty($pwd)) {
-                    if (!$this->modele->verifLoginExiste($login)) {
+                if (!$this->modele->verifLoginExiste($login)) {
+                    if (empty($_POST['telephone']) && empty($_POST['email'])) {
+                        $this->form_inscription();
+                    }elseif (!empty($_POST['email'])){
                         $hash = password_hash($pwd, PASSWORD_DEFAULT);
-                        $this->modele->ajouterUtilisateur($login, $hash);
+                        $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
+                    }else {
+                        $hash = password_hash($pwd, PASSWORD_DEFAULT);
+                        $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
                     }
                 } else {
                     $this->vue->form_inscription();
