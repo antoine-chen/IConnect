@@ -374,7 +374,7 @@ class VueCommande extends VueGenerique {
         return $this->getAffichage();
     }
 
-    public function confirmerRetrait($titre){
+    public function confirmerRetrait($titre,$id,$date){
         echo '
         <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
         <div class="modal fade" id="verifCode">
@@ -391,6 +391,8 @@ class VueCommande extends VueGenerique {
                              <textarea class="form-control" placeholder="code de retrait" id="floatingTextarea" name="code"></textarea>
                             <label for="floatingTextarea">code</label>
                         </div>
+                        <input type="hidden" name="id" value="'.$id.'">
+                        <input type="hidden" name="date" value="'.$date.'">
                         <hr>
                         <div class="d-flex justify-content-end gap-2">
                             <button type="submit" class="btn btn-primary">Valider</button>

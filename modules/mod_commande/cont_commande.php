@@ -60,27 +60,32 @@ class ContCommande {
         }
     }
 
-    public function valider(){
-        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
+    public function valider($id,$date){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($id) && isset($date)) {
                 $this->modele->valideCommande(
-                    $_GET['id'],
-                    $_GET['date']
+                    $id,
+                    $date
                 );
         }
         header("Location: index.php?module=commande&action=commandeAvancee", true, 303);
         exit();
     }
     public function confirmationRetrait(){
-    $this->vue->confirmerRetrait('inserer code de retrait');
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
+            var_dump($_GET);
+            $this->vue->confirmerRetrait('inserer code de retrait',$_GET['id'],$_GET['date']);
+        }
     }
     public function verifierCodeDeRetrait(){
-        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])&& isset($_POST['code'])) {
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_POST['id']) && isset($_POST['date'])&& isset($_POST['code'])) {
             var_dump($_POST['code']);
             if($this->modele->verifCode($_POST['code'],
-                $_GET['id'],
-                $_GET['date'])){
-                    $this->valider();
+                $_POST['id'],
+                $_POST['date'])){
+
+                    $this->valider($_POST['id'],$_POST['date']);
             }
+
         }
     }
 
