@@ -27,7 +27,7 @@ class ContProduit{
                 $this->modele->getProduits($idAsso,$idInventaire),
                 $loginClient,
                 $_SESSION['soldeClient'],
-                $idInventaire
+                $this->modele->getNbProduitsDansPanier($_SESSION['asso'], $_SESSION['id'])
             );
             unset($_SESSION['messageOk']);
             unset($_SESSION['messagePasOk']);

@@ -77,12 +77,6 @@ class ModelePanier extends Modele {
         $updateLigneInventaire->execute([$quantite, $idInventaire, $idProduit]);
     }
 
-    public function recupreDate(){
-        $date = self::$bdd->prepare('SELECT NOW()');
-        $date->execute();
-        return $date->fetchColumn();
-    }
-
     public function idDernierCommandeDuJour($idAssociation, $date){
         $requete = self::$bdd->prepare('SELECT id FROM commande WHERE idAssociation = ? AND CAST(date AS DATE) = CAST(? AS DATE) ORDER BY id DESC LIMIT 1');
         $requete->execute([$idAssociation, $date]);

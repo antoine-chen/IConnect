@@ -34,4 +34,9 @@ class Modele extends Connexion{
         return $get->fetchAll();
     }
 
+    public function recupererDate(){
+        $date = self::$bdd->prepare('SELECT NOW()');
+        $date->execute();
+        return $date->fetchColumn();
+    }
 }

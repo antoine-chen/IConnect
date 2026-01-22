@@ -104,4 +104,10 @@ class ModeleProduit extends Modele {
         $delete->execute([$idProduit,$idAsso]);
     }
 
+    public function getNbProduitsDansPanier($idAssociation, $idUtilisateur){
+        $get = self::$bdd->prepare('SELECT SUM(l.quantite) FROM panier p INNER JOIN lignePanier l ON p.id = l.idPanier WHERE p.idAssociation = ? AND p.idUtilisateur = ?');
+        $get->execute([$idAssociation, $idUtilisateur]);
+        return $get->fetchColumn();
+    }
+
 }

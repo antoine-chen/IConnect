@@ -318,8 +318,18 @@ class VueCommande extends VueGenerique {
     ';
     }
 
-    public function afficherNomAsso(){
-        echo '<h3 class="text-center mb-3">Les commandes du jour chez '.$_SESSION['nomAsso'].'</h3>';
+    public function afficherNomAsso($nbCommandes =""){
+        echo '
+            <div class="d-flex justify-content-center mb-3">
+                <h3>Les commandes du jour chez '.$_SESSION['nomAsso'].'</h3>
+                <div class="position-relative d-inline-block">
+                    <i class="bi bi-receipt fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        '.$nbCommandes.'
+                    </span>
+                </div>
+            </div>
+        ';
     }
 
     public function afficher() {

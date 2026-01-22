@@ -6,15 +6,21 @@ class VueProduit extends VueGenerique{
         parent::__construct();
     }
 
-    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur){
+    public function afficherProduits($listeProduit, $loginClient, $soldeUtilisateur, $nbProduis){
         echo '
     <div class="container">
         <div class="text-center mb-4">
     ';
         $this->confirmationProgressBar();
         echo '
-            <div class="fw-semibold">
+            <div class="fw-semibold d-flex justify-content-between px-5">
                 Solde de '.htmlspecialchars($loginClient).': '. $soldeUtilisateur.'€ chez '.$_SESSION['nomAsso'].'
+                <div class="position-relative d-inline-block">
+                    <i class="bi bi-cart3"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        '.$nbProduis.'
+                    </span>
+                </div>
             </div>
         </div>
 

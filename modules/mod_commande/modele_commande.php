@@ -16,15 +16,9 @@ class ModeleCommande extends Modele {
         return $req->fetchAll();
     }
 
-    public function recupereDate(){
-        $date = self::$bdd->prepare('SELECT NOW()');
-        $date->execute();
-        return $date->fetchColumn();
-    }
-
     public function toutesLesCommandesDuJour(){
         $req = self::$bdd->prepare("SELECT * from commande where idAssociation= ? AND statut='Encours' AND Cast(date AS DATE)=Cast(? AS DATE) order by date");
-        $req->execute([$_SESSION['asso'],$this->recupereDate()]);
+        $req->execute([$_SESSION['asso'],$this->recupererDate()]);
         return $req->fetchAll();
     }
 
@@ -121,6 +115,12 @@ class ModeleCommande extends Modele {
                             ORDER BY c.date DESC');
         $get->execute([$asso]);
         return $get->fetchAll();
+    }
+
+    public function getNombreCommandeEnCours ($idAssociation){
+        $get = self::$bdd->prepare('SELECT count(*) FROM commande WHERE idAssociation = ? AND statut = "EnCours" AND cast(date AS DATE) = cast(? AS DATE)');
+        $get->execute([$idAssociation, $this->recupererDate()]);
+        return $get->fetchColumn();
     }
 
 }

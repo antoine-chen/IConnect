@@ -99,7 +99,7 @@ class ContPanier{
                         $this->insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso);
                         $this->enleverStock($idAsso, $panierClient);
                         $this->modele->updateSoldeUtilisateur($idUtilisateur, $idAsso, $addition); // client paye son panier
-                        $_SESSION['messageOk'] = "Votre panier a été valider";
+                        $_SESSION['messageOk'] = "Votre panier a été validé";
                         $this->modele->deleteClientPanierEtLignePanier($idUtilisateur, $idAsso); // vide panier et ligne panier
                         header("Location: index.php?module=produit");
                         exit;
@@ -118,7 +118,7 @@ class ContPanier{
     }
     // insert dans table commande et ligneCommande qui correspond au panier du client de l'association
     private function insertCommandeEtLigneCommande($idUtilisateur, $panierClient, $idAsso){
-        $date = $this->modele->recupreDate();
+        $date = $this->modele->recupererDate();
         $idDerniereCommande = $this->modele->idDernierCommandeDuJour($idAsso, $date);
 
         $this->modele->insertCommande($idDerniereCommande+1, $idUtilisateur, $date, "Encours", $idAsso);
