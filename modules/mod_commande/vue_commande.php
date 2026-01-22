@@ -97,6 +97,36 @@ class VueCommande extends VueGenerique {
         ';
     }
 
+    public function afficherProfilModal($titre,$utilisateur){
+        echo '
+            <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
+            <div class="modal fade" id="profilClient">
+                <!-- centre la modal verticalement dans l’écran -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- modal-content le rectangle blanc contient tout le contenu visible -->
+                    <div class="modal-content p-4 border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>'.$titre.'</h4>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div>                            
+                            <p>login:'.$utilisateur['login'] .'</p>
+                            <p>mail:'.$utilisateur['email'].'</p>
+                            <p>solde:'.$utilisateur['solde'].'</p></div>
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <!-- ferme le modal -->
+                            <a href="index.php?module=commande&action=commandeAvancee" class="btn btn-secondary"> Fermer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+        echo '<script>const modal = new bootstrap.Modal(document.getElementById("profilClient"));
+        modal.show();</script>';
+    }
+
     public function afficherClientHistorique($historique){
         echo '
         <div class="container mt-5">

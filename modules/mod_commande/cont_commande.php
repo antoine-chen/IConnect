@@ -85,7 +85,10 @@ class ContCommande {
             foreach ($this->modele->derouleCommande($idCommande, $date) as $l1) {
                 $this->modele->restocker($l1['quantite'], $l1['idProduit']);
             }
+
         }
+        header("Location: index.php?module=commande&action=commandeAvancee", true, 303);
+        exit();
     }
 
     public function historiqueCommandeClient(){
@@ -118,16 +121,12 @@ class ContCommande {
         }
     }
     private function profilDunUtilisateur($id){
-        require_once 'modules\mod_compte/vue_compte.php';
-        require_once 'modules\mod_compte\modele_compte.php';
-        $modeleCompte =new ModeleCompte();
-        $vueCompte = new VueCompte();
-        if (isset($_SESSION['role'])&& $_SESSION['role']='barman'&&isset($_GET['id'])){
-            $vueCompte->afficherProfil(
-                $modeleCompte->getProfilUtilisateur($id),
-                $id
-            );
+        if (isset($_SESSION['role'])&& $_SESSION['role']=='Barman'&&isset($_GET['id'])){
+            $this->vue->afficherProfilModal('client',
+                $this->modele->getProfilUtilisateur($id));
         }
+
+
     }
 
     public function getVue(){
