@@ -29,46 +29,43 @@ class VueLandingPage extends VueGenerique {
         </div>
 
         <div class="m-5">
-            <h2>Présentation</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium expedita quidem beatae dicta asperiores dignissimos quaerat vero aspernatur sit assumenda. Numquam veritatis minima esse deleniti magnam nemo expedita! Dolores, quam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero adipisci deleniti, repellat, exercitationem ipsum ipsa nemo molestias quam doloribus neque accusantium eveniet eius molestiae recusandae vitae? Rerum sunt quaerat commodi. </p>
+            <h2 class="mb-4"><span class="badge text-bg-primary">Présentation</span></h2>
+            <p>Ce projet consiste à développer une application web destinée à moderniser la gestion des buvettes associatives. L’objectif est de supprimer l’utilisation d’argent liquide en mettant en place un système de comptes numériques rechargeables pour les adhérents. Les utilisateurs peuvent acheter des consommations directement au comptoir, tandis que les barmen enregistrent les ventes via l’application. Les gestionnaires disposent d’outils pour suivre les stocks, réaliser des inventaires et analyser les ventes. L’application est conçue pour être utilisable sur mobile et pour gérer plusieurs associations de manière indépendante.</p>
         </div>
 
         <div id="produits" class="m-5">
-            <h2>Nos produits</h2>
+            <h2><span class="badge text-bg-secondary">Fonctionnalités</span></h2>
             <div class="text-center d-flex justify-content-center gap-5">
                 <div>
                     <img class="rounded img-fluid" style="height: 300px;" src="modules/landingPage/img_landingPage/boisson.png" alt="">
-                    <p>Lorem ipsum dolor</p>
+                    <p>Des boissons disponibles</p>
                 </div>
                 <div>
                     <img class="rounded img-fluid" style="height: 300px;" src="modules/landingPage/img_landingPage/snack.jpg" alt="">
-                    <p>Lorem ipsum dolor</p>
+                    <p>Des boissons disponibles</p>
                 </div>
             </div>
         </div>
 
         <div id="fonctionnalités" class="m-5">
-            <h2>Fonctionnalités</h2>
-            <div class="d-flex justify-content-center align-items-center">
+            <h2><span class="badge text-bg-success">Fonctionnalités</span></h2>
+            <div class="d-flex justify-content-center align-items-center mb-4">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Charger son compte</h3>
                     <p>Après la connexion, vous pouvez charger votre compte en mettant que le montant que vous voulez puis valider.</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/rechargement.png" alt="">
             </div>
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center mb-4">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Liste des produits</h3>
                     <p>Vous pouvez consulter la liste des produits de chaque association  en cliquant sur l’association</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/listeProduits.png" alt="">
             </div>
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center mb-4">
                 <div class="w-25 mx-5">
                     <h3 class="text-center">Panier</h3>
                     <p>Après avoir que vous avez fait votre panier il suffit de le valider pour que le barman valide votre commande et vous donne ce que vous avez commandé</p>
                 </div>
-                <img class="rounded img-fluid" style="height: 300px; width: 300px;" src="modules/landingPage/img_landingPage/validerPanier.png" alt="">
             </div>
         </div>
 
