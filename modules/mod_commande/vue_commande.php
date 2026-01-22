@@ -108,7 +108,7 @@ class VueCommande extends VueGenerique {
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>'.$titre.'</h4>
 
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <a href="index.php?module=commande&action=commandeAvancee" type="button" class="btn-close" aria-label="Close"></a>
                         </div>
                         <div>                            
                             <p>login:'.$utilisateur['login'] .'</p>
