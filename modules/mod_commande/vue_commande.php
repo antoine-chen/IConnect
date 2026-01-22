@@ -18,7 +18,7 @@ class VueCommande extends VueGenerique {
     // affiche les details d'une commande
     public function afficheDetailsCommande($quer){
         echo '
-        <div class="col-md-6 table-responsive">
+        <div class="col-md-3 table-responsive">
             <table class="table table-sm table-hover align-middle text-center mb-0">
                 <thead class="table-light">
                     <tr> 
