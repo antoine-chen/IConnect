@@ -11,7 +11,7 @@ class ModeleCommande extends Modele {
                                     select * 
                                     from commande 
                                     where statut='Encours'
-                                    order by date");
+                                    order by date desc");
         $req->execute([$_SESSION['asso']]);
         return $req->fetchAll();
     }

@@ -356,7 +356,7 @@ class VueCommande extends VueGenerique {
     ';
     }
 
-    public function afficherNomAsso($nbCommandes =""){
+    public function afficherTitreCommandeJour($nbCommandes =""){
         echo '
             <div class="d-flex justify-content-center mb-3 gap-2">
                 <h3>Les commandes du jour chez '.$_SESSION['nomAsso'].'</h3>
@@ -366,6 +366,14 @@ class VueCommande extends VueGenerique {
                         '.$nbCommandes.'
                     </span>
                 </div>
+            </div>
+        ';
+    }
+
+    public function afficherTitreHistorique(){
+        echo '
+            <div class="d-flex justify-content-center mb-3 gap-2">
+                <h3>Historique chez '.$_SESSION['nomAsso'].'</h3>
             </div>
         ';
     }

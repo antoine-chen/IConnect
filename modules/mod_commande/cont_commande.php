@@ -26,7 +26,7 @@ class ContCommande {
     public function commandeAvancee(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman') {
             $commandes = $this->modele->toutesLesCommandesDuJour();
-            $this->vue->afficherNomAsso(
+            $this->vue->afficherTitreCommandeJour(
                 $this->modele->getNombreCommandeEnCours($_SESSION['asso'])
             );
             foreach ($commandes as $value) {
@@ -45,7 +45,7 @@ class ContCommande {
     public function historique(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman') {
             $commandes = $this->modele->toutesLesCommandes();
-            $this->vue->afficherNomAsso();
+            $this->vue->afficherTitreHistorique();
             foreach ($commandes as $value) {
                 $ligneCommandes = $this->modele->derouleCommande($value['id'], $value['date']);
                 $nomClient = $this->modele->getLoginUtilisateur($this->modele->getClient($value['id'], $value['date']));
@@ -72,13 +72,11 @@ class ContCommande {
     }
     public function confirmationRetrait(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
-            var_dump($_GET);
             $this->vue->confirmerRetrait('inserer code de retrait',$_GET['id'],$_GET['date']);
         }
     }
     public function verifierCodeDeRetrait(){
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_POST['id']) && isset($_POST['date'])&& isset($_POST['code'])) {
-            var_dump($_POST['code']);
             if($this->modele->verifCode($_POST['code'],
                 $_POST['id'],
                 $_POST['date'])){
