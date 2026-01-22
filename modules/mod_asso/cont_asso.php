@@ -174,6 +174,9 @@ class ContAsso {
             $this->formAssociation();
         }
     }
+    public function unrecognizedAction(){
+        $this->vue->actionNonTrouver();
+    }
 
 
 

@@ -35,7 +35,7 @@ class ModStock {
                 $this->controleur->rapport();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

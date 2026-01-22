@@ -30,7 +30,7 @@ class ModPanier{
                 $this->controleur->viderPanier();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

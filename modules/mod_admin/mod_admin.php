@@ -48,7 +48,7 @@ class ModAdmin{
                 $this->controleur->refuserDemande();
                 break;
             default:
-                echo "Action inconnu";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

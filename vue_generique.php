@@ -70,6 +70,34 @@ class VueGenerique {
                 </div>
             ';
     }
+    public function actionNonTrouver(){
+        echo '
+            <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
+            <div class="modal fade" id="unrecognizedAction">
+                <!-- centre la modal verticalement dans l’écran -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- modal-content le rectangle blanc contient tout le contenu visible -->
+                    <div class="modal-content p-4 border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>Action non trouvée</h4>
+
+                            <a href="index.php" type="button" class="btn-close" aria-label="Close"></a>
+                        </div>
+                        <div>                            
+                        <hr>
+                        Cette action n\'existe pas. ;)
+                        <div class="d-flex justify-content-end gap-2">
+                            <!-- ferme le modal -->
+                            <a href="index.php" class="btn btn-secondary"> Fermer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+        echo '<script>const modal = new bootstrap.Modal(document.getElementById("unrecognizedAction"));
+        modal.show();</script>';
+
+    }
 
 
 }

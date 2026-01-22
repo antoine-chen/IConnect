@@ -192,6 +192,9 @@ class ContStock {
             $this->vue->stockProduitBarman($resultat);
         }
     }
+    public function unrecognizedAction(){
+        $this->vue->actionNonTrouver();
+    }
 
     public function getVue(){
         return $this->vue->afficher();

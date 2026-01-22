@@ -30,7 +30,7 @@ class ModFournisseur{
                 $this->controleur->ajouterProduitFournisseur();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

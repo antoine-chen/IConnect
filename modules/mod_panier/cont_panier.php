@@ -141,6 +141,9 @@ class ContPanier{
             header('Location: index.php?module=panier&action=panier');
         }
     }
+    public function unrecognizedAction(){
+        $this->vue->actionNonTrouver();
+    }
 
     public function getVue(){
         return $this->vue->afficher();

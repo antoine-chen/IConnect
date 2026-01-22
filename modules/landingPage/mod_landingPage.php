@@ -17,7 +17,7 @@ class ModLandingPage {
                 $this->controleur->landingPage();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

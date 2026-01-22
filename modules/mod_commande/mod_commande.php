@@ -46,7 +46,7 @@ private $action;
                 $this->controleur->historiqueCommandeAsso();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

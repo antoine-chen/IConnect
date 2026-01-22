@@ -30,7 +30,7 @@ class ModCompte{
                 $this->controleur->modifierProfil();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

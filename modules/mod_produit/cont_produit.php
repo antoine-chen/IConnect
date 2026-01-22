@@ -145,7 +145,9 @@ class ContProduit{
         header('Location: index.php?module=produit&action=listerProduitsFournisseur');
         exit();
     }
-
+    public function unrecognizedAction(){
+        $this->vue->actionNonTrouver();
+    }
     public function getVue(){
         return $this->vue->afficher();
     }

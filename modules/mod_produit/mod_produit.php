@@ -36,7 +36,7 @@ class ModProduit{
                 $this->controleur->restockerProduit();
                 break;
             default:
-                echo "action inconnue";
+                $this->controleur->unrecognizedAction();
                 break;
         }
     }

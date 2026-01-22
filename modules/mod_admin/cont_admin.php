@@ -133,6 +133,9 @@ class ContAdmin{
         }
         $this->listeDemandeCreationAsso();
     }
+    public function unrecognizedAction(){
+        $this->vue->actionNonTrouver();
+    }
 
     public function getVue(){
         return $this->vue->afficher();
