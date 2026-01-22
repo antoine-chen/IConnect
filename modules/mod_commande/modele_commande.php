@@ -84,10 +84,10 @@ class ModeleCommande extends Modele {
                                 INNER JOIN produit p ON l.idProduit = p.id
                                 inner join utilisateurs u1 on c.idUtilisateur = u1.id
                                 left join utilisateurs u2 on c.idBarman = u2.id
-                            WHERE c.idUtilisateur = ? AND c.idAssociation = ?
+                            WHERE c.idUtilisateur = ? AND c.idAssociation = ? AND c.date = l.date
                             GROUP BY c.id, c.date, c.statut, a.nom, a.image
                             ORDER BY c.date DESC');
-        $get->execute([$idUtilisateur, $idAssociation]);
+        $get->execute([$idUtilisateur, $idAssociation, ]);
         return $get->fetchAll();
     }
 
