@@ -74,7 +74,6 @@ class VueCompte extends VueGenerique{
     ';
     }
 
-
     public function afficherFormModifierProfil($listeData, $idUtilisateur){
         echo '
         <div class="container my-4" style="max-width: 600px;">
