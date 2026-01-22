@@ -33,6 +33,9 @@ private $action;
             case 'historiqueCommandeClient':
                 $this->controleur->historiqueCommandeClient();
                 break;
+            case 'afficherProfile':
+                $this->controleur->afficherProfile();
+                break;
             case 'historiqueCommandeFournisseur':
                 $this->controleur->historiqueCommandeFournisseur();
                 break;

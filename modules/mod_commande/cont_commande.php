@@ -2,6 +2,7 @@
 include_once 'vue_commande.php';
 include_once 'modele_commande.php';
 
+
 class ContCommande {
     private $modele;
     private $vue;
@@ -86,7 +87,10 @@ class ContCommande {
             foreach ($this->modele->derouleCommande($idCommande, $date) as $l1) {
                 $this->modele->restocker($l1['quantite'], $l1['idProduit']);
             }
+
         }
+        header("Location: index.php?module=commande&action=commandeAvancee", true, 303);
+        exit();
     }
 
     public function historiqueCommandeClient(){
@@ -108,6 +112,22 @@ class ContCommande {
             $commandes = $this->modele->getHistoriqueCommandesAsso($_SESSION['asso']);
             $this->vue->afficherHistoriqueCommandeAsso($commandes);
         }
+    }
+
+    public function afficherProfile(){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'Barman' && isset($_GET['id']) && isset($_GET['date'])) {
+            $client=$this->modele->getClient($_GET['id'], $_GET['date']);
+            $this->profilDunUtilisateur($client);
+
+        }
+    }
+    private function profilDunUtilisateur($id){
+        if (isset($_SESSION['role'])&& $_SESSION['role']=='Barman'&&isset($_GET['id'])){
+            $this->vue->afficherProfilModal('client',
+                $this->modele->getProfilUtilisateur($id));
+        }
+
+
     }
 
     public function getVue(){

@@ -67,6 +67,14 @@ class ModeleCommande extends Modele {
       $req->execute([$idCommande,$date]);
       return $req->fetchColumn();
     }
+    public function profilDunUtilisateur(){
+        if (isset($_SESSION['role'])&& $_SESSION['role']='barman'&&isset($_GET['id'])){
+            $this->vue->afficherProfil(
+                $this->modele->getProfilUtilisateur($_GET),
+                $_GET['id']
+            );
+        }
+    }
 
     public function getCommandeClientHistorique($idUtilisateur, $idAssociation){
         $get = self::$bdd->prepare('
@@ -115,6 +123,11 @@ class ModeleCommande extends Modele {
                             ORDER BY c.date DESC');
         $get->execute([$asso]);
         return $get->fetchAll();
+    }
+    public function getProfilUtilisateur($idUtilisateur){
+        $profil = self::$bdd->prepare('SELECT login, email, solde FROM utilisateurs inner join solde on id=idUtilisateur WHERE id = ?');
+        $profil->execute([$idUtilisateur]);
+        return $profil->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getNombreCommandeEnCours ($idAssociation){

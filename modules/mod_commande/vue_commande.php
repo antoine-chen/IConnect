@@ -18,7 +18,7 @@ class VueCommande extends VueGenerique {
     // affiche les details d'une commande
     public function afficheDetailsCommande($quer){
         echo '
-        <div class="col-md-6 table-responsive">
+        <div class="col-md-3 table-responsive">
             <table class="table table-sm table-hover align-middle text-center mb-0">
                 <thead class="table-light">
                     <tr> 
@@ -61,6 +61,8 @@ class VueCommande extends VueGenerique {
                         <div class="mb-1">
                             <i class="bi bi-info-circle"></i>
                             <strong>Statut : </strong><p class="badge bg-warning text-dark">'. htmlspecialchars($quer['statut']) .'</p>
+                            <p><a href="index.php?module=commande&action=afficherProfile&id=' . $quer['id'] . '&date='.$quer['date'].'" class="btn btn-primary"> afficher profil</a></p>                        </div>
+    
                         </div>
                         <p class="mb-1">
                             ';
@@ -93,6 +95,36 @@ class VueCommande extends VueGenerique {
             </div>
         </div>
         ';
+    }
+
+    public function afficherProfilModal($titre,$utilisateur){
+        echo '
+            <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
+            <div class="modal fade" id="profilClient">
+                <!-- centre la modal verticalement dans l’écran -->
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- modal-content le rectangle blanc contient tout le contenu visible -->
+                    <div class="modal-content p-4 border-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>'.$titre.'</h4>
+
+                            <a href="index.php?module=commande&action=commandeAvancee" type="button" class="btn-close" aria-label="Close"></a>
+                        </div>
+                        <div>                            
+                            <p>login:'.$utilisateur['login'] .'</p>
+                            <p>mail:'.$utilisateur['email'].'</p>
+                            <p>solde:'.$utilisateur['solde'].'</p></div>
+                        <hr>
+                        <div class="d-flex justify-content-end gap-2">
+                            <!-- ferme le modal -->
+                            <a href="index.php?module=commande&action=commandeAvancee" class="btn btn-secondary"> Fermer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+        echo '<script>const modal = new bootstrap.Modal(document.getElementById("profilClient"));
+        modal.show();</script>';
     }
 
     public function afficherClientHistorique($historique){
