@@ -118,9 +118,9 @@ class VueCompte extends VueGenerique{
                         </div>
 
                         <div class="d-flex justify-content-end gap-2">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            <a class="btn btn-outline-secondary" href="index.php?module=stock"> 
                                 Annuler
-                            </button>
+                            </a>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">
                                 Modifier
                             </button>
