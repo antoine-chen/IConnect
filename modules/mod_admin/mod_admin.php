@@ -26,8 +26,20 @@ class ModAdmin{
             case 'enleverRoleBarman':
                 $this->controleur->enleverRoleBarman();
                 break;
+            case 'donnerRoleGestionnaire' :
+                $this->controleur->donnerRoleGestionnaire();
+                break;
+            case 'enleverRoleGestionnaire' :
+                $this->controleur->enleverRoleGestionnaire();
+                break;
             case 'bannirUtilisateur':
                 $this->controleur->bannirUtilisateur();
+                break;
+            case 'ajoutGestionnaire' :
+                $this->controleur->ajoutGestionnaire();
+                break;
+            case 'enleverGestionnaire' :
+                $this->controleur->enleverGestionnaire();
                 break;
             case 'listeDemandeCreationAsso' :
                 $this->controleur->listeDemandeCreationAsso();

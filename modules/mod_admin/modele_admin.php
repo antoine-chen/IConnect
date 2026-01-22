@@ -22,9 +22,29 @@ class ModeleAdmin extends Modele {
 
     public function getUtilisateurNonRole($idAssociation,$role){
         $get = self::$bdd->prepare('
-            select distinct id,login,nom,prenom,telephone
+            SELECT DISTINCT u.id, u.login, u.nom, u.prenom, u.telephone
+            FROM utilisateurs u
+            JOIN role r ON r.idUtilisateur = u.id
+            WHERE r.idAssociation = ?
+              AND r.role != "Encours"
+              AND NOT EXISTS (
+                  SELECT 1
+                  FROM role r2
+                  WHERE r2.idUtilisateur = u.id
+                    AND r2.idAssociation = ?
+                    AND r2.role = ?
+              )
+        ');
+        $get->execute([$idAssociation, $idAssociation, $role]);
+        return $get->fetchAll();
+    }
+
+    public function getUtilisateurAvecRole($idAssociation,$role)
+    {
+        $get = self::$bdd->prepare('
+            select distinct id,login,nom,prenom,telephone,role
             from utilisateurs inner join role on utilisateurs.id = role.idUtilisateur
-            where idAssociation = (?) and role != (?)
+            where idAssociation = (?) and role = (?)
         ');
         $get->execute([$idAssociation,$role]);
         return $get->fetchAll();

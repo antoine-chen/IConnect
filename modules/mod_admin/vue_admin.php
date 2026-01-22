@@ -8,38 +8,55 @@ class VueAdmin extends VueGenerique{
 
     public function afficherListeAssociations($listeAssociations){
         echo '
-            <h2 class="text-center">Liste des associations</h2>
-            <div class="table-responsive container taille-tableau">
-                <table class="table table-bordered table-hover text-center"> 
-                    <tr> 
-                        <th style="width:70%;">Nom de l\'association</th> 
-                        <th style="width:30%;"></th> 
-                    </tr>    
-        ';
+        <h2 class="text-center mb-4">Liste des associations</h2>
+
+        <div class="table-responsive container taille-tableau">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:50%">Association</th>
+                        <th style="width:25%">Ajouter</th>
+                        <th style="width:25%">Enlever</th>
+                    </tr>
+                </thead>
+                <tbody>
+    ';
         foreach ($listeAssociations as $association){
             echo '
-                <tr>
-                   <th>
-                        <a href="index.php?module=admin&action=listerAssociation&id=' . $association['id'] . '">
-                        ' . htmlspecialchars($association['nom']) . '
-                        </a>
-                    </th> 
-                    <th>
-                        <a href="index.php?module=admin&action=formAjouterGestionnaireOuBarman&id=' . $association['id'] . '">
-                            <button type="button" class="btn btn-primary">
-                                Ajouter un gestionnaire
-                            </button>
-                        </a>
-                    </th>
-                </tr>
-            
-            ';
+            <tr>
+                <td class="fw-semibold">
+                    <a class="text-decoration-none"
+                       href="index.php?module=admin&action=listerAssociation&id='.$association['id'].'">
+                        '.htmlspecialchars($association['nom']).'
+                    </a>
+                </td>
+
+                <td>
+                    <a href="index.php?module=admin&action=ajoutGestionnaire&id='.$association['id'].'"
+                       class="btn btn-success btn-sm">
+                        <i class="bi bi-person-plus"></i>
+                        <span class="d-none d-md-inline">Ajouter</span>
+                    </a>
+                </td>
+
+                <td>
+                    <a href="index.php?module=admin&action=enleverGestionnaire&id='.$association['id'].'"
+                       class="btn btn-warning btn-sm">
+                        <i class="bi bi-person-dash"></i>
+                        <span class="d-none d-md-inline">Enlever</span>
+                    </a>
+                </td>
+            </tr>
+        ';
         }
         echo '
-                </table>
-            </div>
-        ';
+                </tbody>
+            </table>
+        </div>
+    ';
     }
+
+
 
     /**
      * si je suis barman je peux donner le role barman à un client de mon asso
@@ -210,6 +227,94 @@ class VueAdmin extends VueGenerique{
         }
         echo '    </div>
         </div>';
+    }
+
+    public function afficherTabAjoutGestionnaire($comptes)
+    {
+        $this->confirmationProgressBar();
+        echo '
+      <div class="container">  
+       <div class="container-color rounded-4 p-4 w-75 container">
+       <h2 class="text-center mb-4">Mettre rôle gestionnaire</h2>    
+         <div class="table-responsive container taille-tableau">
+            <table class="table table-hover align-middle text-center">
+                <tr class="table-light">
+                    <th>Login</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            ';
+        foreach ($comptes as $compte) {
+            echo '
+                <tr>
+                    <td>'.htmlspecialchars($compte['login']).'</td>
+                    <td>'.htmlspecialchars($compte['prenom']).'</td>
+                    <td>'.htmlspecialchars($compte['nom']).'</td>
+                    <td>'.htmlspecialchars($compte['telephone']).'</td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+
+            ';
+            if ($_SESSION['role'] == 'Admin'){
+                echo '
+                    <a href="index.php?module=admin&action=donnerRoleGestionnaire&id='.$compte['id'].'" class="btn btn-success">
+                        <i class="bi bi-arrow-up-circle"></i>
+                    </a>
+                ';
+            }
+        }
+        echo '
+            </table>    
+           </div>
+          </div>  
+        </div>  
+        ';
+    }
+
+    public function afficherTabSuppressionGestionnaire($comptes)
+    {
+        $this->confirmationProgressBar();
+        echo '
+      <div class="container">  
+       <div class="container-color rounded-4 p-4 w-75 container">    
+         <div class="table-responsive container taille-tableau">
+         <h2 class="text-center mb-4">Enlever rôle gestionnaire</h2>  
+            <table class="table table-hover align-middle text-center">
+                <tr class="table-light">
+                    <th>Login</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            ';
+        foreach ($comptes as $compte) {
+            echo '
+                <tr>
+                    <td>'.htmlspecialchars($compte['login']).'</td>
+                    <td>'.htmlspecialchars($compte['prenom']).'</td>
+                    <td>'.htmlspecialchars($compte['nom']).'</td>
+                    <td>'.htmlspecialchars($compte['telephone']).'</td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+
+            ';
+            if ($_SESSION['role'] == 'Admin'){
+                echo '
+                    <a href="index.php?module=admin&action=enleverRoleGestionnaire&id='.$compte['id'].'" class="btn btn-danger">
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                ';
+            }
+        }
+        echo '
+            </table>    
+           </div>
+          </div>  
+        </div>  
+        ';
     }
 
     public function afficher() {

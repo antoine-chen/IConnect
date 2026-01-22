@@ -62,16 +62,15 @@ class ContAdmin{
     }
 
     public function bannirUtilisateur(){
-        echo $_GET['id'];
-//        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_SESSION['asso']) && isset($_GET['id'])){
-//            $idUtilisateur = $_GET['id'];
-//            $idAssociation = $_SESSION['asso'];
-//            $loginUtilisateur = $this->modele->getLogin($idUtilisateur);
-//            $this->modele->deleteUtilisateur($idUtilisateur, $idAssociation);
-//            $_SESSION['messageOk'] = 'Vous avez banni '.$loginUtilisateur;
-//            header('Location: index.php?module=admin&action=gestionCompte');
-//            exit();
-//        }
+        if (isset($_SESSION['role']) && ($_SESSION['role'] == 'Gestionnaire' || $_SESSION['role'] == 'Admin') && isset($_SESSION['asso']) && isset($_GET['id'])){
+            $idUtilisateur = $_GET['id'];
+            $idAssociation = $_SESSION['asso'];
+            $loginUtilisateur = $this->modele->getLogin($idUtilisateur);
+            $this->modele->deleteUtilisateur($idUtilisateur, $idAssociation);
+            $_SESSION['messageOk'] = 'Vous avez banni '.$loginUtilisateur;
+            header('Location: index.php?module=admin&action=gestionCompte');
+            exit();
+        }
     }
 
     /**
@@ -135,6 +134,54 @@ class ContAdmin{
     }
     public function unrecognizedAction(){
         $this->vue->actionNonTrouver();
+    }
+
+    public function ajoutGestionnaire()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $comptes = $this->modele->getUtilisateurNonRole($_GET['id'],'Gestionnaire');
+            $this->vue->afficherTabAjoutGestionnaire($comptes);
+        }
+    }
+
+    public function donnerRoleGestionnaire()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_GET['id'])){
+            $idUtilisateur = $_GET['id'];
+            $idAssociation = $_SESSION['asso'];
+
+            if (!$this->modele->dejaBarman($idUtilisateur, $idAssociation, "Gestionnaire")){
+                $this->modele->insertRoleBarman($idUtilisateur, $idAssociation, "Gestionnaire");
+                $_SESSION['messageOk'] = 'Promotion success';
+            }else{
+                $_SESSION['messagePasOk'] = 'Promotion fail, cette personne est déjà barman';
+            }
+            header('Location: index.php?module=admin&action=listerAssociation');
+            exit();
+        }
+    }
+
+    public function enleverRoleGestionnaire()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_GET['id'])){
+            $idUtilisateur = $_GET['id'];
+            $idAssociation = $_SESSION['asso'];
+
+            if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Gestionnaire")){
+                $this->modele->deleteRoleBarman($idUtilisateur, $idAssociation, "Gestionnaire");
+                $_SESSION['messageOk'] = 'Le role barman a bien été enlever';
+            }
+            header('Location: index.php?module=admin&action=listerAssociation');
+            exit();
+        }
+    }
+
+    public function enleverGestionnaire()
+    {
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
+            $comptes = $this->modele->getUtilisateurAvecRole($_GET['id'],'Gestionnaire');
+            $this->vue->afficherTabSuppressionGestionnaire($comptes);
+        }
     }
 
     public function getVue(){
