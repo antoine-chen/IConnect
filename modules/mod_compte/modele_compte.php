@@ -42,4 +42,9 @@ class ModeleCompte extends Modele {
         $req->execute([$login,$id]);
         return $req->fetch();
     }
+
+    public function suprimerProfil($id,$login){
+        $req = self::$bdd->prepare('DELETE from utilisateurs Where id = ? AND login = ?');
+        $req->execute([$id,$login]);
+    }
 }

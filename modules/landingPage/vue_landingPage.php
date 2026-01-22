@@ -20,7 +20,7 @@ class VueLandingPage extends VueGenerique {
                     <div>cette solution vous simplifie la vie.</div>
                 </div>
                 <div>
-                <a href="index.php?actionComposant=form_inscription" class="btn btn-success mt-2">S\'inscrire</a>
+                <a href="index.php?actionComposant=rgpd" class="btn btn-success mt-2">S\'inscrire</a>
                 </div>
             </div>
             <div>

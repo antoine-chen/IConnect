@@ -9,8 +9,8 @@ class ModeleConnexion extends Modele {
     }
 
     public function ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone="", $email="") {
-        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd, nom, prenom, telephone, email) VALUES (?, ?, ?, ?, ?, ?)");
-        $req->execute([$login, $hash, $nom, $prenom, $telephone, $email]);
+        $req = self::$bdd->prepare("INSERT INTO utilisateurs (login, pwd, nom, prenom, telephone, email,consentementRgpd) VALUES (?, ?, ?, ?, ?, ?,?)");
+        $req->execute([$login, $hash, $nom, $prenom, $telephone, $email,"à consentit à la collecte"]);
     }
 
     public function getUtilisateur($login) {

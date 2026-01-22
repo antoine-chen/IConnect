@@ -11,6 +11,11 @@ class ContConnexion {
         $this->modele = new ModeleConnexion();
         $this->vue = new VueConnexion();
     }
+    public function avertissementRgpd(){
+        if (!isset($_SESSION['login'])){
+            $_SESSION['landing'] = 0;
+        $this->vue->avertissementModal();
+    }}
 
     public function form_inscription() {
         if (!isset($_SESSION['login'])){
