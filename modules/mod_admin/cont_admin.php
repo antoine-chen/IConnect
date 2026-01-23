@@ -145,15 +145,17 @@ class ContAdmin{
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
             $comptes = $this->modele->getUtilisateurNonRole($_GET['id'],'Gestionnaire');
-            $this->vue->afficherTabAjoutGestionnaire($comptes);
+            $this->vue->afficherTabAjoutGestionnaire($comptes,$_GET['id']);
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     public function donnerRoleGestionnaire()
     {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_GET['id'])){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_GET['id'])){
             $idUtilisateur = $_GET['id'];
-            $idAssociation = $_SESSION['asso'];
+            $idAssociation = $_GET['asso'];
 
             if (!$this->modele->dejaBarman($idUtilisateur, $idAssociation, "Gestionnaire")){
                 $this->modele->insertRoleBarman($idUtilisateur, $idAssociation, "Gestionnaire");
@@ -168,13 +170,13 @@ class ContAdmin{
 
     public function enleverRoleGestionnaire()
     {
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_SESSION['asso']) && isset($_GET['id'])){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin' && isset($_GET['id'])){
             $idUtilisateur = $_GET['id'];
-            $idAssociation = $_SESSION['asso'];
-
+            $idAssociation = $_GET['asso'];
+            var_dump($idUtilisateur,$idAssociation);
             if ($this->modele->dejaBarman($idUtilisateur, $idAssociation, "Gestionnaire")){
                 $this->modele->deleteRoleBarman($idUtilisateur, $idAssociation, "Gestionnaire");
-                $_SESSION['messageOk'] = 'Le role barman a bien été enlever';
+                $_SESSION['messageOk'] = 'Le role gestionnaire a bien été enlever';
             }
             header('Location: index.php?module=admin&action=listerAssociation');
             exit();
@@ -185,7 +187,7 @@ class ContAdmin{
     {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Admin'){
             $comptes = $this->modele->getUtilisateurAvecRole($_GET['id'],'Gestionnaire');
-            $this->vue->afficherTabSuppressionGestionnaire($comptes);
+            $this->vue->afficherTabSuppressionGestionnaire($comptes,$_GET['id']);
         }
     }
 

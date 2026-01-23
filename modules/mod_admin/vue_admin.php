@@ -229,7 +229,7 @@ class VueAdmin extends VueGenerique{
         </div>';
     }
 
-    public function afficherTabAjoutGestionnaire($comptes)
+    public function afficherTabAjoutGestionnaire($comptes,$asso)
     {
         $this->confirmationProgressBar();
         echo '
@@ -259,7 +259,7 @@ class VueAdmin extends VueGenerique{
             ';
             if ($_SESSION['role'] == 'Admin'){
                 echo '
-                    <a href="index.php?module=admin&action=donnerRoleGestionnaire&id='.$compte['id'].'" class="btn btn-success">
+                    <a href="index.php?module=admin&action=donnerRoleGestionnaire&id='.$compte['id'].'&asso='.$asso.'" class="btn btn-success">
                         <i class="bi bi-arrow-up-circle"></i>
                     </a>
                 ';
@@ -273,7 +273,7 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficherTabSuppressionGestionnaire($comptes)
+    public function afficherTabSuppressionGestionnaire($comptes,$asso)
     {
         $this->confirmationProgressBar();
         echo '
@@ -303,7 +303,7 @@ class VueAdmin extends VueGenerique{
             ';
             if ($_SESSION['role'] == 'Admin'){
                 echo '
-                    <a href="index.php?module=admin&action=enleverRoleGestionnaire&id='.$compte['id'].'" class="btn btn-danger">
+                    <a href="index.php?module=admin&action=enleverRoleGestionnaire&id='.$compte['id'].'&asso='.$asso.'" class="btn btn-danger">
                         <i class="bi bi-arrow-down-circle"></i>
                     </a>
                 ';

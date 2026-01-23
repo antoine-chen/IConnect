@@ -160,7 +160,7 @@ class VueCompte extends VueGenerique{
                     <div class="modal-content p-4 border-0">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4>Cookies</h4>
-                            <a href="index.php" type="button" class="btn-close" aria-label="Close"></a>
+                            <a href="index.php?module=compte&action=profil" type="button" class="btn-close" aria-label="Close"></a>
                         </div>
                         <div>                            
                         <p>
@@ -172,7 +172,7 @@ class VueCompte extends VueGenerique{
                             Cette suppression rend impossible l’accès aux services proposés par l’association.
                         </p>
                         <hr>
-                      en clickant sur la case "Suprimer" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
+                      en cliquant sur la case "Suprimer" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
                         <div class="d-flex justify-content-end gap-2">
                             <!-- ferme le modal -->
                             <a href="index.php?module=compte&action=profil" class="btn btn-secondary"> Annuler</a>
