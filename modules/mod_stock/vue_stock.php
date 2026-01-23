@@ -118,7 +118,7 @@ class VueStock extends VueGenerique{
                             </tbody>
                         </table>
 
-                        <div class="p-3 d-flex justify-content-between">
+                        <div class="p-3 d-flex justify-content-end gap-2">
                             <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
                                 Annuler
                             </a>                        

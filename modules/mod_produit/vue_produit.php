@@ -86,7 +86,7 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label fw-semibold">Image du produit (jpg, jpeg, png, webp)</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
-                    <div class="d-flex justify-content-between mt-4">
+                    <div class="d-flex justify-content-end gap-2 mt-4">
                         <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
                             Annuler
                         </a>
@@ -125,7 +125,7 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label">Image du produit (jpg, jpeg, png, webp)</label>
                         <input type="file" name="image" id="imageProduit" class="form-control">
                     </div>
-                    <div class="d-flex justify-content-between mt-4">
+                    <div class="d-flex justify-content-end gap-2 mt-4">
                         <!-- Bouton Retour vers le stock -->
                         <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
                             Annuler
