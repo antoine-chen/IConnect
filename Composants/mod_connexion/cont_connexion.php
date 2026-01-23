@@ -55,12 +55,14 @@ class ContConnexion {
         }
     }
 
-    
+
     public function form_connexion() {
         if (!isset($_SESSION['login'])){
             $_SESSION['landing'] = 0;
             $this->vue->form_connexion();
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     public function connexion() {
