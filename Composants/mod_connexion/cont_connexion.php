@@ -55,6 +55,7 @@ class ContConnexion {
         }
     }
 
+    
     public function form_connexion() {
         if (!isset($_SESSION['login'])){
             $_SESSION['landing'] = 0;
