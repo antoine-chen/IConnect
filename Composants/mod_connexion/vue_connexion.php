@@ -178,7 +178,7 @@ class VueConnexion extends VueGenerique {
 </body>
 </html>
                         <hr>
-                      en clickant sur la case "Accepter" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
+                      en cliquant sur la case "Accepter" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
                         <div class="d-flex justify-content-end gap-2">
                             <!-- ferme le modal -->
                             <a href="index.php" class="btn btn-secondary"> Refuser</a>
