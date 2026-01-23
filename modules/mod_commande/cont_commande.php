@@ -83,8 +83,9 @@ class ContCommande {
 
                     $this->valider($_POST['id'],$_POST['date']);
             }
-
         }
+        header('Location: index.php?module=commande&action=commandeAvancee');
+        exit();
     }
 
 
@@ -118,15 +119,28 @@ class ContCommande {
     }
 
     public function historiqueCommandeFournisseur(){
-        $this->vue->afficherHistoriqueCommandeFournisseur(
-            $this->modele->getCommandeFournisseur($_SESSION['asso'])
-        );
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+            $commandes = $this->modele->getCommandeFournisseur($_SESSION['asso']);
+            if(empty($commandes)) {
+                $this->vue->titreHistoFournisseurVide();
+            }
+            else {
+                $this->vue->afficherHistoriqueCommandeFournisseur(
+                    $commandes
+                );
+            }
+        }
     }
 
     public function historiqueCommandeAsso(){
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
             $commandes = $this->modele->getHistoriqueCommandesAsso($_SESSION['asso']);
-            $this->vue->afficherHistoriqueCommandeAsso($commandes);
+            if(empty($commandes)) {
+                $this->vue->titreHistoCommandesAsso();
+            }
+            else {
+                $this->vue->afficherHistoriqueCommandeAsso($commandes);
+            }
         }
     }
 

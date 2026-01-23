@@ -22,6 +22,8 @@ class ContConnexion {
             $_SESSION['landing'] = 0;
             $this->vue->form_inscription();
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     public function inscription() {
@@ -40,12 +42,15 @@ class ContConnexion {
                     }elseif (!empty($_POST['email'])){
                         $hash = password_hash($pwd, PASSWORD_DEFAULT);
                         $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
+                        $_SESSION['messageOk'] = "Insciption success";
                     }else {
                         $hash = password_hash($pwd, PASSWORD_DEFAULT);
                         $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
+                        $_SESSION['messageOk'] = "Insciption success";
                     }
                 } else {
                     $this->vue->form_inscription();
+                    $_SESSION['messageOk'] = "Insciption fail le login ".$_POST['login']. ' existe déjà';
                 }
             } else {
                 $this->vue->form_inscription();
@@ -79,6 +84,8 @@ class ContConnexion {
                 $this->vue->form_connexion();
             }
         }
+        header('Location: index.php?actionComposant=form_connexion');
+        exit();
     }
 
     public function deconnexion() {

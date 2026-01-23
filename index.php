@@ -21,7 +21,6 @@ else {
         $contenu = $mod->getAffichage();
     }
 }
-
 if ($_SESSION['landing'] == 1){
     include_once "Composants/comp_navbar/comp_navbar.php";
     $mod = new CompNavBar();

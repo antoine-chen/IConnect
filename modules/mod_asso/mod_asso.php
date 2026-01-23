@@ -6,7 +6,6 @@ class ModAsso
 
     public function __construct(){
         $mod = isset($_GET['module']) ? $_GET['module'] : 'asso';
-
         if(isset($_SESSION['role'])) {
             if($_SESSION['role']=='Admin' && $mod == 'asso') {
                 $mod = 'admin';
@@ -57,8 +56,11 @@ class ModAsso
                     case 'afficherAssoPasInscris' :
                         $this->module->afficherAssoPasInscris();
                         break;
-                    case 'afficherAssoEnAttente':
-                        $this->module->afficherAssoEnAttente();
+                    case 'afficherAssoCreationEnAttente':
+                        $this->module->afficherAssoCreationEnAttente();
+                        break;
+                    case 'afficherAssoInscriptionEnAttente':
+                        $this->module->afficherAssoInscriptionEnAttente();
                         break;
                     case 'formAssociation':
                         $this->module->formAssociation();

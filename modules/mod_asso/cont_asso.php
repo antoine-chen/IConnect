@@ -27,25 +27,46 @@ class ContAsso {
             $this->quitterAssoc();
         }
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationInscris($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationInscris($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreInscritsVide();
+            }
+            else {
+                $this->vue->titreInscrits();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 
     public function afficherAssoPasInscris(){
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationPasIncris($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationPasIncris($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titrePasInscritVide();
+            }
+            else {
+                $this->vue->titrePasInscrit();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 
-    public function afficherAssoEnAttente(){
+    public function afficherAssoCreationEnAttente(){
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationEnAttente($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationEnAttente($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreAttenteCreationVide();
+            }
+            else {
+                $this->vue->titreAttenteCreation();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 
@@ -68,7 +89,7 @@ class ContAsso {
 
                 if(empty($listeRoles)) {
                     $this->modele->demandeAccesAssociation($idAsso, $idUtilisateur);
-                    $this->afficherAssoEnAttente();
+                    $this->afficherAssoCreationEnAttente();
                 }
                 else if(isset($_GET['role'])) {
                     $roleChoisi = $_GET['role'];
@@ -127,6 +148,8 @@ class ContAsso {
         if (!isset($_SESSION['role'])){
             $this->vue->afficherFormAssociation($messageErreur);
         }
+        unset($_SESSION['messagePasOk']);
+        unset($_SESSION['messageOk']);
     }
 
     /**
@@ -167,7 +190,9 @@ class ContAsso {
                     move_uploaded_file($_FILES['procesVerbal']['tmp_name'], $cheminProces);
 
                     $this->modele->enregistrerDemande($idUtilisateur, $nomFichier, $cheminCarte, $cheminStatut, $cheminProces);
+                    $_SESSION['messageOk'] = 'Envoie demande success';
                 } else {
+                    $_SESSION['messagePasOk'] = 'Envoie demande fail';
                     $this->modele->deleteAsso($nomFichier);
                 }
             }
@@ -178,6 +203,21 @@ class ContAsso {
         $this->vue->actionNonTrouver();
     }
 
+    public function afficherAssoInscriptionEnAttente()
+    {
+        if (isset($_SESSION['id'])){
+            $assos = $this->modele->getListeAssociationInscription($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreAttenteInscriptionVide();
+            }
+            else {
+                $this->vue->titreAttenteInscription();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
+        }
+    }
 
 
 }

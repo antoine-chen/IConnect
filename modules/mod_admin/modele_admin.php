@@ -3,7 +3,7 @@ include_once "modele.php";
 class ModeleAdmin extends Modele {
 
     public function getAssociations(){
-        $get = self::$bdd->prepare('SELECT * FROM association');
+        $get = self::$bdd->prepare('SELECT * FROM association where statut ="Valide"');
         $get->execute();
         return $get->fetchAll();
     }

@@ -6,9 +6,61 @@ class VueAsso extends VueGenerique {
         parent::__construct();
     }
 
-    public function afficher() {
-        return $this->getAffichage();
+    public function titreInscrits()
+    {
+        echo '
+        <h2 class="text-center my-4 fw-bold text-primary" style="font-size: 1.8rem;">
+            Voici les associations auxquelles vous êtes inscrits
+        </h2>
+    ';
     }
+
+
+    public function titreInscritsVide()
+    {
+        echo '
+              <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                Vous n\'êtes inscrit sur aucune association, veuillez appuyer sur "Toutes les associations" ci dessus pour s\'inscrire à une association
+              <h2>
+        ';
+    }
+
+    public function titrePasInscrit()
+    {
+        echo '
+                <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Voici les associations dont vous n\'êtes pas encore inscrit
+                </h2>
+        ';
+    }
+
+    public function titrePasInscritVide()
+    {
+        echo '
+                <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Vous êtes inscrit à toutes les associations du site
+                </h2>    
+        ';
+    }
+
+    public function titreAttenteCreationVide()
+    {
+        echo '
+        <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+            Vous n\'avez aucune demande de création d\'association en cours de traitement.
+        </h2>    
+    ';
+    }
+
+    public function titreAttenteCreation()
+    {
+        echo '
+        <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+            Voici les associations dont vous avez demandé la création, actuellement en cours de traitement.
+        </h2>    
+    ';
+    }
+
 
     public function afficherListeAsso($associations){
         echo '
@@ -42,6 +94,7 @@ class VueAsso extends VueGenerique {
 
 
     public function afficherFormAssociation($messageErreur){
+        $this->confirmationProgressBar();
         echo '
         <div class="container mt-5" style="max-width: 500px;">
             <div class="card shadow-sm">
@@ -119,7 +172,27 @@ class VueAsso extends VueGenerique {
     ';
     }
 
+    public function titreAttenteInscriptionVide()
+    {
+        echo '
+        <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+            Vous n\'avez aucune demande d\'inscription en cours dans une association.
+        </h2>    
+    ';
+    }
+
+    public function titreAttenteInscription()
+    {
+        echo '
+        <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+            Voici les associations pour lesquelles votre demande d\'inscription est en cours de traitement.
+        </h2>    
+    ';
+    }
 
 
+    public function afficher() {
+        return $this->getAffichage();
+    }
 
 }

@@ -10,6 +10,9 @@ class VueConnexion extends VueGenerique {
         echo '
             <div class="center-connexion bg-white">
                 <form method="post" action="index.php?actionComposant=inscription" class="taille-connexion container-color rounded-4">
+        ';
+        $this->confirmationProgressBar();
+        echo '
                     <input type="hidden" name="tokenCSRF" value="' . htmlspecialchars(Token::genererToken()) . '">
                     <h2 class="text-center">Inscription</h2>
                     <div class="form-floating mt-3 mb-2">
@@ -175,7 +178,7 @@ class VueConnexion extends VueGenerique {
 </body>
 </html>
                         <hr>
-                      en clickant sur la case "Accepter" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
+                      en cliquant sur la case "Accepter" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
                         <div class="d-flex justify-content-end gap-2">
                             <!-- ferme le modal -->
                             <a href="index.php" class="btn btn-secondary"> Refuser</a>

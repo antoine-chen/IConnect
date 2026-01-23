@@ -7,6 +7,7 @@ class VueAdmin extends VueGenerique{
     }
 
     public function afficherListeAssociations($listeAssociations){
+        $this->confirmationProgressBar();
         echo '
         <h2 class="text-center mb-4">Liste des associations</h2>
 
@@ -229,9 +230,8 @@ class VueAdmin extends VueGenerique{
         </div>';
     }
 
-    public function afficherTabAjoutGestionnaire($comptes)
+    public function afficherTabAjoutGestionnaire($comptes,$asso)
     {
-        $this->confirmationProgressBar();
         echo '
       <div class="container">  
        <div class="container-color rounded-4 p-4 w-75 container">
@@ -259,7 +259,7 @@ class VueAdmin extends VueGenerique{
             ';
             if ($_SESSION['role'] == 'Admin'){
                 echo '
-                    <a href="index.php?module=admin&action=donnerRoleGestionnaire&id='.$compte['id'].'" class="btn btn-success">
+                    <a href="index.php?module=admin&action=donnerRoleGestionnaire&id='.$compte['id'].'&asso='.$asso.'" class="btn btn-success">
                         <i class="bi bi-arrow-up-circle"></i>
                     </a>
                 ';
@@ -273,9 +273,8 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
-    public function afficherTabSuppressionGestionnaire($comptes)
+    public function afficherTabSuppressionGestionnaire($comptes,$asso)
     {
-        $this->confirmationProgressBar();
         echo '
       <div class="container">  
        <div class="container-color rounded-4 p-4 w-75 container">    
@@ -303,7 +302,7 @@ class VueAdmin extends VueGenerique{
             ';
             if ($_SESSION['role'] == 'Admin'){
                 echo '
-                    <a href="index.php?module=admin&action=enleverRoleGestionnaire&id='.$compte['id'].'" class="btn btn-danger">
+                    <a href="index.php?module=admin&action=enleverRoleGestionnaire&id='.$compte['id'].'&asso='.$asso.'" class="btn btn-danger">
                         <i class="bi bi-arrow-down-circle"></i>
                     </a>
                 ';
@@ -314,6 +313,15 @@ class VueAdmin extends VueGenerique{
            </div>
           </div>  
         </div>  
+        ';
+    }
+
+    public function demandeCreationAssoVide()
+    {
+        echo '
+                <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Aucun utilisateur a fait de demande de création d\'association
+                </h2>
         ';
     }
 

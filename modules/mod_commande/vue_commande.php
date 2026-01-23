@@ -378,10 +378,6 @@ class VueCommande extends VueGenerique {
         ';
     }
 
-    public function afficher() {
-        return $this->getAffichage();
-    }
-
     public function confirmerRetrait($titre,$id,$date){
         echo '
         <!-- ce bloc est une fenêtre modale, ajoute une animation  -->
@@ -415,4 +411,26 @@ class VueCommande extends VueGenerique {
     echo '<script>const modal = new bootstrap.Modal(document.getElementById("verifCode"));
     modal.show();</script>';
 }
+
+    public function titreHistoFournisseurVide()
+    {
+        echo '
+            <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Vous n\'avez réalisé aucune commande auprès d\'un fournisseur
+            </h2>
+        ';
+    }
+
+    public function titreHistoCommandesAsso()
+    {
+        echo '
+            <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Aucun client a réalisé une commande dans votre association
+            </h2>
+        ';
+    }
+
+    public function afficher() {
+        return $this->getAffichage();
+    }
 }
