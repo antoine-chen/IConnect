@@ -16,6 +16,8 @@ class ContAdmin{
             $listeAssociations = $this->modele->getAssociations();
             $this->vue->afficherListeAssociations($listeAssociations);
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     public function gestionCompte(){
@@ -147,8 +149,6 @@ class ContAdmin{
             $comptes = $this->modele->getUtilisateurNonRole($_GET['id'],'Gestionnaire');
             $this->vue->afficherTabAjoutGestionnaire($comptes,$_GET['id']);
         }
-        unset($_SESSION['messageOk']);
-        unset($_SESSION['messagePasOk']);
     }
 
     public function donnerRoleGestionnaire()

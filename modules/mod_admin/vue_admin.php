@@ -7,6 +7,7 @@ class VueAdmin extends VueGenerique{
     }
 
     public function afficherListeAssociations($listeAssociations){
+        $this->confirmationProgressBar();
         echo '
         <h2 class="text-center mb-4">Liste des associations</h2>
 
@@ -231,7 +232,6 @@ class VueAdmin extends VueGenerique{
 
     public function afficherTabAjoutGestionnaire($comptes,$asso)
     {
-        $this->confirmationProgressBar();
         echo '
       <div class="container">  
        <div class="container-color rounded-4 p-4 w-75 container">
@@ -275,7 +275,6 @@ class VueAdmin extends VueGenerique{
 
     public function afficherTabSuppressionGestionnaire($comptes,$asso)
     {
-        $this->confirmationProgressBar();
         echo '
       <div class="container">  
        <div class="container-color rounded-4 p-4 w-75 container">    
