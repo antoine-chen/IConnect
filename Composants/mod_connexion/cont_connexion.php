@@ -39,18 +39,15 @@ class ContConnexion {
                 if (!$this->modele->verifLoginExiste($login)) {
                     if (empty($_POST['telephone']) && empty($_POST['email'])) {
                         $this->form_inscription();
-                    }elseif (!empty($_POST['email'])){
-                        $hash = password_hash($pwd, PASSWORD_DEFAULT);
-                        $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
-                        $_SESSION['messageOk'] = "Insciption success";
                     }else {
                         $hash = password_hash($pwd, PASSWORD_DEFAULT);
                         $this->modele->ajouterUtilisateur($login, $hash, $nom, $prenom, $telephone, $email);
                         $_SESSION['messageOk'] = "Insciption success";
+                        $this->form_inscription();
                     }
                 } else {
                     $this->vue->form_inscription();
-                    $_SESSION['messageOk'] = "Insciption fail le login ".$_POST['login']. ' existe déjà';
+                    $_SESSION['messagePasOk'] = "Insciption fail le login ".$_POST['login']. ' existe déjà';
                 }
             } else {
                 $this->vue->form_inscription();
