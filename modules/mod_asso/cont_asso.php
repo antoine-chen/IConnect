@@ -127,6 +127,8 @@ class ContAsso {
         if (!isset($_SESSION['role'])){
             $this->vue->afficherFormAssociation($messageErreur);
         }
+        unset($_SESSION['messagePasOk']);
+        unset($_SESSION['messageOk']);
     }
 
     /**
@@ -167,7 +169,9 @@ class ContAsso {
                     move_uploaded_file($_FILES['procesVerbal']['tmp_name'], $cheminProces);
 
                     $this->modele->enregistrerDemande($idUtilisateur, $nomFichier, $cheminCarte, $cheminStatut, $cheminProces);
+                    $_SESSION['messageOk'] = 'Envoie demande success';
                 } else {
+                    $_SESSION['messagePasOk'] = 'Envoie demande fail';
                     $this->modele->deleteAsso($nomFichier);
                 }
             }
