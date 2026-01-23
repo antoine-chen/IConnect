@@ -94,6 +94,7 @@ class VueAsso extends VueGenerique {
 
 
     public function afficherFormAssociation($messageErreur){
+        $this->confirmationProgressBar();
         echo '
         <div class="container mt-5" style="max-width: 500px;">
             <div class="card shadow-sm">

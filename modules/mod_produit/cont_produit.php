@@ -113,6 +113,9 @@ class ContProduit{
                     $this->modele->ajoutProduitInventaire($idInventaire, $idProduit);
                     }
                 }
+                $_SESSION['messageOk'] = 'Modification du produit '.$nom;
+            }else {
+                $_SESSION['messagePasOk'] = 'Modification fail ';
             }
         }
         header('Location: index.php?module=stock');
@@ -134,10 +137,12 @@ class ContProduit{
                 );
             }
         }
+        unset($_SESSION['messageOk']);
+        unset($_SESSION['messagePasOk']);
     }
 
     public function restockerProduit(){
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire'){
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'Gestionnaire' && isset($_POST['quantite']) && isset($_GET['id'])){
             $idProduit = $_GET['id'];
             $quantite = $_POST['quantite'];
             $this->modele->insertRestock($_SESSION['id'], $idProduit, $_POST['quantite'], $_SESSION['asso'], $_GET['idFournisseur']);
@@ -146,6 +151,9 @@ class ContProduit{
                 $idProduit,
                 $quantite
             );
+            $_SESSION['messageOk'] = "Restock success";
+        }else {
+            $_SESSION['messagePasOk'] = "Restock fail";
         }
         header('Location: index.php?module=produit&action=listerProduitsFournisseur');
         exit();

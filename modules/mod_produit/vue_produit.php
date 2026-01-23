@@ -147,6 +147,7 @@ class VueProduit extends VueGenerique{
     }
 
     public function afficherListeProduitsFournisseur($listeFournisseur, $produitsFournisseur){
+        $this->confirmationProgressBar();
         $fournisseursParId = [];
         foreach ($listeFournisseur as $fournisseur) {
             $fournisseursParId[$fournisseur['id']] = $fournisseur;

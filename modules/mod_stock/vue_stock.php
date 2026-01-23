@@ -38,11 +38,7 @@ class VueStock extends VueGenerique{
                           action="index.php?module=stock&action=ajouterPertes&id='.$produit['id'].'"
                           class="d-flex justify-content-center align-items-center gap-2">
                         <input type="hidden" name="tokenCSRF" value="'.htmlspecialchars($token).'">
-                        <input type="number"
-                               name="perte"
-                               min="0"
-                               required
-                               class="form-control form-control-sm w-50">
+                        <input type="number" name="perte" min="0" required class="form-control form-control-sm w-50">
 
                         <button class="btn btn-sm btn-primary" type="submit">
                             ✔
