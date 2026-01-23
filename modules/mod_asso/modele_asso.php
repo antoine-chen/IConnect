@@ -26,10 +26,14 @@ class ModeleAsso extends Modele {
 
 
     public function getListeAssociationEnAttente($idUtilisateur){
-        $getAssoInscris = self::$bdd->prepare('SELECT distinct a.id, a.image, a.nom FROM association a INNER JOIN role r ON a.id = r.idAssociation WHERE r.idUtilisateur = (?) AND r.role = "enCours" AND a.statut="valide"');
-        $getAssoInscris->execute([$idUtilisateur]);
-
-        return $getAssoInscris->fetchAll();
+        $req = self::$bdd->prepare('
+        SELECT a.id, a.image, a.nom
+        FROM demandeCreationAsso d
+        INNER JOIN association a ON d.idAsso = a.id
+        WHERE d.idUtilisateur = ? AND a.statut = "attente"
+    ');
+        $req->execute([$idUtilisateur]);
+        return $req->fetchAll();
     }
 
     public function estPresentDansAsso($idAsso, $login){
@@ -79,5 +83,18 @@ class ModeleAsso extends Modele {
         $get->execute([$idAssociation]);
         return $get->fetchColumn();
     }
+
+    public function getListeAssociationInscription($idUtilisateur){
+        $req = self::$bdd->prepare('
+        SELECT a.id, a.nom, a.image
+        FROM role r
+        INNER JOIN association a ON r.idAssociation = a.id
+        WHERE r.idUtilisateur = ? AND r.role = "enCours"
+        ORDER BY a.nom ASC
+    ');
+        $req->execute([$idUtilisateur]);
+        return $req->fetchAll();
+    }
+
 
 }

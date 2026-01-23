@@ -55,14 +55,14 @@ class ContAsso {
         }
     }
 
-    public function afficherAssoEnAttente(){
+    public function afficherAssoCreationEnAttente(){
         if (isset($_SESSION['id'])){
             $assos = $this->modele->getListeAssociationEnAttente($_SESSION['id']);
             if(empty($assos)) {
-                $this->vue->titreAttenteVide();
+                $this->vue->titreAttenteCreationVide();
             }
             else {
-                $this->vue->titreAttente();
+                $this->vue->titreAttenteCreation();
                 $this->vue->afficherListeAsso(
                     $assos
                 );
@@ -89,7 +89,7 @@ class ContAsso {
 
                 if(empty($listeRoles)) {
                     $this->modele->demandeAccesAssociation($idAsso, $idUtilisateur);
-                    $this->afficherAssoEnAttente();
+                    $this->afficherAssoCreationEnAttente();
                 }
                 else if(isset($_GET['role'])) {
                     $roleChoisi = $_GET['role'];
@@ -199,6 +199,21 @@ class ContAsso {
         $this->vue->actionNonTrouver();
     }
 
+    public function afficherAssoInscriptionEnAttente()
+    {
+        if (isset($_SESSION['id'])){
+            $assos = $this->modele->getListeAssociationInscription($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreAttenteInscriptionVide();
+            }
+            else {
+                $this->vue->titreAttenteInscription();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
+        }
+    }
 
 
 }

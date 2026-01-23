@@ -56,8 +56,11 @@ class ModAsso
                     case 'afficherAssoPasInscris' :
                         $this->module->afficherAssoPasInscris();
                         break;
-                    case 'afficherAssoEnAttente':
-                        $this->module->afficherAssoEnAttente();
+                    case 'afficherAssoCreationEnAttente':
+                        $this->module->afficherAssoCreationEnAttente();
+                        break;
+                    case 'afficherAssoInscriptionEnAttente':
+                        $this->module->afficherAssoInscriptionEnAttente();
                         break;
                     case 'formAssociation':
                         $this->module->formAssociation();

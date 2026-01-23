@@ -47,7 +47,8 @@ class ModeleNavbar extends Modele{
         return array(
             array("url" => "index.php?module=asso&action=afficherAssoInscris", "action" => "Mes associations"),
             array("url" => "index.php?module=asso&action=afficherAssoPasInscris", "action" => "Toutes les associations"),
-            array("url" => "index.php?module=asso&action=afficherAssoEnAttente", "action" => "En attente"),
+            array("url" => "index.php?module=asso&action=afficherAssoInscriptionEnAttente", "action" => "En attente d'inscription"),
+            array("url" => "index.php?module=asso&action=afficherAssoCreationEnAttente", "action" => "Demandes de création en attente"),
             array("url" => "index.php?module=asso&action=formAssociation", "action" => "Créer une association"),
         );
     }
