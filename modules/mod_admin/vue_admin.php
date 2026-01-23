@@ -317,6 +317,15 @@ class VueAdmin extends VueGenerique{
         ';
     }
 
+    public function demandeCreationAssoVide()
+    {
+        echo '
+                <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Aucun utilisateur a fait de demande de création d\'association
+                </h2>
+        ';
+    }
+
     public function afficher() {
         return $this->getAffichage();
     }

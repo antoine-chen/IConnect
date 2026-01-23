@@ -24,9 +24,14 @@ class ModeleCompte extends Modele {
         return $profil->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updataProfilUtilisateur($idUtilisateur, $login, $nom, $prenom, $telephone, $email){
-        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ?, nom = ?, prenom = ?, telephone = ?, email = ? WHERE id = ?');
-        $updateProfil->execute([$login, $nom, $prenom, $telephone, $email, $idUtilisateur]);
+    public function updataProfilUtilisateurAvecTel($idUtilisateur, $login, $nom, $prenom, $telephone){
+        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ?, nom = ?, prenom = ?, telephone = ? WHERE id = ?');
+        $updateProfil->execute([$login, $nom, $prenom, $telephone, $idUtilisateur]);
+    }
+
+    public function updataProfilUtilisateurAvecEmail($idUtilisateur, $login, $nom, $prenom, $email){
+        $updateProfil = self::$bdd->prepare('UPDATE utilisateurs SET login = ?, nom = ?, prenom = ?, email = ? WHERE id = ?');
+        $updateProfil->execute([$login, $nom, $prenom, $email, $idUtilisateur]);
     }
 
     public function updatePassword($id,$mdp)

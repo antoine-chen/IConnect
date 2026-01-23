@@ -25,8 +25,8 @@ class ContStock {
             }
             else {
                 $this->vue->afficherStockActuel($resultat,$date);
+                $this->vue->boutons();
             }
-            $this->vue->boutons();
         }
         unset($_SESSION['messageOk']);
         unset($_SESSION['messagePasOk']);

@@ -79,6 +79,8 @@ class ContConnexion {
                 $this->vue->form_connexion();
             }
         }
+        header('Location: index.php?actionComposant=form_connexion');
+        exit();
     }
 
     public function deconnexion() {

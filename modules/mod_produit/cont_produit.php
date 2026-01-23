@@ -124,10 +124,15 @@ class ContProduit{
             $listeFournisseur = $this->modele->getListeFournisseur($_SESSION['asso']);
             $produitsBruts = $this->modele->getProduitsFournisseur($_SESSION['asso']);
 
-            $this->vue->afficherListeProduitsFournisseur(
-                $listeFournisseur,
-                $produitsBruts
-            );
+            if(empty($listeFournisseur) && empty($produitsBruts)) {
+                $this->vue->titreProduitsVide();
+            }
+            else {
+                $this->vue->afficherListeProduitsFournisseur(
+                    $listeFournisseur,
+                    $produitsBruts
+                );
+            }
         }
     }
 

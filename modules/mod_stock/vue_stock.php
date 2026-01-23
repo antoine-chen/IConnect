@@ -118,8 +118,13 @@ class VueStock extends VueGenerique{
                             </tbody>
                         </table>
 
-                        <div class="p-3 text-center">
-                            <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Valider</button>
+                        <div class="p-3 d-flex justify-content-between">
+                            <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
+                                Annuler
+                            </a>                        
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">
+                                Valider
+                            </button>
                         </div>
         ';
         $this->afficherConfirmationModal('Valider', 'Êtes vous sur de faire un inventaire', 'Valider');
@@ -137,7 +142,15 @@ class VueStock extends VueGenerique{
      * Affiche cette phrase quand aucune inventaire a été crée pour l'association
      */
     public function inventaireVide(){
-        echo '<p>Aucune inventaire a été réalisé pour cette association, veuillez créer un inventaire pour voir le stock actuel</p> ';
+        echo '
+             <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Aucune inventaire a été réalisé pour cette association, veuillez créer un inventaire pour voir le stock actuel
+             </h2>   
+                
+             <div class="text-center m-5">
+                <a href="index.php?module=stock&action=form_inventaire" class="btn btn-primary">Faire l\'inventaire</a>
+            </div> 
+            ';
     }
 
     /**

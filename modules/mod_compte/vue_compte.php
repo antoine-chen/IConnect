@@ -108,12 +108,12 @@ class VueCompte extends VueGenerique{
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input name="telephone" class="form-control" value="'.htmlspecialchars($listeData['telephone']).'" placeholder="Téléphone" required>
+                            <input name="telephone" class="form-control" value="'.htmlspecialchars($listeData['telephone']).'" placeholder="Téléphone">
                             <label>Téléphone</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input name="email" class="form-control" value="'.htmlspecialchars($listeData['email']).'" placeholder="Email" required>
+                            <input name="email" class="form-control" value="'.htmlspecialchars($listeData['email']).'" placeholder="Email">
                             <label>Email</label>
                         </div>
 
@@ -123,7 +123,7 @@ class VueCompte extends VueGenerique{
                         </div>
 
                         <div class="d-flex justify-content-end gap-2">
-                            <a class="btn btn-outline-secondary" href="index.php?module=stock"> 
+                            <a class="btn btn-outline-secondary" href="index.php?module=compte&action=profil"> 
                                 Annuler
                             </a>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">
@@ -175,7 +175,7 @@ class VueCompte extends VueGenerique{
                       en clickant sur la case "Suprimer" « J’accepte que mes données personnelles soient utilisées conformément à la politique de confidentialité »
                         <div class="d-flex justify-content-end gap-2">
                             <!-- ferme le modal -->
-                            <a href="index.php" class="btn btn-secondary"> Annuler</a>
+                            <a href="index.php?module=compte&action=profil" class="btn btn-secondary"> Annuler</a>
                             <a href="index.php?module=compte&action=SuprimerProfil" class=" btn btn-secondary">Confirmer la suppression</a>
                         </div>
                     </div>

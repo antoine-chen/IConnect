@@ -69,9 +69,14 @@ class ContCompte{
 
     public function modifierProfil(){
         if(isset($_POST['tokenCSRF']) && Token::verifierToken($_POST['tokenCSRF'])) {
-            if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['telephone']) && isset($_POST['email'])) {
+            if (isset($_SESSION['role']) && isset($_POST['login']) && isset($_POST['nom']) && isset($_POST['prenom']) && (isset($_POST['telephone']) || isset($_POST['email']))) {
                 if (!$this->modele->verifLoginExisteProfil($_POST['login'],$_SESSION['id'])){
-                    $this->modele->updataProfilUtilisateur($_SESSION['id'], $_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['telephone'], $_POST['email']);
+                    if(isset($_POST['telephone'])) {
+                        $this->modele->updataProfilUtilisateurAvecTel($_SESSION['id'], $_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['telephone']);
+                    }
+                    else if(isset($_POST['email'])) {
+                        $this->modele->updataProfilUtilisateurAvecEmail($_SESSION['id'], $_POST['login'], $_POST['nom'], $_POST['prenom'], $_POST['email']);
+                    }
                     if (!empty($_POST['pwd'])) {
                         $hash = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
                         $this->modele->updatePassword($_SESSION['id'], $hash);
@@ -101,13 +106,6 @@ class ContCompte{
     public function unrecognizedAction(){
         $this->vue->actionNonTrouver();
     }
-    public function getVue(){
-        if (isset($_SESSION['role'])&&$_SESSION['role']!='Admin') {
-            return $this->vue->afficher();
-        }else{header("Location: index.php", true, 303);
-        exit();}
-
-    }
 
     public function modalSuprimerProfil(){
         $this->vue->modalSuprimer();
@@ -117,6 +115,14 @@ class ContCompte{
             $this->modele->suprimerProfil($_SESSION['id'], $_SESSION['login']);
         }header("Location: index.php", true, 303);
         exit();
+    }
+
+    public function getVue(){
+        if (isset($_SESSION['role'])) {
+            return $this->vue->afficher();
+        }else{header("Location: index.php", true, 303);
+            exit();}
+
     }
 
 }

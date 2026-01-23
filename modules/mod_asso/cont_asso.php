@@ -27,25 +27,46 @@ class ContAsso {
             $this->quitterAssoc();
         }
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationInscris($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationInscris($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreInscritsVide();
+            }
+            else {
+                $this->vue->titreInscrits();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 
     public function afficherAssoPasInscris(){
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationPasIncris($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationPasIncris($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titrePasInscritVide();
+            }
+            else {
+                $this->vue->titrePasInscrit();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 
     public function afficherAssoEnAttente(){
         if (isset($_SESSION['id'])){
-            $this->vue->afficherListeAsso(
-                $this->modele->getListeAssociationEnAttente($_SESSION['id'])
-            );
+            $assos = $this->modele->getListeAssociationEnAttente($_SESSION['id']);
+            if(empty($assos)) {
+                $this->vue->titreAttenteVide();
+            }
+            else {
+                $this->vue->titreAttente();
+                $this->vue->afficherListeAsso(
+                    $assos
+                );
+            }
         }
     }
 

@@ -6,7 +6,6 @@ class ModAsso
 
     public function __construct(){
         $mod = isset($_GET['module']) ? $_GET['module'] : 'asso';
-
         if(isset($_SESSION['role'])) {
             if($_SESSION['role']=='Admin' && $mod == 'asso') {
                 $mod = 'admin';

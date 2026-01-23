@@ -86,7 +86,14 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label fw-semibold">Image du produit (jpg, jpeg, png, webp)</label>
                         <input type="file" name="imageProduit" id="imageProduit" class="form-control" required>
                     </div>
-                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
+                            Annuler
+                        </a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">
+                            Confirmer
+                        </button>
+                    </div>
         ';
         $this->afficherConfirmationModal("Ajouter", "Êtes vous sûr d'ajouter un produit ?", "Ajouter");
         echo '
@@ -118,10 +125,16 @@ class VueProduit extends VueGenerique{
                         <label for="imageProduit" class="form-label">Image du produit (jpg, jpeg, png, webp)</label>
                         <input type="file" name="image" id="imageProduit" class="form-control">
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary m-4" data-bs-toggle="modal" data-bs-target="#confirmer">Confirmer</button>
-                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <!-- Bouton Retour vers le stock -->
+                        <a href="index.php?module=stock&action=stockProduits" class="btn btn-outline-secondary">
+                            Annuler
+                        </a>
                     
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmer">
+                            Confirmer
+                        </button>
+                    </div>
                     ';
         $this->afficherConfirmationModal('Modifier', 'Êtes vous sûr de modifier ce produit ?', 'Modifier');
         echo '
@@ -172,6 +185,15 @@ class VueProduit extends VueGenerique{
         }
         echo '</div>';
         echo '</div>';
+    }
+
+    public function titreProduitsVide()
+    {
+        echo '
+            <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
+                    Vous avez aucun produit dans l\'association
+             </h2>  
+        ';
     }
 
     public function afficher() {
