@@ -10,7 +10,7 @@ class VueAsso extends VueGenerique {
     {
         echo '
         <h2 class="text-center my-4 fw-bold text-primary" style="font-size: 1.8rem;">
-            Voici les associations auxquelles vous êtes inscrits
+            Voici vos associations
         </h2>
     ';
     }
@@ -20,7 +20,7 @@ class VueAsso extends VueGenerique {
     {
         echo '
               <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
-                Vous n\'êtes inscrit sur aucune association, veuillez appuyer sur "Toutes les associations" ci dessus pour s\'inscrire à une association
+                Vous n\'êtes inscrit sur aucune association
               <h2>
         ';
     }
@@ -29,7 +29,7 @@ class VueAsso extends VueGenerique {
     {
         echo '
                 <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
-                    Voici les associations dont vous n\'êtes pas encore inscrit
+                    Toutes les associations
                 </h2>
         ';
     }
@@ -47,7 +47,7 @@ class VueAsso extends VueGenerique {
     {
         echo '
         <h2 class="text-center my-4 fw-bold" style="font-size: 1.8rem;">
-            Vous n\'avez aucune demande de création d\'association en cours de traitement.
+            Vous n\'avez aucune demande de création d\'association.
         </h2>    
     ';
     }
