@@ -27,7 +27,7 @@ Figma (maquettes) <br>
 Git & GitHub (versioning) <br>
 Trello (gestion de projet) <br>
 
-# 👤 Gestion des rôles :
+## 👤 Gestion des rôles :
 
 ### 🔓 Utilisateur sans rôle
 Peut : <br>
