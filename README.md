@@ -1,103 +1,104 @@
 # 🍻 BuvetteConnect – Application de gestion de buvettes associatives
 📌 Description du projet
 
-BuvetteConnect est une application web conçue pour moderniser la gestion des buvettes associatives.
+BuvetteConnect est une application web conçue pour moderniser la gestion des buvettes associatives.<br>
 L’objectif principal est de supprimer l’utilisation d’argent liquide en mettant en place un système de comptes numériques rechargeables pour les adhérents.
-Les utilisateurs peuvent acheter des consommations directement au comptoir, tandis que les barmen enregistrent les ventes via l’application. Les gestionnaires disposent d’outils avancés pour suivre les stocks, réaliser des inventaires et analyser les ventes.
+Les utilisateurs peuvent acheter des consommations directement au comptoir, tandis que les barmen enregistrent les ventes via l’application. <br>
+Les gestionnaires disposent d’outils avancés pour suivre les stocks, réaliser des inventaires et analyser les ventes.<br>
 
 ## 🚀 Fonctionnalités principales
 
-💳 Compte numérique rechargeable
-🛒 Système de panier
-📦 Gestion des stocks
-📊 Inventaires
-📈 Rapport de trésorerie
-🏢 Multi-associations
-🔐 Gestion avancée des rôles
+💳 Compte numérique rechargeable <br>
+🛒 Système de panier <br>
+📦 Gestion des stocks <br>
+📊 Inventaires <br>
+📈 Rapport de trésorerie <br>
+🏢 Multi-associations <br>
+🔐 Gestion avancée des rôles <br>
 
 
 ## 🛠️ Technologies utilisées
 
-PHP (Back-end)
-SQL (Base de données)
-HTML / CSS
-Bootstrap
-Figma (maquettes)
-Git & GitHub (versioning)
-Trello (gestion de projet)
+PHP (Back-end) <br>
+SQL (Base de données) <br>
+HTML / CSS <br>
+Bootstrap <br>
+Figma (maquettes) <br>
+Git & GitHub (versioning) <br>
+Trello (gestion de projet) <br>
 
 👤 Gestion des rôles :
 
 ### 🔓 Utilisateur sans rôle
-Peut :
-Voir les associations auxquelles il est inscrit
-Consulter les associations publiques
-Voir l’historique de ses demandes
-Faire une demande de création d’association
-Consulter l’historique de ses demandes
+Peut : <br>
+Voir les associations auxquelles il est inscrit <br>
+Consulter les associations publiques <br>
+Voir l’historique de ses demandes <br>
+Faire une demande de création d’association <br>
+Consulter l’historique de ses demandes <br>
 
 ### 👥 Fonctionnalités communes à tous les rôles
-Consulter son profil
-Modifier son profil
+Consulter son profil <br>
+Modifier son profil <br>
 
 ### 🛒 Rôle Client
-Peut :
-Recharger son compte
-Consulter la liste des produits
-Ajouter des produits au panier
-Consulter son panier
-Valider ses commandes
+Peut : <br>
+Recharger son compte <br>
+Consulter la liste des produits <br>
+Ajouter des produits au panier <br>
+Consulter son panier <br>
+Valider ses commandes <br>
 
 ### 🍺 Rôle Barman
-Peut :
-Consulter le profil des clients
-Voir les commandes du jour
-Consulter l’historique des commandes
-Consulter le stock des produits de l’association
+Peut : <br>
+Consulter le profil des clients <br>
+Voir les commandes du jour <br>
+Consulter l’historique des commandes <br>
+Consulter le stock des produits de l’association <br>
 
 ### 📊 Rôle Gestionnaire
-Peut :
-Consulter le dernier inventaire
-Réaliser un inventaire
-Ajouter ou modifier un produit
-Enregistrer des pertes
-Gérer les comptes utilisateurs (clients et barmans)
-Lister les fournisseurs et leurs produits
-Consulter l’historique des commandes fournisseurs
-Gérer les demandes d’adhésion
-Générer un rapport de trésorerie
+Peut : <br>
+Consulter le dernier inventaire <br>
+Réaliser un inventaire <br>
+Ajouter ou modifier un produit <br>
+Enregistrer des pertes <br>
+Gérer les comptes utilisateurs (clients et barmans) <br>
+Lister les fournisseurs et leurs produits <br>
+Consulter l’historique des commandes fournisseurs <br>
+Gérer les demandes d’adhésion <br>
+Générer un rapport de trésorerie <br>
 
 ### 🛡️ Rôle Admin
-Peut :
-Gérer les associations
-Attribuer les rôles aux utilisateurs
+Peut : <br>
+Gérer les associations <br>
+Attribuer les rôles aux utilisateurs <br>
 
 ## 📂 Base de données
-Conception du MCD (Modèle Conceptuel de Données)
-Transformation en MLD (Modèle Logique de Données)
+Conception du MCD (Modèle Conceptuel de Données) <br>
+Transformation en MLD (Modèle Logique de Données) <br>
 
-Implémentation SQL
-Gestion des relations :
-Utilisateurs
-Associations
-Produits
-Commandes
-Stocks
-Fournisseurs
+Implémentation SQL <br>
+Gestion des relations : <br>
+Utilisateurs,
+Associations,
+Produits,
+Commandes,
+Stocks,
+Fournisseurs,
 Inventaires
 
 ## 🏗️ Architecture
 
-Le projet suit une architecture MVC (Modèle - Vue - Contrôleur) :
-Modèle : gestion des données et interactions avec la base
-Vue : affichage (HTML / Bootstrap)
-Contrôleur : gestion de la logique métier et des requêtes utilisateur
+Le projet suit une architecture MVC (Modèle - Vue - Contrôleur) : <br>
+Modèle : gestion des données et interactions avec la base <br>
+Vue : affichage (HTML / Bootstrap) <br>
+Contrôleur : gestion de la logique métier et des requêtes utilisateur <br>
 
 ## Ce projet nous a permis de :
 
-Réfléchir à la structure globale du site (architecture MVC)
-Concevoir et rédiger le MCD / MLD
-Mettre en pratique les compétences Front-end et Back-end
-Travailler en équipe avec Git et Trello
-Concevoir l’interface avec Figma
+Réfléchir à la structure globale du site (architecture MVC) <br>
+Concevoir et rédiger le MCD / MLD <br>
+Mettre en pratique les compétences Front-end et Back-end <br>
+Travailler en équipe avec Git et Trello <br>
+Concevoir l’interface avec Figma <br>
 
