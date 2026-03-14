@@ -1,4 +1,4 @@
-# 🍻 BuvetteConnect – Application de gestion de buvettes associatives
+# 🍻 IConnect – Application de gestion de buvettes associatives
 📌 Description du projet
 
 BuvetteConnect est une application web conçue pour moderniser la gestion des buvettes associatives.<br>
